@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luoshi.mapper.TbProductSubmitMapper" >
+  <resultMap id="BaseResultMap" type="com.luoshi.pojo.TbProductSubmit" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="custom_name" property="customName" jdbcType="VARCHAR" />
+    <result column="zero_submit" property="zeroSubmit" jdbcType="VARCHAR" />
+    <result column="shop_title" property="shopTitle" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="shop_active" property="shopActive" jdbcType="VARCHAR" />
+    <result column="shop_item" property="shopItem" jdbcType="VARCHAR" />
+    <result column="shop_main_pic" property="shopMainPic" jdbcType="VARCHAR" />
+    <result column="shop_market_pic" property="shopMarketPic" jdbcType="VARCHAR" />
+    <result column="extension_strategy" property="extensionStrategy" jdbcType="VARCHAR" />
+    <result column="characteristic_strategy" property="characteristicStrategy" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="VARCHAR" />
+    <result column="coupon_name" property="couponName" jdbcType="VARCHAR" />
+    <result column="coupon_url" property="couponUrl" jdbcType="VARCHAR" />
+    <result column="coupon_after_price" property="couponAfterPrice" jdbcType="DOUBLE" />
+    <result column="coupon_count" property="couponCount" jdbcType="VARCHAR" />
+    <result column="coupon_price" property="couponPrice" jdbcType="VARCHAR" />
+    <result column="service_price" property="servicePrice" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="return_money_time" property="returnMoneyTime" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="taobao_price" property="taobaoPrice" jdbcType="VARCHAR" />
+    <result column="buy_count" property="buyCount" jdbcType="VARCHAR" />
+    <result column="settlement_type" property="settlementType" jdbcType="VARCHAR" />
+    <result column="upload_pic" property="uploadPic" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, custom_name, zero_submit, shop_title, goods_id, shop_active, shop_item, shop_main_pic, 
+    shop_market_pic, extension_strategy, characteristic_strategy, start_time, coupon_type, 
+    coupon_name, coupon_url, coupon_after_price, coupon_count, coupon_price, service_price, 
+    end_time, return_money_time, remarks, taobao_price, buy_count, settlement_type, upload_pic, 
+    platform
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbProductSubmitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_product_submit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_product_submit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_product_submit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.luoshi.pojo.TbProductSubmitExample" >
+    delete from tb_product_submit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.luoshi.pojo.TbProductSubmit" >
+    insert into tb_product_submit (id, custom_name, zero_submit, 
+      shop_title, goods_id, shop_active, 
+      shop_item, shop_main_pic, shop_market_pic, 
+      extension_strategy, characteristic_strategy, 
+      start_time, coupon_type, coupon_name, 
+      coupon_url, coupon_after_price, coupon_count, 
+      coupon_price, service_price, end_time, 
+      return_money_time, remarks, taobao_price, 
+      buy_count, settlement_type, upload_pic, 
+      platform)
+    values (#{id,jdbcType=INTEGER}, #{customName,jdbcType=VARCHAR}, #{zeroSubmit,jdbcType=VARCHAR}, 
+      #{shopTitle,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{shopActive,jdbcType=VARCHAR}, 
+      #{shopItem,jdbcType=VARCHAR}, #{shopMainPic,jdbcType=VARCHAR}, #{shopMarketPic,jdbcType=VARCHAR}, 
+      #{extensionStrategy,jdbcType=VARCHAR}, #{characteristicStrategy,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, #{couponName,jdbcType=VARCHAR}, 
+      #{couponUrl,jdbcType=VARCHAR}, #{couponAfterPrice,jdbcType=DOUBLE}, #{couponCount,jdbcType=VARCHAR}, 
+      #{couponPrice,jdbcType=VARCHAR}, #{servicePrice,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, 
+      #{returnMoneyTime,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{taobaoPrice,jdbcType=VARCHAR}, 
+      #{buyCount,jdbcType=VARCHAR}, #{settlementType,jdbcType=VARCHAR}, #{uploadPic,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luoshi.pojo.TbProductSubmit" >
+    insert into tb_product_submit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customName != null" >
+        custom_name,
+      </if>
+      <if test="zeroSubmit != null" >
+        zero_submit,
+      </if>
+      <if test="shopTitle != null" >
+        shop_title,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="shopActive != null" >
+        shop_active,
+      </if>
+      <if test="shopItem != null" >
+        shop_item,
+      </if>
+      <if test="shopMainPic != null" >
+        shop_main_pic,
+      </if>
+      <if test="shopMarketPic != null" >
+        shop_market_pic,
+      </if>
+      <if test="extensionStrategy != null" >
+        extension_strategy,
+      </if>
+      <if test="characteristicStrategy != null" >
+        characteristic_strategy,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="couponType != null" >
+        coupon_type,
+      </if>
+      <if test="couponName != null" >
+        coupon_name,
+      </if>
+      <if test="couponUrl != null" >
+        coupon_url,
+      </if>
+      <if test="couponAfterPrice != null" >
+        coupon_after_price,
+      </if>
+      <if test="couponCount != null" >
+        coupon_count,
+      </if>
+      <if test="couponPrice != null" >
+        coupon_price,
+      </if>
+      <if test="servicePrice != null" >
+        service_price,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="returnMoneyTime != null" >
+        return_money_time,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="taobaoPrice != null" >
+        taobao_price,
+      </if>
+      <if test="buyCount != null" >
+        buy_count,
+      </if>
+      <if test="settlementType != null" >
+        settlement_type,
+      </if>
+      <if test="uploadPic != null" >
+        upload_pic,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customName != null" >
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="zeroSubmit != null" >
+        #{zeroSubmit,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTitle != null" >
+        #{shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="shopActive != null" >
+        #{shopActive,jdbcType=VARCHAR},
+      </if>
+      <if test="shopItem != null" >
+        #{shopItem,jdbcType=VARCHAR},
+      </if>
+      <if test="shopMainPic != null" >
+        #{shopMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="shopMarketPic != null" >
+        #{shopMarketPic,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionStrategy != null" >
+        #{extensionStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="characteristicStrategy != null" >
+        #{characteristicStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null" >
+        #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponUrl != null" >
+        #{couponUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAfterPrice != null" >
+        #{couponAfterPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="couponCount != null" >
+        #{couponCount,jdbcType=VARCHAR},
+      </if>
+      <if test="couponPrice != null" >
+        #{couponPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePrice != null" >
+        #{servicePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMoneyTime != null" >
+        #{returnMoneyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="taobaoPrice != null" >
+        #{taobaoPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="buyCount != null" >
+        #{buyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementType != null" >
+        #{settlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadPic != null" >
+        #{uploadPic,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.luoshi.pojo.TbProductSubmitExample" resultType="java.lang.Integer" >
+    select count(*) from tb_product_submit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_product_submit
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.customName != null" >
+        custom_name = #{record.customName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zeroSubmit != null" >
+        zero_submit = #{record.zeroSubmit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopTitle != null" >
+        shop_title = #{record.shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopActive != null" >
+        shop_active = #{record.shopActive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopItem != null" >
+        shop_item = #{record.shopItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopMainPic != null" >
+        shop_main_pic = #{record.shopMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopMarketPic != null" >
+        shop_market_pic = #{record.shopMarketPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extensionStrategy != null" >
+        extension_strategy = #{record.extensionStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.characteristicStrategy != null" >
+        characteristic_strategy = #{record.characteristicStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponType != null" >
+        coupon_type = #{record.couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponName != null" >
+        coupon_name = #{record.couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponUrl != null" >
+        coupon_url = #{record.couponUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponAfterPrice != null" >
+        coupon_after_price = #{record.couponAfterPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.couponCount != null" >
+        coupon_count = #{record.couponCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponPrice != null" >
+        coupon_price = #{record.couponPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePrice != null" >
+        service_price = #{record.servicePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnMoneyTime != null" >
+        return_money_time = #{record.returnMoneyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taobaoPrice != null" >
+        taobao_price = #{record.taobaoPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyCount != null" >
+        buy_count = #{record.buyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settlementType != null" >
+        settlement_type = #{record.settlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadPic != null" >
+        upload_pic = #{record.uploadPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_product_submit
+    set id = #{record.id,jdbcType=INTEGER},
+      custom_name = #{record.customName,jdbcType=VARCHAR},
+      zero_submit = #{record.zeroSubmit,jdbcType=VARCHAR},
+      shop_title = #{record.shopTitle,jdbcType=VARCHAR},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      shop_active = #{record.shopActive,jdbcType=VARCHAR},
+      shop_item = #{record.shopItem,jdbcType=VARCHAR},
+      shop_main_pic = #{record.shopMainPic,jdbcType=VARCHAR},
+      shop_market_pic = #{record.shopMarketPic,jdbcType=VARCHAR},
+      extension_strategy = #{record.extensionStrategy,jdbcType=VARCHAR},
+      characteristic_strategy = #{record.characteristicStrategy,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=VARCHAR},
+      coupon_type = #{record.couponType,jdbcType=VARCHAR},
+      coupon_name = #{record.couponName,jdbcType=VARCHAR},
+      coupon_url = #{record.couponUrl,jdbcType=VARCHAR},
+      coupon_after_price = #{record.couponAfterPrice,jdbcType=DOUBLE},
+      coupon_count = #{record.couponCount,jdbcType=VARCHAR},
+      coupon_price = #{record.couponPrice,jdbcType=VARCHAR},
+      service_price = #{record.servicePrice,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
+      return_money_time = #{record.returnMoneyTime,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      taobao_price = #{record.taobaoPrice,jdbcType=VARCHAR},
+      buy_count = #{record.buyCount,jdbcType=VARCHAR},
+      settlement_type = #{record.settlementType,jdbcType=VARCHAR},
+      upload_pic = #{record.uploadPic,jdbcType=VARCHAR},
+      platform = #{record.platform,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luoshi.pojo.TbProductSubmit" >
+    update tb_product_submit
+    <set >
+      <if test="customName != null" >
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="zeroSubmit != null" >
+        zero_submit = #{zeroSubmit,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTitle != null" >
+        shop_title = #{shopTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="shopActive != null" >
+        shop_active = #{shopActive,jdbcType=VARCHAR},
+      </if>
+      <if test="shopItem != null" >
+        shop_item = #{shopItem,jdbcType=VARCHAR},
+      </if>
+      <if test="shopMainPic != null" >
+        shop_main_pic = #{shopMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="shopMarketPic != null" >
+        shop_market_pic = #{shopMarketPic,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionStrategy != null" >
+        extension_strategy = #{extensionStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="characteristicStrategy != null" >
+        characteristic_strategy = #{characteristicStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null" >
+        coupon_name = #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponUrl != null" >
+        coupon_url = #{couponUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAfterPrice != null" >
+        coupon_after_price = #{couponAfterPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="couponCount != null" >
+        coupon_count = #{couponCount,jdbcType=VARCHAR},
+      </if>
+      <if test="couponPrice != null" >
+        coupon_price = #{couponPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePrice != null" >
+        service_price = #{servicePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMoneyTime != null" >
+        return_money_time = #{returnMoneyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="taobaoPrice != null" >
+        taobao_price = #{taobaoPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="buyCount != null" >
+        buy_count = #{buyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementType != null" >
+        settlement_type = #{settlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadPic != null" >
+        upload_pic = #{uploadPic,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luoshi.pojo.TbProductSubmit" >
+    update tb_product_submit
+    set custom_name = #{customName,jdbcType=VARCHAR},
+      zero_submit = #{zeroSubmit,jdbcType=VARCHAR},
+      shop_title = #{shopTitle,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      shop_active = #{shopActive,jdbcType=VARCHAR},
+      shop_item = #{shopItem,jdbcType=VARCHAR},
+      shop_main_pic = #{shopMainPic,jdbcType=VARCHAR},
+      shop_market_pic = #{shopMarketPic,jdbcType=VARCHAR},
+      extension_strategy = #{extensionStrategy,jdbcType=VARCHAR},
+      characteristic_strategy = #{characteristicStrategy,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      coupon_type = #{couponType,jdbcType=VARCHAR},
+      coupon_name = #{couponName,jdbcType=VARCHAR},
+      coupon_url = #{couponUrl,jdbcType=VARCHAR},
+      coupon_after_price = #{couponAfterPrice,jdbcType=DOUBLE},
+      coupon_count = #{couponCount,jdbcType=VARCHAR},
+      coupon_price = #{couponPrice,jdbcType=VARCHAR},
+      service_price = #{servicePrice,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      return_money_time = #{returnMoneyTime,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      taobao_price = #{taobaoPrice,jdbcType=VARCHAR},
+      buy_count = #{buyCount,jdbcType=VARCHAR},
+      settlement_type = #{settlementType,jdbcType=VARCHAR},
+      upload_pic = #{uploadPic,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

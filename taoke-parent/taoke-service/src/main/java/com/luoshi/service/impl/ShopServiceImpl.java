@@ -1,0 +1,198 @@
+package com.luoshi.service.impl;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.luoshi.pojo.TbSysUser;
+import com.luoshi.service.SysUserService;
+import com.luoshi.service.WaitingWorkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.luoshi.mapper.TbShopMapper;
+import com.luoshi.pojo.TbBackmoneyExample.Criteria;
+import com.luoshi.pojo.TbShop;
+import com.luoshi.pojo.TbShopExample;
+import com.luoshi.service.ShopService;
+
+import entity.PageResult;
+
+/**
+ * 服务实现层
+ * @author Administrator
+ *
+ */
+@Service
+public class ShopServiceImpl implements ShopService {
+
+	@Autowired
+	private TbShopMapper shopMapper;
+
+    @Autowired
+    private SysUserService sysUserService;
+	
+	/**
+	 * 查询全部
+	 */
+	@Override
+	public List<TbShop> findAll() {
+		return shopMapper.selectByExample(null);
+	}
+
+	/**
+	 * 按分页查询
+	 */
+	@Override
+	public PageResult findPage(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);		
+		Page<TbShop> page=   (Page<TbShop>) shopMapper.selectByExample(null);
+		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	/**
+	 * 增加
+	 */
+	@Override
+	public void add(TbShop shop) {
+		shopMapper.insert(shop);		
+	}
+
+	
+	/**
+	 * 修改
+	 */
+	@Override
+	public void update(TbShop shop){
+		shopMapper.updateByPrimaryKey(shop);
+	}	
+	
+	/**
+	 * 根据ID获取实体
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public TbShop findOne(int id){
+		return shopMapper.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * 批量删除
+	 */
+	@Override
+	public void delete(int[] ids) {
+		for(int id:ids){
+			shopMapper.deleteByPrimaryKey(id);
+		}		
+	}
+
+
+    @Override
+    public List<String> checkWangWangAccount(String wangwangAccount) {
+
+	    List<String> list = new ArrayList<>();
+        TbShopExample example=new TbShopExample();
+        com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
+
+        criteria.andWangwangaccountEqualTo(wangwangAccount);
+        List<TbShop> tbShops = shopMapper.selectByExample(example);
+        if(tbShops.size() == 0) {
+            return list;
+        } else {
+            for (TbShop shop : tbShops){
+                list.add(sysUserService.findOne(shop.getShopUseId()).getRealname());
+            }
+            return list;
+        }
+    }
+
+    @Override
+	public PageResult findPage(TbShop shop, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		
+		TbShopExample example=new TbShopExample();
+		com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
+		
+		if(shop!=null){			
+						if(shop.getShopName()!=null && shop.getShopName().length()>0){
+				criteria.andShopNameLike("%"+shop.getShopName()+"%");
+			}
+			if(shop.getWangwangaccount()!=null && shop.getWangwangaccount().length()>0){
+				criteria.andWangwangaccountLike("%"+shop.getWangwangaccount()+"%");
+			}
+			if(shop.getShopProduct()!=null && shop.getShopProduct().length()>0){
+				criteria.andShopProductLike("%"+shop.getShopProduct()+"%");
+			}
+			if(shop.getShopBoss()!=null && shop.getShopBoss().length()>0){
+				criteria.andShopBossLike("%"+shop.getShopBoss()+"%");
+			}
+			if(shop.getShopPhone()!=null && shop.getShopPhone().length()>0){
+				criteria.andShopPhoneLike("%"+shop.getShopPhone()+"%");
+			}
+			if(shop.getShopQq()!=null && shop.getShopQq().length()>0){
+				criteria.andShopQqLike("%"+shop.getShopQq()+"%");
+			}
+			if(shop.getShopWx()!=null && shop.getShopWx().length()>0){
+				criteria.andShopWxLike("%"+shop.getShopWx()+"%");
+			}
+			if(shop.getShopOperatePhone()!=null && shop.getShopOperatePhone().length()>0){
+				criteria.andShopOperatePhoneLike("%"+shop.getShopOperatePhone()+"%");
+			}
+			if(shop.getShopUrl()!=null && shop.getShopUrl().length()>0){
+				criteria.andShopUrlLike("%"+shop.getShopUrl()+"%");
+			}
+			if(shop.getMaturity()!=null && shop.getMaturity().length()>0){
+				criteria.andMaturityLike("%"+shop.getMaturity()+"%");
+			}
+			if(shop.getShopType()!=null && shop.getShopType().length()>0){
+				criteria.andShopTypeLike("%"+shop.getShopType()+"%");
+			}
+			if(shop.getMainOperate()!=null && shop.getMainOperate().length()>0){
+				criteria.andMainOperateLike("%"+shop.getMainOperate()+"%");
+			}
+			
+			if(shop.getShopRealShooting()!=null && shop.getShopRealShooting().length()>0){
+				criteria.andShopRealShootingLike("%"+shop.getShopRealShooting()+"%");
+			}
+			if(shop.getOperatePhone()!=null && shop.getOperatePhone().length()>0){
+				criteria.andOperatePhoneLike("%"+shop.getOperatePhone()+"%");
+			}
+			if(shop.getFollowUpRecord()!=null && shop.getFollowUpRecord().length()>0){
+				criteria.andFollowUpRecordLike("%"+shop.getFollowUpRecord()+"%");
+			}
+			if(shop.getRefundsTime()!=null && shop.getRefundsTime().length()>0){
+				criteria.andRefundsTimeLike("%"+shop.getRefundsTime()+"%");
+			}
+			if(shop.getRefundsMoney()!=null && shop.getRefundsMoney().length()>0){
+				criteria.andRefundsMoneyLike("%"+shop.getRefundsMoney()+"%");
+			}
+			if(shop.getCreateTime()!=null && shop.getCreateTime().length()>0){
+				criteria.andCreateTimeLike("%"+shop.getCreateTime()+"%");
+			}
+			if(shop.getDataType()!=null && shop.getDataType().length()>0){
+				criteria.andDataTypeLike("%"+shop.getDataType()+"%");
+			}
+			if(shop.getTaokeType()!=null && shop.getTaokeType().length()>0){
+				criteria.andTaokeTypeLike("%"+shop.getTaokeType()+"%");
+			}
+			if(shop.getCooperation()!=null && shop.getCooperation().length()>0){
+				criteria.andCooperationLike("%"+shop.getCooperation()+"%");
+			}
+			if(shop.getSpare()!=null && shop.getSpare().length()>0){
+				criteria.andSpareLike("%"+shop.getSpare()+"%");
+			}
+			if(shop.getPrivateType()!=null && shop.getPrivateType().length()>0){
+				criteria.andPrivateTypeLike("%"+shop.getPrivateType()+"%");
+			}
+			if(shop.getShopBz()!=null && shop.getShopBz().length()>0){
+				criteria.andShopBzLike("%"+shop.getShopBz()+"%");
+			}
+	
+		}
+		
+		Page<TbShop> page= (Page<TbShop>)shopMapper.selectByExample(example);		
+		return new PageResult(page.getTotal(), page.getResult());
+	}
+	
+}

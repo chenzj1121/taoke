@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luoshi.mapper.TbFollowUpRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.luoshi.pojo.TbFollowUpRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="record" property="record" jdbcType="VARCHAR" />
+    <result column="follow_up_time" property="followUpTime" jdbcType="TIMESTAMP" />
+    <result column="maturity" property="maturity" jdbcType="VARCHAR" />
+    <result column="product_submit_id" property="productSubmitId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record, follow_up_time, maturity, product_submit_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbFollowUpRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_follow_up_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_follow_up_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_follow_up_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.luoshi.pojo.TbFollowUpRecordExample" >
+    delete from tb_follow_up_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.luoshi.pojo.TbFollowUpRecord" >
+    insert into tb_follow_up_record (id, record, follow_up_time, 
+      maturity, product_submit_id)
+    values (#{id,jdbcType=INTEGER}, #{record,jdbcType=VARCHAR}, #{followUpTime,jdbcType=TIMESTAMP}, 
+      #{maturity,jdbcType=VARCHAR}, #{productSubmitId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luoshi.pojo.TbFollowUpRecord" >
+    insert into tb_follow_up_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="record != null" >
+        record,
+      </if>
+      <if test="followUpTime != null" >
+        follow_up_time,
+      </if>
+      <if test="maturity != null" >
+        maturity,
+      </if>
+      <if test="productSubmitId != null" >
+        product_submit_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpTime != null" >
+        #{followUpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maturity != null" >
+        #{maturity,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubmitId != null" >
+        #{productSubmitId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.luoshi.pojo.TbFollowUpRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_follow_up_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_follow_up_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.record != null" >
+        record = #{record.record,jdbcType=VARCHAR},
+      </if>
+      <if test="record.followUpTime != null" >
+        follow_up_time = #{record.followUpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maturity != null" >
+        maturity = #{record.maturity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSubmitId != null" >
+        product_submit_id = #{record.productSubmitId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_follow_up_record
+    set id = #{record.id,jdbcType=INTEGER},
+      record = #{record.record,jdbcType=VARCHAR},
+      follow_up_time = #{record.followUpTime,jdbcType=TIMESTAMP},
+      maturity = #{record.maturity,jdbcType=VARCHAR},
+      product_submit_id = #{record.productSubmitId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luoshi.pojo.TbFollowUpRecord" >
+    update tb_follow_up_record
+    <set >
+      <if test="record != null" >
+        record = #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="followUpTime != null" >
+        follow_up_time = #{followUpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maturity != null" >
+        maturity = #{maturity,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubmitId != null" >
+        product_submit_id = #{productSubmitId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luoshi.pojo.TbFollowUpRecord" >
+    update tb_follow_up_record
+    set record = #{record,jdbcType=VARCHAR},
+      follow_up_time = #{followUpTime,jdbcType=TIMESTAMP},
+      maturity = #{maturity,jdbcType=VARCHAR},
+      product_submit_id = #{productSubmitId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

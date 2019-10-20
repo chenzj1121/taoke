@@ -6,7 +6,7 @@
       </el-row> -->
       <el-row type="flex" justify="space-between" align="middle" class="content_bar">
         <el-col>
-          <Menu class="menu"/>
+          <Menu class="menu" :type="type"/>
         </el-col>
         <el-col class="logout_col">
           <Logout/>
@@ -26,13 +26,19 @@
 import Menu from '@/components/menu.vue'
 import Logout from '@/components/logout.vue'
 import logo from '@/assets/logo.png'
+import { getUser } from '@/utils/auth'
 export default {
   components: { Menu, Logout },
   data () {
+    this.type = getUser().type;
     return {
-      logoUrl: logo
+      logoUrl: logo,
+      type:0,
     }
-  }
+  },
+  mounted(){
+    this.type = getUser().type;
+  },
 }
 </script>
 

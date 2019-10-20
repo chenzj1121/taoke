@@ -20,18 +20,28 @@
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">系统管理</template>
-      <el-menu-item index="/systemManager/userList">用户管理</el-menu-item>
+      <el-menu-item index="/systemManager/userList" v-if="type!=2">用户管理</el-menu-item>
       <el-menu-item index="/systemManager/own">个人设置</el-menu-item>
       <el-menu-item index="/systemManager/modifyPassword">密码修改</el-menu-item>
-      <el-menu-item index="/systemManager/dept">部门管理</el-menu-item>
-      <el-menu-item index="/systemManager/group">小组管理</el-menu-item>
+      <el-menu-item index="/systemManager/dept" v-if="type!=2">部门管理</el-menu-item>
+      <el-menu-item index="/systemManager/group" v-if="type!=2">小组管理</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
 
 <script>
 export default {
+  props:["type"],
+  updated(){
+  console.log(this.type)
+  },
+  // computed: {
+  //   admin(){
+  //     return this.type  
+  //   }
+  // }
 }
+
 </script>
 
 <style>

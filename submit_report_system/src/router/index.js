@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Layout from '@/Layout'
 import {getUser}　from "../utils/auth/index"
 
-let userType;
 Vue.use(Router)
 function shouWei(to,from,next){
   if(getUser().type!=2){

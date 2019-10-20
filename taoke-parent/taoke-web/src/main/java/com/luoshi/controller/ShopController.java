@@ -30,9 +30,15 @@ public class ShopController {
 		return shopService.findAll();
 	}
 
-    @RequestMapping("/getSubmitAccountNameList")
-    public List<String> getSubmitAccountNameList(@RequestParam("wangwangAccount") String wangwangAccount) {
-        return shopService.checkWangWangAccount(wangwangAccount);
+	/**
+	 * 查询旺旺账号
+	 * @param wangwangAccount
+	 * @return
+	 */
+    @RequestMapping("/getWangwangAccountCounts")
+    public int  getSubmitAccountNameList(@RequestParam("wangwangAccount") String wangwangAccount) {
+    	int size = shopService.checkWangWangAccount(wangwangAccount).size();
+        return size;
     }
 	
 	/**

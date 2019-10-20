@@ -1,6 +1,9 @@
 package com.luoshi.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -24,6 +27,8 @@ public class LoginController {
 
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    HttpServletRequest request;
 
     @RequestMapping("/login")
     public Result login(@RequestBody TbSysUser tbSysUser) {
@@ -36,6 +41,8 @@ public class LoginController {
 //    	subject.login(upt);
     	
         Result result = sysUserService.getUserByName(tbSysUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", result.getData());
     	return result;
     	}catch (Exception e) {
     	return ajaxReturn(false,"登陆失败");

@@ -99,7 +99,7 @@
         <el-button type="success" size="mini" @click="addCustomer">新建</el-button>
         <el-button type="warning" size="mini">导入</el-button>
         <el-button type="primary" size="mini">模板下载</el-button>
-        <el-button type="warning" size="mini">转入公海</el-button>
+        <el-button type="warning" size="mini" @click="transTo">转入公海</el-button>
       </el-row>
     </el-row>
     <el-row>
@@ -137,13 +137,15 @@
         <el-table-column prop="dataType" label="资料类型"/>
         <el-table-column prop="operatorUserId" label="操作人"/>
         <el-table-column prop="name" label="打标类型"/>
-        <el-table-column label="操作" width="260px">
+        <el-table-column label="操作" width="320px">
           <template slot-scope="scope">
             <div class="operates">
-              <el-button type="primary" size="mini" @click="submitReport(scope.row)">提报</el-button>
-              <el-button type="warning" size="mini" @click="nav2Update(scope.row.id)">修改</el-button>
-              <el-button type="primary" size="mini" @click="followRecord(scope.row)">跟进记录</el-button>
-              <el-button type="danger" size="mini" @click="del(scope.row)">删除</el-button>
+              <el-row>
+                <el-button type="primary" size="mini" @click="submitReport(scope.row)">提报</el-button>
+                <el-button type="warning" size="mini" @click="nav2Update(scope.row.id)">修改</el-button>
+                <el-button type="primary" size="mini" @click="followRecord(scope.row)">跟进记录</el-button>
+                <el-button type="danger" size="mini" @click="del(scope.row)">删除</el-button>
+              </el-row>
             </div>
           </template>
         </el-table-column>
@@ -163,7 +165,7 @@
 </template>
 
 <script>
-import { getShopList, deleteShopById } from '@/api'
+import { getShopList, deleteShopById,updateShop} from '@/api'
 import pagination from '@/components/page'
 import maturities from '@/assets/maturity'
 export default {
@@ -180,7 +182,8 @@ export default {
         pageNum: 1,
         total: 30
       },
-      loading: false
+      loading: false,
+      multipleSelection: []
     }
   },
   mounted () {
@@ -190,11 +193,12 @@ export default {
     submitReport (item) {
       this.$router.push({ path: '/customer/cooperationDetail' })
     },
-    handleSelectionChange () {
-
+    handleSelectionChange (val) {
+       this.multipleSelection = val;
     },
-    followRecord () {
-      this.$router.push({ path: '/customer/followRecord' })
+    followRecord (opt) {
+      console.log(opt)
+      this.$router.push({ path: '/customer/followRecord',query:{id:opt.id}})
     },
     addCustomer () {
       this.$router.push({ path: '/customer/add' })
@@ -239,14 +243,36 @@ export default {
       const rows = this.page.pageSize
       this.loading = true
       shop.privateType = '1'
-      getShopList(shop, page, rows).then(response => {
-        this.tableData = response.rows
-        this.page.total = response.total
+      getShopList(shop, page, rows).then(res => {
+        console.log(res)
+        this.tableData = res.rows
+        this.page.total = res.total
         this.loading = false
       })
         .catch(() => {
           this.loading = false
         })
+    },
+    transTo(){
+      let flag  = true;
+      if(this.multipleSelection[0]){
+        for(let i=0;i<this.multipleSelection.length;i++){
+         this.multipleSelection[i].privateType = 0;
+         updateShop(this.multipleSelection[i]).then(res=>{
+           if(res.success){
+              // this.$sucmsg(res.message)
+           }else{
+             this.$errmsg(res.message)
+             let flag = false;
+           }
+         })
+        }
+      if(flag){this.$sucmsg("修改成功")}
+      this.bindData();
+      }else{
+        this.$message("请选择店铺")
+      }
+
     }
   }
 }

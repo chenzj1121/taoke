@@ -9,8 +9,7 @@ import '@/css/css_reset.css'
 
 import './permission.js'
 import './utils/addMethods2vm'
-
-Vue.config.productionTip = true
+// Vue.config.productionTip = true
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */

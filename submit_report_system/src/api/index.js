@@ -51,3 +51,10 @@ export const deleteShopById = id => ajax(PRE_URL + `/shop/delete.do?ids=${id}`, 
 export const getCooperationPage = (form, page, rows) => ajax(PRE_URL + `/coop/search.do?page=${page}&rows=${rows}`, form, 'post')
 
 export const getCheckmonkeyPage = (form, page, rows) => ajax(PRE_URL + `/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
+
+//10-18 lambor
+export const addTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/add.do',target, 'post')
+export const updateTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/update.do',target, 'post')
+export const findTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/findOne.do?id='+target,'post')
+export const addRecord = (target) => ajax(PRE_URL + '/followUpRecord/add.do',target,'post')
+export const findRecord = (id) => ajax(PRE_URL + '/followUpRecord/findOne.do?id='+id,'get')

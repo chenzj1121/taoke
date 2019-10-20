@@ -56,20 +56,23 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          const user = this.loginForm
-          this.savaUser2Cookie(user)
-          this.loading = false
-          this.$sucmsg('登录成功!')
-          this.$router.replace({ path: '/home' })
-
+          // const user = this.loginForm
+          // this.savaUser2Cookie(user)
+          // this.loading = false
+          // this.$sucmsg('登录成功!')
+          // this.$router.replace({ path: '/home' })
           reqLogin(this.loginForm).then(res => {
-            console.log(res)
-            const { username, realname, phone, userRole, deptId, groupId, id } = res
-            const user = { username, realname, phone, userRole, deptId, groupId, id }
-            this.savaUser2Cookie(user)
-            this.loading = false
-            this.$sucmsg('登录成功!')
-            this.$router.replace({ path: '/home' })
+            // console.log(res)
+            if(res.success){
+               const { username, realname, phone, deptId, groupId, id,type} = res.data
+              const user = { username, realname, phone, deptId, groupId, id,type }
+              this.savaUser2Cookie(user)
+              this.loading = false
+              this.$sucmsg('登录成功!')
+              this.$router.replace({ path: '/home' })
+            }else{
+               this.$message.error(res.message);
+            }
           })
             .catch(err => {
               console.log(err)

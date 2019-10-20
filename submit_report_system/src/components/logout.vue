@@ -2,7 +2,7 @@
   <div class="wrap">
     <i class="el-icon-user-solid"></i>
     <div>欢迎</div>
-    <div style="padding: 0 10px;">吴小婧</div>
+    <div style="padding: 0 10px;">{{userInfo.username}}</div>
     <div style="margin-right: 10px;">使用网上办公平台</div>
     <div style="cursor: pointer;" @click="logout">退出系统</div>
   </div>
@@ -10,7 +10,16 @@
 
 <script>
 import { deleteUser } from '@/utils/auth'
+import {getUser} from '../utils/auth/index'
 export default {
+  data(){
+    return{
+      userInfo:{}
+    }
+  },
+  mounted(){
+    this.userInfo = getUser()
+  },
   methods: {
     logout () {
       this.$confirm('确认退出吗？', {})

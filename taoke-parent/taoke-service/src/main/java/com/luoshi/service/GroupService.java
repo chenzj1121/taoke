@@ -59,5 +59,8 @@ public interface GroupService {
 	public PageResult findPage(TbGroup group, int pageNum,int pageSize);
 
 
-    List<TbGroup> getGroupByDeptId(Integer deptId);
+//    List<TbGroup> getGroupByDeptId(Integer deptId);
+
+
+	public List<TbGroup> findByDept(int deptId);
 }

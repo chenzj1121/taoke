@@ -81,14 +81,14 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 
-    @Override
+   /* @Override
     public List<TbGroup> getGroupByDeptId(Integer deptId) {
         TbGroupExample example=new TbGroupExample();
         com.luoshi.pojo.TbGroupExample.Criteria criteria = example.createCriteria();
 
         criteria.andGroupDeptIdEqualTo(deptId);
         return groupMapper.selectByExample(example);
-    }
+    }*/
 
     @Override
 	public PageResult findPage(TbGroup group, int pageNum, int pageSize) {
@@ -106,6 +106,15 @@ public class GroupServiceImpl implements GroupService {
 		
 		Page<TbGroup> page= (Page<TbGroup>)groupMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	@Override
+	public List<TbGroup> findByDept(int deptId) {
+		TbGroupExample example=new TbGroupExample();
+        com.luoshi.pojo.TbGroupExample.Criteria criteria = example.createCriteria();
+
+        criteria.andGroupDeptIdEqualTo(deptId);
+        return groupMapper.selectByExample(example);
 	}
 	
 }

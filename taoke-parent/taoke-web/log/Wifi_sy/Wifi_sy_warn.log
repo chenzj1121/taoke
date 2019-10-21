@@ -2856,3 +2856,4 @@ java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refr
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:748)
 2019-10-17 15:25:20 [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:354:[WARN]] Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: "undefined"
+2019-10-21 14:54:05 [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:354:[WARN]] Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: "undefined"

@@ -32,11 +32,24 @@ public class GroupController {
 	public List<TbGroup> findAll(){			
 		return groupService.findAll();
 	}
-
-    @RequestMapping("getGroupByDeptId")
+	
+	/**
+	 * 根据部门编号返回列表信息
+	 * @return
+	 */
+	@RequestMapping("/findByDept")
+	public List<TbGroup> findByDept(@RequestParam("deptId")int deptId){			
+		return groupService.findByDept(deptId);
+	}
+	
+	/**
+	 * 根据部门编号返回列表信息
+	 * @return
+	 */
+/*    @RequestMapping("getGroupByDeptId")
     public List<TbGroup> getGroupByDeptId(@RequestParam("deptId")Integer deptId) {
 	    return groupService.getGroupByDeptId(deptId);
-    }
+    }*/
 	/**
 	 * 返回全部列表
 	 * @return

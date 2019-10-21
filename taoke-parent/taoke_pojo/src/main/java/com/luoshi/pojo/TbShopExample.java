@@ -2524,6 +2524,136 @@ public class TbShopExample {
             addCriterion("shop_bz not between", value1, value2, "shopBz");
             return (Criteria) this;
         }
+
+        public Criteria andShopGroupIdIsNull() {
+            addCriterion("shop_group_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdIsNotNull() {
+            addCriterion("shop_group_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdEqualTo(Integer value) {
+            addCriterion("shop_group_id =", value, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdNotEqualTo(Integer value) {
+            addCriterion("shop_group_id <>", value, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdGreaterThan(Integer value) {
+            addCriterion("shop_group_id >", value, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("shop_group_id >=", value, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdLessThan(Integer value) {
+            addCriterion("shop_group_id <", value, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdLessThanOrEqualTo(Integer value) {
+            addCriterion("shop_group_id <=", value, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdIn(List<Integer> values) {
+            addCriterion("shop_group_id in", values, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdNotIn(List<Integer> values) {
+            addCriterion("shop_group_id not in", values, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdBetween(Integer value1, Integer value2) {
+            addCriterion("shop_group_id between", value1, value2, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopGroupIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("shop_group_id not between", value1, value2, "shopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameIsNull() {
+            addCriterion("shop_user_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameIsNotNull() {
+            addCriterion("shop_user_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameEqualTo(String value) {
+            addCriterion("shop_user_name =", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameNotEqualTo(String value) {
+            addCriterion("shop_user_name <>", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameGreaterThan(String value) {
+            addCriterion("shop_user_name >", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameGreaterThanOrEqualTo(String value) {
+            addCriterion("shop_user_name >=", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameLessThan(String value) {
+            addCriterion("shop_user_name <", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameLessThanOrEqualTo(String value) {
+            addCriterion("shop_user_name <=", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameLike(String value) {
+            addCriterion("shop_user_name like", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameNotLike(String value) {
+            addCriterion("shop_user_name not like", value, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameIn(List<String> values) {
+            addCriterion("shop_user_name in", values, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameNotIn(List<String> values) {
+            addCriterion("shop_user_name not in", values, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameBetween(String value1, String value2) {
+            addCriterion("shop_user_name between", value1, value2, "shopUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopUserNameNotBetween(String value1, String value2) {
+            addCriterion("shop_user_name not between", value1, value2, "shopUserName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

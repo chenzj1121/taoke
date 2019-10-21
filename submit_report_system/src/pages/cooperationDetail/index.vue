@@ -94,8 +94,8 @@
           <span>驳回消息 0 条</span>
           <span class="link">点击查看</span>
           &nbsp;&nbsp;
-          <el-button type="primary">下载模板</el-button>
-          <el-button type="warning">上传数据</el-button>
+          <!-- <el-button type="primary">下载模板</el-button>
+          <el-button type="warning">上传数据</el-button> -->
           <span style="font-size: 12px;">店铺数： 123</span>
         </el-form-item>
       </el-form>

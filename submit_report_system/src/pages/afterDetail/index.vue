@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import {getDetail} from "@/api/index"
 export default {
   data () {
     return {
@@ -107,6 +108,11 @@ export default {
       ],
       afterDetailTableData: []
     }
+  },
+  mounted(){
+    getDetail().then(res=>{
+      console.log(res)
+    })
   }
 }
 </script>

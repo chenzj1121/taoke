@@ -60,24 +60,27 @@
           <el-form-item prop="endPrice">
             <el-input :value="form.endPrice" type="number"></el-input>
           </el-form-item>
-          <el-form-item label="销售部:" label-width="60px">
+          <el-form-item label="部门:" label-width="60px">
             <div>
-              <el-select value="0">
-                <el-option value="0" label="123"></el-option>
+              <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
               </el-select>
             </div>
           </el-form-item>
           <el-form-item label="组别:" label-width="60px">
             <div>
-              <el-select value="0">
-                <el-option value="0" label="123"></el-option>
+              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.shopDeptId,form.shopGroupId)">
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
               </el-select>
             </div>
           </el-form-item>
           <el-form-item label="部门人员:" label-width="80px">
             <div>
-              <el-select value="0">
-                <el-option value="0" label="123"></el-option>
+              <el-select v-model="form.shopUserId2" placeholder="请选择" @change="un(form.shopUserId2)">
+                <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
               </el-select>
             </div>
           </el-form-item>
@@ -116,9 +119,9 @@
       >
         <el-table-column type="selection"/>
         <el-table-column type="index" label="序号"/>
-        <el-table-column prop="name" label="所属小组"/>
-        <el-table-column prop="name" label="所属人员"/>
-        <el-table-column prop="name" label="所属部门"/>
+        <el-table-column prop="group" label="所属小组"/>
+        <el-table-column prop="creater" label="所属人员"/>
+        <el-table-column prop="dep" label="所属部门"/>
         <el-table-column label="店铺名称">
           <template slot-scope="scope">
             <span class="shopName" @click="nav2ShopDetail(scope.row.id)">{{scope.row.shopName}}</span>
@@ -165,7 +168,7 @@
 </template>
 
 <script>
-import { getShopList, deleteShopById,updateShop} from '@/api'
+import { getShopList, deleteShopById,updateShop,getDeptByList,getGroupByList,getUserById,getGroupMember} from '@/api'
 import pagination from '@/components/page'
 import maturities from '@/assets/maturity'
 export default {
@@ -180,16 +183,64 @@ export default {
       page: {
         pageSize: 10,
         pageNum: 1,
-        total: 30
+        total: 0
       },
+      deptList:{},
+      groupList:{},
       loading: false,
-      multipleSelection: []
+      multipleSelection: [],
+      list:[],
+      flag:true,
+      gruopList2:[],//部门联动-小组
+      memberList:[],//部门联动-员工
     }
   },
   mounted () {
+    this.getGroupList()
     this.bindData()
+    this.getDeptList()
   },
   methods: {
+    un(id){
+      console.log(id)
+    },
+    getGroup(id){
+      // console.log(id)
+        this.form.shopGroupId = null;
+        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+        this.gruopList2 = []
+        this.memberList = []
+      if(id){
+      //  this.form.shopDeptId =null;
+      this.groupList.map(item=>{
+        if(item.groupDeptId==id){
+          this.gruopList2.push(item)
+        }
+      })
+      }
+    },
+    getMember(deptId,groupId){
+        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+      this.memberList = [];
+      if(deptId && groupId){
+      //  this.form.shopGroupId = null;
+        getGroupMember(deptId,groupId).then(res=>{
+          this.memberList = res
+        })
+      }
+    },
+     getDeptList () {
+      getDeptByList().then(res => {
+        // console.log(res)
+        this.deptList = res
+      })
+    },
+    getGroupList() {
+      getGroupByList().then(res => {
+        // console.log(res)
+        this.groupList = res
+      })
+    },
     submitReport (item) {
       this.$router.push({ path: '/customer/cooperationDetail' })
     },
@@ -244,20 +295,38 @@ export default {
       this.loading = true
       shop.privateType = '1'
       getShopList(shop, page, rows).then(res => {
-        console.log(res)
         this.tableData = res.rows
+          res.rows.map((item,index)=>{
+            // item.group =""+item.shopDeptId+item.shopGroupId
+              this.groupList.map(obj=>{
+                if(item.shopDeptId == obj.groupDeptId && item.shopGroupId == obj.groupId){
+                  item.group = obj.groupName
+                  item.dep = obj.groupName
+                }
+              })
+              // getUserById(item.shopUserId2).then(obj=>{
+              //   this.tableData[index].creater = obj.username;
+              // })
+          })
+               this.tableData = res.rows
+
         this.page.total = res.total
         this.loading = false
+        // console.log(res.rows)
+      
       })
         .catch(() => {
           this.loading = false
         })
     },
+
     transTo(){
       let flag  = true;
       if(this.multipleSelection[0]){
         for(let i=0;i<this.multipleSelection.length;i++){
          this.multipleSelection[i].privateType = 0;
+          this.multipleSelection[i].shopGroupId = "";
+           this.multipleSelection[i].shopDeptId =""; 
          updateShop(this.multipleSelection[i]).then(res=>{
            if(res.success){
               // this.$sucmsg(res.message)
@@ -274,7 +343,15 @@ export default {
       }
 
     }
-  }
+  },
+  watch:{
+    tableData(val){
+      this.tableData = val
+      console.log(val)
+    },
+     deep:true
+  },
+ 
 }
 </script>
 

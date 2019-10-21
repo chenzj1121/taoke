@@ -58,3 +58,11 @@ export const updateTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/upd
 export const findTarget = (userId,year,month) => ajax(PRE_URL + '/userWorkTargetMonth/findOneByYearAndMonth.do?userId='+userId+"&year="+year+"&month="+month,'post')
 export const addRecord = (target) => ajax(PRE_URL + '/followUpRecord/add.do',target,'post')
 export const findRecord = (id) => ajax(PRE_URL + '/followUpRecord/findOne.do?id='+id,'get')
+export const checkWangWang = (name) => ajax(PRE_URL + '/shop/getWangwangAccountCounts.do?wangwangAccount='+name,'post')
+export const getDetail = () => ajax(PRE_URL + '/backgroundDetails/findAll.do?','','post')
+export const getGroupMember = (deptId,groupId) => ajax(PRE_URL + '/sysUser/getUserByDeptIdAndGroupId.do?deptId='+deptId+"&groupId="+groupId,'','post')
+
+
+
+
+

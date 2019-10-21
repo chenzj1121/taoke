@@ -8,8 +8,8 @@
         </el-form-item>
         <el-form-item prop="wangwangaccount" label="旺旺账号：" :rules="[{ required: true, message: '旺旺账号不能为空' }]">
           <div class="oneline">
-            <el-input v-model="form.wangwangaccount"></el-input>
-            <el-button type="primary">检测</el-button>
+            <el-input v-model="form.wangwangaccount" type="text"></el-input>
+            <el-button :type="btn.type" @click="checkWang" :loading="btn.load">{{btn.txt}}</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="shopBoss" label="店铺老板：">
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { addShop } from '@/api'
+import { addShop,checkWangWang } from '@/api'
 import maturity from '@/assets/maturity'
 import {getUser} from "../../utils/auth"
 export default {
@@ -67,7 +67,13 @@ export default {
     return {
       form: {},
       maturities: maturity,
-      status: ['淘宝', '天猫']
+      status: ['淘宝', '天猫'],
+      btn:{
+        type:"primary",
+        txt:"检测",
+        load:false,
+      },
+      flag:false,
     }
   },
   mounted(){
@@ -75,11 +81,13 @@ export default {
   },
   methods: {
     onSubmit () {
+      if(this.flag){
       this.$refs.form.validate(valid => {
         if (valid) {
           this.form.shopDeptId = getUser().deptId;
-          this.form.shopBz = getUser().groupId;
+          this.form.shopGroupId = getUser().groupId;
           this.form.shopUserId2 = getUser().id;
+          this.form.shopUseId = getUser().id;
           console.log('params', this.form)
           this.form.privateType = '1'
           addShop(this.form).then(response => {
@@ -94,9 +102,28 @@ export default {
           })
         }
       })
+      }else{
+        this.$errmsg("请验证旺旺号")
+      }
     },
     back () {
       this.$router.go(-1)
+    },
+    checkWang(){
+      this.form.wangwangaccount = this.form.wangwangaccount.toString()
+      this.btn.load = true
+      checkWangWang(this.form.wangwangaccount).then(res=>{
+      this.btn.load = false
+        if(res<=3){
+          this.btn.type = "success";
+          this.btn.txt = "成功"
+          this.flag = true;
+        }else{
+          this.btn.type = "danger";
+          this.flag = false;
+        }
+
+      })
     }
   }
 }

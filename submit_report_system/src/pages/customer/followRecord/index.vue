@@ -70,7 +70,7 @@ export default {
           }
         });
     }
-    // this.find()
+    this.find()
   },
   methods: {
     back () {

@@ -6,9 +6,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> 3c7077c984229c6ff4408cd8b4c4a38c0e32208e
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -192,6 +198,7 @@ public class ProductSubmitController {
         }  
         out.close();  
     }
+<<<<<<< HEAD
     /**
       * 文件上传
      * @param request
@@ -248,5 +255,7 @@ public class ProductSubmitController {
 		return result;
 		
 	}
+=======
+>>>>>>> 3c7077c984229c6ff4408cd8b4c4a38c0e32208e
 	
 }

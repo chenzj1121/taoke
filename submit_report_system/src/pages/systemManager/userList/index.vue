@@ -75,12 +75,12 @@
           <el-button type="warning" size="mini" @click="updUserById(scope.row.id)">修改</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="注销">
+      <!-- <el-table-column label="注销">
         <template slot-scope="scope">
           <span v-if="scope.row.isDelete === 0" class="linkSpan" @click="logoutUser(scope.row)"><el-tag>已激活</el-tag></span>
           <span v-if="scope.row.isDelete === 1" class="linkSpan" @click="logoutUser(scope.row)"><el-tag type="danger">已注销</el-tag></span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getUserList"/>
     <el-dialog

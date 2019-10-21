@@ -1,8 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/Layout'
+import {getUser}　from "../utils/auth/index"
 
 Vue.use(Router)
+function shouWei(to,from,next){
+  if(getUser().type!=2){
+    next()
+  }else{
+    alert("对不起，你没有权限")
+    next('/home')
+  }
+}
 
 export default new Router({
   routes: [
@@ -148,23 +157,24 @@ export default new Router({
         {
           path: '/systemManager/userList',
           name: 'userList',
+          beforeEnter: (to, from, next) => {shouWei(to,from,next)},
           component: Layout,
           redirect: 'systemManager/userList/index',
           children: [
             {
               path: 'index',
               name: 'index',
-              component: () => import('@/pages/systemManager/userList')
+              component: () => import('@/pages/systemManager/userList'),
             },
             {
               path: 'addUser',
               name: 'addUser',
-              component: () => import('@/pages/systemManager/userList/addUser')
+              component: () => import('@/pages/systemManager/userList/addUser'),
             },
             {
               path: 'updUser',
               name: 'updUser',
-              component: () => import('@/pages/systemManager/userList/updUser')
+              component: () => import('@/pages/systemManager/userList/updUser'),
             }
           ]
         },
@@ -198,6 +208,7 @@ export default new Router({
           path: '/systemManager/dept',
           name: 'dept',
           component: Layout,
+          beforeEnter: (to, from, next) => {shouWei(to,from,next)},
           redirect: 'systemManager/dept/index',
           children: [
             {
@@ -211,6 +222,7 @@ export default new Router({
           path: '/systemManager/group',
           name: 'group',
           component: Layout,
+          beforeEnter: (to, from, next) => {shouWei(to,from,next)},
           redirect: 'systemManager/group/index',
           children: [
             {

@@ -1,13 +1,16 @@
 package com.luoshi.service.impl;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luoshi.mapper.TbProductSubmitMapper;
-import com.luoshi.pojo.TbBackmoneyExample.Criteria;
 import com.luoshi.pojo.TbProductSubmit;
 import com.luoshi.pojo.TbProductSubmitExample;
 import com.luoshi.service.ProductSubmitService;
@@ -167,5 +170,60 @@ public class ProductSubmitServiceImpl implements ProductSubmitService {
 		Page<TbProductSubmit> page= (Page<TbProductSubmit>)productSubmitMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
+		
+	public void doImport(InputStream is) throws IOException {
+			
+		HSSFWorkbook wb = null;
+		try {
+			wb = new HSSFWorkbook(is);
+			HSSFSheet sheet = wb.getSheetAt(0);
+			String type = "";
+/*			if("供应商".equals(sheet.getSheetName())){
+				type = Supplier.TYPE_SUPPLIER;
+			}else if("客户".equals(sheet.getSheetName())){
+				type = Supplier.TYPE_CUSTOMER;
+			}else{
+				throw new ErpException("工作表名称不正确");
+			}*/
+			
+			//读取数据
+			//最后一行的行号
+			int lastRow = sheet.getLastRowNum();
+			TbProductSubmit productSubmit = null;
+			for(int i = 1; i <= lastRow; i++){
+				productSubmit = new TbProductSubmit();
+			/*	productSubmit.setName(sheet.getRow(i).getCell(0).getStringCellValue());//供应商名称
+				//判断是否已经存在，通过名称来判断
+				List<Supplier> list = supplierDao.getList(null, supplier, null);
+				if(list.size() > 0){
+					supplier = list.get(0);
+				}
+				supplier.setAddress(sheet.getRow(i).getCell(1).getStringCellValue());//地址
+				supplier.setContact(sheet.getRow(i).getCell(2).getStringCellValue());//联系人
+				supplier.setTele(sheet.getRow(i).getCell(3).getStringCellValue());//电话
+				supplier.setEmail(sheet.getRow(i).getCell(4).getStringCellValue());//Email
+				if(list.size() == 0){
+					//新增
+					supplier.setType(type);
+					supplierDao.add(supplier);
+				}*/
+				productSubmit.setStartTime(sheet.getRow(i).getCell(0).getStringCellValue());
+				productSubmit.setEndTime(sheet.getRow(i).getCell(1).getStringCellValue());
+				productSubmit.setShopTitle(sheet.getRow(i).getCell(2).getStringCellValue());
+				productSubmit.setGoodsId(Integer.parseInt( sheet.getRow(i).getCell(3).getStringCellValue()));
+				productSubmit.setRemarks(sheet.getRow(i).getCell(4).getStringCellValue());
+				productSubmit.setCustomName(sheet.getRow(i).getCell(5).getStringCellValue());
+				
+				}			
+		} finally{
+			if(null != wb){
+				try {
+					wb.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		}
 	
 }

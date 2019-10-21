@@ -1,4 +1,7 @@
 package com.luoshi.service;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import com.luoshi.pojo.TbProductSubmit;
 
@@ -57,5 +60,13 @@ public interface ProductSubmitService {
 	 * @return
 	 */
 	public PageResult findPage(TbProductSubmit productSubmit, int pageNum,int pageSize);
+
+
+	/**
+	 * 导入xsl文件
+	 * @param ins
+	 * @throws IOException 
+	 */
+	public void doImport(InputStream ins) throws IOException;
 	
 }

@@ -29,6 +29,23 @@
     <result column="settlement_type" property="settlementType" jdbcType="VARCHAR" />
     <result column="upload_pic" property="uploadPic" jdbcType="VARCHAR" />
     <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="use_id" property="useId" jdbcType="INTEGER" />
+    <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="aliwangwang" property="aliwangwang" jdbcType="VARCHAR" />
+    <result column="goods_counts" property="goodsCounts" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="orders_type" property="ordersType" jdbcType="INTEGER" />
+    <result column="pay" property="pay" jdbcType="DOUBLE" />
+    <result column="pay_about" property="payAbout" jdbcType="DOUBLE" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="pay_money" property="payMoney" jdbcType="DOUBLE" />
+    <result column="money_about" property="moneyAbout" jdbcType="DOUBLE" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="gd_id" property="gdId" jdbcType="BIGINT" />
+    <result column="tb_type" property="tbType" jdbcType="VARCHAR" />
+    <result column="tb_time" property="tbTime" jdbcType="TIMESTAMP" />
+    <result column="tb_bz" property="tbBz" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -93,7 +110,9 @@
     shop_market_pic, extension_strategy, characteristic_strategy, start_time, coupon_type, 
     coupon_name, coupon_url, coupon_after_price, coupon_count, coupon_price, service_price, 
     end_time, return_money_time, remarks, taobao_price, buy_count, settlement_type, upload_pic, 
-    platform
+    platform, use_id, dept_id, group_id, aliwangwang, goods_counts, goods_price, orders_type, 
+    pay, pay_about, pay_time, pay_money, money_about, order_id, gd_id, tb_type, tb_time, 
+    tb_bz
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbProductSubmitExample" >
     select
@@ -135,7 +154,13 @@
       coupon_price, service_price, end_time, 
       return_money_time, remarks, taobao_price, 
       buy_count, settlement_type, upload_pic, 
-      platform)
+      platform, use_id, dept_id, 
+      group_id, aliwangwang, goods_counts, 
+      goods_price, orders_type, pay, 
+      pay_about, pay_time, pay_money, 
+      money_about, order_id, gd_id, 
+      tb_type, tb_time, tb_bz
+      )
     values (#{id,jdbcType=INTEGER}, #{customName,jdbcType=VARCHAR}, #{zeroSubmit,jdbcType=VARCHAR}, 
       #{shopTitle,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{shopActive,jdbcType=VARCHAR}, 
       #{shopItem,jdbcType=VARCHAR}, #{shopMainPic,jdbcType=VARCHAR}, #{shopMarketPic,jdbcType=VARCHAR}, 
@@ -145,7 +170,13 @@
       #{couponPrice,jdbcType=VARCHAR}, #{servicePrice,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, 
       #{returnMoneyTime,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{taobaoPrice,jdbcType=VARCHAR}, 
       #{buyCount,jdbcType=VARCHAR}, #{settlementType,jdbcType=VARCHAR}, #{uploadPic,jdbcType=VARCHAR}, 
-      #{platform,jdbcType=VARCHAR})
+      #{platform,jdbcType=VARCHAR}, #{useId,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, 
+      #{groupId,jdbcType=INTEGER}, #{aliwangwang,jdbcType=VARCHAR}, #{goodsCounts,jdbcType=INTEGER}, 
+      #{goodsPrice,jdbcType=DOUBLE}, #{ordersType,jdbcType=INTEGER}, #{pay,jdbcType=DOUBLE}, 
+      #{payAbout,jdbcType=DOUBLE}, #{payTime,jdbcType=TIMESTAMP}, #{payMoney,jdbcType=DOUBLE}, 
+      #{moneyAbout,jdbcType=DOUBLE}, #{orderId,jdbcType=BIGINT}, #{gdId,jdbcType=BIGINT}, 
+      #{tbType,jdbcType=VARCHAR}, #{tbTime,jdbcType=TIMESTAMP}, #{tbBz,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbProductSubmit" >
     insert into tb_product_submit
@@ -231,6 +262,57 @@
       <if test="platform != null" >
         platform,
       </if>
+      <if test="useId != null" >
+        use_id,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="aliwangwang != null" >
+        aliwangwang,
+      </if>
+      <if test="goodsCounts != null" >
+        goods_counts,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="ordersType != null" >
+        orders_type,
+      </if>
+      <if test="pay != null" >
+        pay,
+      </if>
+      <if test="payAbout != null" >
+        pay_about,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="payMoney != null" >
+        pay_money,
+      </if>
+      <if test="moneyAbout != null" >
+        money_about,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="gdId != null" >
+        gd_id,
+      </if>
+      <if test="tbType != null" >
+        tb_type,
+      </if>
+      <if test="tbTime != null" >
+        tb_time,
+      </if>
+      <if test="tbBz != null" >
+        tb_bz,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -313,6 +395,57 @@
       </if>
       <if test="platform != null" >
         #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="useId != null" >
+        #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="aliwangwang != null" >
+        #{aliwangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCounts != null" >
+        #{goodsCounts,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="ordersType != null" >
+        #{ordersType,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=DOUBLE},
+      </if>
+      <if test="payAbout != null" >
+        #{payAbout,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="moneyAbout != null" >
+        #{moneyAbout,jdbcType=DOUBLE},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="gdId != null" >
+        #{gdId,jdbcType=BIGINT},
+      </if>
+      <if test="tbType != null" >
+        #{tbType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbTime != null" >
+        #{tbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbBz != null" >
+        #{tbBz,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -406,6 +539,57 @@
       <if test="record.platform != null" >
         platform = #{record.platform,jdbcType=VARCHAR},
       </if>
+      <if test="record.useId != null" >
+        use_id = #{record.useId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aliwangwang != null" >
+        aliwangwang = #{record.aliwangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsCounts != null" >
+        goods_counts = #{record.goodsCounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsPrice != null" >
+        goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ordersType != null" >
+        orders_type = #{record.ordersType,jdbcType=INTEGER},
+      </if>
+      <if test="record.pay != null" >
+        pay = #{record.pay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.payAbout != null" >
+        pay_about = #{record.payAbout,jdbcType=DOUBLE},
+      </if>
+      <if test="record.payTime != null" >
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payMoney != null" >
+        pay_money = #{record.payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.moneyAbout != null" >
+        money_about = #{record.moneyAbout,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.gdId != null" >
+        gd_id = #{record.gdId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbType != null" >
+        tb_type = #{record.tbType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbTime != null" >
+        tb_time = #{record.tbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbBz != null" >
+        tb_bz = #{record.tbBz,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -439,7 +623,24 @@
       buy_count = #{record.buyCount,jdbcType=VARCHAR},
       settlement_type = #{record.settlementType,jdbcType=VARCHAR},
       upload_pic = #{record.uploadPic,jdbcType=VARCHAR},
-      platform = #{record.platform,jdbcType=VARCHAR}
+      platform = #{record.platform,jdbcType=VARCHAR},
+      use_id = #{record.useId,jdbcType=INTEGER},
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      aliwangwang = #{record.aliwangwang,jdbcType=VARCHAR},
+      goods_counts = #{record.goodsCounts,jdbcType=INTEGER},
+      goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
+      orders_type = #{record.ordersType,jdbcType=INTEGER},
+      pay = #{record.pay,jdbcType=DOUBLE},
+      pay_about = #{record.payAbout,jdbcType=DOUBLE},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      pay_money = #{record.payMoney,jdbcType=DOUBLE},
+      money_about = #{record.moneyAbout,jdbcType=DOUBLE},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      gd_id = #{record.gdId,jdbcType=BIGINT},
+      tb_type = #{record.tbType,jdbcType=VARCHAR},
+      tb_time = #{record.tbTime,jdbcType=TIMESTAMP},
+      tb_bz = #{record.tbBz,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -525,6 +726,57 @@
       <if test="platform != null" >
         platform = #{platform,jdbcType=VARCHAR},
       </if>
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="aliwangwang != null" >
+        aliwangwang = #{aliwangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCounts != null" >
+        goods_counts = #{goodsCounts,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="ordersType != null" >
+        orders_type = #{ordersType,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=DOUBLE},
+      </if>
+      <if test="payAbout != null" >
+        pay_about = #{payAbout,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payMoney != null" >
+        pay_money = #{payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="moneyAbout != null" >
+        money_about = #{moneyAbout,jdbcType=DOUBLE},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="gdId != null" >
+        gd_id = #{gdId,jdbcType=BIGINT},
+      </if>
+      <if test="tbType != null" >
+        tb_type = #{tbType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbTime != null" >
+        tb_time = #{tbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbBz != null" >
+        tb_bz = #{tbBz,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -555,7 +807,24 @@
       buy_count = #{buyCount,jdbcType=VARCHAR},
       settlement_type = #{settlementType,jdbcType=VARCHAR},
       upload_pic = #{uploadPic,jdbcType=VARCHAR},
-      platform = #{platform,jdbcType=VARCHAR}
+      platform = #{platform,jdbcType=VARCHAR},
+      use_id = #{useId,jdbcType=INTEGER},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER},
+      aliwangwang = #{aliwangwang,jdbcType=VARCHAR},
+      goods_counts = #{goodsCounts,jdbcType=INTEGER},
+      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      orders_type = #{ordersType,jdbcType=INTEGER},
+      pay = #{pay,jdbcType=DOUBLE},
+      pay_about = #{payAbout,jdbcType=DOUBLE},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_money = #{payMoney,jdbcType=DOUBLE},
+      money_about = #{moneyAbout,jdbcType=DOUBLE},
+      order_id = #{orderId,jdbcType=BIGINT},
+      gd_id = #{gdId,jdbcType=BIGINT},
+      tb_type = #{tbType,jdbcType=VARCHAR},
+      tb_time = #{tbTime,jdbcType=TIMESTAMP},
+      tb_bz = #{tbBz,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -6,7 +6,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.luoshi.pojo.TbProductSubmit;
 import com.luoshi.service.ProductSubmitService;
@@ -68,6 +71,46 @@ public class ProductSubmitController {
 			return new Result(false, "增加失败");
 		}
 	}
+	
+	/**
+     * 保存商品
+     * @param image
+     * @param product
+     * @param map
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/addProduct.do")
+    public Result fileUpload(MultipartFile file,TbProductSubmit productSubmit,HttpServletRequest request) throws IOException {
+
+        /**
+          * 上传图片
+         */
+        //图片上传成功后，将图片的地址写到数据库
+        String filePath =  request.getSession().getServletContext().getRealPath("/")+"upload/"+file.getOriginalFilename();//保存图片的路径
+        //获取原始图片的拓展名
+        String originalFilename = file.getOriginalFilename();
+        //新的文件名字
+        String newFileName = UUID.randomUUID()+originalFilename;
+        //封装上传文件位置的全路径
+        File targetFile = new File(filePath,newFileName); 
+        //把本地文件上传到封装上传文件位置的全路径
+        file.transferTo(targetFile);
+        productSubmit.setShopMainPic(newFileName);
+        
+        /**
+         * 保存商品
+         */
+//        productService.save(product);
+//        return "redirect:/list.do"; 
+        try {
+			productSubmitService.add(productSubmit);
+			return new Result(true, "增加成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "增加失败");
+		}
+    }
 	
 	/**
 	 * 修改
@@ -149,5 +192,61 @@ public class ProductSubmitController {
         }  
         out.close();  
     }
+    /**
+      * 文件上传
+     * @param request
+     * @return
+     * @throws IllegalStateException
+     * @throws IOException
+     */
+    @RequestMapping("/upload")
+    public Result importExcel(@RequestParam("file") MultipartFile file,HttpServletRequest request,
+    		HttpServletResponse response) throws Exception{
+    	Result rs = new Result();
+		int code = 200;
+		
+		//判断文件是否为空
+		if(file.isEmpty()){
+			rs.setMessage("文件是空");
+			rs.setSuccess(false);
+			return rs;
+		}
+		
+		//判断文件类型是否错误(xlsx/xls)
+		if(file.getOriginalFilename().indexOf("xlsx")<0||file.getOriginalFilename().indexOf("xls")<0){
+			rs.setMessage("文件类型错误");
+			rs.setSuccess(false);
+			return rs;
+		}
+		
+		
+		//存入本地文件夹
+//		String path = request.getSession().getServletContext().getRealPath("/")+"upload/"+file.getOriginalFilename();
+//		try{
+//			file.transferTo(new File(path));
+//		}catch (IllegalStateException e) {
+//			e.printStackTrace();
+//			// TODO: handle exception
+//		}catch (IOException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		File localFile = new File(path);
+		InputStream ins = file.getInputStream();
+		//读取excel文档  
+		productSubmitService.doImport(ins);
+		
+		//这里的result就是整个excel的数据。根据需求自行确定校验规则及后续加数据库等操作
+		return null;
+		}
+    
+    public Result ajaxReturn(boolean success, String message){
+		//返回前端的JSON数据
+    	Result result=new Result();
+		result.setMessage(message);
+		result.setSuccess(success);
+		return result;
+		
+	}
 	
 }

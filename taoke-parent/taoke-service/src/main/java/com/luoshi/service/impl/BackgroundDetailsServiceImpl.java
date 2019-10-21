@@ -1,6 +1,8 @@
 package com.luoshi.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -111,7 +113,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	}
 
 		@Override
-		public void doImport(InputStream ins) throws IOException {
+		public void doImport(InputStream ins) throws Exception {
 			HSSFWorkbook wb = null;
 			try {
 				wb = new HSSFWorkbook(ins);
@@ -146,12 +148,23 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 						supplier.setType(type);
 						supplierDao.add(supplier);
 					}*/
-//					details.setStartTime(sheet.getRow(i).getCell(0).getStringCellValue());
-//					details.setEndTime(sheet.getRow(i).getCell(1).getStringCellValue());
-//					details.setShopTitle(sheet.getRow(i).getCell(2).getStringCellValue());
-//					details.setGoodsId(Integer.parseInt( sheet.getRow(i).getCell(3).getStringCellValue()));
-//					details.setRemarks(sheet.getRow(i).getCell(4).getStringCellValue());
-//					details.setCustomName(sheet.getRow(i).getCell(5).getStringCellValue());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					details.setCreateTime(sdf.parse(sheet.getRow(i).getCell(0).getStringCellValue()));
+					details.setClickTime(sdf.parse(sheet.getRow(i).getCell(1).getStringCellValue()));
+					details.setShopMessage(sheet.getRow(i).getCell(2).getStringCellValue());
+					details.setGoodsId(Integer.parseInt( sheet.getRow(i).getCell(3).getStringCellValue()));
+					details.setAliwangwang(sheet.getRow(i).getCell(4).getStringCellValue());
+					details.setShopName(sheet.getRow(i).getCell(5).getStringCellValue());
+					details.setGoodsCounts(Integer.parseInt(sheet.getRow(i).getCell(6).getStringCellValue()));//设置商品数量
+					details.setGoodsPrice(Double.parseDouble(sheet.getRow(i).getCell(7).getStringCellValue()));
+					details.setOrdersFl(Double.parseDouble(sheet.getRow(i).getCell(8).getStringCellValue()));
+					details.setPay(Double.parseDouble(sheet.getRow(i).getCell(9).getStringCellValue()));//付款金额
+					details.setPayAbout(Double.parseDouble(sheet.getRow(i).getCell(10).getStringCellValue()));//预估付款服务费
+					details.setPayTime(sdf.parse(sheet.getRow(i).getCell(11).getStringCellValue()));//结算时间
+					details.setPayMoney(Double.parseDouble(sheet.getRow(i).getCell(12).getStringCellValue()));//结算金额
+					details.setOrderId(Long.parseLong(sheet.getRow(i).getCell(13).getStringCellValue()));//订单编号
+					details.setGdId(Long.parseLong(sheet.getRow(i).getCell(14).getStringCellValue()));//活动id
+					backgroundDetailsMapper.insert(details);
 					
 					}			
 			} finally{

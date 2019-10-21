@@ -61,7 +61,7 @@ public interface BackgroundDetailsService {
 	public PageResult findPage(TbBackgroundDetails backgroundDetails, int pageNum,int pageSize);
 
 
-	public void doImport(InputStream ins) throws IOException;
+	public void doImport(InputStream ins) throws Exception;
 
 
 

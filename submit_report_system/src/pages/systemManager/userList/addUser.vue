@@ -71,6 +71,7 @@ export default {
     },
     getGroupList () {
       getGroupByList().then(res => {
+        console.log(res)
         this.groupList = res
       })
     },

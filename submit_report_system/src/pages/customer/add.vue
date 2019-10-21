@@ -61,6 +61,7 @@
 <script>
 import { addShop } from '@/api'
 import maturity from '@/assets/maturity'
+import {getUser} from "../../utils/auth"
 export default {
   data () {
     return {
@@ -69,10 +70,16 @@ export default {
       status: ['淘宝', '天猫']
     }
   },
+  mounted(){
+    console.log(getUser())
+  },
   methods: {
     onSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
+          this.form.shopDeptId = getUser().deptId;
+          this.form.shopBz = getUser().groupId;
+          this.form.shopUserId2 = getUser().id;
           console.log('params', this.form)
           this.form.privateType = '1'
           addShop(this.form).then(response => {

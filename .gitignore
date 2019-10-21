@@ -40,3 +40,9 @@ taoke-parent/taoke_pojo/target/
 *.ntvs*
 *.njsproj
 *.sln
+/taoke-parent/taoke_pojo/target
+/taoke-parent/taoke-common/target
+/taoke-parent/taoke-dao/target
+/taoke-parent/taoke-service/target
+/taoke-parent/taoke-web/target
+/taoke-parent/taoke-dao/target

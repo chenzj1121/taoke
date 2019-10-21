@@ -23,6 +23,7 @@
 
 <script>
 import { findTarget } from '@/api'
+import {getUser} from '../../utils/auth'
 export default {
   data () {
     return {
@@ -31,18 +32,26 @@ export default {
     }
   },
   mounted(){
-    findTarget(15).then(res=>{
+    let userId = getUser().id;
+    let date = new Date();
+    let month = date.getMonth()+1;
+    let year = date.getFullYear()
+     let data = {
+       userId,
+       month,
+       year
+    }
+    findTarget(userId,year,month).then(res=>{
       this.loading = false
       let list = {
         target: res.workTarget,
       }
-      let data = new Date();
-      let nowDay = data.getDate();
-      let fullDay = new Date(data.getFullYear(),(data.getMonth()+1),0).getDate() //当月总天数
+      let nowDay = date.getDate();
+      let fullDay = new Date(date.getFullYear(),(date.getMonth()+1),0).getDate() //当月总天数
       list.shouldBeDone = (list.target/fullDay*nowDay).toFixed(2);
       list.hasDone = res.firstWeekCustom+res.secondWeekCustom+res.thirdWeekCustom+res.fourthWeekCustom+res.fifthWeekCustom
       list.donePercent = (list.hasDone/list.target*100).toFixed(2)+"%";
-      list.diff = "-"+(list.target - list.hasDone)
+      list.diff = (list.target - list.hasDone)>0?"-"+ (list.target - list.hasDone):"+"+ (list.target - list.hasDone)*(-1)
       list.plannedSpeed = (nowDay/fullDay*100).toFixed(2)+"%"
       list.monthDays = fullDay;
       list.day =nowDay;

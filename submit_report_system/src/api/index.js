@@ -55,6 +55,6 @@ export const getCheckmonkeyPage = (form, page, rows) => ajax(PRE_URL + `/checkmo
 //10-18 lambor
 export const addTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/add.do',target, 'post')
 export const updateTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/update.do',target, 'post')
-export const findTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/findOne.do?id='+target,'post')
+export const findTarget = (userId,year,month) => ajax(PRE_URL + '/userWorkTargetMonth/findOneByYearAndMonth.do?userId='+userId+"&year="+year+"&month="+month,'post')
 export const addRecord = (target) => ajax(PRE_URL + '/followUpRecord/add.do',target,'post')
 export const findRecord = (id) => ajax(PRE_URL + '/followUpRecord/findOne.do?id='+id,'get')

@@ -30,7 +30,8 @@ public class UserWorkTargetMonthController {
      */
     @RequestMapping("/findOneByYearAndMonth")
     public TbUserWorkTargetMonth findOneByYearAndMonth(@RequestParam("userId") Integer userId, @RequestParam("year") Integer year, @RequestParam("month")Integer month){
-        return userWorkTargetMonthService.findOneByYearAndMonth(userId, year, month);
+        
+    	return userWorkTargetMonthService.findOneByYearAndMonth(userId, year, month);
     }
 
     @RequestMapping("/updateOneByYearAndMonth")

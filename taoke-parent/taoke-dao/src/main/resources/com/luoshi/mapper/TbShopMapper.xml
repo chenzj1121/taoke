@@ -38,6 +38,8 @@
     <result column="private_type" property="privateType" jdbcType="VARCHAR" />
     <result column="private_user_id" property="privateUserId" jdbcType="INTEGER" />
     <result column="shop_bz" property="shopBz" jdbcType="VARCHAR" />
+    <result column="shop_group_id" property="shopGroupId" jdbcType="INTEGER" />
+    <result column="shop_user_name" property="shopUserName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -103,7 +105,7 @@
     shop_type, main_operate, shop_tbType, shop_jsType, shop_Real_shooting, operate_phone, 
     next_time, follow_up_record, refunds_time, refunds_money, create_time, data_type, 
     operator_user_id, Extension, taoke_type, cooperation, cooperation_num, entry_num, 
-    Spare, private_type, private_user_id, shop_bz
+    Spare, private_type, private_user_id, shop_bz, shop_group_id, shop_user_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbShopExample" >
     select
@@ -147,8 +149,8 @@
       create_time, data_type, operator_user_id, 
       Extension, taoke_type, cooperation, 
       cooperation_num, entry_num, Spare, 
-      private_type, private_user_id, shop_bz
-      )
+      private_type, private_user_id, shop_bz, 
+      shop_group_id, shop_user_name)
     values (#{id,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{wangwangaccount,jdbcType=VARCHAR}, 
       #{shopProduct,jdbcType=VARCHAR}, #{shopUseId,jdbcType=INTEGER}, #{shopBoss,jdbcType=VARCHAR}, 
       #{shopPhone,jdbcType=VARCHAR}, #{shopDeptId,jdbcType=INTEGER}, #{shopUserId2,jdbcType=INTEGER}, 
@@ -160,8 +162,8 @@
       #{createTime,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR}, #{operatorUserId,jdbcType=INTEGER}, 
       #{extension,jdbcType=INTEGER}, #{taokeType,jdbcType=VARCHAR}, #{cooperation,jdbcType=VARCHAR}, 
       #{cooperationNum,jdbcType=INTEGER}, #{entryNum,jdbcType=INTEGER}, #{spare,jdbcType=VARCHAR}, 
-      #{privateType,jdbcType=VARCHAR}, #{privateUserId,jdbcType=INTEGER}, #{shopBz,jdbcType=VARCHAR}
-      )
+      #{privateType,jdbcType=VARCHAR}, #{privateUserId,jdbcType=INTEGER}, #{shopBz,jdbcType=VARCHAR}, 
+      #{shopGroupId,jdbcType=INTEGER}, #{shopUserName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbShop" >
     insert into tb_shop
@@ -274,6 +276,12 @@
       <if test="shopBz != null" >
         shop_bz,
       </if>
+      <if test="shopGroupId != null" >
+        shop_group_id,
+      </if>
+      <if test="shopUserName != null" >
+        shop_user_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -383,6 +391,12 @@
       </if>
       <if test="shopBz != null" >
         #{shopBz,jdbcType=VARCHAR},
+      </if>
+      <if test="shopGroupId != null" >
+        #{shopGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="shopUserName != null" >
+        #{shopUserName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -503,6 +517,12 @@
       <if test="record.shopBz != null" >
         shop_bz = #{record.shopBz,jdbcType=VARCHAR},
       </if>
+      <if test="record.shopGroupId != null" >
+        shop_group_id = #{record.shopGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopUserName != null" >
+        shop_user_name = #{record.shopUserName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -545,7 +565,9 @@
       Spare = #{record.spare,jdbcType=VARCHAR},
       private_type = #{record.privateType,jdbcType=VARCHAR},
       private_user_id = #{record.privateUserId,jdbcType=INTEGER},
-      shop_bz = #{record.shopBz,jdbcType=VARCHAR}
+      shop_bz = #{record.shopBz,jdbcType=VARCHAR},
+      shop_group_id = #{record.shopGroupId,jdbcType=INTEGER},
+      shop_user_name = #{record.shopUserName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -658,6 +680,12 @@
       <if test="shopBz != null" >
         shop_bz = #{shopBz,jdbcType=VARCHAR},
       </if>
+      <if test="shopGroupId != null" >
+        shop_group_id = #{shopGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="shopUserName != null" >
+        shop_user_name = #{shopUserName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -697,7 +725,9 @@
       Spare = #{spare,jdbcType=VARCHAR},
       private_type = #{privateType,jdbcType=VARCHAR},
       private_user_id = #{privateUserId,jdbcType=INTEGER},
-      shop_bz = #{shopBz,jdbcType=VARCHAR}
+      shop_bz = #{shopBz,jdbcType=VARCHAR},
+      shop_group_id = #{shopGroupId,jdbcType=INTEGER},
+      shop_user_name = #{shopUserName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

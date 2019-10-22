@@ -78,7 +78,7 @@
           </el-form-item>
           <el-form-item label="部门人员:" label-width="80px">
             <div>
-              <el-select v-model="form.shopUserId2" placeholder="请选择" @change="un(form.shopUserId2)">
+              <el-select v-model="form.shopUserId2" placeholder="请选择" >
                 <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
               </el-select>
@@ -168,7 +168,7 @@
 </template>
 
 <script>
-import { getShopList, deleteShopById,updateShop,getDeptByList,getGroupByList,getUserById,getGroupMember} from '@/api'
+import {getUserByList, getShopList, deleteShopById,updateShop,getDeptByList,getGroupByList,getUserById,getGroupMember} from '@/api'
 import pagination from '@/components/page'
 import maturities from '@/assets/maturity'
 export default {
@@ -191,18 +191,23 @@ export default {
       multipleSelection: [],
       list:[],
       flag:true,
+      userList:[],
       gruopList2:[],//部门联动-小组
       memberList:[],//部门联动-员工
     }
   },
   mounted () {
+    this.getUserList()
     this.getGroupList()
     this.bindData()
     this.getDeptList()
   },
   methods: {
-    un(id){
-      console.log(id)
+    getUserList(){
+      getUserByList().then(res=>{
+        // console.log(res);
+        this.userList = res
+      })
     },
     getGroup(id){
       // console.log(id)
@@ -296,12 +301,19 @@ export default {
       shop.privateType = '1'
       getShopList(shop, page, rows).then(res => {
         this.tableData = res.rows
-          res.rows.map((item,index)=>{
+        console.log(res.rows)
+
+          res.rows.forEach((item,index)=>{
             // item.group =""+item.shopDeptId+item.shopGroupId
-              this.groupList.map(obj=>{
+              this.groupList.forEach(obj=>{
                 if(item.shopDeptId == obj.groupDeptId && item.shopGroupId == obj.groupId){
                   item.group = obj.groupName
                   item.dep = obj.groupName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.shopUserId2 ==obj.id ){
+                  item.creater = obj.username
                 }
               })
               // getUserById(item.shopUserId2).then(obj=>{
@@ -312,7 +324,6 @@ export default {
 
         this.page.total = res.total
         this.loading = false
-        // console.log(res.rows)
       
       })
         .catch(() => {
@@ -347,7 +358,7 @@ export default {
   watch:{
     tableData(val){
       this.tableData = val
-      console.log(val)
+      // console.log(val)
     },
      deep:true
   },

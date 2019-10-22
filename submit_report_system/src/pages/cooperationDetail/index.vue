@@ -107,21 +107,25 @@
         <el-table-column type="selection"></el-table-column>
         <el-table-column type="index" label="序号"></el-table-column>
         <el-table-column prop="coopType" label="提报状态"></el-table-column>
-        <el-table-column prop="coopPtType" label="平台状态"></el-table-column>
+        <el-table-column prop="coopPttype" label="平台状态"></el-table-column>
         <el-table-column prop="coopCustomer" label="商家客户"></el-table-column>
-        <el-table-column prop="coopMainPicture" label="商家主图"></el-table-column>
+        <el-table-column prop="coopMainpicture" label="商家主图">
+                <template   slot-scope="scope">            
+                    <img :src="scope.row.coopMainpicture"  min-width="70" height="70" />
+                </template>   
+        </el-table-column>
         <el-table-column prop="coopActivity" label="商家活动"></el-table-column>
         <el-table-column prop="coopGoodsId" label="商家ID"></el-table-column>
         <el-table-column prop="coopZero" label="零点提报"></el-table-column>
-        <el-table-column prop="coopAlterPrice" label="券后价"></el-table-column>
-        <el-table-column prop="coopYhqNums" label="优惠券总量"></el-table-column>
-        <el-table-column prop="coopYjScale" label="佣金比例"></el-table-column>
-        <el-table-column prop="coopTbTime" label="提报时间"></el-table-column>
-        <el-table-column prop="coopStartTime" label="上线时间"></el-table-column>
-        <el-table-column prop="coopEndTime" label="结束时间"></el-table-column>
+        <el-table-column prop="coopAlterprice" label="券后价"></el-table-column>
+        <el-table-column prop="coopYhqnums" label="优惠券总量"></el-table-column>
+        <el-table-column prop="coopYjscale" label="佣金比例"></el-table-column>
+        <el-table-column prop="coopTbtime" label="提报时间"  width="100px"></el-table-column>
+        <el-table-column prop="coopStarttime" label="上线时间" width="100px"></el-table-column>
+        <el-table-column prop="coopEndtime" label="结束时间"  width="100px"></el-table-column>
         <el-table-column prop="coopBack" label="回款金额"></el-table-column>
         <el-table-column prop="coopDeptId" label="部门"></el-table-column>
-        <el-table-column prop="coopUserId" label="责任人"></el-table-column>
+        <el-table-column prop="coopUser" label="责任人"></el-table-column>
         <el-table-column prop="coopYhqName" label="优惠券名称"></el-table-column>
         <el-table-column prop="coopMessage" label="备注"></el-table-column>
         <el-table-column prop="name" label="操作" width="360px">
@@ -143,7 +147,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCooperationPage } from '@/api'
+import { getCooperationPage ,getDeptByList,getUserByList} from '@/api'
 export default {
   components: {
     Page
@@ -195,21 +199,65 @@ export default {
         { label: '线上结算', value: '线上结算' },
         { label: '线下结算', value: '线下结算' }
       ],
-      cooperationDetailTableData: []
+      cooperationDetailTableData: [],
+      userList:[],
+      // groupList:{},
+      deptList:[],
     }
   },
   mounted () {
+    this.getUserList()
+    this.getDeptList()
     this.bindData()
   },
   methods: {
+      getDeptList () {
+      getDeptByList().then(res => {
+        // console.log(res)
+        this.deptList = res
+      })
+    },
+      getUserList(){
+      getUserByList().then(res=>{
+        this.userList = res
+      })
+    },
+    //  getGroupList() {
+    //   getGroupByList().then(res => {
+    //     this.groupList = res
+    //   })
+    // },
     bindData () {
       const form = this.form
       const page = this.page.pageNum
       const rows = this.page.pageSize
       this.loading = true
-      getCooperationPage(form, page, rows).then(response => {
-        this.cooperationDetailTableData = response.rows
-        this.page.total = response.total
+      getCooperationPage(form, page, rows).then(res => {
+         res.rows.forEach((item,index)=>{
+           let list =["coopEndtime","coopStarttime","coopTbtime"]
+           list.forEach(obj=>{
+             item[obj] = this.getMyDate(item[obj])
+            // console.log(oTime)
+           })
+            // item.coopEndtime = new Date(item.coopEndtime);
+            // item.coopStarttime = new Date(item.coopStarttime);
+            // item.coopTbtime = new Date(item.coopTbtime)
+              this.deptList.forEach(obj=>{
+                if(item.coopDeptId == obj.deptId ){
+                  item.coopDeptId = obj.deptName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.coopUserId ==obj.id ){
+                  item.coopUser = obj.username
+                }
+              })
+   
+          })
+        console.log(res)
+
+        this.cooperationDetailTableData = res.rows
+        this.page.total = res.total
         this.loading = false
       })
         .catch(() => {
@@ -218,7 +266,16 @@ export default {
     },
     nav2Checking (id) {
       this.$router.push({path: 'checking', query: { id }})
+    },
+  getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+    let oTime = oYear +'-'+ oMonth +'-'+oDay
+    return oTime;
     }
+
   }
 }
 </script>

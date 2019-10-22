@@ -59,8 +59,11 @@ export const findTarget = (userId,year,month) => ajax(PRE_URL + '/userWorkTarget
 export const addRecord = (target) => ajax(PRE_URL + '/followUpRecord/add.do',target,'post')
 export const findRecord = (id) => ajax(PRE_URL + '/followUpRecord/findOne.do?id='+id,'get')
 export const checkWangWang = (name) => ajax(PRE_URL + '/shop/getWangwangAccountCounts.do?wangwangAccount='+name,'post')
-export const getDetail = () => ajax(PRE_URL + '/backgroundDetails/findAll.do?','','post')
+export const getDetail = (obj,page,rows) => ajax(PRE_URL + `/backgroundDetails/search.do?page=${page}&rows=${rows}`,obj,'post')
 export const getGroupMember = (deptId,groupId) => ajax(PRE_URL + '/sysUser/getUserByDeptIdAndGroupId.do?deptId='+deptId+"&groupId="+groupId,'','post')
+// export const getCoopDetail = (obj,page,rows)=>ajax(PRE_URL+`/coop/search.do?page=${page}&rows=${rows}`,obj,'post')
+export const getBackMoney = (obj,page,rows) => ajax(PRE_URL + `/backmoney/search.do?page=${page}&rows=${rows}`,obj,'post')
+
 
 
 

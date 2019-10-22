@@ -46,7 +46,7 @@
       <el-table-column label="序号" type="index"></el-table-column>
       <el-table-column label="登录账号" prop="username"></el-table-column>
       <el-table-column label="真实姓名" prop="realname"></el-table-column>
-      <el-table-column label="所属单位"  width="200">
+      <el-table-column label="所属单位" prop="" width="200">
         <template slot-scope="scope">
           <el-tag>{{scope.row.deptName }}  {{scope.row.groupName}}</el-tag>
         </template>
@@ -157,8 +157,13 @@ export default {
       // debugger
       this.loading = true
       getUserByPage(this.form, this.page.pageNum, this.page.pageSize).then(res => {
-        // console.log('pageData', res.rows)
+        res.rows.map((item,index)=>{
+              this.deptList.map(obj=>{
+                if(item.deptId == obj.deptId ){item.deptName = obj.deptName}
+              })
+          })
         this.userList = res.rows
+          // console.log(this.userList)
         this.page.total = res.total
         this.loading = false
       })
@@ -236,8 +241,9 @@ export default {
     }
   },
   created () {
-    this.getUserList()
     this.getDeptList()
+    this.getUserList()
+
   }
 }
 </script>

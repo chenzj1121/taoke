@@ -37,41 +37,46 @@
       :data="moneyBackTableData">
       <el-table-column type="selection" width="30"></el-table-column>
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column prop="name" label="销售部"></el-table-column>
-      <el-table-column prop="name" label="组别"></el-table-column>
-      <el-table-column prop="name" label="销售人"></el-table-column>
+      <el-table-column prop="dep" label="销售部"></el-table-column>
+      <el-table-column prop="group" label="组别"></el-table-column>
+      <el-table-column prop="creater" label="销售人"></el-table-column>
       <el-table-column label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showMoreRecords(scope.row.id)">{{scope.row.name}}</span>
+          <span class="link" @click="showMoreRecords(scope.row.bmId)">{{scope.row.bmShopName}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="商品ID"></el-table-column>
-      <el-table-column prop="name" label="优惠券名称"></el-table-column>
-      <el-table-column prop="name" label="上线时间"></el-table-column>
-      <el-table-column prop="name" label="下线时间"></el-table-column>
-      <el-table-column prop="name" label="操作类型"></el-table-column>
-      <el-table-column prop="name" label="打款金额"></el-table-column>
-      <el-table-column prop="name" label="返/退款金额"></el-table-column>
-      <el-table-column prop="name" label="剩余金额"></el-table-column>
-      <el-table-column prop="name" label="打款账户">
+      <el-table-column prop="bmShopName" label="商品ID"></el-table-column>
+      <el-table-column prop="bmYhqName" label="优惠券名称"></el-table-column>
+      <el-table-column prop="bmOnlineTime" label="上线时间"></el-table-column>
+      <el-table-column prop="bmOfflineTime" label="下线时间"></el-table-column>
+      <el-table-column prop="bmType" label="操作类型"></el-table-column>
+      <el-table-column prop="bmMakeMoney" label="打款金额"></el-table-column>
+      <el-table-column prop="bmBackMoney" label="返/退款金额"></el-table-column>
+      <el-table-column prop="bmSurplus" label="剩余金额"></el-table-column>
+      <el-table-column prop="bmBackAccountNumber" label="打款账户">
         <template slot-scope="scope">
-          <span class="link" @click="showAccountInfo(scope.row.id)">{{scope.row.name}}</span>
+          <span class="link" @click="showAccountInfo(scope.row.id)">{{scope.row.bmBackAccountNumber}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="打款时间"></el-table-column>
-      <el-table-column prop="name" label="申请时间"></el-table-column>
-      <el-table-column prop="name" label="备注"></el-table-column>
-      <el-table-column prop="name" label="优惠券图片"></el-table-column>
-      <el-table-column prop="name" label="确认状态"></el-table-column>
-      <el-table-column prop="name" label="再次提交"></el-table-column>
-      <el-table-column prop="name" label="打款截图"></el-table-column>
+      <el-table-column prop="bmMakeTime" label="打款时间"></el-table-column>
+      <el-table-column prop="bmCreateTime" label="申请时间"></el-table-column>
+      <el-table-column prop="bmText" label="备注"></el-table-column>
+      <el-table-column prop="bmYhqPhoto" label="优惠券图片">
+        <template slot-scope="scope">
+          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+        </template>
+      </el-table-column>
+      <el-table-column prop="bmConfirmType" label="确认状态"></el-table-column>
+      <el-table-column prop="bm_back_type" label="再次提交">
+        
+      </el-table-column>
+      <el-table-column prop="bmMakePhoto" label="打款截图">
+         <template slot-scope="scope">
+          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+        </template>
+      </el-table-column>
     </el-table>
-    <el-pagination
-      background
-      style="margin-top:10px;text-align:right;"
-      layout="prev, pager, next"
-      :total="100">
-    </el-pagination>
+    <Page style="text-align:right;margin-top:10px;" :page="page" @change="bindData"/>
 
     <el-dialog
       title="此店铺下同属这笔款的商品记录"
@@ -97,8 +102,8 @@
         size="mini"
         :data="moreRecordsByShopTableData">
         <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column label="店铺名称" prop="name"></el-table-column>
-        <el-table-column label="商品ID" prop="name"></el-table-column>
+        <el-table-column label="店铺名称" prop="bmShopName"></el-table-column>
+        <el-table-column label="商品ID" prop="bmGoodsId"></el-table-column>
         <el-table-column label="优惠券名称" prop="name"></el-table-column>
         <el-table-column label="上线时间" prop="name"></el-table-column>
         <el-table-column label="下线时间" prop="name"></el-table-column>
@@ -109,12 +114,13 @@
         <el-table-column label="转入账户" prop="name"></el-table-column>
         <el-table-column label="打款日期" prop="name"></el-table-column>
       </el-table>
-      <el-pagination
+      <!-- <el-pagination
         background
         style="margin-top:10px;text-align:right;"
         layout="prev, pager, next"
         :total="100">
-      </el-pagination>
+      </el-pagination> -->
+       <Page style="text-align:right;margin-top:10px;" :page="page1" />
     </el-dialog>
 
     <el-dialog
@@ -135,12 +141,17 @@
 </template>
 
 <script>
+import {getBackMoney,getUserByList, getDeptByList,getGroupByList} from '@/api'
+import Page from '@/components/page'
 export default {
+    components: {
+    Page
+  },
   data () {
     return {
       form: {},
       moneyBackTableData: [
-        { name: 'name', id: 1 }
+        // { name: 'name', id: 1 }
       ], // 返款的表格数据
       statusOptions: [
         { label: '全部', value: 'name' },
@@ -159,15 +170,88 @@ export default {
       accountInfoVisiable: false,
       accountInfo: {
         name: 'name'
-      }
+      },
+      loading: false,
+      page: {
+        pageSize: 10,
+        pageNum: 1,
+        total: 10
+      },
+       page1: {
+        pageSize: 5,
+        pageNum: 1,
+        total: 10
+      },
+       userList:[],
+      groupList:[],
+      deptList:[],
     }
   },
+  mounted(){
+      this.getUserList()
+    this.getDeptList()
+    this.getGroupList()
+    this.bindData()
+  },
   methods: {
+      getDeptList () {
+      getDeptByList().then(res => {
+        this.deptList = res
+      })
+    },
+      getUserList(){
+      getUserByList().then(res=>{
+        this.userList = res
+      })
+    },
+     getGroupList() {
+      getGroupByList().then(res => {
+        this.groupList = res
+      })
+    },
+    bindData(){
+      const form = this.form
+      const page = this.page.pageNum
+      const rows = this.page.pageSize
+      this.loading = true
+      getBackMoney(form, page, rows).then(res=>{
+           res.rows.forEach((item,index)=>{
+              let list =["bmOfflineTime","bmOnlineTime","bmMakeTime","bmCreateTime"]
+              list.forEach(obj=>{
+                item[obj] = this.getMyDate(item[obj])
+              })
+              this.groupList.forEach(obj=>{
+                if(item.bmDeptId == obj.groupDeptId && item.bmGroupId == obj.groupId){
+                  item.group = obj.groupName
+                  item.dep = obj.groupName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.bmUserId ==obj.id ){
+                  item.creater = obj.username
+                }
+              })
+      
+          })
+        this.moneyBackTableData=res.rows
+        this.page.total = res.total
+      console.log(res.rows)
+
+      })
+    },
     showMoreRecords (id) {
       this.moreRecordsByShopVisiable = true
     },
     showAccountInfo () {
       this.accountInfoVisiable = true
+    },
+    getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+    let oTime = oYear +'-'+ oMonth +'-'+oDay
+    return oTime;
     }
   }
 }

@@ -9,7 +9,7 @@
         <el-form-item prop="wangwangaccount" label="旺旺账号：" :rules="[{ required: true, message: '旺旺账号不能为空' }]">
           <div class="oneline">
             <el-input v-model="form.wangwangaccount"></el-input>
-            <el-button type="primary">检测</el-button>
+                      <el-button :type="btn.type" @click="checkWang" :loading="btn.load">{{btn.txt}}</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="shopBoss" label="店铺老板：">
@@ -59,18 +59,42 @@
 </template>
 
 <script>
-import { addShop } from '@/api'
+import { addShop,checkWangWang} from '@/api'
 import maturity from '@/assets/maturity'
 export default {
   data () {
     return {
       form: {},
       maturities: maturity,
-      status: ['淘宝', '天猫']
+      status: ['淘宝', '天猫'],
+       btn:{
+        type:"primary",
+        txt:"检测",
+        load:false,
+      },
+      flag : false
     }
   },
   methods: {
+      checkWang(){
+      this.form.wangwangaccount = this.form.wangwangaccount.toString()
+      this.btn.load = true
+      checkWangWang(this.form.wangwangaccount).then(res=>{
+      this.btn.load = false
+        if(res<=3){
+          this.btn.type = "success";
+          this.btn.txt = "成功"
+          this.flag = true;
+        }else{
+          this.$errmsg("账号已存在超过3次")
+          this.btn.type = "danger";
+          this.flag = false;
+        }
+
+      })
+    },
     onSubmit () {
+      if(this.flag){
       this.$refs.form.validate(valid => {
         if (valid) {
           console.log('params', this.form)
@@ -87,6 +111,7 @@ export default {
           })
         }
       })
+      }
     },
     back () {
       this.$router.go(-1)

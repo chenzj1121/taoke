@@ -3,58 +3,68 @@
     <div class="title">后台明细</div>
     <el-form inline size="mini">
       <el-form-item label="销售部">
-        <el-select v-model="form.name">
-          <el-option v-for="(option, index) in departmentOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-        </el-select>
+       <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
+              </el-select>
       </el-form-item>
       <el-form-item label="组别">
-        <el-select v-model="form.name">
-          <el-option v-for="(option, index) in groupOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-        </el-select>
+         <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.shopDeptId,form.shopGroupId)">
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
+              </el-select>
       </el-form-item>
       <el-form-item label="责任人">
-        <el-select v-model="form.name">
-          <el-option v-for="(option, index) in principalOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-        </el-select>
+        <el-select v-model="form.shopUserId2" placeholder="请选择">
+                <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
+              </el-select>
       </el-form-item>
       <el-form-item label="店铺名称">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.shopName"></el-input>
       </el-form-item>
       <el-form-item label="商品ID">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.goodsId"></el-input>
       </el-form-item>
       <br/>
       <el-form-item label="结算时间">
-        <el-date-picker
-          v-model="form.name"
-          type="daterange"
+        <!-- <el-date-picker
+          v-model="form.createTime"
+          type="date"
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期">
-        </el-date-picker>
+        </el-date-picker> -->
+          <el-col :span="11">
+         <el-date-picker type="date" placeholder="开始日期" v-model="form.createTime" style="width: 100%;"></el-date-picker>
+        </el-col>
+        <el-col class="line" :span="2">至</el-col>
+        <el-col :span="11">
+          <el-date-picker  type="date" placeholder="结束时间" v-model="form.clickTime" style="width: 100%;"></el-date-picker>
+        </el-col>
       </el-form-item>
       <el-form-item label="订单号搜索">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.orderId"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="form.name">
+        <el-select v-model="form.ordersType">
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="结算金额排序">
-        <el-select v-model="form.name">
+        <el-select v-model="form.sort">
           <el-option v-for="(option, index) in orderByOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
       <br/>
       <el-form-item>
-        <el-button type="primary">查询</el-button>
+        <el-button type="primary" @click="getDetailList">查询</el-button>
       </el-form-item>
       <el-form-item label="付款服务费总额">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.pay"></el-input>
       </el-form-item>
       <el-form-item label="结算服务费总额">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.payMoney"></el-input>
       </el-form-item>
       <el-form-item>
         <span>驳回消息 0 条</span>
@@ -65,30 +75,35 @@
       :data="afterDetailTableData"
       size="mini">
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column label="所属部门" prop="name"></el-table-column>
-      <el-table-column label="组别" prop="name"></el-table-column>
-      <el-table-column label="责任人" prop="name"></el-table-column>
-      <el-table-column label="店铺名称" prop="name"></el-table-column>
-      <el-table-column label="商品ID" prop="name"></el-table-column>
-      <el-table-column label="订单数" prop="name"></el-table-column>
-      <el-table-column label="服务费比例" prop="name"></el-table-column>
-      <el-table-column label="付款金额" prop="name"></el-table-column>
-      <el-table-column label="付款服务费" prop="name"></el-table-column>
-      <el-table-column label="结算金额" prop="name"></el-table-column>
-      <el-table-column label="结算服务费" prop="name"></el-table-column>
+      <el-table-column label="所属部门" prop="deptName"></el-table-column>
+      <el-table-column label="组别" prop="groupName"></el-table-column>
+      <el-table-column label="责任人" prop="creater"></el-table-column>
+      <el-table-column label="店铺名称" prop="shopName"></el-table-column>
+      <el-table-column label="商品ID" prop="goodsId"></el-table-column>
+      <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
+      <el-table-column label="服务费比例" prop="ordersFl"></el-table-column>
+      <el-table-column label="付款金额" prop="pay"></el-table-column>
+      <el-table-column label="付款服务费" prop="payAbout"></el-table-column>
+      <el-table-column label="结算金额" prop="payMoney"></el-table-column>
+      <el-table-column label="结算服务费" prop="moneyAbout"></el-table-column>
     </el-table>
-    <el-pagination
+    <!-- <el-pagination
       style="text-align: right;margin-top:10px;"
       background
       layout="prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </el-pagination> -->
+    <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getDetailList" />
   </div>
 </template>
 
 <script>
-import {getDetail} from "@/api/index"
+import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList} from "@/api/index"
+import Page from '@/components/page'
 export default {
+   components: {
+    Page
+  },
   data () {
     return {
       form: {},
@@ -106,13 +121,92 @@ export default {
         { label: '由高到低', value: '由高到低' },
         { label: '由低到高', value: '由低到高' }
       ],
-      afterDetailTableData: []
+      afterDetailTableData: [],
+      page: {
+        pageSize: 10,
+        pageNum: 1,
+        total: 10
+      },
+      userList:[],
+      deptList:[],
+      groupList:[],
+      gruopList2:[],//部门联动-小组
+      memberList:[],//部门联动-员工
     }
   },
   mounted(){
-    getDetail().then(res=>{
-      console.log(res)
+    this.getUserList()
+    this.getGroupList()
+    this.getDeptList()
+    this.getDetailList()
+  },
+  methods:{
+      getUserList(){
+      getUserByList().then(res=>{
+        // console.log(res);
+        this.userList = res
+      })
+    },
+      getDeptList () {
+      getDeptByList().then(res => {
+        // console.log(res)
+        this.deptList = res
+      })
+    },
+    getGroupList() {
+      getGroupByList().then(res => {
+        // console.log(res)
+        this.groupList = res
+      })
+    },
+    getDetailList(){
+      var param = {}
+      param.sysUser = this.form
+      param.pageNum = this.page.pageNum
+      param.pageSize = this.page.pageSize
+    getDetail(this.form,this.page.pageNum,this.page.pageSize).then(res=>{
+       res.rows.forEach((item,index)=>{
+              this.groupList.forEach((obj)=>{
+                 if(item.deptId == obj.groupDeptId && item.groupId ==obj.groupId){
+                      item.groupName = obj.groupName
+                      item.deptName = obj.groupName
+                  }
+              })
+                this.userList.forEach(obj=>{
+                if(item.useId ==obj.id ){
+                  item.creater = obj.username
+                }
+              })
+          })
+      this.page.total = res.total
+      this.afterDetailTableData = res.rows
     })
+    },
+      getGroup(id){
+      // console.log(id)
+        this.form.shopGroupId = null;
+        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+        this.gruopList2 = []
+        this.memberList = []
+      if(id){
+      //  this.form.shopDeptId =null;
+      this.groupList.map(item=>{
+        if(item.groupDeptId==id){
+          this.gruopList2.push(item)
+        }
+      })
+      }
+    },
+    getMember(deptId,groupId){
+        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+      this.memberList = [];
+      if(deptId && groupId){
+      //  this.form.shopGroupId = null;
+        getGroupMember(deptId,groupId).then(res=>{
+          this.memberList = res
+        })
+      }
+    },
   }
 }
 </script>

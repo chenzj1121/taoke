@@ -28,7 +28,8 @@ export const getUserByList = () => ajax(PRE_URL + '/sysUser/findAll.do', '', 'po
 
 export const getGroupByPage = (param) => ajax(PRE_URL + '/group/findAll.do', param, 'post')
 
-export const getGroupByList = () => ajax(PRE_URL + '/group/findAll.do', '', 'get')
+export const getGroupByList = () => ajax(PRE_URL + '/dept/findAll.do', '', 'post')
+//export const getGroupByList = () => ajax(PRE_URL + '/group/findAll.do', '', 'get')
 
 export const getGroupById = (param) => ajax(PRE_URL + '/group/findOne.do?id=' + param, 'get')
 

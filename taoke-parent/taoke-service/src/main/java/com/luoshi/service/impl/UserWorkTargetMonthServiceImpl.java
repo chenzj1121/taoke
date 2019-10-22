@@ -100,7 +100,11 @@ public class UserWorkTargetMonthServiceImpl implements UserWorkTargetMonthServic
     public TbUserWorkTargetMonth findOneByYearAndMonth(Integer userId, Integer year, Integer month) {
         TbUserWorkTargetMonthExample example = new TbUserWorkTargetMonthExample();
         TbUserWorkTargetMonthExample.Criteria criteria = example.createCriteria().andYearEqualTo(year).andMonthEqualTo(month).andUserIdEqualTo(userId);
-        return userWorkTargetMonthMapper.selectByExample(example).get(0);
+        List<TbUserWorkTargetMonth> list = userWorkTargetMonthMapper.selectByExample(example);
+        if(list.size()>0) {
+          return userWorkTargetMonthMapper.selectByExample(example).get(0);
+        }
+        return null;
     }
 
     @Override

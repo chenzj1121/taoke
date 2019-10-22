@@ -34,7 +34,7 @@ public class GroupController {
 	}
 	
 	/**
-	 * 根据部门编号返回列表信息
+	 * 根据部门编号返回小组列表信息
 	 * @return
 	 */
 	@RequestMapping("/findByDept")

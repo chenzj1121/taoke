@@ -11,11 +11,13 @@
         <el-form-item label="真实姓名:">
           <el-input v-model="form.realname"/>
         </el-form-item>
-        <el-form-item label="所属单位:">
-          <el-select v-model="form.dept_id"  clearable>
-            <el-option v-for="(dept, index) in deptList" :key="index" :label="dept.deptName" :value="dept.deptId"></el-option>
-          </el-select>
+        <el-form-item label="所属部门:">
+          <el-input v-model="form.deptId"/>
         </el-form-item>
+        <el-form-item label="所属部门:">
+          <el-input v-model="form.groupId"/>
+        </el-form-item>
+        
         <br/>
         <el-form-item label="用户权限:">
           <el-input v-model="form.userRole"/>
@@ -75,12 +77,12 @@
           <el-button type="warning" size="mini" @click="updUserById(scope.row.id)">修改</el-button>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="注销">
+      <el-table-column label="注销">
         <template slot-scope="scope">
           <span v-if="scope.row.isDelete === 0" class="linkSpan" @click="logoutUser(scope.row)"><el-tag>已激活</el-tag></span>
           <span v-if="scope.row.isDelete === 1" class="linkSpan" @click="logoutUser(scope.row)"><el-tag type="danger">已注销</el-tag></span>
         </template>
-      </el-table-column> -->
+      </el-table-column> 
     </el-table>
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getUserList"/>
     <el-dialog
@@ -132,11 +134,13 @@ export default {
       },
       orderBy: 'create_time',
       userTypeList: [
+        { label: '全部员工', value: '' },
         { label: '新员工', value: 0 },
         { label: '老员工', value: 1 }
       ],
       userList: [],
-      deptList: []
+      deptList: [],
+      groupList:[]
     }
   },
   methods: {
@@ -144,6 +148,12 @@ export default {
       getDeptByList().then(res => {
         // console.log('deptList', res)
         this.deptList = res
+      })
+    },
+    getgroupList () {
+      getGroupByList().then(res => {
+         console.log('1234', res)
+        this.groupList = res
       })
     },
     getUserList () {
@@ -163,7 +173,21 @@ export default {
               })
           })
         this.userList = res.rows
+<<<<<<< HEAD
           // console.log(this.userList)
+=======
+        
+        for (var i=0;i<this.userList.length;i++)
+        { 
+          // if(this.userList[i].deptId==null){
+          //   this.userList[i].deptId=0
+          // }
+           this.userList[i].deptId = this.deptList[this.userList[i].deptId].deptName;
+           //this.userList[i].groupId = this.groupList[this.userList[i].groupId].groupName;
+        }
+
+        console.log(this.userList)
+>>>>>>> 25fe1b553fd64cc3eb3cb37d6460a16e9325d3f0
         this.page.total = res.total
         this.loading = false
       })
@@ -241,9 +265,17 @@ export default {
     }
   },
   created () {
+<<<<<<< HEAD
     this.getDeptList()
     this.getUserList()
 
+=======
+    this.getUserList()
+    
+    this.getDeptList()
+    this.getgroupList()
+    
+>>>>>>> 25fe1b553fd64cc3eb3cb37d6460a16e9325d3f0
   }
 }
 </script>

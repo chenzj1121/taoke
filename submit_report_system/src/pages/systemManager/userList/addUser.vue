@@ -31,10 +31,10 @@
             <el-option v-for="(group, index) in groupList" :key="index" :label="group.groupName" :value="group.groupId"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="用户角色:" prop="userRole">
+        <el-form-item label="用户角色:" prop="type">
           <!-- <el-input v-model="form.userRole"></el-input> -->
-          <el-select v-model="form.userRole">
-            <el-option v-for="(role, index) in roleList" :key="index" :value="role.value" :label="role.label"></el-option>
+          <el-select v-model="form.type">
+            <el-option v-for="(role, index) in roleList" :key="index" :value="role.index" :label="role.label"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>

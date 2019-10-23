@@ -132,13 +132,18 @@ export default {
       })
     },
     delGroup (id) {
-      console.log(id)
+      console.log(this.groupList)
+      // this.groupList.forEach((item,index) => {
+      //   if (item.groupId==id) {
+      //       this.groupList
+      //   }
+      // });
       this.$confirm('此操作将删除此部门, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        delGroupById(id).then(res => {
+        delGroupById([id]).then(res => {
           this.getGroupList()
         })
         this.$message({

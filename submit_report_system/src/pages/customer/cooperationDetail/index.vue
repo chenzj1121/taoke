@@ -77,7 +77,7 @@
         <el-form-item label="优惠券总量：" required>
           <div class="flex">
             <el-input type="number" v-model="form.name"></el-input>
-            <span style="width: 130px;">数量大于等于600</span>
+            <!-- <span style="width: 130px;">数量大于等于600</span> -->
           </div>
         </el-form-item>
         <el-form-item label="券后价：" required>

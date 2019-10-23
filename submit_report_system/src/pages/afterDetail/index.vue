@@ -67,21 +67,23 @@
         <el-input v-model="form.payMoney"></el-input>
       </el-form-item>
       <el-form-item>
-    
         <span>驳回消息 0 条</span>
         <span class="link">点击查看</span>
       </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="downloadFile">下载表格</el-button>
           <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
-        <form enctype="multipart/form-data" target="nm_iframe" id="form" >
+        <form enctype="multipart/form-data" target="nm_iframe" id="form" style="display:inline_block">
           <!-- <el-button size="small" type="primary">点击上传</el-button> -->
-           <input type="file"  name="file">
-          <input type="submit" @click="upload">
+           <input type="file"  name="file" style="display:none" id="filebox" @change="upload">
+            <input type="hidden"  id="ssFile" name="ssFile">
+          <el-button size="small" type="primary" @click="openFile">导入表格</el-button>
+
+          <!-- <input type="submit" @click="upload"> -->
         </form> 
           <!-- <el-button size="small" type="primary" @click="upload">点击上传</el-button>
         <input class="easyui-filebox" type="file" name="file1" id="file1">
-        <input type="hidden"  id="ssFile" name="ssFile"> 用于文件名回显 -->
+        用于文件名回显 -->
         </el-form-item>
     </el-form>
     <el-table
@@ -154,6 +156,9 @@ export default {
     this.getDetailList()
   },
   methods:{
+    openFile(){
+      document.getElementById("filebox").click()
+    },
     upload(e){
       // let index = e.currentTarget.getAttribute("data-id");
       // let file = e.currentTarget.files[0];
@@ -178,16 +183,20 @@ export default {
       let form = document.getElementById("form")
       var formData = new FormData() ;
       let file = document.getElementsByName("file")[0].files[0]
-      formData.append("file",file);
-      console.log(formData)
-      uploadDetail(formData).then(res=>{
-        console.log(res)
-        if(res.success){
-
-        }else{
-          this.$errmsg(res.message)
-        }
-      })
+      let fileType = file.name.split(".")[1]
+      
+      if(fileType=="xls" && fileType =="xlsx"){
+        formData.append("file",file);
+         uploadDetail(formData).then(res=>{
+            // if(res.success){
+            // }else{
+            //   this.$errmsg(res.message)
+            // }
+          })
+      }else{
+        this.$errmsg("请上传excel格式文件")
+      }   
+      
     },
     downloadFile(){
       window.open(PRE_URL+"/backgroundDetails/download.do?filename=moban.xls", '_blank');

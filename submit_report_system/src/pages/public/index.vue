@@ -66,8 +66,8 @@
       <el-table-column label="运营电话" prop="shopOperatePhone"></el-table-column>
       <el-table-column label="店铺电话" prop="shopPhone"></el-table-column>
       <el-table-column label="领取">
-        <template>
-          <span class="linkSpan">领取</span>
+        <template slot-scope="scope">
+          <span class="linkSpan" @click="update(scope.row)">领取</span>
         </template>
       </el-table-column>
     </el-table>
@@ -83,7 +83,8 @@
 
 <script>
 import Page from '@/components/page'
-import { getShopList } from '@/api'
+import { getShopList,updateShop } from '@/api'
+import {getUser} from "@/utils/auth"
 export default {
   components: {
     Page
@@ -108,6 +109,21 @@ export default {
     }
   },
   methods: {
+    update(obj){
+      let info = getUser()
+      obj.privateType = 1;
+      obj.shopUserId2 = info.id;
+      obj.shopDeptId =info.deptId;
+      obj.shopGroupId = info.groupId;
+      updateShop(obj).then(res=>{
+        if (res.success) {
+          this.$sucmsg(res.message)
+          this.bindData()
+        }else{
+          this.$errmsg(res.message)
+        }
+      })
+    },
     nav2ShopDetailById (id) {
       this.$router.push({path: '/shopDetail', query: { id }})
     },

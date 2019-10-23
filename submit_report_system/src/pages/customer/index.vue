@@ -335,6 +335,7 @@ export default {
          this.multipleSelection[i].privateType = 0;
           this.multipleSelection[i].shopGroupId = "";
            this.multipleSelection[i].shopDeptId =""; 
+             this.multipleSelection[i].shopUserId =""; 
          updateShop(this.multipleSelection[i]).then(res=>{
            if(res.success){
               // this.$sucmsg(res.message)

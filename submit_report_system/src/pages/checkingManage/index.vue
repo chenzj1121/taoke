@@ -65,7 +65,7 @@
       <el-table-column prop="cmUserId" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showOtherRecords(scope.row.id)">{{ scope.row.name }}</span>
+          <span class="link" @click="showOtherRecords(scope.row.id)">{{ scope.row.cmShopName }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="cmShopType" label="类型"></el-table-column>
@@ -74,8 +74,16 @@
       <el-table-column prop="cmSyMoney" label="剩余金额"></el-table-column>
       <el-table-column prop="cmJsNums" label="结算量"></el-table-column>
       <el-table-column prop="cmFwPrice" label="服务费单价"></el-table-column>
-      <el-table-column prop="cmYhqPhoto" label="优惠券截图"></el-table-column>
-      <el-table-column prop="name" label="打款截图"></el-table-column>
+      <el-table-column prop="cmYhqPhoto" label="优惠券截图">
+        <template slot-scope="scope">
+          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="打款截图">
+         <template slot-scope="scope">
+          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+        </template>
+      </el-table-column>
       <el-table-column prop="cmLoadCustomer" label="转入账户"></el-table-column>
       <el-table-column prop="cmApplyTime" label="申请时间"></el-table-column>
       <el-table-column prop="cmType" label="查款状态"></el-table-column>
@@ -125,12 +133,15 @@
 
 <script>
 import Page from '@/components/page'
-import { getCheckmonkeyPage } from '@/api'
+import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList } from '@/api'
 export default {
   components: {
     Page
   },
   mounted () {
+    this.getUserList()
+    this.getGroupList()
+    this.getDeptList()
     this.bindData()
   },
   data () {
@@ -160,10 +171,29 @@ export default {
       otherRecordsTableData: [
         { name: 'name', id: 1 }
       ],
-      otherRecordsVisiable: false
+      otherRecordsVisiable: false,
+        deptList:[],
+        groupList:[],
+        userList:[]
     }
   },
+
   methods: {
+    getUserList(){
+      getUserByList().then(res=>{
+        this.userList = res
+      })
+    },
+     getDeptList () {
+      getDeptByList().then(res => {
+        this.deptList = res
+      })
+    },
+    getGroupList() {
+      getGroupByList().then(res => {
+        this.groupList = res
+      })
+    },
     showOtherRecords (id) {
       this.otherRecordsVisiable = true
     },
@@ -172,14 +202,42 @@ export default {
       const rows = this.page.pageSize
       const params = this.form
       this.loading = true
-      getCheckmonkeyPage(params, page, rows).then(response => {
-        this.checkingTableData = response.rows
-        this.page.total = response.total
+      getCheckmonkeyPage(params, page, rows).then(res => {
+            res.rows.forEach((item,index)=>{
+              item.cmApplyTime = this.getMyDate(item.cmApplyTime)
+              item.cmBackTime = this.getMyDate(item.cmBackTime)
+              this.groupList.forEach(obj=>{
+                if(item.cmSellDept == obj.groupDeptId && item.cmDept == obj.groupId){
+                  item.cmSellDept = obj.groupName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.cmUserId ==obj.id ){
+                  item.cmUserId = obj.username
+                }
+              })
+              this.deptList.forEach(obj=>{
+                if(item.cmDept == obj.deptId){
+                  item.cmDept = obj.deptName
+                }
+              })
+            })
+        console.log(res)
+        this.checkingTableData = res.rows
+        this.page.total = res.total
         this.loading = false
       })
         .catch(() => {
           this.loading = false
         })
+    },
+  getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+    let oTime = oYear +'-'+ oMonth +'-'+oDay
+    return oTime;
     }
   }
 }

@@ -35,7 +35,7 @@ export const getGroupByList = () => ajax(PRE_URL + '/group/findAll.do', '', 'pos
 
 export const getGroupById = (param) => ajax(PRE_URL + '/group/findOne.do?id=' + param, 'get')
 
-export const delGroupById = (param) => ajax(PRE_URL + '/group/delete.do?id=' + param, 'get')
+export const delGroupById = (param) => ajax(PRE_URL + '/group/delete.do?ids=' + param, 'get')
 
 export const addGroup = (param) => ajax(PRE_URL + '/group/add.do', param, 'post')
 

@@ -3,10 +3,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +22,7 @@ import com.luoshi.mapper.TbBackgroundDetailsMapper;
 import com.luoshi.pojo.TbBackgroundDetails;
 import com.luoshi.pojo.TbBackgroundDetailsExample;
 import com.luoshi.pojo.TbProductSubmit;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.pojo.TbBackgroundDetailsExample.Criteria;
 import com.luoshi.service.BackgroundDetailsService;
 
@@ -31,6 +38,10 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 
 	@Autowired
 	private TbBackgroundDetailsMapper backgroundDetailsMapper;
+	
+	@Autowired
+
+	private HttpServletRequest request;
 	
 	/**
 	 * 查询全部
@@ -117,6 +128,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			HSSFWorkbook wb = null;
 			try {
 				wb = new HSSFWorkbook(ins);
+				
 				HSSFSheet sheet = wb.getSheetAt(0);
 				String type = "";
 	/*			if("供应商".equals(sheet.getSheetName())){
@@ -129,9 +141,11 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				
 				//读取数据
 				//最后一行的行号
-				int lastRow = sheet.getLastRowNum();
+				int a=0;
+				int lastRow=sheet.getLastRowNum();
 				TbBackgroundDetails details = null;
 				for(int i = 1; i <= lastRow; i++){
+					if(sheet.getRow(i).getCell(0)!=null && sheet.getRow(i).getCell(0)!=null) {
 					details = new TbBackgroundDetails();
 				/*	productSubmit.setName(sheet.getRow(i).getCell(0).getStringCellValue());//供应商名称
 					//判断是否已经存在，通过名称来判断
@@ -148,25 +162,52 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 						supplier.setType(type);
 						supplierDao.add(supplier);
 					}*/
+					if(sheet.getRow(i).getCell(0).getStringCellValue()!=null) {
+					for(int j=0; j<16;j++) {
+						System.out.println(j);
+					sheet.getRow(i).getCell(j).setCellType(CellType.STRING);
+					}
+					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					HttpSession session = request.getSession();
+					TbSysUser user = (TbSysUser) session.getAttribute("user");
+					details.setUseId(user.getId());
+					details.setDeptId(user.getDeptId());
+					details.setGroupId(user.getGroupId());
 					details.setCreateTime(sdf.parse(sheet.getRow(i).getCell(0).getStringCellValue()));
 					details.setClickTime(sdf.parse(sheet.getRow(i).getCell(1).getStringCellValue()));
 					details.setShopMessage(sheet.getRow(i).getCell(2).getStringCellValue());
-					details.setGoodsId(Integer.parseInt( sheet.getRow(i).getCell(3).getStringCellValue()));
+					details.setGoodsId(Long.parseLong( sheet.getRow(i).getCell(3).getStringCellValue()));
 					details.setAliwangwang(sheet.getRow(i).getCell(4).getStringCellValue());
 					details.setShopName(sheet.getRow(i).getCell(5).getStringCellValue());
 					details.setGoodsCounts(Integer.parseInt(sheet.getRow(i).getCell(6).getStringCellValue()));//设置商品数量
 					details.setGoodsPrice(Double.parseDouble(sheet.getRow(i).getCell(7).getStringCellValue()));
-					details.setOrdersFl(Double.parseDouble(sheet.getRow(i).getCell(8).getStringCellValue()));
-					details.setPay(Double.parseDouble(sheet.getRow(i).getCell(9).getStringCellValue()));//付款金额
-					details.setPayAbout(Double.parseDouble(sheet.getRow(i).getCell(10).getStringCellValue()));//预估付款服务费
-					details.setPayTime(sdf.parse(sheet.getRow(i).getCell(11).getStringCellValue()));//结算时间
-					details.setPayMoney(Double.parseDouble(sheet.getRow(i).getCell(12).getStringCellValue()));//结算金额
-					details.setOrderId(Long.parseLong(sheet.getRow(i).getCell(13).getStringCellValue()));//订单编号
-					details.setGdId(Long.parseLong(sheet.getRow(i).getCell(14).getStringCellValue()));//活动id
-					backgroundDetailsMapper.insert(details);
 					
-					}			
+					details.setOrdersType(sheet.getRow(i).getCell(8).getStringCellValue());
+					String newStr = (sheet.getRow(i).getCell(9).getStringCellValue()).replace("%","");
+					double num = Double.parseDouble(newStr);
+					double newNum = num*0.01;
+					details.setOrdersFl(newNum);
+					details.setPay(Double.parseDouble(sheet.getRow(i).getCell(10).getStringCellValue()));//付款金额
+					details.setPayAbout(Double.parseDouble(sheet.getRow(i).getCell(11).getStringCellValue()));//预估付款服务费
+					if(sheet.getRow(i).getCell(12).getStringCellValue()!="" && sheet.getRow(i).getCell(12).getStringCellValue()!=null) {
+						Date date;
+						try {
+							date = sdf.parse(sheet.getRow(i).getCell(12).getStringCellValue());
+						} catch (Exception e) {
+							date = null;
+						}
+						details.setPayTime(date);//结算时间
+					}else {
+					details.setPayTime(new Date());//结算时间
+					}
+					details.setPayMoney(Double.parseDouble(sheet.getRow(i).getCell(13).getStringCellValue()));//结算金额
+					details.setOrderId(Long.parseLong(sheet.getRow(i).getCell(14).getStringCellValue()));//订单编号
+					details.setGdId(Long.parseLong(sheet.getRow(i).getCell(15).getStringCellValue()));//活动id
+					backgroundDetailsMapper.insert(details);
+					}
+				}
+						
 			} finally{
 				if(null != wb){
 					try {

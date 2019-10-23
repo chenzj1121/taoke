@@ -172,12 +172,12 @@ public class BackgroundDetailsController {
 		}
 		
 		//判断文件类型是否错误(xlsx/xls)
-		if(file.getOriginalFilename().indexOf("xlsx")<0||file.getOriginalFilename().indexOf("xls")<0){
+/*		if(file.getOriginalFilename().indexOf("xls")<0||file.getOriginalFilename().indexOf("xlsx")<0){
 			rs.setMessage("文件类型错误");
 			rs.setSuccess(false);
 			return rs;
 		}
-		
+		*/
 		
 		//存入本地文件夹
 //		String path = request.getSession().getServletContext().getRealPath("/")+"upload/"+file.getOriginalFilename();

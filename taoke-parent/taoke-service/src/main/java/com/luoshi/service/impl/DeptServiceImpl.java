@@ -94,7 +94,6 @@ public class DeptServiceImpl implements DeptService {
 			}
 	
 		}
-		
 		Page<TbDept> page= (Page<TbDept>)deptMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}

@@ -171,7 +171,17 @@ export default {
               })
           })
         this.userList = res.rows
-          console.log(this.userList)
+        
+        for (var i=0;i<this.userList.length;i++)
+        { 
+          // if(this.userList[i].deptId==null){
+          //   this.userList[i].deptId=0
+          // }
+           this.userList[i].deptId = this.deptList[this.userList[i].deptId].deptName;
+           //this.userList[i].groupId = this.groupList[this.userList[i].groupId].groupName;
+        }
+
+        console.log(this.userList)
         this.page.total = res.total
         this.loading = false
       })
@@ -248,10 +258,12 @@ export default {
       this.$router.push({ path: 'updUser', query: {id} })
     }
   },
-  mounted () {
+  created () {
+    this.getUserList()
+    
     this.getDeptList()
     this.getgroupList()
-    this.getUserList()
+    
   }
 }
 </script>

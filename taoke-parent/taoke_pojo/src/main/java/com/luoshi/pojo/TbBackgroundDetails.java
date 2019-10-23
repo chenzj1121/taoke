@@ -11,7 +11,7 @@ public class TbBackgroundDetails {
 
     private String shopMessage;
 
-    private Integer goodsId;
+    private Long goodsId;
 
     private Integer useId;
 
@@ -27,7 +27,7 @@ public class TbBackgroundDetails {
 
     private Double goodsPrice;
 
-    private Integer ordersType;
+    private String ordersType;
 
     private Double ordersFl;
 
@@ -77,15 +77,17 @@ public class TbBackgroundDetails {
         this.shopMessage = shopMessage == null ? null : shopMessage.trim();
     }
 
-    public Integer getGoodsId() {
-        return goodsId;
-    }
+    
 
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
+    public Long getGoodsId() {
+		return goodsId;
+	}
 
-    public Integer getUseId() {
+	public void setGoodsId(Long goodsId) {
+		this.goodsId = goodsId;
+	}
+
+	public Integer getUseId() {
         return useId;
     }
 
@@ -141,11 +143,11 @@ public class TbBackgroundDetails {
         this.goodsPrice = goodsPrice;
     }
 
-    public Integer getOrdersType() {
+    public String getOrdersType() {
         return ordersType;
     }
 
-    public void setOrdersType(Integer ordersType) {
+    public void setOrdersType(String ordersType) {
         this.ordersType = ordersType;
     }
 

@@ -67,9 +67,22 @@
         <el-input v-model="form.payMoney"></el-input>
       </el-form-item>
       <el-form-item>
+    
         <span>驳回消息 0 条</span>
         <span class="link">点击查看</span>
       </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="downloadFile">下载表格</el-button>
+          <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
+        <form enctype="multipart/form-data" target="nm_iframe" id="form" >
+          <!-- <el-button size="small" type="primary">点击上传</el-button> -->
+           <input type="file"  name="file">
+          <input type="submit" @click="upload">
+        </form> 
+          <!-- <el-button size="small" type="primary" @click="upload">点击上传</el-button>
+        <input class="easyui-filebox" type="file" name="file1" id="file1">
+        <input type="hidden"  id="ssFile" name="ssFile"> 用于文件名回显 -->
+        </el-form-item>
     </el-form>
     <el-table
       :data="afterDetailTableData"
@@ -98,7 +111,7 @@
 </template>
 
 <script>
-import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList} from "@/api/index"
+import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList,PRE_URL,uploadDetail} from "@/api/index"
 import Page from '@/components/page'
 export default {
    components: {
@@ -141,6 +154,44 @@ export default {
     this.getDetailList()
   },
   methods:{
+    upload(e){
+      // let index = e.currentTarget.getAttribute("data-id");
+      // let file = e.currentTarget.files[0];
+      // console.log(file)
+      //  var file1 = document.getElementById("file1");  
+      //   var ssFile = document.getElementById("ssFile");  
+      //       ssFile.value = file1.value.substring(12);    //取出文件名，并赋值回显到文本框，用于向后台传文件名
+      //   $.ajaxFileUpload({
+      //       url : `${PRE_URL}/backgroundDetails/upload.do`, //用于文件上传的服务器端请求地址
+      //       fileElementId : 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+      //       type : 'post',
+      //       dataType : 'text', //返回值类型 一般设置为json
+      //       success : function(data, status) //服务器成功响应处理函数
+      //       {
+      //           alert("文件上传成功");
+      //       },
+      //       error : function(data, status, e)//服务器响应失败处理函数
+      //       {
+      //           alert("文件上传失败");
+      //       }
+      //   });
+      let form = document.getElementById("form")
+      var formData = new FormData() ;
+      let file = document.getElementsByName("file")[0].files[0]
+      formData.append("file",file);
+      console.log(formData)
+      uploadDetail(formData).then(res=>{
+        console.log(res)
+        if(res.success){
+
+        }else{
+          this.$errmsg(res.message)
+        }
+      })
+    },
+    downloadFile(){
+      window.open(PRE_URL+"/backgroundDetails/download.do?filename=moban.xls", '_blank');
+    },
       getUserList(){
       getUserByList().then(res=>{
         // console.log(res);

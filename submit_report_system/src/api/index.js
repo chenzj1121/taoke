@@ -1,6 +1,8 @@
 import ajax from './axios'
 
-const PRE_URL = '/api'
+// const PRE_URL 
+
+export const PRE_URL = '/api'
 
 export const reqLogin = (user) => ajax(PRE_URL + '/login.do', user, 'post')
 
@@ -28,8 +30,8 @@ export const getUserByList = () => ajax(PRE_URL + '/sysUser/findAll.do', '', 'po
 
 export const getGroupByPage = (param) => ajax(PRE_URL + '/group/findAll.do', param, 'post')
 
-export const getGroupByList = () => ajax(PRE_URL + '/dept/findAll.do', '', 'post')
-//export const getGroupByList = () => ajax(PRE_URL + '/group/findAll.do', '', 'get')
+// export const getGroupByList = () => ajax(PRE_URL + '/dept/findAll.do', '', 'post')
+export const getGroupByList = () => ajax(PRE_URL + '/group/findAll.do', '', 'post')
 
 export const getGroupById = (param) => ajax(PRE_URL + '/group/findOne.do?id=' + param, 'get')
 
@@ -64,6 +66,10 @@ export const getDetail = (obj,page,rows) => ajax(PRE_URL + `/backgroundDetails/s
 export const getGroupMember = (deptId,groupId) => ajax(PRE_URL + '/sysUser/getUserByDeptIdAndGroupId.do?deptId='+deptId+"&groupId="+groupId,'','post')
 // export const getCoopDetail = (obj,page,rows)=>ajax(PRE_URL+`/coop/search.do?page=${page}&rows=${rows}`,obj,'post')
 export const getBackMoney = (obj,page,rows) => ajax(PRE_URL + `/backmoney/search.do?page=${page}&rows=${rows}`,obj,'post')
+// export const downloadDetail = (name) => ajax(PRE_URL + `/backgroundDetails/download.do?filename=moban.xls`,"",'post')
+export const uploadDetail = (file) => ajax(PRE_URL + `/backgroundDetails/upload.do`,file,'post')
+
+
 
 
 

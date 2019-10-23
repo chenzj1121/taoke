@@ -27,7 +27,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary">查询</el-button>
-        <el-button type="primary">下载表格</el-button>
+        <el-button type="primary" >下载表格</el-button>
         <span>驳回消息 5 条</span>
         <span>点击查看</span>
       </el-form-item>
@@ -188,12 +188,17 @@ export default {
     }
   },
   mounted(){
-      this.getUserList()
+    this.getUserList()
     this.getDeptList()
     this.getGroupList()
     this.bindData()
   },
   methods: {
+    downloadFile(){
+      downloadDetail("moban").then(res=>{
+        console.loading(res)
+      })
+    },
       getDeptList () {
       getDeptByList().then(res => {
         this.deptList = res
@@ -220,10 +225,15 @@ export default {
               list.forEach(obj=>{
                 item[obj] = this.getMyDate(item[obj])
               })
+              this.deptList.forEach(obj=>{
+                if(item.bmDeptId == obj.deptId){
+                  item.dep = obj.deptName
+                }
+              })
               this.groupList.forEach(obj=>{
                 if(item.bmDeptId == obj.groupDeptId && item.bmGroupId == obj.groupId){
                   item.group = obj.groupName
-                  item.dep = obj.groupName
+                  // item.dep = obj.groupName
                 }
               })
               this.userList.forEach(obj=>{

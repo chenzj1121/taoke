@@ -119,9 +119,9 @@
       >
         <el-table-column type="selection"/>
         <el-table-column type="index" label="序号"/>
-        <el-table-column prop="group" label="所属小组"/>
+        <el-table-column prop="dep" label="所属小组"/>
         <el-table-column prop="creater" label="所属人员"/>
-        <el-table-column prop="dep" label="所属部门"/>
+        <el-table-column prop="group" label="所属部门"/>
         <el-table-column label="店铺名称">
           <template slot-scope="scope">
             <span class="shopName" @click="nav2ShopDetail(scope.row.id)">{{scope.row.shopName}}</span>
@@ -197,26 +197,23 @@ export default {
     }
   },
   mounted () {
+    this.getDeptList()
     this.getUserList()
     this.getGroupList()
     this.bindData()
-    this.getDeptList()
   },
   methods: {
     getUserList(){
       getUserByList().then(res=>{
-        // console.log(res);
         this.userList = res
       })
     },
     getGroup(id){
-      // console.log(id)
         this.form.shopGroupId = null;
         if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
         this.gruopList2 = []
         this.memberList = []
       if(id){
-      //  this.form.shopDeptId =null;
       this.groupList.map(item=>{
         if(item.groupDeptId==id){
           this.gruopList2.push(item)
@@ -228,7 +225,6 @@ export default {
         if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
       this.memberList = [];
       if(deptId && groupId){
-      //  this.form.shopGroupId = null;
         getGroupMember(deptId,groupId).then(res=>{
           this.memberList = res
         })
@@ -236,13 +232,11 @@ export default {
     },
      getDeptList () {
       getDeptByList().then(res => {
-        // console.log(res)
         this.deptList = res
       })
     },
     getGroupList() {
       getGroupByList().then(res => {
-        // console.log(res)
         this.groupList = res
       })
     },
@@ -302,18 +296,21 @@ export default {
       getShopList(shop, page, rows).then(res => {
         this.tableData = res.rows
         console.log(res.rows)
-
           res.rows.forEach((item,index)=>{
             // item.group =""+item.shopDeptId+item.shopGroupId
               this.groupList.forEach(obj=>{
                 if(item.shopDeptId == obj.groupDeptId && item.shopGroupId == obj.groupId){
                   item.group = obj.groupName
-                  item.dep = obj.groupName
                 }
               })
               this.userList.forEach(obj=>{
                 if(item.shopUserId2 ==obj.id ){
                   item.creater = obj.username
+                }
+              })
+              this.deptList.forEach(obj=>{
+                if(item.shopDeptId == obj.deptId){
+                  item.dep = obj.deptName
                 }
               })
               // getUserById(item.shopUserId2).then(obj=>{

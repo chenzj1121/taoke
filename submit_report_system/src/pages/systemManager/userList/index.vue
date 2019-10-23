@@ -50,7 +50,7 @@
       <el-table-column label="真实姓名" prop="realname"></el-table-column>
       <el-table-column label="所属单位" prop="" width="200">
         <template slot-scope="scope">
-          <el-tag>{{scope.row.deptName }}  {{scope.row.groupName}}</el-tag>
+         {{scope.row.groupName}}
         </template>
       </el-table-column>
       <el-table-column label="用户权限" prop="userRole"></el-table-column>
@@ -110,7 +110,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getUserByPage, updUser, getDeptByList } from '@/api/index'
+import { getUserByPage, updUser, getDeptByList,getGroupByList  } from '@/api/index'
 import { Base64 } from 'js-base64'
 export default {
   components: {
@@ -146,13 +146,11 @@ export default {
   methods: {
     getDeptList () {
       getDeptByList().then(res => {
-        // console.log('deptList', res)
         this.deptList = res
       })
     },
     getgroupList () {
       getGroupByList().then(res => {
-         console.log('1234', res)
         this.groupList = res
       })
     },
@@ -167,27 +165,13 @@ export default {
       // debugger
       this.loading = true
       getUserByPage(this.form, this.page.pageNum, this.page.pageSize).then(res => {
-        res.rows.map((item,index)=>{
-              this.deptList.map(obj=>{
-                if(item.deptId == obj.deptId ){item.deptName = obj.deptName}
+        res.rows.forEach((item,index)=>{
+              this.groupList.forEach(obj=>{
+                if(item.deptId == obj.groupDeptId && item.groupId == obj.groupId ){item.groupName = obj.groupName}
               })
           })
         this.userList = res.rows
-<<<<<<< HEAD
-          // console.log(this.userList)
-=======
-        
-        for (var i=0;i<this.userList.length;i++)
-        { 
-          // if(this.userList[i].deptId==null){
-          //   this.userList[i].deptId=0
-          // }
-           this.userList[i].deptId = this.deptList[this.userList[i].deptId].deptName;
-           //this.userList[i].groupId = this.groupList[this.userList[i].groupId].groupName;
-        }
-
-        console.log(this.userList)
->>>>>>> 25fe1b553fd64cc3eb3cb37d6460a16e9325d3f0
+          console.log(this.userList)
         this.page.total = res.total
         this.loading = false
       })
@@ -264,18 +248,10 @@ export default {
       this.$router.push({ path: 'updUser', query: {id} })
     }
   },
-  created () {
-<<<<<<< HEAD
-    this.getDeptList()
-    this.getUserList()
-
-=======
-    this.getUserList()
-    
+  mounted () {
     this.getDeptList()
     this.getgroupList()
-    
->>>>>>> 25fe1b553fd64cc3eb3cb37d6460a16e9325d3f0
+    this.getUserList()
   }
 }
 </script>

@@ -365,8 +365,8 @@ public class TbBackgroundDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdEqualTo(Integer value) {
-            addCriterion("goods_id =", value, "goodsId");
+        public Criteria andGoodsIdEqualTo(Long long1) {
+            addCriterion("goods_id =", long1, "goodsId");
             return (Criteria) this;
         }
 
@@ -865,8 +865,8 @@ public class TbBackgroundDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrdersTypeEqualTo(Integer value) {
-            addCriterion("orders_type =", value, "ordersType");
+        public Criteria andOrdersTypeEqualTo(String string) {
+            addCriterion("orders_type =", string, "ordersType");
             return (Criteria) this;
         }
 

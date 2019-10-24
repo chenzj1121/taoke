@@ -193,7 +193,7 @@ public class BackgroundDetailsController {
 //		File localFile = new File(path);
 		InputStream ins = file.getInputStream();
 		//读取excel文档  
-		backgroundDetailsService.doImport(ins);
+		backgroundDetailsService.doImport(ins,file);
 		
 		//这里的result就是整个excel的数据。根据需求自行确定校验规则及后续加数据库等操作
 		return null;

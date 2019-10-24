@@ -2,6 +2,9 @@ package com.luoshi.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.luoshi.pojo.TbBackgroundDetails;
 
 import entity.PageResult;
@@ -61,7 +64,10 @@ public interface BackgroundDetailsService {
 	public PageResult findPage(TbBackgroundDetails backgroundDetails, int pageNum,int pageSize);
 
 
-	public void doImport(InputStream ins) throws Exception;
+	public void doImport(InputStream ins, MultipartFile file) throws Exception;
+
+
+	//public void doImport(InputStream ins, MultipartFile file);
 
 
 

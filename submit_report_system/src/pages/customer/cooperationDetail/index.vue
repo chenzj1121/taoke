@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -156,7 +157,17 @@ export default {
   },
   mounted(){
     this.shopDetail = this.$route.params
-    console.log(this.shopDetail)
+    if (this.shopDetail.shopName) {
+      
+    }else{
+      alert("?")
+    }
+    // console.log(this.shopDetail)
+    // const appSecrt = "5db14111720ce"
+    // const version = "v1.0.0"
+    // axios.get(`https://openapi.dataoke.com/api/goods/get-goods-details?appSecrt=${appSecrt}&version=${version}`).then(res=>{
+    //  console.log(res);
+    // })
   },
   methods: {
     back () {

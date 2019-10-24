@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.luoshi.pojo.TbBackgroundDetails;
 
 import entity.PageResult;
+import entity.Result;
 /**
  * 服务层接口
  * @author Administrator
@@ -64,7 +65,7 @@ public interface BackgroundDetailsService {
 	public PageResult findPage(TbBackgroundDetails backgroundDetails, int pageNum,int pageSize);
 
 
-	public void doImport(InputStream ins, MultipartFile file) throws Exception;
+	public Result doImport(MultipartFile file) throws Exception;
 
 
 	//public void doImport(InputStream ins, MultipartFile file);

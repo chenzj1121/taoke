@@ -32,6 +32,7 @@ import com.luoshi.pojo.TbBackgroundDetailsExample.Criteria;
 import com.luoshi.service.BackgroundDetailsService;
 
 import entity.PageResult;
+import entity.Result;
 
 /**
  * 服务实现层
@@ -111,7 +112,9 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 		TbBackgroundDetailsExample example=new TbBackgroundDetailsExample();
 		Criteria criteria = example.createCriteria();
 		
-		if(backgroundDetails!=null){			
+		if(backgroundDetails!=null){
+			System.out.println(backgroundDetails.getDeptId());
+			System.out.println("123");
 			if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
 				criteria.andShopMessageLike("%"+backgroundDetails.getShopMessage()+"%");
 			}
@@ -122,10 +125,13 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				criteria.andShopNameLike("%"+backgroundDetails.getShopName()+"%");
 			}
 			if(backgroundDetails.getDeptId()!=null ){
+				System.out.println(backgroundDetails.getDeptId());
+				System.out.println("123");
 				criteria.andDeptIdEqualTo(backgroundDetails.getDeptId());
 			}
 			//小组
 			if(backgroundDetails.getGroupId()!=null) {
+				
 				criteria.andGroupIdEqualTo(backgroundDetails.getGroupId());
 			}
 			//责任人
@@ -160,8 +166,13 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	}
 
 		@Override
-		public void doImport(InputStream ins, MultipartFile file) throws Exception {
+		public Result doImport(MultipartFile file) throws Exception {
 			Workbook wb = null;
+			Result result =new Result();
+			System.out.println(file.getName());
+			System.out.println(file.getName().endsWith("xlsx"));
+			System.out.println(file.getName().endsWith("xls"));
+			InputStream ins = file.getInputStream();
 			try {
 				//wb = new HSSFWorkbook(ins);
 				if (file.getName().endsWith("xlsx")) {
@@ -248,9 +259,19 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					details.setGdId(Long.parseLong(sheet.getRow(i).getCell(15).getStringCellValue()));//活动id
 					backgroundDetailsMapper.insert(details);
 					}
+					
 				}
+				result.setSuccess(true);
+				result.setMessage("导入成功");
+				return result;
 						
-			} finally{
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.setSuccess(false);
+				result.setMessage("导入失败");
+				return result;
+			}finally{
+				
 				if(null != wb){
 					try {
 						wb.close();

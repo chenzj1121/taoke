@@ -3,19 +3,19 @@
     <div class="title">后台明细</div>
     <el-form inline size="mini">
       <el-form-item label="销售部">
-       <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">
+       <el-select v-model="form.deptId" placeholder="请选择" @change="getGroup(form.deptId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
               </el-select>
       </el-form-item>
       <el-form-item label="组别">
-         <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.shopDeptId,form.shopGroupId)">
+         <el-select v-model="form.groupId" placeholder="请选择" @change="getMember(form.deptId,form.groupId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
               </el-select>
       </el-form-item>
       <el-form-item label="责任人">
-        <el-select v-model="form.shopUserId2" placeholder="请选择">
+        <el-select v-model="form.useId" placeholder="请选择">
                 <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
               </el-select>
@@ -184,9 +184,9 @@ export default {
       var formData = new FormData() ;
       let file = document.getElementsByName("file")[0].files[0]
       let fileType = file.name.split(".")[1]
-      
+      let fileName = file.name.split(".")[0]
       if(fileType=="xls" || fileType =="xlsx"){
-        formData.append("file",file);
+        formData.append(fileName,file);
          uploadDetail(formData).then(res=>{
             // if(res.success){
             // }else{
@@ -244,8 +244,9 @@ export default {
     },
       getGroup(id){
       // console.log(id)
-        this.form.shopGroupId = null;
-        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+  
+        this.form.groupId = null;
+        if( this.form.useId){ this.form.useId = null;}
         this.gruopList2 = []
         this.memberList = []
       if(id){
@@ -258,10 +259,11 @@ export default {
       }
     },
     getMember(deptId,groupId){
-        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+      console.log(deptId,groupId)
+        if( this.form.useId){ this.form.useId = null;}
       this.memberList = [];
       if(deptId && groupId){
-      //  this.form.shopGroupId = null;
+      //  this.form.groupId = null;
         getGroupMember(deptId,groupId).then(res=>{
           this.memberList = res
         })

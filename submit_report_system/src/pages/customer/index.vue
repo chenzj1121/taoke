@@ -241,7 +241,8 @@ export default {
       })
     },
     submitReport (item) {
-      this.$router.push({ path: '/customer/cooperationDetail' })
+      console.log(item)
+      this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail' ,params:item})
     },
     handleSelectionChange (val) {
        this.multipleSelection = val;

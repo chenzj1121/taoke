@@ -3,11 +3,11 @@
     <div class="content">
       <el-form ref="form" :model="form" label-width="120px" size="mini">
         <el-form-item label="商家客户：">
-          <el-input v-model="form.name" disabled/>
+          <el-input v-model="shopDetail.shopName" disabled/>
         </el-form-item>
         <el-form-item label="零点提报：">
-          <el-radio label="零点" v-model="form.name"/>
-          <el-radio label="非零点" v-model="form.name"/>
+          <el-radio label="零点" name="zero" v-model="form.coopZero"/>
+          <el-radio label="非零点" name="zero" v-model="form.coopZero"/>
         </el-form-item>
         <el-form-item prop="name" label="商品标题：" :rules="[
             { required: true, message: '请输入商品标题' },
@@ -150,8 +150,13 @@ export default {
     return {
       form: {
         settleStatus: undefined
-      }
+      },
+      shopDetail:{}
     }
+  },
+  mounted(){
+    this.shopDetail = this.$route.params
+    console.log(this.shopDetail)
   },
   methods: {
     back () {

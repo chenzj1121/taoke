@@ -13,8 +13,13 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -107,7 +112,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 		Criteria criteria = example.createCriteria();
 		
 		if(backgroundDetails!=null){			
-						if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
+			if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
 				criteria.andShopMessageLike("%"+backgroundDetails.getShopMessage()+"%");
 			}
 			if(backgroundDetails.getAliwangwang()!=null && backgroundDetails.getAliwangwang().length()>0){
@@ -116,7 +121,38 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			if(backgroundDetails.getShopName()!=null && backgroundDetails.getShopName().length()>0){
 				criteria.andShopNameLike("%"+backgroundDetails.getShopName()+"%");
 			}
-	
+			if(backgroundDetails.getDeptId()!=null ){
+				criteria.andDeptIdEqualTo(backgroundDetails.getDeptId());
+			}
+			//小组
+			if(backgroundDetails.getGroupId()!=null) {
+				criteria.andGroupIdEqualTo(backgroundDetails.getGroupId());
+			}
+			//责任人
+			if(backgroundDetails.getUseId()!=null) {
+				criteria.andUseIdEqualTo(backgroundDetails.getUseId());
+			}
+			//商品id
+			if(backgroundDetails.getGoodsId()!=null){
+				criteria.andGoodsIdEqualTo(backgroundDetails.getGoodsId());
+			}
+			//时间查询
+			if(backgroundDetails.getCreateTime()!=null) {
+				criteria.andPayTimeGreaterThanOrEqualTo(backgroundDetails.getCreateTime());
+			}
+			//时间查询
+			if(backgroundDetails.getClickTime()!=null) {
+				criteria.andPayTimeLessThanOrEqualTo(backgroundDetails.getCreateTime());
+			}
+			//订单号
+			if(backgroundDetails.getOrderId()!=null){
+				criteria.andOrderIdEqualTo(backgroundDetails.getOrderId());
+			}
+			//状态
+			if(backgroundDetails.getOrdersType()!=null){
+				criteria.andOrdersTypeEqualTo(backgroundDetails.getOrdersType());
+			}
+			
 		}
 		
 		Page<TbBackgroundDetails> page= (Page<TbBackgroundDetails>)backgroundDetailsMapper.selectByExample(example);		
@@ -124,12 +160,18 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	}
 
 		@Override
-		public void doImport(InputStream ins) throws Exception {
-			HSSFWorkbook wb = null;
+		public void doImport(InputStream ins, MultipartFile file) throws Exception {
+			Workbook wb = null;
 			try {
-				wb = new HSSFWorkbook(ins);
-				
-				HSSFSheet sheet = wb.getSheetAt(0);
+				//wb = new HSSFWorkbook(ins);
+				if (file.getName().endsWith("xlsx")) {
+				    wb = new XSSFWorkbook(ins);
+					//XSSFSheet sheet = wb.getSheetAt(0);
+				              }else {
+					wb = new HSSFWorkbook(ins);
+					//HSSFSheet sheet = wb.getSheetAt(0);
+					 }
+				//HSSFSheet sheet = wb.getSheetAt(0);
 				String type = "";
 	/*			if("供应商".equals(sheet.getSheetName())){
 					type = Supplier.TYPE_SUPPLIER;
@@ -141,6 +183,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				
 				//读取数据
 				//最后一行的行号
+				Sheet sheet = wb.getSheetAt(0);
 				int a=0;
 				int lastRow=sheet.getLastRowNum();
 				TbBackgroundDetails details = null;
@@ -164,7 +207,6 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					}*/
 					if(sheet.getRow(i).getCell(0).getStringCellValue()!=null) {
 					for(int j=0; j<16;j++) {
-						System.out.println(j);
 					sheet.getRow(i).getCell(j).setCellType(CellType.STRING);
 					}
 					}

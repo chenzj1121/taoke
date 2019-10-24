@@ -73,7 +73,7 @@
         <el-form-item>
           <el-button type="primary" @click="downloadFile">下载表格</el-button>
           <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
-        <form enctype="multipart/form-data" target="nm_iframe" id="form" style="display:inline_block">
+        <form enctype="multipart/form-data" target="nm_iframe" id="form" style="display:inline">
           <!-- <el-button size="small" type="primary">点击上传</el-button> -->
            <input type="file"  name="file" style="display:none" id="filebox" @change="upload">
             <input type="hidden"  id="ssFile" name="ssFile">
@@ -185,7 +185,7 @@ export default {
       let file = document.getElementsByName("file")[0].files[0]
       let fileType = file.name.split(".")[1]
       
-      if(fileType=="xls" && fileType =="xlsx"){
+      if(fileType=="xls" || fileType =="xlsx"){
         formData.append("file",file);
          uploadDetail(formData).then(res=>{
             // if(res.success){

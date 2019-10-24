@@ -191,12 +191,11 @@ public class BackgroundDetailsController {
 //			e.printStackTrace();
 //		}
 //		File localFile = new File(path);
-		InputStream ins = file.getInputStream();
+		//InputStream ins = file.getInputStream();
 		//读取excel文档  
-		backgroundDetailsService.doImport(ins,file);
+		return backgroundDetailsService.doImport(file);
 		
 		//这里的result就是整个excel的数据。根据需求自行确定校验规则及后续加数据库等操作
-		return null;
 		}
     
     public Result ajaxReturn(boolean success, String message){

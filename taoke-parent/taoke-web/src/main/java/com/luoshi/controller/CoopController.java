@@ -1,11 +1,14 @@
 package com.luoshi.controller;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dtk.util.HttpUtils;
+import com.dtk.util.SignMD5Util;
 import com.luoshi.pojo.TbCoop;
 import com.luoshi.service.CoopService;
 
@@ -31,7 +34,28 @@ public class CoopController {
 	public List<TbCoop> findAll(){			
 		return coopService.findAll();
 	}
-	
+	private static final String appSecret = "b94fd7405747ca971f22f0f0ed4b37fb";//应用sercret
+    private static final String appKey = "5db14111720ce"; //应用key
+    private static final String host = "https://openapi.dataoke.com/api/goods/get-goods-details";//应用服务接口
+	/**
+	 * 返回大淘客商品信息
+	 * 
+	 */
+	@RequestMapping("/findByGoodId")
+	public String findPage(String goodsId){
+		 TreeMap<String,String> paraMap = new TreeMap<>();
+		 
+	        paraMap.put("version","v1.0.0");
+	        paraMap.put("appKey","5db14111720ce");
+	        paraMap.put("goodsId",goodsId);
+	        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,appSecret));
+	        System.out.println(SignMD5Util.getSignStr(paraMap,appSecret));
+	        System.out.println(host);
+	        System.out.println(paraMap);
+	        System.out.println(HttpUtils.sendGet(host,paraMap));
+	        String string = HttpUtils.sendGet(host,paraMap);
+	        return string;
+	}
 	
 	/**
 	 * 返回全部列表

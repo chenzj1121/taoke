@@ -63,15 +63,11 @@
         <br/>
       </div>
       <el-form-item label="优惠券使用情况截图：">
-       <el-upload
-        class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload>
+        <el-upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          list-type="picture-card">
+          <i class="el-icon-plus"></i>
+        </el-upload>
       </el-form-item>
       <br/>
       <el-form-item label="打款截图：">
@@ -122,7 +118,7 @@ export default {
         { label: '银行卡', value: 'name' },
         { label: '对公银行卡', value: 'name' }
       ],
-      imageUrl: ''
+      imageUrl: undefined
     }
   },
   mounted(){

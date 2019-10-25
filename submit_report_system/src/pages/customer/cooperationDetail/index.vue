@@ -166,11 +166,13 @@ export default {
     }
   },
   mounted(){
-    this.form.coopDeptId=getUser().deptId
-    this.form.coopUserId=getUser().id
     this.getRole()
     this.shopDetail = this.$route.params
     this.form.coopCustomer = this.shopDetail.shopName;
+    this.form.coopDeptId=getUser().deptId
+    this.form.coopUserId=getUser().id
+    this.form.coopBossName = this.shopDetail.shopBoss
+
     if(!this.shopDetail.shopName) {
        this.$alert('未检测到店铺', '警告', {
           confirmButtonText: '确定',

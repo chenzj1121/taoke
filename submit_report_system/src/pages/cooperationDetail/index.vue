@@ -115,7 +115,7 @@
                 </template>   
         </el-table-column>
         <el-table-column prop="coopActivity" label="商家活动"></el-table-column>
-        <el-table-column prop="coopGoodsId" label="商家ID"></el-table-column>
+        <el-table-column prop="coopGoodsId" label="商品ID"></el-table-column>
         <el-table-column prop="coopZero" label="零点提报"></el-table-column>
         <el-table-column prop="coopAlterprice" label="券后价"></el-table-column>
         <el-table-column prop="coopYhqnums" label="优惠券总量"></el-table-column>
@@ -129,12 +129,12 @@
         <el-table-column prop="coopYhqName" label="优惠券名称"></el-table-column>
         <el-table-column prop="coopMessage" label="备注"></el-table-column>
         <el-table-column prop="name" label="操作" width="360px">
-          <template>
+          <template slot-scope="scope">
             <span class="flex">
-              <el-button size="mini" type="primary">查看商品</el-button>
+              <el-button size="mini" type="primary" @click="viewGood(scope.row.coopGoodsId)">查看商品</el-button>
               <el-button size="mini">撤回</el-button>
               <el-button size="mini" type="warning">重新提报</el-button>
-              <el-button size="mini" type="primary" @click="nav2Checking(1)">查款</el-button>
+              <el-button size="mini" type="primary" @click="nav2Checking(scope.row)">查款</el-button>
               <el-button size="mini" type="warning">返/退款</el-button>
             </span>
           </template>
@@ -211,6 +211,9 @@ export default {
     this.bindData()
   },
   methods: {
+    viewGood(id){
+         window.open(`https://item.taobao.com/item.htm?ft=t&id=${id}`);   
+    },
       getDeptList () {
       getDeptByList().then(res => {
         // console.log(res)
@@ -264,8 +267,8 @@ export default {
           this.loading = false
         })
     },
-    nav2Checking (id) {
-      this.$router.push({path: 'checking', query: { id }})
+    nav2Checking (obj) {
+      this.$router.push({path: 'checking',name:"check",params: obj})
     },
   getMyDate(str) {
     var oDate = new Date(str)

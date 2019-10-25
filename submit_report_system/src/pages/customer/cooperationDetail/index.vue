@@ -3,7 +3,7 @@
     <div class="content">
       <el-form ref="form" :model="form" label-width="120px" size="mini">
         <el-form-item label="商家客户：">
-          <el-input v-model="shopDetail.shopName" disabled/>
+          <el-input v-model="form.coopCustomer" disabled/>
         </el-form-item>
         <el-form-item label="零点提报：">
           <el-radio label="零点" name="zero" v-model="form.coopZero"/>
@@ -32,10 +32,10 @@
              <el-option v-for="(item,index) in optionList" :key="index" :value="item.id" :label="item.name">{{item.name}}</el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="coopMainPicture" label="商品主图：" :rules="[{ required: true, message: '请输入商品主图' }]">
+        <el-form-item prop="coopMainpicture" label="商品主图：" :rules="[{ required: true, message: '请输入商品主图' }]">
           <div class="flex">
-            <el-input v-model="form.coopMainPicture"></el-input>
-            <el-button type="primary" @click="viewMainPic(form.coopMainPicture)">查看主图</el-button>
+            <el-input v-model="form.coopMainpicture"></el-input>
+            <el-button type="primary" @click="viewMainPic(form.coopMainpicture)">查看主图</el-button>
           </div>
         </el-form-item>
         <el-form-item label="商品营销图：">
@@ -54,12 +54,12 @@
           <el-radio v-model="form.beginTime" label="立即开始"></el-radio>
           <el-radio v-model="form.beginTime" label="预告"></el-radio>
         </el-form-item>
-        <el-form-item prop="coopStartTime" label="预告时间" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入预告时间' }]">
+        <el-form-item prop="coopStarttime" label="预告时间" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入预告时间' }]">
           <el-date-picker
-            v-model="form.coopStartTime"
+            v-model="form.coopStarttime"
             type="date"
             placeholder="选择日期"
-            value-format="timestamp">
+            >
           </el-date-picker>
         </el-form-item>
         <!-- <el-form-item label="优惠券类型：">
@@ -75,27 +75,27 @@
             <el-button type="primary"  @click="viewGood(form.coopCoupon)">查看优惠券</el-button>
           </div>
         </el-form-item>
-        <el-form-item prop="coopYhqNums" label="优惠券总量：" :rules="[{ required: true, message: '请输入优惠卷总量' }]" >
+        <el-form-item prop="coopYhqnums" label="优惠券总量：" :rules="[{ required: true, message: '请输入优惠卷总量' }]" >
           <div class="flex">
-            <el-input type="number" v-model="form.coopYhqNums" ></el-input>
+            <el-input type="number" v-model="form.coopYhqnums" ></el-input>
             <!-- <span style="width: 130px;">数量大于等于600</span> -->
           </div>
         </el-form-item>
-          <el-form-item prop="coopAlterPrice" label="券后价：" :rules="[{ required: true, message: '请输入券后价格' }]">
-          <el-input type="number" v-model="form.coopAlterPrice"></el-input>
+          <el-form-item prop="coopAlterprice" label="券后价：" :rules="[{ required: true, message: '请输入券后价格' }]">
+          <el-input type="number" v-model="form.coopAlterprice"></el-input>
         </el-form-item>
-        <el-form-item prop="coopYjScale" label="佣金比例：" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入佣金比例' }]">
-          <el-input type="number" v-model="form.coopYjScale"></el-input>
+        <el-form-item prop="coopYjscale" label="佣金比例：" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入佣金比例' }]">
+          <el-input type="number" v-model="form.coopYjscale"></el-input>
         </el-form-item>
         <el-form-item  prop="coopServiceFee" label="服务费单价：" :rules="[{ required: true, message: '请输入服务单价' }]">
           <el-input v-model="form.coopServiceFee"></el-input>
         </el-form-item>
-        <el-form-item prop="coopEndTime" label="结束时间：" :rules="[{ required: true, message: '请输入结束时间' }]">
+        <el-form-item prop="coopEndtime" label="结束时间：" :rules="[{ required: true, message: '请输入结束时间' }]">
           <el-date-picker
-            v-model="form.coopEndTime"
+            v-model="form.coopEndtime"
             type="date"
             placeholder="请选择日期"
-            value-format="timestamp">
+            >
           </el-date-picker>
         </el-form-item>
         <el-form-item prop="coopPerTime" label="预汇款时间：" :rules="[{ required: true, message: '请输入预汇款时间' }]">
@@ -103,7 +103,7 @@
             v-model="form.coopPerTime"
             type="date"
             placeholder="请选择日期"
-            value-format="timestamp">
+            >
           </el-date-picker>
         </el-form-item>
         <el-form-item label="备注">
@@ -162,6 +162,7 @@ export default {
       },
       shopDetail:{},
       optionList:[],
+      flag :false
     }
   },
   mounted(){
@@ -169,6 +170,7 @@ export default {
     this.form.coopUserId=getUser().id
     this.getRole()
     this.shopDetail = this.$route.params
+    this.form.coopCustomer = this.shopDetail.shopName;
     if(!this.shopDetail.shopName) {
        this.$alert('未检测到店铺', '警告', {
           confirmButtonText: '确定',
@@ -183,11 +185,13 @@ export default {
       if (id) {
         getGoodsInfo(id).then(res=>{
           if(res.code==0){
-            this.$message("改商品存在")
-            this.flag = true
+            this.$sucmsg("此商品已经存在")
+            this.form.coopPttype = "已上线"
           }else{
-            this.$message("改商品不存在")
+            this.$sucmsg("商品不存在")
+            this.form.coopPttype = "未找到"
           }
+          this.flag = true;
         })
       }else{
         this.$message("请输入商品id")
@@ -219,10 +223,22 @@ export default {
     submit(){
       this.$refs.form.validate(valid => {
         if(valid){
-          console.log(this.form)
-          addCoop(this.form).then(res=>{
-            console.log(res)
-          })
+          if (this.flag) {
+              console.log(this.form)
+              this.form.coopTbtime = new Date()
+              addCoop(this.form).then(res=>{
+                console.log(res)
+                if (res.success) {
+                  this.$sucmsg(res.message)
+                  this.$router.go(-1)
+                }else{
+                  this.$errmsg(res.message)
+                }
+              })
+          }else{
+            this.$("请检测商品")
+          }
+         
         }else{
           this.$message("请填写必填项")
         }

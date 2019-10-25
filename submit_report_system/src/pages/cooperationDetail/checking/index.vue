@@ -6,7 +6,7 @@
       label-position="left"
       label-width="150px">
       <el-form-item label="推广店铺：">
-        <el-input v-model="form.name" disabled></el-input>
+        <el-input v-model="form.coopCustomer" disabled></el-input>
       </el-form-item>
       <el-form-item label="店铺多选：">
         <el-select multiple v-model="form.shops">
@@ -63,11 +63,15 @@
         <br/>
       </div>
       <el-form-item label="优惠券使用情况截图：">
-        <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
-          list-type="picture-card">
-          <i class="el-icon-plus"></i>
-        </el-upload>
+       <el-upload
+        class="avatar-uploader"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
       </el-form-item>
       <br/>
       <el-form-item label="打款截图：">
@@ -118,8 +122,12 @@ export default {
         { label: '银行卡', value: 'name' },
         { label: '对公银行卡', value: 'name' }
       ],
-      imageUrl: undefined
+      imageUrl: ''
     }
+  },
+  mounted(){
+    console.log( this.$route.params)
+    this.form.coopCustomer = this.$route.params.coopCustomer
   },
   methods: {
     back () {

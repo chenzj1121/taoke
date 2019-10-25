@@ -71,6 +71,13 @@ export const uploadDetail = (file) => ajax(PRE_URL + `/backgroundDetails/upload.
 export const getSysRole = () => ajax(PRE_URL + `/sysRole/findAll.do`,'','post')
 export const getGoodsInfo = (id) => ajax(PRE_URL + `/coop/findByGoodId.do?goodsId=${id}`,'','post')
 export const addCoop = (obj) => ajax(PRE_URL + `/coop/add.do`,obj,'post')
+export const getMoreShop = (obj,page,rows) => ajax(PRE_URL + `/shop/search.do?page=${page}&rows=${rows}`,obj,'post')
+export const getHisCoop = (obj,page,rows) => ajax(PRE_URL + `/coop/search.do?page=${page}&rows=${rows}`,obj,'post')
+export const addCheckMoney = (obj) => ajax(PRE_URL + `/checkmoneys/add.do`,obj,'post')
+
+
+
+
 
 
 

@@ -171,9 +171,11 @@
 import {getUserByList, getShopList, deleteShopById,updateShop,getDeptByList,getGroupByList,getUserById,getGroupMember} from '@/api'
 import pagination from '@/components/page'
 import maturities from '@/assets/maturity'
+
 export default {
   components: {
-    pagination
+    pagination,
+    
   },
   data () {
     return {

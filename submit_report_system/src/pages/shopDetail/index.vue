@@ -67,6 +67,7 @@
 /**
  * @description 商店详情
  */
+import {getShopById} from "@/api"
 import Form from './form'
 export default {
   components: {
@@ -79,16 +80,26 @@ export default {
       writeable: false,
       cooperationRecordTableData: [],
       followRecordTableData: [],
-      historyRecordTableData: []
+      historyRecordTableData: [],
+      shopInfo:{}
     }
   },
+  mounted(){
+    this.getShopInfo(this.$route.query.id)
+  },
   methods: {
+    getShopInfo(id){
+      getShopById(id).then(res=>{
+        this.form = res
+        console.log(res)
+      })
+    },
     updateInfo () {
       // this.writeable = true
     },
     nav2CooperationDetail () {
-      const { id } = this
-      this.$router.push({path: '/customer/cooperationDetail', query: { id }})
+      const id  = this.$route.query.id
+      this.$router.push({path: '/customer/cooperationDetail',name:"cooperationDetail", params:this.form})
     },
     back () {
       this.$router.go(-1)

@@ -211,6 +211,7 @@ export default {
     this.bindData()
   },
   methods: {
+   
     viewGood(id){
          window.open(`https://item.taobao.com/item.htm?ft=t&id=${id}`);   
     },

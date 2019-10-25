@@ -595,52 +595,52 @@ public class TbCoopExample {
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdEqualTo(Integer value) {
+        public Criteria andCoopGoodsIdEqualTo(Long value) {
             addCriterion("coop_goods_Id =", value, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdNotEqualTo(Integer value) {
+        public Criteria andCoopGoodsIdNotEqualTo(Long value) {
             addCriterion("coop_goods_Id <>", value, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdGreaterThan(Integer value) {
+        public Criteria andCoopGoodsIdGreaterThan(Long value) {
             addCriterion("coop_goods_Id >", value, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCoopGoodsIdGreaterThanOrEqualTo(Long value) {
             addCriterion("coop_goods_Id >=", value, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdLessThan(Integer value) {
+        public Criteria andCoopGoodsIdLessThan(Long value) {
             addCriterion("coop_goods_Id <", value, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdLessThanOrEqualTo(Integer value) {
+        public Criteria andCoopGoodsIdLessThanOrEqualTo(Long value) {
             addCriterion("coop_goods_Id <=", value, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdIn(List<Integer> values) {
+        public Criteria andCoopGoodsIdIn(List<Long> values) {
             addCriterion("coop_goods_Id in", values, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdNotIn(List<Integer> values) {
+        public Criteria andCoopGoodsIdNotIn(List<Long> values) {
             addCriterion("coop_goods_Id not in", values, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdBetween(Integer value1, Integer value2) {
+        public Criteria andCoopGoodsIdBetween(Long value1, Long value2) {
             addCriterion("coop_goods_Id between", value1, value2, "coopGoodsId");
             return (Criteria) this;
         }
 
-        public Criteria andCoopGoodsIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andCoopGoodsIdNotBetween(Long value1, Long value2) {
             addCriterion("coop_goods_Id not between", value1, value2, "coopGoodsId");
             return (Criteria) this;
         }
@@ -1332,6 +1332,76 @@ public class TbCoopExample {
 
         public Criteria andCoopYhqNameNotBetween(String value1, String value2) {
             addCriterion("coop_yhq_name not between", value1, value2, "coopYhqName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameIsNull() {
+            addCriterion("coop_boss_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameIsNotNull() {
+            addCriterion("coop_boss_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameEqualTo(String value) {
+            addCriterion("coop_boss_name =", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameNotEqualTo(String value) {
+            addCriterion("coop_boss_name <>", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameGreaterThan(String value) {
+            addCriterion("coop_boss_name >", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_boss_name >=", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameLessThan(String value) {
+            addCriterion("coop_boss_name <", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameLessThanOrEqualTo(String value) {
+            addCriterion("coop_boss_name <=", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameLike(String value) {
+            addCriterion("coop_boss_name like", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameNotLike(String value) {
+            addCriterion("coop_boss_name not like", value, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameIn(List<String> values) {
+            addCriterion("coop_boss_name in", values, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameNotIn(List<String> values) {
+            addCriterion("coop_boss_name not in", values, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameBetween(String value1, String value2) {
+            addCriterion("coop_boss_name between", value1, value2, "coopBossName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossNameNotBetween(String value1, String value2) {
+            addCriterion("coop_boss_name not between", value1, value2, "coopBossName");
             return (Criteria) this;
         }
 

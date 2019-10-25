@@ -41,6 +41,8 @@ public class TbCoop {
 
     private String coopYhqName;
 
+    private String coopBossName;
+
     private String coopMessage;
 
     private String coopShop;
@@ -127,17 +129,15 @@ public class TbCoop {
         this.coopActivity = coopActivity == null ? null : coopActivity.trim();
     }
 
-   
-
     public Long getCoopGoodsId() {
-		return coopGoodsId;
-	}
+        return coopGoodsId;
+    }
 
-	public void setCoopGoodsId(Long coopGoodsId) {
-		this.coopGoodsId = coopGoodsId;
-	}
+    public void setCoopGoodsId(Long coopGoodsId) {
+        this.coopGoodsId = coopGoodsId;
+    }
 
-	public String getCoopZero() {
+    public String getCoopZero() {
         return coopZero;
     }
 
@@ -223,6 +223,14 @@ public class TbCoop {
 
     public void setCoopYhqName(String coopYhqName) {
         this.coopYhqName = coopYhqName == null ? null : coopYhqName.trim();
+    }
+
+    public String getCoopBossName() {
+        return coopBossName;
+    }
+
+    public void setCoopBossName(String coopBossName) {
+        this.coopBossName = coopBossName == null ? null : coopBossName.trim();
     }
 
     public String getCoopMessage() {

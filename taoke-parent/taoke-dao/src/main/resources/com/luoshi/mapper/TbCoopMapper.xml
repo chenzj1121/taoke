@@ -9,7 +9,7 @@
     <result column="coop_customer" property="coopCustomer" jdbcType="VARCHAR" />
     <result column="coop_mainPicture" property="coopMainpicture" jdbcType="VARCHAR" />
     <result column="coop_activity" property="coopActivity" jdbcType="VARCHAR" />
-    <result column="coop_goods_Id" property="coopGoodsId" jdbcType="INTEGER" />
+    <result column="coop_goods_Id" property="coopGoodsId" jdbcType="BIGINT" />
     <result column="coop_zero" property="coopZero" jdbcType="VARCHAR" />
     <result column="coop_alterPrice" property="coopAlterprice" jdbcType="DOUBLE" />
     <result column="coop_yhqNums" property="coopYhqnums" jdbcType="INTEGER" />
@@ -21,6 +21,7 @@
     <result column="coop_dept_id" property="coopDeptId" jdbcType="INTEGER" />
     <result column="coop_user_id" property="coopUserId" jdbcType="INTEGER" />
     <result column="coop_yhq_name" property="coopYhqName" jdbcType="VARCHAR" />
+    <result column="coop_boss_name" property="coopBossName" jdbcType="VARCHAR" />
     <result column="coop_message" property="coopMessage" jdbcType="VARCHAR" />
     <result column="coop_shop" property="coopShop" jdbcType="VARCHAR" />
     <result column="coop_tbMessage" property="coopTbmessage" jdbcType="VARCHAR" />
@@ -99,9 +100,9 @@
     coop_id, coop_type, coop_ptType, coop_xdwType, coop_customer, coop_mainPicture, coop_activity, 
     coop_goods_Id, coop_zero, coop_alterPrice, coop_yhqNums, coop_yjScale, coop_tbTime, 
     coop_startTime, coop_endTime, coop_back, coop_dept_id, coop_user_id, coop_yhq_name, 
-    coop_message, coop_shop, coop_tbMessage, coop_shop_fl, coop_picture, coop_promotion, 
-    coop_coupon, coop_color, coop_service_fee, coop_per_time, coop_coupon_num, coop_tapbao_price, 
-    coop_pay_num, coop_Head_id, coop_real_shot
+    coop_boss_name, coop_message, coop_shop, coop_tbMessage, coop_shop_fl, coop_picture, 
+    coop_promotion, coop_coupon, coop_color, coop_service_fee, coop_per_time, coop_coupon_num, 
+    coop_tapbao_price, coop_pay_num, coop_Head_id, coop_real_shot
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbCoopExample" >
     select
@@ -140,24 +141,24 @@
       coop_alterPrice, coop_yhqNums, coop_yjScale, 
       coop_tbTime, coop_startTime, coop_endTime, 
       coop_back, coop_dept_id, coop_user_id, 
-      coop_yhq_name, coop_message, coop_shop, 
-      coop_tbMessage, coop_shop_fl, coop_picture, 
-      coop_promotion, coop_coupon, coop_color, 
-      coop_service_fee, coop_per_time, coop_coupon_num, 
-      coop_tapbao_price, coop_pay_num, coop_Head_id, 
-      coop_real_shot)
+      coop_yhq_name, coop_boss_name, coop_message, 
+      coop_shop, coop_tbMessage, coop_shop_fl, 
+      coop_picture, coop_promotion, coop_coupon, 
+      coop_color, coop_service_fee, coop_per_time, 
+      coop_coupon_num, coop_tapbao_price, coop_pay_num, 
+      coop_Head_id, coop_real_shot)
     values (#{coopId,jdbcType=INTEGER}, #{coopType,jdbcType=VARCHAR}, #{coopPttype,jdbcType=VARCHAR}, 
       #{coopXdwtype,jdbcType=VARCHAR}, #{coopCustomer,jdbcType=VARCHAR}, #{coopMainpicture,jdbcType=VARCHAR}, 
-      #{coopActivity,jdbcType=VARCHAR}, #{coopGoodsId,jdbcType=INTEGER}, #{coopZero,jdbcType=VARCHAR}, 
+      #{coopActivity,jdbcType=VARCHAR}, #{coopGoodsId,jdbcType=BIGINT}, #{coopZero,jdbcType=VARCHAR}, 
       #{coopAlterprice,jdbcType=DOUBLE}, #{coopYhqnums,jdbcType=INTEGER}, #{coopYjscale,jdbcType=VARCHAR}, 
       #{coopTbtime,jdbcType=TIMESTAMP}, #{coopStarttime,jdbcType=TIMESTAMP}, #{coopEndtime,jdbcType=TIMESTAMP}, 
       #{coopBack,jdbcType=DOUBLE}, #{coopDeptId,jdbcType=INTEGER}, #{coopUserId,jdbcType=INTEGER}, 
-      #{coopYhqName,jdbcType=VARCHAR}, #{coopMessage,jdbcType=VARCHAR}, #{coopShop,jdbcType=VARCHAR}, 
-      #{coopTbmessage,jdbcType=VARCHAR}, #{coopShopFl,jdbcType=INTEGER}, #{coopPicture,jdbcType=VARCHAR}, 
-      #{coopPromotion,jdbcType=VARCHAR}, #{coopCoupon,jdbcType=VARCHAR}, #{coopColor,jdbcType=VARCHAR}, 
-      #{coopServiceFee,jdbcType=DOUBLE}, #{coopPerTime,jdbcType=TIMESTAMP}, #{coopCouponNum,jdbcType=DOUBLE}, 
-      #{coopTapbaoPrice,jdbcType=DOUBLE}, #{coopPayNum,jdbcType=INTEGER}, #{coopHeadId,jdbcType=BIGINT}, 
-      #{coopRealShot,jdbcType=VARCHAR})
+      #{coopYhqName,jdbcType=VARCHAR}, #{coopBossName,jdbcType=VARCHAR}, #{coopMessage,jdbcType=VARCHAR}, 
+      #{coopShop,jdbcType=VARCHAR}, #{coopTbmessage,jdbcType=VARCHAR}, #{coopShopFl,jdbcType=INTEGER}, 
+      #{coopPicture,jdbcType=VARCHAR}, #{coopPromotion,jdbcType=VARCHAR}, #{coopCoupon,jdbcType=VARCHAR}, 
+      #{coopColor,jdbcType=VARCHAR}, #{coopServiceFee,jdbcType=DOUBLE}, #{coopPerTime,jdbcType=TIMESTAMP}, 
+      #{coopCouponNum,jdbcType=DOUBLE}, #{coopTapbaoPrice,jdbcType=DOUBLE}, #{coopPayNum,jdbcType=INTEGER}, 
+      #{coopHeadId,jdbcType=BIGINT}, #{coopRealShot,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbCoop" >
     insert into tb_coop
@@ -218,6 +219,9 @@
       </if>
       <if test="coopYhqName != null" >
         coop_yhq_name,
+      </if>
+      <if test="coopBossName != null" >
+        coop_boss_name,
       </if>
       <if test="coopMessage != null" >
         coop_message,
@@ -288,7 +292,7 @@
         #{coopActivity,jdbcType=VARCHAR},
       </if>
       <if test="coopGoodsId != null" >
-        #{coopGoodsId,jdbcType=INTEGER},
+        #{coopGoodsId,jdbcType=BIGINT},
       </if>
       <if test="coopZero != null" >
         #{coopZero,jdbcType=VARCHAR},
@@ -322,6 +326,9 @@
       </if>
       <if test="coopYhqName != null" >
         #{coopYhqName,jdbcType=VARCHAR},
+      </if>
+      <if test="coopBossName != null" >
+        #{coopBossName,jdbcType=VARCHAR},
       </if>
       <if test="coopMessage != null" >
         #{coopMessage,jdbcType=VARCHAR},
@@ -401,7 +408,7 @@
         coop_activity = #{record.coopActivity,jdbcType=VARCHAR},
       </if>
       <if test="record.coopGoodsId != null" >
-        coop_goods_Id = #{record.coopGoodsId,jdbcType=INTEGER},
+        coop_goods_Id = #{record.coopGoodsId,jdbcType=BIGINT},
       </if>
       <if test="record.coopZero != null" >
         coop_zero = #{record.coopZero,jdbcType=VARCHAR},
@@ -435,6 +442,9 @@
       </if>
       <if test="record.coopYhqName != null" >
         coop_yhq_name = #{record.coopYhqName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coopBossName != null" >
+        coop_boss_name = #{record.coopBossName,jdbcType=VARCHAR},
       </if>
       <if test="record.coopMessage != null" >
         coop_message = #{record.coopMessage,jdbcType=VARCHAR},
@@ -495,7 +505,7 @@
       coop_customer = #{record.coopCustomer,jdbcType=VARCHAR},
       coop_mainPicture = #{record.coopMainpicture,jdbcType=VARCHAR},
       coop_activity = #{record.coopActivity,jdbcType=VARCHAR},
-      coop_goods_Id = #{record.coopGoodsId,jdbcType=INTEGER},
+      coop_goods_Id = #{record.coopGoodsId,jdbcType=BIGINT},
       coop_zero = #{record.coopZero,jdbcType=VARCHAR},
       coop_alterPrice = #{record.coopAlterprice,jdbcType=DOUBLE},
       coop_yhqNums = #{record.coopYhqnums,jdbcType=INTEGER},
@@ -507,6 +517,7 @@
       coop_dept_id = #{record.coopDeptId,jdbcType=INTEGER},
       coop_user_id = #{record.coopUserId,jdbcType=INTEGER},
       coop_yhq_name = #{record.coopYhqName,jdbcType=VARCHAR},
+      coop_boss_name = #{record.coopBossName,jdbcType=VARCHAR},
       coop_message = #{record.coopMessage,jdbcType=VARCHAR},
       coop_shop = #{record.coopShop,jdbcType=VARCHAR},
       coop_tbMessage = #{record.coopTbmessage,jdbcType=VARCHAR},
@@ -548,7 +559,7 @@
         coop_activity = #{coopActivity,jdbcType=VARCHAR},
       </if>
       <if test="coopGoodsId != null" >
-        coop_goods_Id = #{coopGoodsId,jdbcType=INTEGER},
+        coop_goods_Id = #{coopGoodsId,jdbcType=BIGINT},
       </if>
       <if test="coopZero != null" >
         coop_zero = #{coopZero,jdbcType=VARCHAR},
@@ -582,6 +593,9 @@
       </if>
       <if test="coopYhqName != null" >
         coop_yhq_name = #{coopYhqName,jdbcType=VARCHAR},
+      </if>
+      <if test="coopBossName != null" >
+        coop_boss_name = #{coopBossName,jdbcType=VARCHAR},
       </if>
       <if test="coopMessage != null" >
         coop_message = #{coopMessage,jdbcType=VARCHAR},
@@ -639,7 +653,7 @@
       coop_customer = #{coopCustomer,jdbcType=VARCHAR},
       coop_mainPicture = #{coopMainpicture,jdbcType=VARCHAR},
       coop_activity = #{coopActivity,jdbcType=VARCHAR},
-      coop_goods_Id = #{coopGoodsId,jdbcType=INTEGER},
+      coop_goods_Id = #{coopGoodsId,jdbcType=BIGINT},
       coop_zero = #{coopZero,jdbcType=VARCHAR},
       coop_alterPrice = #{coopAlterprice,jdbcType=DOUBLE},
       coop_yhqNums = #{coopYhqnums,jdbcType=INTEGER},
@@ -651,6 +665,7 @@
       coop_dept_id = #{coopDeptId,jdbcType=INTEGER},
       coop_user_id = #{coopUserId,jdbcType=INTEGER},
       coop_yhq_name = #{coopYhqName,jdbcType=VARCHAR},
+      coop_boss_name = #{coopBossName,jdbcType=VARCHAR},
       coop_message = #{coopMessage,jdbcType=VARCHAR},
       coop_shop = #{coopShop,jdbcType=VARCHAR},
       coop_tbMessage = #{coopTbmessage,jdbcType=VARCHAR},

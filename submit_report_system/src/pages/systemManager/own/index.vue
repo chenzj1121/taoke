@@ -23,7 +23,9 @@
           </el-select>
         </el-form-item>
         <el-form-item label="用户角色:" prop="userRole">
-          <el-input v-model="user.userRole"></el-input>
+         <el-select v-model="user.userRole">
+            <el-option v-for="(group, index) in groupList" :key="index" :label="group.groupName" :value="group.groupId"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updUserById">保存</el-button>

@@ -149,7 +149,7 @@ export default {
         this.deptList = res
       })
     },
-    getgroupList () {
+    getGroupList () {
       getGroupByList().then(res => {
         this.groupList = res
       })
@@ -166,21 +166,25 @@ export default {
       this.loading = true
       getUserByPage(this.form, this.page.pageNum, this.page.pageSize).then(res => {
         res.rows.forEach((item,index)=>{
+          console.log(this.groupList)
               this.groupList.forEach(obj=>{
-                if(item.deptId == obj.groupDeptId && item.groupId == obj.groupId ){item.groupName = obj.groupName}
+                if(item.deptId == obj.groupDeptId && item.groupId == obj.groupId ){
+                    item.groupName = obj.groupName
+                  }
               })
           })
-        this.userList = res.rows
-        
-        for (var i=0;i<this.userList.length;i++)
-        { 
+        // this.userList.forEach(item=>{
+        //         item.deptId = this.deptList[item.deptId].deptName;
+        // })
+        // for (var i=0;i<this.userList.length;i++)
+        // { 
           // if(this.userList[i].deptId==null){
           //   this.userList[i].deptId=0
           // }
-           this.userList[i].deptId = this.deptList[this.userList[i].deptId].deptName;
+           
            //this.userList[i].groupId = this.groupList[this.userList[i].groupId].groupName;
-        }
-
+        // }
+        this.userList = res.rows
         console.log(this.userList)
         this.page.total = res.total
         this.loading = false
@@ -259,10 +263,9 @@ export default {
     }
   },
   created () {
+    this.getGroupList()
     this.getUserList()
-    
     this.getDeptList()
-    this.getgroupList()
     
   }
 }

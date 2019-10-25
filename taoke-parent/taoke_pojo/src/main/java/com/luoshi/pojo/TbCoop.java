@@ -17,7 +17,7 @@ public class TbCoop {
 
     private String coopActivity;
 
-    private Integer coopGoodsId;
+    private Long coopGoodsId;
 
     private String coopZero;
 
@@ -127,15 +127,17 @@ public class TbCoop {
         this.coopActivity = coopActivity == null ? null : coopActivity.trim();
     }
 
-    public Integer getCoopGoodsId() {
-        return coopGoodsId;
-    }
+   
 
-    public void setCoopGoodsId(Integer coopGoodsId) {
-        this.coopGoodsId = coopGoodsId;
-    }
+    public Long getCoopGoodsId() {
+		return coopGoodsId;
+	}
 
-    public String getCoopZero() {
+	public void setCoopGoodsId(Long coopGoodsId) {
+		this.coopGoodsId = coopGoodsId;
+	}
+
+	public String getCoopZero() {
         return coopZero;
     }
 

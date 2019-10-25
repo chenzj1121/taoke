@@ -49,10 +49,10 @@ public class CoopController {
 	        paraMap.put("appKey","5db14111720ce");
 	        paraMap.put("goodsId",goodsId);
 	        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,appSecret));
-	        System.out.println(SignMD5Util.getSignStr(paraMap,appSecret));
-	        System.out.println(host);
-	        System.out.println(paraMap);
-	        System.out.println(HttpUtils.sendGet(host,paraMap));
+//	        System.out.println(SignMD5Util.getSignStr(paraMap,appSecret));
+//	        System.out.println(host);
+//	        System.out.println(paraMap);
+//	        System.out.println(HttpUtils.sendGet(host,paraMap));
 	        String string = HttpUtils.sendGet(host,paraMap);
 	        return string;
 	}

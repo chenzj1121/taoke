@@ -47,6 +47,30 @@ public class TbCoop {
 
     private String coopTbmessage;
 
+    private Integer coopShopFl;
+
+    private String coopPicture;
+
+    private String coopPromotion;
+
+    private String coopCoupon;
+
+    private String coopColor;
+
+    private Double coopServiceFee;
+
+    private Date coopPerTime;
+
+    private Double coopCouponNum;
+
+    private Double coopTapbaoPrice;
+
+    private Integer coopPayNum;
+
+    private Long coopHeadId;
+
+    private String coopRealShot;
+
     public Integer getCoopId() {
         return coopId;
     }
@@ -221,5 +245,101 @@ public class TbCoop {
 
     public void setCoopTbmessage(String coopTbmessage) {
         this.coopTbmessage = coopTbmessage == null ? null : coopTbmessage.trim();
+    }
+
+    public Integer getCoopShopFl() {
+        return coopShopFl;
+    }
+
+    public void setCoopShopFl(Integer coopShopFl) {
+        this.coopShopFl = coopShopFl;
+    }
+
+    public String getCoopPicture() {
+        return coopPicture;
+    }
+
+    public void setCoopPicture(String coopPicture) {
+        this.coopPicture = coopPicture == null ? null : coopPicture.trim();
+    }
+
+    public String getCoopPromotion() {
+        return coopPromotion;
+    }
+
+    public void setCoopPromotion(String coopPromotion) {
+        this.coopPromotion = coopPromotion == null ? null : coopPromotion.trim();
+    }
+
+    public String getCoopCoupon() {
+        return coopCoupon;
+    }
+
+    public void setCoopCoupon(String coopCoupon) {
+        this.coopCoupon = coopCoupon == null ? null : coopCoupon.trim();
+    }
+
+    public String getCoopColor() {
+        return coopColor;
+    }
+
+    public void setCoopColor(String coopColor) {
+        this.coopColor = coopColor == null ? null : coopColor.trim();
+    }
+
+    public Double getCoopServiceFee() {
+        return coopServiceFee;
+    }
+
+    public void setCoopServiceFee(Double coopServiceFee) {
+        this.coopServiceFee = coopServiceFee;
+    }
+
+    public Date getCoopPerTime() {
+        return coopPerTime;
+    }
+
+    public void setCoopPerTime(Date coopPerTime) {
+        this.coopPerTime = coopPerTime;
+    }
+
+    public Double getCoopCouponNum() {
+        return coopCouponNum;
+    }
+
+    public void setCoopCouponNum(Double coopCouponNum) {
+        this.coopCouponNum = coopCouponNum;
+    }
+
+    public Double getCoopTapbaoPrice() {
+        return coopTapbaoPrice;
+    }
+
+    public void setCoopTapbaoPrice(Double coopTapbaoPrice) {
+        this.coopTapbaoPrice = coopTapbaoPrice;
+    }
+
+    public Integer getCoopPayNum() {
+        return coopPayNum;
+    }
+
+    public void setCoopPayNum(Integer coopPayNum) {
+        this.coopPayNum = coopPayNum;
+    }
+
+    public Long getCoopHeadId() {
+        return coopHeadId;
+    }
+
+    public void setCoopHeadId(Long coopHeadId) {
+        this.coopHeadId = coopHeadId;
+    }
+
+    public String getCoopRealShot() {
+        return coopRealShot;
+    }
+
+    public void setCoopRealShot(String coopRealShot) {
+        this.coopRealShot = coopRealShot == null ? null : coopRealShot.trim();
     }
 }

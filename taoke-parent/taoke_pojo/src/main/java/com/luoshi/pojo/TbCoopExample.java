@@ -1544,6 +1544,776 @@ public class TbCoopExample {
             addCriterion("coop_tbMessage not between", value1, value2, "coopTbmessage");
             return (Criteria) this;
         }
+
+        public Criteria andCoopShopFlIsNull() {
+            addCriterion("coop_shop_fl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlIsNotNull() {
+            addCriterion("coop_shop_fl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlEqualTo(Integer value) {
+            addCriterion("coop_shop_fl =", value, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlNotEqualTo(Integer value) {
+            addCriterion("coop_shop_fl <>", value, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlGreaterThan(Integer value) {
+            addCriterion("coop_shop_fl >", value, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coop_shop_fl >=", value, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlLessThan(Integer value) {
+            addCriterion("coop_shop_fl <", value, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlLessThanOrEqualTo(Integer value) {
+            addCriterion("coop_shop_fl <=", value, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlIn(List<Integer> values) {
+            addCriterion("coop_shop_fl in", values, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlNotIn(List<Integer> values) {
+            addCriterion("coop_shop_fl not in", values, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlBetween(Integer value1, Integer value2) {
+            addCriterion("coop_shop_fl between", value1, value2, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShopFlNotBetween(Integer value1, Integer value2) {
+            addCriterion("coop_shop_fl not between", value1, value2, "coopShopFl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureIsNull() {
+            addCriterion("coop_picture is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureIsNotNull() {
+            addCriterion("coop_picture is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureEqualTo(String value) {
+            addCriterion("coop_picture =", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureNotEqualTo(String value) {
+            addCriterion("coop_picture <>", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureGreaterThan(String value) {
+            addCriterion("coop_picture >", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_picture >=", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureLessThan(String value) {
+            addCriterion("coop_picture <", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureLessThanOrEqualTo(String value) {
+            addCriterion("coop_picture <=", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureLike(String value) {
+            addCriterion("coop_picture like", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureNotLike(String value) {
+            addCriterion("coop_picture not like", value, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureIn(List<String> values) {
+            addCriterion("coop_picture in", values, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureNotIn(List<String> values) {
+            addCriterion("coop_picture not in", values, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureBetween(String value1, String value2) {
+            addCriterion("coop_picture between", value1, value2, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPictureNotBetween(String value1, String value2) {
+            addCriterion("coop_picture not between", value1, value2, "coopPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionIsNull() {
+            addCriterion("coop_promotion is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionIsNotNull() {
+            addCriterion("coop_promotion is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionEqualTo(String value) {
+            addCriterion("coop_promotion =", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionNotEqualTo(String value) {
+            addCriterion("coop_promotion <>", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionGreaterThan(String value) {
+            addCriterion("coop_promotion >", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_promotion >=", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionLessThan(String value) {
+            addCriterion("coop_promotion <", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionLessThanOrEqualTo(String value) {
+            addCriterion("coop_promotion <=", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionLike(String value) {
+            addCriterion("coop_promotion like", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionNotLike(String value) {
+            addCriterion("coop_promotion not like", value, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionIn(List<String> values) {
+            addCriterion("coop_promotion in", values, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionNotIn(List<String> values) {
+            addCriterion("coop_promotion not in", values, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionBetween(String value1, String value2) {
+            addCriterion("coop_promotion between", value1, value2, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPromotionNotBetween(String value1, String value2) {
+            addCriterion("coop_promotion not between", value1, value2, "coopPromotion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponIsNull() {
+            addCriterion("coop_coupon is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponIsNotNull() {
+            addCriterion("coop_coupon is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponEqualTo(String value) {
+            addCriterion("coop_coupon =", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNotEqualTo(String value) {
+            addCriterion("coop_coupon <>", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponGreaterThan(String value) {
+            addCriterion("coop_coupon >", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_coupon >=", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponLessThan(String value) {
+            addCriterion("coop_coupon <", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponLessThanOrEqualTo(String value) {
+            addCriterion("coop_coupon <=", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponLike(String value) {
+            addCriterion("coop_coupon like", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNotLike(String value) {
+            addCriterion("coop_coupon not like", value, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponIn(List<String> values) {
+            addCriterion("coop_coupon in", values, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNotIn(List<String> values) {
+            addCriterion("coop_coupon not in", values, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponBetween(String value1, String value2) {
+            addCriterion("coop_coupon between", value1, value2, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNotBetween(String value1, String value2) {
+            addCriterion("coop_coupon not between", value1, value2, "coopCoupon");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorIsNull() {
+            addCriterion("coop_color is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorIsNotNull() {
+            addCriterion("coop_color is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorEqualTo(String value) {
+            addCriterion("coop_color =", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorNotEqualTo(String value) {
+            addCriterion("coop_color <>", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorGreaterThan(String value) {
+            addCriterion("coop_color >", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_color >=", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorLessThan(String value) {
+            addCriterion("coop_color <", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorLessThanOrEqualTo(String value) {
+            addCriterion("coop_color <=", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorLike(String value) {
+            addCriterion("coop_color like", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorNotLike(String value) {
+            addCriterion("coop_color not like", value, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorIn(List<String> values) {
+            addCriterion("coop_color in", values, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorNotIn(List<String> values) {
+            addCriterion("coop_color not in", values, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorBetween(String value1, String value2) {
+            addCriterion("coop_color between", value1, value2, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopColorNotBetween(String value1, String value2) {
+            addCriterion("coop_color not between", value1, value2, "coopColor");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeIsNull() {
+            addCriterion("coop_service_fee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeIsNotNull() {
+            addCriterion("coop_service_fee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeEqualTo(Double value) {
+            addCriterion("coop_service_fee =", value, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeNotEqualTo(Double value) {
+            addCriterion("coop_service_fee <>", value, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeGreaterThan(Double value) {
+            addCriterion("coop_service_fee >", value, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("coop_service_fee >=", value, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeLessThan(Double value) {
+            addCriterion("coop_service_fee <", value, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeLessThanOrEqualTo(Double value) {
+            addCriterion("coop_service_fee <=", value, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeIn(List<Double> values) {
+            addCriterion("coop_service_fee in", values, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeNotIn(List<Double> values) {
+            addCriterion("coop_service_fee not in", values, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeBetween(Double value1, Double value2) {
+            addCriterion("coop_service_fee between", value1, value2, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopServiceFeeNotBetween(Double value1, Double value2) {
+            addCriterion("coop_service_fee not between", value1, value2, "coopServiceFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeIsNull() {
+            addCriterion("coop_per_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeIsNotNull() {
+            addCriterion("coop_per_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeEqualTo(Date value) {
+            addCriterion("coop_per_time =", value, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeNotEqualTo(Date value) {
+            addCriterion("coop_per_time <>", value, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeGreaterThan(Date value) {
+            addCriterion("coop_per_time >", value, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("coop_per_time >=", value, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeLessThan(Date value) {
+            addCriterion("coop_per_time <", value, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeLessThanOrEqualTo(Date value) {
+            addCriterion("coop_per_time <=", value, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeIn(List<Date> values) {
+            addCriterion("coop_per_time in", values, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeNotIn(List<Date> values) {
+            addCriterion("coop_per_time not in", values, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeBetween(Date value1, Date value2) {
+            addCriterion("coop_per_time between", value1, value2, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPerTimeNotBetween(Date value1, Date value2) {
+            addCriterion("coop_per_time not between", value1, value2, "coopPerTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumIsNull() {
+            addCriterion("coop_coupon_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumIsNotNull() {
+            addCriterion("coop_coupon_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumEqualTo(Double value) {
+            addCriterion("coop_coupon_num =", value, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumNotEqualTo(Double value) {
+            addCriterion("coop_coupon_num <>", value, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumGreaterThan(Double value) {
+            addCriterion("coop_coupon_num >", value, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumGreaterThanOrEqualTo(Double value) {
+            addCriterion("coop_coupon_num >=", value, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumLessThan(Double value) {
+            addCriterion("coop_coupon_num <", value, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumLessThanOrEqualTo(Double value) {
+            addCriterion("coop_coupon_num <=", value, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumIn(List<Double> values) {
+            addCriterion("coop_coupon_num in", values, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumNotIn(List<Double> values) {
+            addCriterion("coop_coupon_num not in", values, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumBetween(Double value1, Double value2) {
+            addCriterion("coop_coupon_num between", value1, value2, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCouponNumNotBetween(Double value1, Double value2) {
+            addCriterion("coop_coupon_num not between", value1, value2, "coopCouponNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceIsNull() {
+            addCriterion("coop_tapbao_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceIsNotNull() {
+            addCriterion("coop_tapbao_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceEqualTo(Double value) {
+            addCriterion("coop_tapbao_price =", value, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceNotEqualTo(Double value) {
+            addCriterion("coop_tapbao_price <>", value, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceGreaterThan(Double value) {
+            addCriterion("coop_tapbao_price >", value, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("coop_tapbao_price >=", value, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceLessThan(Double value) {
+            addCriterion("coop_tapbao_price <", value, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceLessThanOrEqualTo(Double value) {
+            addCriterion("coop_tapbao_price <=", value, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceIn(List<Double> values) {
+            addCriterion("coop_tapbao_price in", values, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceNotIn(List<Double> values) {
+            addCriterion("coop_tapbao_price not in", values, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceBetween(Double value1, Double value2) {
+            addCriterion("coop_tapbao_price between", value1, value2, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTapbaoPriceNotBetween(Double value1, Double value2) {
+            addCriterion("coop_tapbao_price not between", value1, value2, "coopTapbaoPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumIsNull() {
+            addCriterion("coop_pay_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumIsNotNull() {
+            addCriterion("coop_pay_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumEqualTo(Integer value) {
+            addCriterion("coop_pay_num =", value, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumNotEqualTo(Integer value) {
+            addCriterion("coop_pay_num <>", value, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumGreaterThan(Integer value) {
+            addCriterion("coop_pay_num >", value, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coop_pay_num >=", value, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumLessThan(Integer value) {
+            addCriterion("coop_pay_num <", value, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumLessThanOrEqualTo(Integer value) {
+            addCriterion("coop_pay_num <=", value, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumIn(List<Integer> values) {
+            addCriterion("coop_pay_num in", values, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumNotIn(List<Integer> values) {
+            addCriterion("coop_pay_num not in", values, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumBetween(Integer value1, Integer value2) {
+            addCriterion("coop_pay_num between", value1, value2, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("coop_pay_num not between", value1, value2, "coopPayNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdIsNull() {
+            addCriterion("coop_Head_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdIsNotNull() {
+            addCriterion("coop_Head_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdEqualTo(Long value) {
+            addCriterion("coop_Head_id =", value, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdNotEqualTo(Long value) {
+            addCriterion("coop_Head_id <>", value, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdGreaterThan(Long value) {
+            addCriterion("coop_Head_id >", value, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("coop_Head_id >=", value, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdLessThan(Long value) {
+            addCriterion("coop_Head_id <", value, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdLessThanOrEqualTo(Long value) {
+            addCriterion("coop_Head_id <=", value, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdIn(List<Long> values) {
+            addCriterion("coop_Head_id in", values, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdNotIn(List<Long> values) {
+            addCriterion("coop_Head_id not in", values, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdBetween(Long value1, Long value2) {
+            addCriterion("coop_Head_id between", value1, value2, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopHeadIdNotBetween(Long value1, Long value2) {
+            addCriterion("coop_Head_id not between", value1, value2, "coopHeadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotIsNull() {
+            addCriterion("coop_real_shot is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotIsNotNull() {
+            addCriterion("coop_real_shot is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotEqualTo(String value) {
+            addCriterion("coop_real_shot =", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotNotEqualTo(String value) {
+            addCriterion("coop_real_shot <>", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotGreaterThan(String value) {
+            addCriterion("coop_real_shot >", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_real_shot >=", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotLessThan(String value) {
+            addCriterion("coop_real_shot <", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotLessThanOrEqualTo(String value) {
+            addCriterion("coop_real_shot <=", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotLike(String value) {
+            addCriterion("coop_real_shot like", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotNotLike(String value) {
+            addCriterion("coop_real_shot not like", value, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotIn(List<String> values) {
+            addCriterion("coop_real_shot in", values, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotNotIn(List<String> values) {
+            addCriterion("coop_real_shot not in", values, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotBetween(String value1, String value2) {
+            addCriterion("coop_real_shot between", value1, value2, "coopRealShot");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopRealShotNotBetween(String value1, String value2) {
+            addCriterion("coop_real_shot not between", value1, value2, "coopRealShot");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

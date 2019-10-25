@@ -162,7 +162,6 @@ export default {
       },
       shopDetail:{},
       optionList:[],
-      flag:false,
     }
   },
   mounted(){
@@ -181,14 +180,19 @@ export default {
   },
   methods: {
     checkGood(id){
+      if (id) {
         getGoodsInfo(id).then(res=>{
           if(res.code==0){
-            this.$sucmsg(res.msg)
+            this.$message("改商品存在")
             this.flag = true
           }else{
-            this.$errmsg(res.msg)
+            this.$message("改商品不存在")
           }
         })
+      }else{
+        this.$message("请输入商品id")
+      }
+        
     },
     viewGood(id){
       if (id) {
@@ -215,15 +219,10 @@ export default {
     submit(){
       this.$refs.form.validate(valid => {
         if(valid){
-          if (this.flag) {
-             console.log(this.form)
+          console.log(this.form)
           addCoop(this.form).then(res=>{
             console.log(res)
           })
-          }else{
-            this.$message("请检测商品ID为正确ID")
-          }
-         
         }else{
           this.$message("请填写必填项")
         }

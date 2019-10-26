@@ -31,7 +31,6 @@
           <el-table-column prop="coopEndtime" label="下线时间" ></el-table-column>
           <el-table-column prop="coopYhqName" label="优惠券名称" ></el-table-column>
           <el-table-column prop="coopServiceFee" label="服务费单价" ></el-table-column>
-         
         </el-table>
           <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getCoopDetail"/>
           <el-button  @click="saveCoop" >保存</el-button>
@@ -48,19 +47,26 @@
            <el-table-column prop="coopStarttime" label="推广开始时间"></el-table-column>
            <el-table-column prop="coopEndtime" label="推广结束时间"></el-table-column>
            <el-table-column  label="优惠卷名称">
-              <el-input ></el-input>
+                 <template slot-scope="scope">
+                    <el-input v-model="scope.row.goodsYhqName" ></el-input>
+                 </template>
            </el-table-column>
            <el-table-column  label="结算量">
-             <el-input></el-input>
+            <template slot-scope="scope">
+                    <el-input v-model="scope.row.goodsNums" ></el-input>
+                 </template>
            </el-table-column>
            <el-table-column prop="coopServiceFee" label="服务费单价"></el-table-column>
            <el-table-column  label="单品结算金额">
-             <el-input></el-input>
+            <template slot-scope="scope">
+                    <el-input v-model="scope.row.goodsPayMoney" ></el-input>
+                 </template>
            </el-table-column >
             <!-- <el-table-column label="操作">
             <span>保存</span>
           </el-table-column> -->
          </el-table>
+         <el-button type="primary" @click="addGoods">保存</el-button>
       </el-form-item>
       <br/>
       <el-form-item label="优惠券名称：" :rules="[{ required: true, message: '不能为空' }]">
@@ -147,7 +153,7 @@
 </template>
 
 <script>
-import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney} from '@/api'
+import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney,addGoodsDetail} from '@/api'
 import {getUser} from "@/utils/auth"
 import Page from '@/components/page'
 export default {
@@ -188,6 +194,27 @@ export default {
     this.userInfo= getUser()
   },
   methods: {
+    addGoods(){
+      this.multipleSelection.forEach((item,index)=>{
+        item.goodsId =  item.coopGoodsId
+        item.goodsStarttime = item.coopStarttime
+        item.goodsEndtime =item.coopEndtime
+        item.goodsPayMoney = item.coopServiceFee
+        item.goodsShopId = this.$route.query.id
+        item.goodsDeptId =this.userInfo.deptId
+        item.goodsGroupId =this.userInfo.groupId
+        item.goodsUserId =this.userInfo.id
+        item.goodsService = item.coopServiceFee
+        addGoodsDetail(item).then(res=>{
+            if (!res.success) {
+              this.$errmsg("商品信息，第"+index+"条数据传输失败")
+            }else{
+              thus.$sucmsg("商品信息，第"+index+"条数据传输成功")
+            }
+        })  
+      })
+      console.log(this.multipleSelection)
+    },
     getShop(id){
         getShopById(id).then(res=>{
           if (res) {
@@ -208,8 +235,6 @@ export default {
     let oTime = oYear +'-'+ oMonth +'-'+oDay
     return oTime;
     },
-
-
     addCheck(){
       this.form.cmUserId = this.userInfo.id
       this.form.cmSellDept = this.userInfo.groupId
@@ -217,26 +242,32 @@ export default {
       this.form.cmShopName =this.shopDetail.shopName
       console.log(this.form)
       console.log(this.userInfo)
-      // addCheckMoney(this.form).then(res=>{
-      //   if (res.success) {
-      //       this.$sucmsg(res.message)
-      //       this.$router.go(-1)
-      //   }else{
-      //       this.$errmsg(res.message)
-      //   }
-      // })
+      addCheckMoney(this.form).then(res=>{
+        if (res.success) {
+            this.$sucmsg(res.message)
+        }else{
+            this.$errmsg(res.message)
+        }
+      })
       if (this.form.isChecking) {
+       this.addBack()
+      }
+    },
+    addBack(){
         this.form.bmUserId = this.userInfo.id
         this.form.bmGroupId = this.userInfo.groupId
-        this.form.bmDept = this.userInfo.deptId;
+        this.form.bmDeptId = this.userInfo.deptId;
         this.form.bmShopName =this.shopDetail.shopName
         this.form.bmJsMoney = this.form.cmJsMoney
         this.form.bmYhqName =this.form.cmYhqName
         this.form.bmBackType = this.form.isAlipay
             addBackMoney(this.form).then(res=>{
-              console.log(res)
+            if (res.success) {
+                  this.$sucmsg(res.message)
+              }else{
+                  this.$errmsg(res.message)
+              }
             })
-      }
     },
     handleSelectionChange(val) {
         this.multipleSelection = val;

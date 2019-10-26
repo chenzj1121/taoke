@@ -65,7 +65,7 @@
       <el-table-column prop="cmUserId" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showOtherRecords(scope.row.id)">{{ scope.row.cmShopName }}</span>
+          <span class="link" @click="showOtherRecords(scope.row.cmShopName)">{{ scope.row.cmShopName }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="cmShopType" label="类型"></el-table-column>
@@ -108,8 +108,8 @@
         size="mini"
         :data="otherRecordsTableData">
         <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column label="部门" prop="name"></el-table-column>
-        <el-table-column label="销售人" prop="name"></el-table-column>
+        <el-table-column label="部门" prop="goodsDeptId"></el-table-column>
+        <el-table-column label="销售人" prop="goodsUserId"></el-table-column>
         <el-table-column label="店铺名称" prop="name"></el-table-column>
         <el-table-column label="商品ID" prop="name"></el-table-column>
         <el-table-column label="优惠券名称" prop="name"></el-table-column>
@@ -121,19 +121,14 @@
         <el-table-column label="转入账户" prop="name"></el-table-column>
         <el-table-column label="打款日期" prop="name"></el-table-column>
       </el-table>
-      <el-pagination
-        background
-        style="margin-top:10px;text-align:right;"
-        layout="prev, pager, next"
-        :total="100">
-      </el-pagination>
+    <Page style="text-align:right;margin-top:10px;" :page="page1" @change="bindData"/>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import Page from '@/components/page'
-import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList } from '@/api'
+import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail} from '@/api'
 export default {
   components: {
     Page
@@ -151,6 +146,11 @@ export default {
         pageSize: 10,
         pageNum: 1,
         total: 10
+      },
+       page1: {
+        pageSize: 5,
+        pageNum: 1,
+        total: 0
       },
       loading: false,
       statusOptions: [
@@ -194,7 +194,28 @@ export default {
         this.groupList = res
       })
     },
-    showOtherRecords (id) {
+    showOtherRecords (cmShopName) {
+      getGoodsDetail({cmShopName},this.page1.pageNum,this.page1.pageSize).then(res=>{
+        res.rows.forEach((item,index)=>{
+            item.goodsEndtime = this.getMyDate(item.goodsEndtime)
+            item.goodsStarttime = this.getMyDate(item.goodsStarttime)
+           this.groupList.forEach(obj=>{
+                if(item.goodsGroupId == obj.groupId && item.goodsDeptId == obj.groupDeptId){
+                  item.goodsGroupId = obj.groupName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.goodsUserId ==obj.id ){
+                  item.goodsUserId = obj.username
+                }
+              })
+              this.deptList.forEach(obj=>{
+                if(item.goodsDeptId == obj.deptId){
+                  item.goodsDeptId = obj.deptName
+                }
+              })
+            })
+      })
       this.otherRecordsVisiable = true
     },
     bindData () {
@@ -207,7 +228,7 @@ export default {
               item.cmApplyTime = this.getMyDate(item.cmApplyTime)
               item.cmBackTime = this.getMyDate(item.cmBackTime)
               this.groupList.forEach(obj=>{
-                if(item.cmSellDept == obj.groupDeptId && item.cmDept == obj.groupId){
+                if(item.cmSellDept == obj.groupId && item.cmDept == obj.groupDeptId){
                   item.cmSellDept = obj.groupName
                 }
               })

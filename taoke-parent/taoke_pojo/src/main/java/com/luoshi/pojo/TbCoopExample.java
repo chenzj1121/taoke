@@ -2384,6 +2384,66 @@ public class TbCoopExample {
             addCriterion("coop_real_shot not between", value1, value2, "coopRealShot");
             return (Criteria) this;
         }
+
+        public Criteria andCoopBossIdIsNull() {
+            addCriterion("coop_boss_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdIsNotNull() {
+            addCriterion("coop_boss_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdEqualTo(Integer value) {
+            addCriterion("coop_boss_id =", value, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdNotEqualTo(Integer value) {
+            addCriterion("coop_boss_id <>", value, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdGreaterThan(Integer value) {
+            addCriterion("coop_boss_id >", value, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coop_boss_id >=", value, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdLessThan(Integer value) {
+            addCriterion("coop_boss_id <", value, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdLessThanOrEqualTo(Integer value) {
+            addCriterion("coop_boss_id <=", value, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdIn(List<Integer> values) {
+            addCriterion("coop_boss_id in", values, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdNotIn(List<Integer> values) {
+            addCriterion("coop_boss_id not in", values, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdBetween(Integer value1, Integer value2) {
+            addCriterion("coop_boss_id between", value1, value2, "coopBossId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopBossIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("coop_boss_id not between", value1, value2, "coopBossId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

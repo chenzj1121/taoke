@@ -73,6 +73,8 @@ public class TbCoop {
 
     private String coopRealShot;
 
+    private Integer coopBossId;
+
     public Integer getCoopId() {
         return coopId;
     }
@@ -351,5 +353,13 @@ public class TbCoop {
 
     public void setCoopRealShot(String coopRealShot) {
         this.coopRealShot = coopRealShot == null ? null : coopRealShot.trim();
+    }
+
+    public Integer getCoopBossId() {
+        return coopBossId;
+    }
+
+    public void setCoopBossId(Integer coopBossId) {
+        this.coopBossId = coopBossId;
     }
 }

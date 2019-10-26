@@ -2,10 +2,11 @@ package com.luoshi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.luoshi.pojo.TbShop;
-import com.luoshi.service.ShopService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.luoshi.pojo.TbGoods;
+import com.luoshi.service.GoodsService;
 
 import entity.PageResult;
 import entity.Result;
@@ -15,31 +16,21 @@ import entity.Result;
  *
  */
 @RestController
-@RequestMapping("/shop")
-public class ShopController {
+@RequestMapping("/goods")
+public class GoodsController {
 
 	@Autowired
-	private ShopService shopService;
+	private GoodsService goodsService;
 	
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbShop> findAll(){			
-		return shopService.findAll();
+	public List<TbGoods> findAll(){			
+		return goodsService.findAll();
 	}
-
-	/**
-	 * 查询旺旺账号
-	 * @param wangwangAccount
-	 * @return
-	 */
-    @RequestMapping("/getWangwangAccountCounts")
-    public int  getSubmitAccountNameList(@RequestParam("wangwangAccount") String wangwangAccount) {
-    	int size = shopService.checkWangWangAccount(wangwangAccount).size();
-        return size;
-    }
+	
 	
 	/**
 	 * 返回全部列表
@@ -47,19 +38,27 @@ public class ShopController {
 	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){			
-		return shopService.findPage(page, rows);
+		return goodsService.findPage(page, rows);
 	}
+	/**
+	 * 根据店铺返回全部列表
+	 * @return
+	 */
+	@RequestMapping("/findByShop")
+	public List<TbGoods>  findByShop(int shopId){			
+		return goodsService.findByShop(shopId);
+	}
+	
 	
 	/**
 	 * 增加
-	 * @param shop
+	 * @param goods
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbShop shop){
-		System.out.println(shop.toString());
+	public Result add(@RequestBody TbGoods goods){
 		try {
-			shopService.add(shop);
+			goodsService.add(goods);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,13 +68,13 @@ public class ShopController {
 	
 	/**
 	 * 修改
-	 * @param shop
+	 * @param goods
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody TbShop shop){
+	public Result update(@RequestBody TbGoods goods){
 		try {
-			shopService.update(shop);
+			goodsService.update(goods);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,9 +88,8 @@ public class ShopController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	@ResponseBody
-	public TbShop findOne(int id){
-		return shopService.findOne(id);		
+	public TbGoods findOne(Long id){
+		return goodsService.findOne(id);		
 	}
 	
 	/**
@@ -100,9 +98,9 @@ public class ShopController {
 	 * @return
 	 */
 	@RequestMapping("/delete")
-	public Result delete(int [] ids){
+	public Result delete(Long [] ids){
 		try {
-			shopService.delete(ids);
+			goodsService.delete(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,14 +110,14 @@ public class ShopController {
 	
 		/**
 	 * 查询+分页
-	 * @param
+	 * @param brand
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbShop shop, int page, int rows,Double MaxMoney){
-		return shopService.findPage(shop, page, rows, MaxMoney);		
+	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
+		return goodsService.findPage(goods, page, rows);		
 	}
 	
 }

@@ -75,6 +75,10 @@ public class TbCoop {
 
     private Integer coopBossId;
 
+    private String coopCheckMoney;
+
+    private String coopPayType;
+
     public Integer getCoopId() {
         return coopId;
     }
@@ -361,5 +365,21 @@ public class TbCoop {
 
     public void setCoopBossId(Integer coopBossId) {
         this.coopBossId = coopBossId;
+    }
+
+    public String getCoopCheckMoney() {
+        return coopCheckMoney;
+    }
+
+    public void setCoopCheckMoney(String coopCheckMoney) {
+        this.coopCheckMoney = coopCheckMoney == null ? null : coopCheckMoney.trim();
+    }
+
+    public String getCoopPayType() {
+        return coopPayType;
+    }
+
+    public void setCoopPayType(String coopPayType) {
+        this.coopPayType = coopPayType == null ? null : coopPayType.trim();
     }
 }

@@ -56,7 +56,8 @@ public interface ShopService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbShop shop, int pageNum,int pageSize);
+	public PageResult findPage(TbShop shop, int pageNum,int pageSize, Double MaxMoney);
 
     List<String> checkWangWangAccount(String wangwangAccount);
+
 }

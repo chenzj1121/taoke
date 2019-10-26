@@ -1,4 +1,5 @@
 package com.luoshi.service.impl;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,7 +89,7 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 	
 	
 		@Override
-	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum, int pageSize) {
+	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum, int pageSize,Date maxTime,Date backTime) {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbCheckmoneysExample example=new TbCheckmoneysExample();
@@ -99,12 +100,44 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(user.getType().equals("2")) {
 				criteria.andCmUserIdEqualTo(user.getId());
 			}
+			//申请时间
+			if(checkmoneys.getCmApplyTime()!=null){
+				criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());
+			}
+			if(maxTime!=null) {
+				criteria.andCmApplyTimeLessThanOrEqualTo(maxTime);
+			}
+			//到款时间
+			if(checkmoneys.getCmBackTime()!=null) {
+				criteria.andCmBackTimeGreaterThanOrEqualTo(checkmoneys.getCmBackTime());
+			}
+			if(backTime!=null) {
+				criteria.andCmBackTimeLessThanOrEqualTo(backTime);
+			}
+			//状态
+			if(checkmoneys.getCmType()!=null) {
+				criteria.andCmTypeEqualTo(checkmoneys.getCmType());
+			}
+			//结算金额排序
+			if(checkmoneys.getCmJsMoney()!=null) {
+				if("1".equals(checkmoneys.getCmJsMoney())) {
+					example.setOrderByClause("`cm_js_money` DESC,id ASC");
+				}else if("2".equals(checkmoneys.getCmJsMoney())) {
+					example.setOrderByClause("`cm_js_money` DESC,id ASC");
+				}
+				
+			}
+			if(checkmoneys.getCmType()!=null) {
+				criteria.andCmTypeEqualTo(checkmoneys.getCmType());
+			}
 			if(checkmoneys.getCmSellDept()!=null && checkmoneys.getCmSellDept().length()>0){
 				criteria.andCmSellDeptLike("%"+checkmoneys.getCmSellDept()+"%");
 			}
 			if(checkmoneys.getCmDept()!=null && checkmoneys.getCmDept().length()>0){
 				criteria.andCmDeptLike("%"+checkmoneys.getCmDept()+"%");
 			}
+			
+			//店铺名称
 			if(checkmoneys.getCmShopName()!=null && checkmoneys.getCmShopName().length()>0){
 				criteria.andCmShopNameLike("%"+checkmoneys.getCmShopName()+"%");
 			}

@@ -1,5 +1,6 @@
 package com.luoshi.service.impl;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +62,7 @@ public class ShopServiceImpl implements ShopService {
 	 */
 	@Override
 	public void add(TbShop shop) {
+		shop.setCreateTime(new Date());
 		shopMapper.insert(shop);		
 	}
 
@@ -127,8 +129,8 @@ public class ShopServiceImpl implements ShopService {
 				criteria.andShopUserId2EqualTo(user.getId());
 			}
 			//根据部门查找
-			if(shop.getDataType()!=null) {
-				criteria.andDataTypeEqualTo(shop.getDataType());
+			if(shop.getShopDeptId()!=null) {
+				criteria.andShopDeptIdEqualTo(shop.getShopDeptId());
 			}
 			//根据小组查找
 			if(shop.getShopGroupId()!=null) {
@@ -138,7 +140,9 @@ public class ShopServiceImpl implements ShopService {
 			if(shop.getShopUserId2()!=null) {
 				criteria.andShopUserId2EqualTo(shop.getShopUserId2());
 			}
-			
+			if(shop.getCreateTime()!=null){
+				criteria.andCreateTimeEqualTo(shop.getCreateTime());
+			}
 			if(shop.getShopName()!=null && shop.getShopName().length()>0){
 				criteria.andShopNameLike("%"+shop.getShopName()+"%");
 			}
@@ -190,9 +194,6 @@ public class ShopServiceImpl implements ShopService {
 			}
 			if(shop.getRefundsMoney()!=null && shop.getRefundsMoney().length()>0){
 				criteria.andRefundsMoneyLike("%"+shop.getRefundsMoney()+"%");
-			}
-			if(shop.getCreateTime()!=null){
-				criteria.andCreateTimeEqualTo(shop.getCreateTime());
 			}
 			if(shop.getDataType()!=null && shop.getDataType().length()>0){
 				criteria.andDataTypeLike("%"+shop.getDataType()+"%");

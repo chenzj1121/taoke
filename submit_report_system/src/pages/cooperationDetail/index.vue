@@ -147,7 +147,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCooperationPage ,getDeptByList,getUserByList} from '@/api'
+import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney} from '@/api'
 export default {
   components: {
     Page

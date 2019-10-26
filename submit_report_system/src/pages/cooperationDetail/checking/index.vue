@@ -9,7 +9,7 @@
         <el-input v-model="shopDetail.shopName" disabled></el-input>
       </el-form-item>
       <el-form-item label="店铺多选：">
-        <el-select multiple v-model="form.shops">
+        <el-select multiple v-model="form.shop" >
           <el-option v-for="(option, index) in sameShop" :key="index" :label="option.shopName" :value="option.id"></el-option>
         </el-select>
       </el-form-item>
@@ -48,7 +48,7 @@
            <el-table-column prop="coopStarttime" label="推广开始时间"></el-table-column>
            <el-table-column prop="coopEndtime" label="推广结束时间"></el-table-column>
            <el-table-column  label="优惠卷名称">
-             <el-input  ></el-input>
+              <el-input ></el-input>
            </el-table-column>
            <el-table-column  label="结算量">
              <el-input></el-input>
@@ -57,9 +57,9 @@
            <el-table-column  label="单品结算金额">
              <el-input></el-input>
            </el-table-column >
-            <el-table-column label="操作">
+            <!-- <el-table-column label="操作">
             <span>保存</span>
-          </el-table-column>
+          </el-table-column> -->
          </el-table>
       </el-form-item>
       <br/>
@@ -78,31 +78,31 @@
       <br/>
       <div v-if="form.isChecking">
         <el-form-item label="销售花名：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.bmUserName"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款比例：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.bmBackBl"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款金额：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.cmFkMoney"></el-input>
+          <el-input v-model="form.bmBackMoney"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款银行：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-radio v-model="form.isAlipay" :label="true">支付宝</el-radio>
-          <el-radio v-model="form.isAlipay" :label="false">银行卡</el-radio>
+          <el-radio v-model="form.isAlipay" label="支付宝">支付宝</el-radio>
+          <el-radio v-model="form.isAlipay" label="银行卡">银行卡</el-radio>
         </el-form-item>
-        <el-form-item v-if="form.isChecking && !form.isAlipay" :rules="[{ required: true, message: '不能为空' }]">
+        <el-form-item v-if="form.isChecking && form.isAlipay=='银行卡'" :rules="[{ required: true, message: '不能为空' }]">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款账户：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.bmBackAccount"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款账号：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.bmBackAccountumber"></el-input>
         </el-form-item>
         <br/>
       </div>
@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById} from '@/api'
+import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney} from '@/api'
 import {getUser} from "@/utils/auth"
 import Page from '@/components/page'
 export default {
@@ -214,11 +214,29 @@ export default {
       this.form.cmUserId = this.userInfo.id
       this.form.cmSellDept = this.userInfo.groupId
       this.form.cmDept = this.userInfo.deptId;
+      this.form.cmShopName =this.shopDetail.shopName
       console.log(this.form)
       console.log(this.userInfo)
-      // addCheckMoney().then(res=>{
-
+      // addCheckMoney(this.form).then(res=>{
+      //   if (res.success) {
+      //       this.$sucmsg(res.message)
+      //       this.$router.go(-1)
+      //   }else{
+      //       this.$errmsg(res.message)
+      //   }
       // })
+      if (this.form.isChecking) {
+        this.form.bmUserId = this.userInfo.id
+        this.form.bmGroupId = this.userInfo.groupId
+        this.form.bmDept = this.userInfo.deptId;
+        this.form.bmShopName =this.shopDetail.shopName
+        this.form.bmJsMoney = this.form.cmJsMoney
+        this.form.bmYhqName =this.form.cmYhqName
+        this.form.bmBackType = this.form.isAlipay
+            addBackMoney(this.form).then(res=>{
+              console.log(res)
+            })
+      }
     },
     handleSelectionChange(val) {
         this.multipleSelection = val;

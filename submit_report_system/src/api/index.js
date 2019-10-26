@@ -75,6 +75,8 @@ export const getMoreShop = (obj,page,rows) => ajax(PRE_URL + `/shop/search.do?pa
 export const getHisCoop = (obj,page,rows) => ajax(PRE_URL + `/coop/search.do?page=${page}&rows=${rows}`,obj,'post')
 export const addCheckMoney = (obj) => ajax(PRE_URL + `/checkmoneys/add.do`,obj,'post')
 export const findCoop = (id) => ajax(PRE_URL + '/coop/findOne.do?id='+id,'post')
+export const addBackMoney = (obj) => ajax(PRE_URL + `/backmoney/add.do`,obj,'post')
+
 
 
 

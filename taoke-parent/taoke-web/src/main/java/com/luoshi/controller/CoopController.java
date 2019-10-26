@@ -1,12 +1,19 @@
 package com.luoshi.controller;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dtk.util.HttpUtils;
 import com.dtk.util.SignMD5Util;
@@ -26,6 +33,9 @@ public class CoopController {
 
 	@Autowired
 	private CoopService coopService;
+	
+	@Autowired
+	private HttpServletRequest request;
 	
 	/**
 	 * 返回全部列表
@@ -73,8 +83,35 @@ public class CoopController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbCoop coop){
+	public Result add(@RequestBody TbCoop coop,@RequestParam(value="file",required=false) MultipartFile[] file){
 		try {
+			 //定义序号
+		    int count=1;
+		    for (MultipartFile mf : file) {
+			if(!mf.isEmpty()){
+				// 使用UUID给图片重命名，并去掉四个“-”
+				String name = UUID.randomUUID().toString().replaceAll("-", "");
+				// 获取文件的扩展名
+				String ext = FilenameUtils.getExtension(mf
+				.getOriginalFilename());  
+				// 设置图片上传路径
+				String url = request.getSession().getServletContext()
+				.getRealPath("/upload");
+				System.out.println(url);
+				// 以绝对路径保存重名命后的图片
+				mf.transferTo(new File(url + "/" + name + "." + ext));
+				// 把图片存储路径保存到数据库
+				String path="upload/" + name + "." + ext;
+				if(count==1){
+					coop.setCoopMainpicture(path);
+				}else if(count==2){
+					coop.setCoopPicture(path);
+				}else if(count==3){
+					coop.setCoopRealShot(path);
+				}
+			}  
+			count++;
+		}  
 			coopService.add(coop);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {

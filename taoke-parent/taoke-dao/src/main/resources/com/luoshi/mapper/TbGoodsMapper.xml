@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luoshi.mapper.TbGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.luoshi.pojo.TbGoods" >
+    <id column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="goods_starttime" property="goodsStarttime" jdbcType="TIMESTAMP" />
+    <result column="goods_endtime" property="goodsEndtime" jdbcType="TIMESTAMP" />
+    <result column="goods_yhq_name" property="goodsYhqName" jdbcType="VARCHAR" />
+    <result column="goods_nums" property="goodsNums" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="goods_service" property="goodsService" jdbcType="DOUBLE" />
+    <result column="goods_pay_money" property="goodsPayMoney" jdbcType="DOUBLE" />
+    <result column="goods_shop_id" property="goodsShopId" jdbcType="INTEGER" />
+    <result column="goods_dept_id" property="goodsDeptId" jdbcType="INTEGER" />
+    <result column="goods_group_id" property="goodsGroupId" jdbcType="INTEGER" />
+    <result column="goods_user_id" property="goodsUserId" jdbcType="INTEGER" />
+    <result column="goods_FID" property="goodsFid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goods_id, goods_starttime, goods_endtime, goods_yhq_name, goods_nums, goods_price, 
+    goods_service, goods_pay_money, goods_shop_id, goods_dept_id, goods_group_id, goods_user_id, 
+    goods_FID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.luoshi.pojo.TbGoodsExample" >
+    delete from tb_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.luoshi.pojo.TbGoods" >
+    insert into tb_goods (goods_id, goods_starttime, goods_endtime, 
+      goods_yhq_name, goods_nums, goods_price, 
+      goods_service, goods_pay_money, goods_shop_id, 
+      goods_dept_id, goods_group_id, goods_user_id, 
+      goods_FID)
+    values (#{goodsId,jdbcType=BIGINT}, #{goodsStarttime,jdbcType=TIMESTAMP}, #{goodsEndtime,jdbcType=TIMESTAMP}, 
+      #{goodsYhqName,jdbcType=VARCHAR}, #{goodsNums,jdbcType=INTEGER}, #{goodsPrice,jdbcType=DOUBLE}, 
+      #{goodsService,jdbcType=DOUBLE}, #{goodsPayMoney,jdbcType=DOUBLE}, #{goodsShopId,jdbcType=INTEGER}, 
+      #{goodsDeptId,jdbcType=INTEGER}, #{goodsGroupId,jdbcType=INTEGER}, #{goodsUserId,jdbcType=INTEGER}, 
+      #{goodsFid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luoshi.pojo.TbGoods" >
+    insert into tb_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsStarttime != null" >
+        goods_starttime,
+      </if>
+      <if test="goodsEndtime != null" >
+        goods_endtime,
+      </if>
+      <if test="goodsYhqName != null" >
+        goods_yhq_name,
+      </if>
+      <if test="goodsNums != null" >
+        goods_nums,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="goodsService != null" >
+        goods_service,
+      </if>
+      <if test="goodsPayMoney != null" >
+        goods_pay_money,
+      </if>
+      <if test="goodsShopId != null" >
+        goods_shop_id,
+      </if>
+      <if test="goodsDeptId != null" >
+        goods_dept_id,
+      </if>
+      <if test="goodsGroupId != null" >
+        goods_group_id,
+      </if>
+      <if test="goodsUserId != null" >
+        goods_user_id,
+      </if>
+      <if test="goodsFid != null" >
+        goods_FID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsStarttime != null" >
+        #{goodsStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsEndtime != null" >
+        #{goodsEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsYhqName != null" >
+        #{goodsYhqName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNums != null" >
+        #{goodsNums,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsService != null" >
+        #{goodsService,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsPayMoney != null" >
+        #{goodsPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsShopId != null" >
+        #{goodsShopId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDeptId != null" >
+        #{goodsDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsGroupId != null" >
+        #{goodsGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsUserId != null" >
+        #{goodsUserId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsFid != null" >
+        #{goodsFid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.luoshi.pojo.TbGoodsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_goods
+    <set >
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsStarttime != null" >
+        goods_starttime = #{record.goodsStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsEndtime != null" >
+        goods_endtime = #{record.goodsEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsYhqName != null" >
+        goods_yhq_name = #{record.goodsYhqName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsNums != null" >
+        goods_nums = #{record.goodsNums,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsPrice != null" >
+        goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goodsService != null" >
+        goods_service = #{record.goodsService,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goodsPayMoney != null" >
+        goods_pay_money = #{record.goodsPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goodsShopId != null" >
+        goods_shop_id = #{record.goodsShopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsDeptId != null" >
+        goods_dept_id = #{record.goodsDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsGroupId != null" >
+        goods_group_id = #{record.goodsGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsUserId != null" >
+        goods_user_id = #{record.goodsUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsFid != null" >
+        goods_FID = #{record.goodsFid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_goods
+    set goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_starttime = #{record.goodsStarttime,jdbcType=TIMESTAMP},
+      goods_endtime = #{record.goodsEndtime,jdbcType=TIMESTAMP},
+      goods_yhq_name = #{record.goodsYhqName,jdbcType=VARCHAR},
+      goods_nums = #{record.goodsNums,jdbcType=INTEGER},
+      goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
+      goods_service = #{record.goodsService,jdbcType=DOUBLE},
+      goods_pay_money = #{record.goodsPayMoney,jdbcType=DOUBLE},
+      goods_shop_id = #{record.goodsShopId,jdbcType=INTEGER},
+      goods_dept_id = #{record.goodsDeptId,jdbcType=INTEGER},
+      goods_group_id = #{record.goodsGroupId,jdbcType=INTEGER},
+      goods_user_id = #{record.goodsUserId,jdbcType=INTEGER},
+      goods_FID = #{record.goodsFid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luoshi.pojo.TbGoods" >
+    update tb_goods
+    <set >
+      <if test="goodsStarttime != null" >
+        goods_starttime = #{goodsStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsEndtime != null" >
+        goods_endtime = #{goodsEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsYhqName != null" >
+        goods_yhq_name = #{goodsYhqName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNums != null" >
+        goods_nums = #{goodsNums,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsService != null" >
+        goods_service = #{goodsService,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsPayMoney != null" >
+        goods_pay_money = #{goodsPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsShopId != null" >
+        goods_shop_id = #{goodsShopId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDeptId != null" >
+        goods_dept_id = #{goodsDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsGroupId != null" >
+        goods_group_id = #{goodsGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsUserId != null" >
+        goods_user_id = #{goodsUserId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsFid != null" >
+        goods_FID = #{goodsFid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luoshi.pojo.TbGoods" >
+    update tb_goods
+    set goods_starttime = #{goodsStarttime,jdbcType=TIMESTAMP},
+      goods_endtime = #{goodsEndtime,jdbcType=TIMESTAMP},
+      goods_yhq_name = #{goodsYhqName,jdbcType=VARCHAR},
+      goods_nums = #{goodsNums,jdbcType=INTEGER},
+      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      goods_service = #{goodsService,jdbcType=DOUBLE},
+      goods_pay_money = #{goodsPayMoney,jdbcType=DOUBLE},
+      goods_shop_id = #{goodsShopId,jdbcType=INTEGER},
+      goods_dept_id = #{goodsDeptId,jdbcType=INTEGER},
+      goods_group_id = #{goodsGroupId,jdbcType=INTEGER},
+      goods_user_id = #{goodsUserId,jdbcType=INTEGER},
+      goods_FID = #{goodsFid,jdbcType=BIGINT}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+</mapper>

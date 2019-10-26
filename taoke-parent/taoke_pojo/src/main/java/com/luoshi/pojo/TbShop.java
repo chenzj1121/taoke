@@ -49,7 +49,7 @@ public class TbShop {
 
     private String refundsTime;
 
-    private String refundsMoney;
+    private Double refundsMoney;
 
     private Date createTime;
 
@@ -265,15 +265,15 @@ public class TbShop {
         this.refundsTime = refundsTime == null ? null : refundsTime.trim();
     }
 
-    public String getRefundsMoney() {
-        return refundsMoney;
-    }
+    public Double getRefundsMoney() {
+		return refundsMoney;
+	}
 
-    public void setRefundsMoney(String refundsMoney) {
-        this.refundsMoney = refundsMoney == null ? null : refundsMoney.trim();
-    }
+	public void setRefundsMoney(Double refundsMoney) {
+		this.refundsMoney = refundsMoney;
+	}
 
-    public Date getCreateTime() {
+	public Date getCreateTime() {
         return createTime;
     }
 

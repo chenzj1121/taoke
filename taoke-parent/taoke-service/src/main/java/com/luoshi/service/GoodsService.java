@@ -1,7 +1,6 @@
 package com.luoshi.service;
-import java.util.Date;
 import java.util.List;
-import com.luoshi.pojo.TbCoop;
+import com.luoshi.pojo.TbGoods;
 
 import entity.PageResult;
 /**
@@ -9,13 +8,13 @@ import entity.PageResult;
  * @author Administrator
  *
  */
-public interface CoopService {
+public interface GoodsService {
 
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
-	public List<TbCoop> findAll();
+	public List<TbGoods> findAll();
 	
 	
 	/**
@@ -28,13 +27,13 @@ public interface CoopService {
 	/**
 	 * 增加
 	*/
-	public void add(TbCoop coop);
+	public void add(TbGoods goods);
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(TbCoop coop);
+	public void update(TbGoods goods);
 	
 
 	/**
@@ -42,14 +41,14 @@ public interface CoopService {
 	 * @param id
 	 * @return
 	 */
-	public TbCoop findOne(int id);
+	public TbGoods findOne(Long id);
 	
 	
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void delete(int [] ids);
+	public void delete(Long [] ids);
 
 	/**
 	 * 分页
@@ -57,10 +56,6 @@ public interface CoopService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbCoop coop, int pageNum,int pageSize, Date TbMaxTime, Date maxStartTime, Date endTime);
-
-
-
-
+	public PageResult findPage(TbGoods goods, int pageNum,int pageSize);
 	
 }

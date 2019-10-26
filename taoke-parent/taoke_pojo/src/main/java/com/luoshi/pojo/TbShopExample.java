@@ -1690,13 +1690,13 @@ public class TbShopExample {
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyGreaterThanOrEqualTo(String value) {
-            addCriterion("refunds_money >=", value, "refundsMoney");
+        public Criteria andRefundsMoneyGreaterThanOrEqualTo(Double double1) {
+            addCriterion("refunds_money >=", double1, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyLessThan(String value) {
-            addCriterion("refunds_money <", value, "refundsMoney");
+        public Criteria andRefundsMoneyLessThan(Double double1) {
+            addCriterion("refunds_money <", double1, "refundsMoney");
             return (Criteria) this;
         }
 

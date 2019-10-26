@@ -2444,6 +2444,146 @@ public class TbCoopExample {
             addCriterion("coop_boss_id not between", value1, value2, "coopBossId");
             return (Criteria) this;
         }
+
+        public Criteria andCoopCheckMoneyIsNull() {
+            addCriterion("coop_check_money is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyIsNotNull() {
+            addCriterion("coop_check_money is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyEqualTo(String value) {
+            addCriterion("coop_check_money =", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyNotEqualTo(String value) {
+            addCriterion("coop_check_money <>", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyGreaterThan(String value) {
+            addCriterion("coop_check_money >", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_check_money >=", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyLessThan(String value) {
+            addCriterion("coop_check_money <", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyLessThanOrEqualTo(String value) {
+            addCriterion("coop_check_money <=", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyLike(String value) {
+            addCriterion("coop_check_money like", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyNotLike(String value) {
+            addCriterion("coop_check_money not like", value, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyIn(List<String> values) {
+            addCriterion("coop_check_money in", values, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyNotIn(List<String> values) {
+            addCriterion("coop_check_money not in", values, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyBetween(String value1, String value2) {
+            addCriterion("coop_check_money between", value1, value2, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopCheckMoneyNotBetween(String value1, String value2) {
+            addCriterion("coop_check_money not between", value1, value2, "coopCheckMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeIsNull() {
+            addCriterion("coop_pay_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeIsNotNull() {
+            addCriterion("coop_pay_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeEqualTo(String value) {
+            addCriterion("coop_pay_type =", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeNotEqualTo(String value) {
+            addCriterion("coop_pay_type <>", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeGreaterThan(String value) {
+            addCriterion("coop_pay_type >", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_pay_type >=", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeLessThan(String value) {
+            addCriterion("coop_pay_type <", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeLessThanOrEqualTo(String value) {
+            addCriterion("coop_pay_type <=", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeLike(String value) {
+            addCriterion("coop_pay_type like", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeNotLike(String value) {
+            addCriterion("coop_pay_type not like", value, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeIn(List<String> values) {
+            addCriterion("coop_pay_type in", values, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeNotIn(List<String> values) {
+            addCriterion("coop_pay_type not in", values, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeBetween(String value1, String value2) {
+            addCriterion("coop_pay_type between", value1, value2, "coopPayType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopPayTypeNotBetween(String value1, String value2) {
+            addCriterion("coop_pay_type not between", value1, value2, "coopPayType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

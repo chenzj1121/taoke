@@ -1,4 +1,5 @@
 package com.luoshi.service.impl;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +88,7 @@ public class CoopServiceImpl implements CoopService {
 	
 	
 		@Override
-	public PageResult findPage(TbCoop coop, int pageNum, int pageSize) {
+	public PageResult findPage(TbCoop coop, int pageNum, int pageSize,Date TbMaxTime,Date maxStartTime,Date endTime) {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbCoopExample example=new TbCoopExample();
@@ -98,19 +99,60 @@ public class CoopServiceImpl implements CoopService {
 			if(user.getType().equals("2")) {
 				criteria.andCoopUserIdEqualTo(user.getId());
 			}
+			//提报状态
 			if(coop.getCoopType()!=null && coop.getCoopType().length()>0){
-				criteria.andCoopTypeLike("%"+coop.getCoopType()+"%");
+				criteria.andCoopTypeEqualTo(coop.getCoopType());
 			}
-			
+			//活动类型
+			if(coop.getCoopActivity()!=null && coop.getCoopActivity().length()>0){
+				criteria.andCoopActivityEqualTo(coop.getCoopActivity());
+			}
+			//提报时间
+			if(coop.getCoopTbtime()!=null){
+				criteria.andCoopTbtimeGreaterThanOrEqualTo(coop.getCoopTbtime());
+			}
+			//提报时间
+			if(TbMaxTime!=null){
+				criteria.andCoopTbtimeLessThanOrEqualTo(TbMaxTime);
+			}
+			//上线时间区间
+			if(coop.getCoopStarttime()!=null) {
+				criteria.andCoopStarttimeGreaterThanOrEqualTo(coop.getCoopStarttime());
+			}
+			//上线时间
+			if(maxStartTime!=null) {
+				criteria.andCoopStarttimeLessThanOrEqualTo(maxStartTime);
+			}
+			//goodsId
+			if(coop.getCoopGoodsId()!=null){
+				criteria.andCoopGoodsIdEqualTo(coop.getCoopGoodsId());
+			}
+			//下线时间
+			if(coop.getCoopEndtime()!=null) {
+				criteria.andCoopEndtimeGreaterThan(coop.getCoopEndtime());
+			}
+			//下线时间
+			if(endTime!=null) {
+				criteria.andCoopEndtimeLessThanOrEqualTo(endTime);
+			}
+			//责任人
+			if(coop.getCoopUserId()!=null) {
+				criteria.andCoopUserIdEqualTo(coop.getCoopUserId());
+			}
+			//是否查款
+			if(coop.getCoopCheckMoney()!=null) {
+				criteria.andCoopCheckMoneyEqualTo(coop.getCoopCheckMoney());
+			}
+			//结算类型
+			if(coop.getCoopPayType()!=null) {
+				criteria.andCoopPayTypeEqualTo(coop.getCoopPayType());
+			}
 			if(coop.getCoopCustomer()!=null && coop.getCoopCustomer().length()>0){
 				criteria.andCoopCustomerLike("%"+coop.getCoopCustomer()+"%");
 			}
-			
-			if(coop.getCoopActivity()!=null && coop.getCoopActivity().length()>0){
-				criteria.andCoopActivityLike("%"+coop.getCoopActivity()+"%");
-			}
+			//是否零点
 			if(coop.getCoopZero()!=null && coop.getCoopZero().length()>0){
-				criteria.andCoopZeroLike("%"+coop.getCoopZero()+"%");
+				criteria.andCoopZeroEqualTo(coop.getCoopZero());
 			}
 			
 			if(coop.getCoopYhqName()!=null && coop.getCoopYhqName().length()>0){

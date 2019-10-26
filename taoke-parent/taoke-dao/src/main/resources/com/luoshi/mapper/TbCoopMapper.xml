@@ -38,6 +38,8 @@
     <result column="coop_Head_id" property="coopHeadId" jdbcType="BIGINT" />
     <result column="coop_real_shot" property="coopRealShot" jdbcType="VARCHAR" />
     <result column="coop_boss_id" property="coopBossId" jdbcType="INTEGER" />
+    <result column="coop_check_money" property="coopCheckMoney" jdbcType="VARCHAR" />
+    <result column="coop_pay_type" property="coopPayType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -103,7 +105,8 @@
     coop_startTime, coop_endTime, coop_back, coop_dept_id, coop_user_id, coop_yhq_name, 
     coop_boss_name, coop_message, coop_shop, coop_tbMessage, coop_shop_fl, coop_picture, 
     coop_promotion, coop_coupon, coop_color, coop_service_fee, coop_per_time, coop_coupon_num, 
-    coop_tapbao_price, coop_pay_num, coop_Head_id, coop_real_shot, coop_boss_id
+    coop_tapbao_price, coop_pay_num, coop_Head_id, coop_real_shot, coop_boss_id, coop_check_money, 
+    coop_pay_type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbCoopExample" >
     select
@@ -147,8 +150,8 @@
       coop_picture, coop_promotion, coop_coupon, 
       coop_color, coop_service_fee, coop_per_time, 
       coop_coupon_num, coop_tapbao_price, coop_pay_num, 
-      coop_Head_id, coop_real_shot, coop_boss_id
-      )
+      coop_Head_id, coop_real_shot, coop_boss_id, 
+      coop_check_money, coop_pay_type)
     values (#{coopId,jdbcType=INTEGER}, #{coopType,jdbcType=VARCHAR}, #{coopPttype,jdbcType=VARCHAR}, 
       #{coopXdwtype,jdbcType=VARCHAR}, #{coopCustomer,jdbcType=VARCHAR}, #{coopMainpicture,jdbcType=VARCHAR}, 
       #{coopActivity,jdbcType=VARCHAR}, #{coopGoodsId,jdbcType=BIGINT}, #{coopZero,jdbcType=VARCHAR}, 
@@ -160,8 +163,8 @@
       #{coopPicture,jdbcType=VARCHAR}, #{coopPromotion,jdbcType=VARCHAR}, #{coopCoupon,jdbcType=VARCHAR}, 
       #{coopColor,jdbcType=VARCHAR}, #{coopServiceFee,jdbcType=DOUBLE}, #{coopPerTime,jdbcType=TIMESTAMP}, 
       #{coopCouponNum,jdbcType=DOUBLE}, #{coopTapbaoPrice,jdbcType=DOUBLE}, #{coopPayNum,jdbcType=INTEGER}, 
-      #{coopHeadId,jdbcType=BIGINT}, #{coopRealShot,jdbcType=VARCHAR}, #{coopBossId,jdbcType=INTEGER}
-      )
+      #{coopHeadId,jdbcType=BIGINT}, #{coopRealShot,jdbcType=VARCHAR}, #{coopBossId,jdbcType=INTEGER}, 
+      #{coopCheckMoney,jdbcType=VARCHAR}, #{coopPayType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbCoop" >
     insert into tb_coop
@@ -274,6 +277,12 @@
       <if test="coopBossId != null" >
         coop_boss_id,
       </if>
+      <if test="coopCheckMoney != null" >
+        coop_check_money,
+      </if>
+      <if test="coopPayType != null" >
+        coop_pay_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="coopId != null" >
@@ -383,6 +392,12 @@
       </if>
       <if test="coopBossId != null" >
         #{coopBossId,jdbcType=INTEGER},
+      </if>
+      <if test="coopCheckMoney != null" >
+        #{coopCheckMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="coopPayType != null" >
+        #{coopPayType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -503,6 +518,12 @@
       <if test="record.coopBossId != null" >
         coop_boss_id = #{record.coopBossId,jdbcType=INTEGER},
       </if>
+      <if test="record.coopCheckMoney != null" >
+        coop_check_money = #{record.coopCheckMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coopPayType != null" >
+        coop_pay_type = #{record.coopPayType,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -545,7 +566,9 @@
       coop_pay_num = #{record.coopPayNum,jdbcType=INTEGER},
       coop_Head_id = #{record.coopHeadId,jdbcType=BIGINT},
       coop_real_shot = #{record.coopRealShot,jdbcType=VARCHAR},
-      coop_boss_id = #{record.coopBossId,jdbcType=INTEGER}
+      coop_boss_id = #{record.coopBossId,jdbcType=INTEGER},
+      coop_check_money = #{record.coopCheckMoney,jdbcType=VARCHAR},
+      coop_pay_type = #{record.coopPayType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -658,6 +681,12 @@
       <if test="coopBossId != null" >
         coop_boss_id = #{coopBossId,jdbcType=INTEGER},
       </if>
+      <if test="coopCheckMoney != null" >
+        coop_check_money = #{coopCheckMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="coopPayType != null" >
+        coop_pay_type = #{coopPayType,jdbcType=VARCHAR},
+      </if>
     </set>
     where coop_id = #{coopId,jdbcType=INTEGER}
   </update>
@@ -697,7 +726,9 @@
       coop_pay_num = #{coopPayNum,jdbcType=INTEGER},
       coop_Head_id = #{coopHeadId,jdbcType=BIGINT},
       coop_real_shot = #{coopRealShot,jdbcType=VARCHAR},
-      coop_boss_id = #{coopBossId,jdbcType=INTEGER}
+      coop_boss_id = #{coopBossId,jdbcType=INTEGER},
+      coop_check_money = #{coopCheckMoney,jdbcType=VARCHAR},
+      coop_pay_type = #{coopPayType,jdbcType=VARCHAR}
     where coop_id = #{coopId,jdbcType=INTEGER}
   </update>
 </mapper>

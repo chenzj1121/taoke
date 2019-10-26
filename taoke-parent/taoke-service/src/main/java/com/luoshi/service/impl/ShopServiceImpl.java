@@ -116,7 +116,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-	public PageResult findPage(TbShop shop, int pageNum, int pageSize) {
+	public PageResult findPage(TbShop shop, int pageNum, int pageSize,Double MaxMoney) {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbShopExample example=new TbShopExample();
@@ -140,8 +140,17 @@ public class ShopServiceImpl implements ShopService {
 			if(shop.getShopUserId2()!=null) {
 				criteria.andShopUserId2EqualTo(shop.getShopUserId2());
 			}
+			//创建时间
 			if(shop.getCreateTime()!=null){
 				criteria.andCreateTimeEqualTo(shop.getCreateTime());
+			}
+			//回款金额区间
+			if(shop.getRefundsMoney()!=null) {
+				criteria.andRefundsMoneyGreaterThanOrEqualTo(shop.getRefundsMoney());
+			}
+			//回款金额区间
+			if(MaxMoney!=null) {
+				criteria.andRefundsMoneyLessThan(shop.getRefundsMoney());
 			}
 			if(shop.getShopName()!=null && shop.getShopName().length()>0){
 				criteria.andShopNameLike("%"+shop.getShopName()+"%");
@@ -191,9 +200,6 @@ public class ShopServiceImpl implements ShopService {
 			}
 			if(shop.getRefundsTime()!=null && shop.getRefundsTime().length()>0){
 				criteria.andRefundsTimeLike("%"+shop.getRefundsTime()+"%");
-			}
-			if(shop.getRefundsMoney()!=null && shop.getRefundsMoney().length()>0){
-				criteria.andRefundsMoneyLike("%"+shop.getRefundsMoney()+"%");
 			}
 			if(shop.getDataType()!=null && shop.getDataType().length()>0){
 				criteria.andDataTypeLike("%"+shop.getDataType()+"%");

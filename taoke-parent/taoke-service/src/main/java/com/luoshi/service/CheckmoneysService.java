@@ -1,4 +1,5 @@
 package com.luoshi.service;
+import java.util.Date;
 import java.util.List;
 import com.luoshi.pojo.TbCheckmoneys;
 
@@ -56,6 +57,8 @@ public interface CheckmoneysService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum,int pageSize);
+	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum,int pageSize,Date maxTime,Date backTime);
+
+
 	
 }

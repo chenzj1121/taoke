@@ -1,4 +1,5 @@
 package com.luoshi.controller;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,8 +109,8 @@ public class CheckmoneysController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbCheckmoneys checkmoneys, int page, int rows  ){
-		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows);		
+	public PageResult search(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
+		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows,maxTime,backTime);		
 	}
 	
 }

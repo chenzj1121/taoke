@@ -40,6 +40,15 @@ public class GoodsController {
 	public PageResult  findPage(int page,int rows){			
 		return goodsService.findPage(page, rows);
 	}
+	/**
+	 * 根据店铺返回全部列表
+	 * @return
+	 */
+	@RequestMapping("/findByShop")
+	public List<TbGoods>  findByShop(int shopId){			
+		return goodsService.findByShop(shopId);
+	}
+	
 	
 	/**
 	 * 增加

@@ -57,5 +57,8 @@ public interface GoodsService {
 	 * @return
 	 */
 	public PageResult findPage(TbGoods goods, int pageNum,int pageSize);
+
+
+	public List<TbGoods> findByShop(int shopId);
 	
 }

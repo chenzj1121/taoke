@@ -10,6 +10,7 @@ import com.luoshi.mapper.TbGoodsMapper;
 import com.luoshi.pojo.TbBackgroundDetailsExample.Criteria;
 import com.luoshi.pojo.TbGoods;
 import com.luoshi.pojo.TbGoodsExample;
+import com.luoshi.pojo.TbSysUserExample;
 import com.luoshi.service.GoodsService;
 
 import entity.PageResult;
@@ -81,7 +82,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(TbGoods goods, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
@@ -97,6 +98,14 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		Page<TbGoods> page= (Page<TbGoods>)goodsMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	@Override
+	public List<TbGoods> findByShop(int shopId) {
+		TbGoodsExample example=new TbGoodsExample();
+		com.luoshi.pojo.TbGoodsExample.Criteria criteria = example.createCriteria();
+        criteria.andGoodsShopIdEqualTo(shopId);
+        return goodsMapper.selectByExample(example);
 	}
 	
 }

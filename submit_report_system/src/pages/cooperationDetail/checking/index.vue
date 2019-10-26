@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import { getMoreShop,getHisCoop,addCheckMoney} from '@/api'
+import { getMoreShop,getHisCoop,addCheckMoney,findCoop} from '@/api'
 import Page from '@/components/page'
 export default {
    components: {
@@ -173,11 +173,11 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$route.params)
-    if (!this.$route.params.coopCustomer) {
-      this.$router.go(-1);
-      this.$errmsg("失去店铺数据,请重新进入")
-    }
+    console.log(this.$route.query)
+    // if (!this.$route.params.coopCustomer) {
+    //   this.$router.go(-1);
+    //   this.$errmsg("失去店铺数据,请重新进入")
+    // }
     this.form.coopCustomer = this.$route.params.coopCustomer
     this.getShopByName(this.$route.params.coopBossName)
     this.getCoopDetail(this.form.coopCustomer)

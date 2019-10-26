@@ -128,9 +128,9 @@
         <el-form-item label="上传实拍图：">
           <div class="flex">
             <el-input v-model="form.coopRealShot"></el-input>
+            <!-- <el-input v-model="form.coopRealShot"></el-input>
             <el-input v-model="form.coopRealShot"></el-input>
-            <el-input v-model="form.coopRealShot"></el-input>
-            <el-input v-model="form.coopRealShot"></el-input>
+            <el-input v-model="form.coopRealShot"></el-input> -->
           </div>
         </el-form-item>
         <!-- <el-form-item label="选择平台：">
@@ -172,7 +172,7 @@ export default {
     this.form.coopDeptId=getUser().deptId
     this.form.coopUserId=getUser().id
     this.form.coopBossName = this.shopDetail.shopBoss
-
+    this.form.shopId = this.shopDetail.id
     if(!this.shopDetail.shopName) {
        this.$alert('未检测到店铺', '警告', {
           confirmButtonText: '确定',
@@ -233,7 +233,7 @@ export default {
                 if (res.success) {
                   this.$sucmsg(res.message)
                   this.$router.go(-1)
-                }else{
+                }else {
                   this.$errmsg(res.message)
                 }
               })

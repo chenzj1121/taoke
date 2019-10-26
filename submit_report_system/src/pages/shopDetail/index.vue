@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     checkMoney(){
-       this.$router.push({path: 'checking',name:"check",params: this.form})
+       this.$router.push({path: 'checking',name:"check",query: {id:this.form.id}})
     },
     getShopInfo(id){
       getShopById(id).then(res=>{

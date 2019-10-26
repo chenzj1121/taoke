@@ -1404,6 +1404,66 @@ public class TbCheckmoneysExample {
             addCriterion("cm_yhq_type not between", value1, value2, "cmYhqType");
             return (Criteria) this;
         }
+
+        public Criteria andCmShopIdIsNull() {
+            addCriterion("cm_shop_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdIsNotNull() {
+            addCriterion("cm_shop_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdEqualTo(Integer value) {
+            addCriterion("cm_shop_id =", value, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdNotEqualTo(Integer value) {
+            addCriterion("cm_shop_id <>", value, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdGreaterThan(Integer value) {
+            addCriterion("cm_shop_id >", value, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cm_shop_id >=", value, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdLessThan(Integer value) {
+            addCriterion("cm_shop_id <", value, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdLessThanOrEqualTo(Integer value) {
+            addCriterion("cm_shop_id <=", value, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdIn(List<Integer> values) {
+            addCriterion("cm_shop_id in", values, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdNotIn(List<Integer> values) {
+            addCriterion("cm_shop_id not in", values, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdBetween(Integer value1, Integer value2) {
+            addCriterion("cm_shop_id between", value1, value2, "cmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmShopIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("cm_shop_id not between", value1, value2, "cmShopId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

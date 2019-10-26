@@ -57,7 +57,10 @@ public interface CoopService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbCoop coop, int pageNum,int pageSize, Date TbMaxTime, Date maxStartTime, Date endTime);
+	//public PageResult findPage(TbCoop coop, int pageNum,int pageSize, Date TbMaxTime, Date maxStartTime, Date endTime);
+
+
+	 public PageResult findPage(TbCoop coop, int page, int rows, Date tbMaxTime, Date maxStartTime, Date endTime);
 
 
 

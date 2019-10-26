@@ -43,6 +43,8 @@ public class TbCheckmoneys {
 
     private String cmYhqType;
 
+    private Integer cmShopId;
+
     public Integer getCmId() {
         return cmId;
     }
@@ -201,5 +203,13 @@ public class TbCheckmoneys {
 
     public void setCmYhqType(String cmYhqType) {
         this.cmYhqType = cmYhqType == null ? null : cmYhqType.trim();
+    }
+
+    public Integer getCmShopId() {
+        return cmShopId;
+    }
+
+    public void setCmShopId(Integer cmShopId) {
+        this.cmShopId = cmShopId;
     }
 }

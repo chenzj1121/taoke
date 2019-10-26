@@ -1,6 +1,9 @@
 package com.luoshi.service.impl;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import com.luoshi.mapper.TbCheckmoneysMapper;
 import com.luoshi.pojo.TbBackmoneyExample.Criteria;
 import com.luoshi.pojo.TbCheckmoneys;
 import com.luoshi.pojo.TbCheckmoneysExample;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.CheckmoneysService;
 
 import entity.PageResult;
@@ -24,7 +28,8 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 
 	@Autowired
 	private TbCheckmoneysMapper checkmoneysMapper;
-	
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 查询全部
 	 */
@@ -88,9 +93,13 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 		
 		TbCheckmoneysExample example=new TbCheckmoneysExample();
 		com.luoshi.pojo.TbCheckmoneysExample.Criteria criteria = example.createCriteria();
-		
-		if(checkmoneys!=null){			
-						if(checkmoneys.getCmSellDept()!=null && checkmoneys.getCmSellDept().length()>0){
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		if(checkmoneys!=null){		
+			if(user.getType().equals("2")) {
+				criteria.andCmUserIdEqualTo(user.getId());
+			}
+			if(checkmoneys.getCmSellDept()!=null && checkmoneys.getCmSellDept().length()>0){
 				criteria.andCmSellDeptLike("%"+checkmoneys.getCmSellDept()+"%");
 			}
 			if(checkmoneys.getCmDept()!=null && checkmoneys.getCmDept().length()>0){

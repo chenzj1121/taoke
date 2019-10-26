@@ -1,6 +1,9 @@
 package com.luoshi.service.impl;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import com.luoshi.mapper.TbCoopMapper;
 import com.luoshi.pojo.TbBackmoneyExample.Criteria;
 import com.luoshi.pojo.TbCoop;
 import com.luoshi.pojo.TbCoopExample;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.CoopService;
 
 import entity.PageResult;
@@ -24,7 +28,8 @@ public class CoopServiceImpl implements CoopService {
 
 	@Autowired
 	private TbCoopMapper coopMapper;
-	
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 查询全部
 	 */
@@ -87,9 +92,13 @@ public class CoopServiceImpl implements CoopService {
 		
 		TbCoopExample example=new TbCoopExample();
 		com.luoshi.pojo.TbCoopExample.Criteria criteria = example.createCriteria();
-		
-		if(coop!=null){			
-						if(coop.getCoopType()!=null && coop.getCoopType().length()>0){
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		if(coop!=null){	
+			if(user.getType().equals("2")) {
+				criteria.andCoopUserIdEqualTo(user.getId());
+			}
+			if(coop.getCoopType()!=null && coop.getCoopType().length()>0){
 				criteria.andCoopTypeLike("%"+coop.getCoopType()+"%");
 			}
 			

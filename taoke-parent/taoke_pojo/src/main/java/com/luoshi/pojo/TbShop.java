@@ -51,7 +51,7 @@ public class TbShop {
 
     private String refundsMoney;
 
-    private String createTime;
+    private Date createTime;
 
     private String dataType;
 
@@ -273,15 +273,15 @@ public class TbShop {
         this.refundsMoney = refundsMoney == null ? null : refundsMoney.trim();
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
-    }
+    public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public String getDataType() {
+	public String getDataType() {
         return dataType;
     }
 

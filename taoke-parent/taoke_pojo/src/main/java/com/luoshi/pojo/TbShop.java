@@ -75,9 +75,11 @@ public class TbShop {
 
     private String shopBz;
 
-    private Integer shopGroupId;
+    private String shopGroupId;
 
     private String shopUserName;
+
+    private String shopOperateQq;
 
     public Integer getId() {
         return id;
@@ -367,12 +369,12 @@ public class TbShop {
         this.shopBz = shopBz == null ? null : shopBz.trim();
     }
 
-    public Integer getShopGroupId() {
+    public String getShopGroupId() {
         return shopGroupId;
     }
 
-    public void setShopGroupId(Integer shopGroupId) {
-        this.shopGroupId = shopGroupId;
+    public void setShopGroupId(String shopGroupId) {
+        this.shopGroupId = shopGroupId == null ? null : shopGroupId.trim();
     }
 
     public String getShopUserName() {
@@ -381,5 +383,13 @@ public class TbShop {
 
     public void setShopUserName(String shopUserName) {
         this.shopUserName = shopUserName == null ? null : shopUserName.trim();
+    }
+
+    public String getShopOperateQq() {
+        return shopOperateQq;
+    }
+
+    public void setShopOperateQq(String shopOperateQq) {
+        this.shopOperateQq = shopOperateQq == null ? null : shopOperateQq.trim();
     }
 }

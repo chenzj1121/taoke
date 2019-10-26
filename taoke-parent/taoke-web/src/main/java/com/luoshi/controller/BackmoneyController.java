@@ -109,6 +109,7 @@ public class BackmoneyController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbBackmoney backmoney, int page, int rows  ){
+		System.out.println(backmoney);
 		return backmoneyService.findPage(backmoney, page, rows);		
 	}
 	

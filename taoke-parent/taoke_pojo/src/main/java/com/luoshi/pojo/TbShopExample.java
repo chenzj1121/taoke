@@ -1745,8 +1745,8 @@ public class TbShopExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(String value) {
-            addCriterion("create_time =", value, "createTime");
+        public Criteria andCreateTimeEqualTo(Date date) {
+            addCriterion("create_time =", date, "createTime");
             return (Criteria) this;
         }
 

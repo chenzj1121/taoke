@@ -2,6 +2,9 @@ package com.luoshi.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.SysUserService;
 import com.luoshi.service.WaitingWorkService;
@@ -31,6 +34,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private SysUserService sysUserService;
+    
+	@Autowired
+	private HttpServletRequest request;
 	
 	/**
 	 * 查询全部
@@ -113,9 +119,27 @@ public class ShopServiceImpl implements ShopService {
 		
 		TbShopExample example=new TbShopExample();
 		com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
-		
-		if(shop!=null){			
-						if(shop.getShopName()!=null && shop.getShopName().length()>0){
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		if(shop!=null){
+			//如果是员工只能查询本人
+			if(user.getType().equals("2")) {
+				criteria.andOperatorUserIdEqualTo(user.getId());
+			}
+			//根据部门查找
+			if(shop.getDataType()!=null) {
+				criteria.andDataTypeEqualTo(shop.getDataType());
+			}
+			//根据小组查找
+			if(shop.getShopGroupId()!=null) {
+				criteria.andShopGroupIdEqualTo(shop.getShopGroupId());
+			}
+			//根据员工id查找
+			if(shop.getShopUserId2()!=null) {
+				criteria.andShopUserId2EqualTo(shop.getShopUserId2());
+			}
+			
+			if(shop.getShopName()!=null && shop.getShopName().length()>0){
 				criteria.andShopNameLike("%"+shop.getShopName()+"%");
 			}
 			if(shop.getWangwangaccount()!=null && shop.getWangwangaccount().length()>0){
@@ -167,8 +191,8 @@ public class ShopServiceImpl implements ShopService {
 			if(shop.getRefundsMoney()!=null && shop.getRefundsMoney().length()>0){
 				criteria.andRefundsMoneyLike("%"+shop.getRefundsMoney()+"%");
 			}
-			if(shop.getCreateTime()!=null && shop.getCreateTime().length()>0){
-				criteria.andCreateTimeLike("%"+shop.getCreateTime()+"%");
+			if(shop.getCreateTime()!=null){
+				criteria.andCreateTimeEqualTo(shop.getCreateTime());
 			}
 			if(shop.getDataType()!=null && shop.getDataType().length()>0){
 				criteria.andDataTypeLike("%"+shop.getDataType()+"%");

@@ -1,6 +1,9 @@
 package com.luoshi.service.impl;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import com.luoshi.mapper.TbFollowUpRecordMapper;
 import com.luoshi.pojo.TbBackmoneyExample.Criteria;
 import com.luoshi.pojo.TbFollowUpRecord;
 import com.luoshi.pojo.TbFollowUpRecordExample;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.FollowUpRecordService;
 
 import entity.PageResult;
@@ -24,7 +28,8 @@ public class FollowUpRecordServiceImpl implements FollowUpRecordService {
 
 	@Autowired
 	private TbFollowUpRecordMapper followUpRecordMapper;
-	
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 查询全部
 	 */
@@ -87,9 +92,11 @@ public class FollowUpRecordServiceImpl implements FollowUpRecordService {
 		
 		TbFollowUpRecordExample example=new TbFollowUpRecordExample();
 		com.luoshi.pojo.TbFollowUpRecordExample.Criteria criteria = example.createCriteria();
-		
-		if(followUpRecord!=null){			
-						if(followUpRecord.getRecord()!=null && followUpRecord.getRecord().length()>0){
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		if(followUpRecord!=null){
+			
+			if(followUpRecord.getRecord()!=null && followUpRecord.getRecord().length()>0){
 				criteria.andRecordLike("%"+followUpRecord.getRecord()+"%");
 			}
 			if(followUpRecord.getMaturity()!=null && followUpRecord.getMaturity().length()>0){

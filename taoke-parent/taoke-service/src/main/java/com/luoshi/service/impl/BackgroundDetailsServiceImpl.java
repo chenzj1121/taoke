@@ -46,7 +46,6 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	private TbBackgroundDetailsMapper backgroundDetailsMapper;
 	
 	@Autowired
-
 	private HttpServletRequest request;
 	
 	/**
@@ -111,10 +110,12 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 		
 		TbBackgroundDetailsExample example=new TbBackgroundDetailsExample();
 		Criteria criteria = example.createCriteria();
-		
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
 		if(backgroundDetails!=null){
-			System.out.println(backgroundDetails.getDeptId());
-			System.out.println("123");
+			if(user.getType().equals("2")) {
+				criteria.andUseIdEqualTo(user.getId());
+			}
 			if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
 				criteria.andShopMessageLike("%"+backgroundDetails.getShopMessage()+"%");
 			}
@@ -125,13 +126,10 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				criteria.andShopNameLike("%"+backgroundDetails.getShopName()+"%");
 			}
 			if(backgroundDetails.getDeptId()!=null ){
-				System.out.println(backgroundDetails.getDeptId());
-				System.out.println("123");
 				criteria.andDeptIdEqualTo(backgroundDetails.getDeptId());
 			}
 			//小组
 			if(backgroundDetails.getGroupId()!=null) {
-				
 				criteria.andGroupIdEqualTo(backgroundDetails.getGroupId());
 			}
 			//责任人

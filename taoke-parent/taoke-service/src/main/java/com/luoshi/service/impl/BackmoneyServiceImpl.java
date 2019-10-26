@@ -1,6 +1,9 @@
 package com.luoshi.service.impl;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.luoshi.mapper.TbBackmoneyMapper;
 import com.luoshi.pojo.TbBackmoney;
 import com.luoshi.pojo.TbBackmoneyExample;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.pojo.TbBackmoneyExample.Criteria;
 import com.luoshi.service.BackmoneyService;
 
@@ -24,7 +28,8 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 
 	@Autowired
 	private TbBackmoneyMapper backmoneyMapper;
-	
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 查询全部
 	 */
@@ -87,9 +92,14 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 		
 		TbBackmoneyExample example=new TbBackmoneyExample();
 		Criteria criteria = example.createCriteria();
-		
-		if(backmoney!=null){			
-						if(backmoney.getBmShopName()!=null && backmoney.getBmShopName().length()>0){
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		if(backmoney!=null){
+			//如果是员工只能查询本人
+			if(user.getType().equals("2")) {
+				criteria.andBmUserIdEqualTo(user.getId());
+			}
+			if(backmoney.getBmShopName()!=null && backmoney.getBmShopName().length()>0){
 				criteria.andBmShopNameLike("%"+backmoney.getBmShopName()+"%");
 			}
 			if(backmoney.getBmYhqName()!=null && backmoney.getBmYhqName().length()>0){

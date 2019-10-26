@@ -183,6 +183,7 @@ export default {
       dialogVisible:false,
       shopDetail:{},
       userInfo:{},
+      
     }
   },
   mounted(){

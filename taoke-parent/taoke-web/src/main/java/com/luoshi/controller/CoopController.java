@@ -134,7 +134,8 @@ public class CoopController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbCoop coop, int page, int rows,Date TbMaxTime, Date maxStartTime, Date endTime  ){
-		return coopService.findPage(coop, page, rows,TbMaxTime, maxStartTime, endTime);		
+		return coopService.findPage(coop, page, rows,TbMaxTime, maxStartTime, endTime);	
+		//return null;
 	}
 	
 }

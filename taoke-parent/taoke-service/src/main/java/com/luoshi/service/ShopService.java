@@ -52,12 +52,15 @@ public interface ShopService {
 
 	/**
 	 * 分页
+	 * @param maxMoney 
 	 * @param pageNum 当前页 码
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbShop shop, int pageNum,int pageSize, Double MaxMoney);
+	public PageResult findPage(TbShop shop, int page,int rows, Double maxMoney);
 
     List<String> checkWangWangAccount(String wangwangAccount);
+
+
 
 }

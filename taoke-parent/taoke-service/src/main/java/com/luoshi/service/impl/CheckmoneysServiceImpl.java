@@ -121,7 +121,7 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			//结算金额排序
 			if(checkmoneys.getCmJsMoney()!=null) {
 				if("1".equals(checkmoneys.getCmJsMoney())) {
-					example.setOrderByClause("`cm_js_money` DESC,id ASC");
+					example.setOrderByClause("`cm_js_money` ASC,id ASC");
 				}else if("2".equals(checkmoneys.getCmJsMoney())) {
 					example.setOrderByClause("`cm_js_money` DESC,id ASC");
 				}

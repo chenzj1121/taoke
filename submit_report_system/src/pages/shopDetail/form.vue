@@ -77,7 +77,7 @@
       </el-form-item>
       <br/>
       <el-form-item label="运营QQ">
-        <el-input :disabled="!writeable" v-model="form.shopQq"></el-input>
+        <el-input :disabled="!writeable" v-model="form.shopOperateQq"></el-input>
       </el-form-item>
       <el-form-item label="结算方式">
         <el-input :disabled="!writeable" v-model="form.shopJstype"></el-input>

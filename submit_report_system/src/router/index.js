@@ -94,6 +94,11 @@ export default new Router({
               path: 'add',
               name: 'add',
               component: () => import('@/pages/public/add')
+            },
+            {
+              path: 'update',
+              name: 'updatePublic',
+              component: () => import('@/pages/shopDetail/update/index')
             }
           ]
         },

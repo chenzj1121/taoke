@@ -269,7 +269,7 @@ export default {
         })
     },
     nav2Checking (obj) {
-      this.$router.push({path: 'checking',name:"check",params: obj})
+      this.$router.push({path: 'checking',name:"check",params:obj})
     },
   getMyDate(str) {
     var oDate = new Date(str)

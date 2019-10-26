@@ -11,7 +11,7 @@
     <el-row>
       <hr/>
       <el-button size="mini" type="primary" @click="nav2CooperationDetail">订单提报</el-button>
-      <el-button size="mini" type="primary">查款</el-button>
+      <el-button size="mini" type="primary" @click="checkMoney">查款</el-button>
       <el-button size="mini" type="primary">合同单录入</el-button>
       <div class="title">合作记录</div>
       <el-table
@@ -88,6 +88,9 @@ export default {
     this.getShopInfo(this.$route.query.id)
   },
   methods: {
+    checkMoney(){
+       this.$router.push({path: 'checking',name:"check",params: this.form})
+    },
     getShopInfo(id){
       getShopById(id).then(res=>{
         this.form = res
@@ -96,6 +99,7 @@ export default {
     },
     updateInfo () {
       // this.writeable = true
+      this.$router.push({path:"/pubilc/update",name:"updatePublic",query:{id:this.id}})
     },
     nav2CooperationDetail () {
       const id  = this.$route.query.id

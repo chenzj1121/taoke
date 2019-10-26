@@ -117,6 +117,11 @@ export default new Router({
               path: 'checking',
               name: 'check',
               component: () => import('@/pages/cooperationDetail/checking')
+            },
+            {
+              path:'backmoney',
+              name:'backmoney',
+              component: () => import('@/pages/cooperationDetail/backMoney/index')
             }
           ]
         },

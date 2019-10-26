@@ -172,7 +172,7 @@ export default {
     this.form.coopDeptId=getUser().deptId
     this.form.coopUserId=getUser().id
     this.form.coopBossName = this.shopDetail.shopBoss
-    this.form.shopId = this.shopDetail.id
+    this.form.coopBossId = this.shopDetail.id
     if(!this.shopDetail.shopName) {
        this.$alert('未检测到店铺', '警告', {
           confirmButtonText: '确定',

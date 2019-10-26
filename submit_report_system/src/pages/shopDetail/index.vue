@@ -67,7 +67,7 @@
 /**
  * @description 商店详情
  */
-import {getShopById} from "@/api"
+import {getShopById,getCooperationPage} from "@/api"
 import Form from './form'
 export default {
   components: {
@@ -89,6 +89,10 @@ export default {
   },
   methods: {
     checkMoney(){
+      // getCooperationPage({shopBossId:this.form.id},1,10).then(res=>{
+      //   console.log(res)
+
+      // })
        this.$router.push({path: 'checking',name:"check",query: {id:this.form.id}})
     },
     getShopInfo(id){

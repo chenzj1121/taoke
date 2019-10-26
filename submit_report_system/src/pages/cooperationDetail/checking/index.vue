@@ -6,7 +6,7 @@
       label-position="left"
       label-width="150px">
       <el-form-item label="推广店铺：">
-        <el-input v-model="form.coopCustomer" disabled></el-input>
+        <el-input v-model="shopDetail.shopName" disabled></el-input>
       </el-form-item>
       <el-form-item label="店铺多选：">
         <el-select multiple v-model="form.shops">
@@ -31,6 +31,7 @@
           <el-table-column prop="coopEndtime" label="下线时间" ></el-table-column>
           <el-table-column prop="coopYhqName" label="优惠券名称" ></el-table-column>
           <el-table-column prop="coopServiceFee" label="服务费单价" ></el-table-column>
+         
         </el-table>
           <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getCoopDetail"/>
           <el-button  @click="saveCoop" >保存</el-button>
@@ -55,7 +56,10 @@
            <el-table-column prop="coopServiceFee" label="服务费单价"></el-table-column>
            <el-table-column  label="单品结算金额">
              <el-input></el-input>
-           </el-table-column>
+           </el-table-column >
+            <el-table-column label="操作">
+            <span>保存</span>
+          </el-table-column>
          </el-table>
       </el-form-item>
       <br/>
@@ -135,7 +139,7 @@
         <br/>
       </div>
       <el-form-item>
-        <el-button type="primary">保存</el-button>
+        <el-button type="primary" @click="addCheck">保存</el-button>
         <el-button @click="back">返回</el-button>
       </el-form-item>
     </el-form>
@@ -143,7 +147,8 @@
 </template>
 
 <script>
-import { getMoreShop,getHisCoop,addCheckMoney,findCoop} from '@/api'
+import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById} from '@/api'
+import {getUser} from "@/utils/auth"
 import Page from '@/components/page'
 export default {
    components: {
@@ -170,19 +175,31 @@ export default {
         total: 0
       },
       dialogVisible:false,
+      shopDetail:{},
+      userInfo:{},
     }
   },
   mounted(){
-    console.log(this.$route.query)
-    // if (!this.$route.params.coopCustomer) {
-    //   this.$router.go(-1);
-    //   this.$errmsg("失去店铺数据,请重新进入")
-    // }
-    this.form.coopCustomer = this.$route.params.coopCustomer
-    this.getShopByName(this.$route.params.coopBossName)
-    this.getCoopDetail(this.form.coopCustomer)
+    if (!this.$route.query.id) {
+      this.$router.go(-1);
+      this.$errmsg("失去店铺数据,请重新进入")
+    }
+    this.getShop(this.$route.query.id)
+    this.userInfo= getUser()
   },
   methods: {
+    getShop(id){
+        getShopById(id).then(res=>{
+          if (res) {
+              this.getShopByName(res.shopBoss)
+              this.getCoopDetail(this.$route.query.id,res.shopName)
+              this.shopDetail = res
+          }else{
+            this.$errmsg("未找到信息")
+          }
+         
+        })
+    },
     getMyDate(str) {
     var oDate = new Date(str)
     let oYear = oDate.getFullYear()
@@ -194,6 +211,11 @@ export default {
 
 
     addCheck(){
+      this.form.cmUserId = this.userInfo.id
+      this.form.cmSellDept = this.userInfo.groupId
+      this.form.cmDept = this.userInfo.deptId;
+      console.log(this.form)
+      console.log(this.userInfo)
       // addCheckMoney().then(res=>{
 
       // })
@@ -205,8 +227,8 @@ export default {
       // console.log(this.multipleSelection)
       this.dialogVisible = false
     },
-    getCoopDetail(coopCustomer){
-      getHisCoop({coopCustomer},this.page.pageNum,this.page.pageSize).then(res=>{
+    getCoopDetail(coopBossId,coopCustomer){
+      getHisCoop({coopBossId,coopCustomer},this.page.pageNum,this.page.pageSize).then(res=>{
         res.rows.forEach(item=>{
           item.coopStarttime = this.getMyDate(item.coopStarttime)
           item.coopEndtime = this.getMyDate(item.coopEndtime)

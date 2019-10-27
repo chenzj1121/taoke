@@ -183,7 +183,7 @@ export default {
       dialogVisible:false,
       shopDetail:{},
       userInfo:{},
-      
+
     }
   },
   mounted(){
@@ -206,11 +206,12 @@ export default {
         item.goodsGroupId =this.userInfo.groupId
         item.goodsUserId =this.userInfo.id
         item.goodsService = item.coopServiceFee
+        // item.goodsShopName = item.coopCustomer
         addGoodsDetail(item).then(res=>{
-            if (!res.success) {
-              this.$errmsg("商品信息，第"+index+"条数据传输失败")
+            if (res.success) {
+              this.$sucmsg("商品信息，第"+index+"条数据传输成功")
             }else{
-              thus.$sucmsg("商品信息，第"+index+"条数据传输成功")
+               this.$errmsg("商品信息，第"+index+"条数据传输失败")
             }
         })  
       })
@@ -241,6 +242,8 @@ export default {
       this.form.cmSellDept = this.userInfo.groupId
       this.form.cmDept = this.userInfo.deptId;
       this.form.cmShopName =this.shopDetail.shopName
+      this.form.cmShopId = this.shopDetail.id
+      this.form.cmApplyTime = new Date()
       console.log(this.form)
       console.log(this.userInfo)
       addCheckMoney(this.form).then(res=>{

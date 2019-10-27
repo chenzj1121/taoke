@@ -65,7 +65,7 @@
       <el-table-column prop="cmUserId" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showOtherRecords(scope.row.cmShopName)">{{ scope.row.cmShopName }}</span>
+          <span class="link" @click="showOtherRecords(scope.row.cmShopId,scope.row.cmShopName)">{{ scope.row.cmShopName }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="cmShopType" label="类型"></el-table-column>
@@ -110,18 +110,18 @@
         <el-table-column type="index" label="序号"></el-table-column>
         <el-table-column label="部门" prop="goodsDeptId"></el-table-column>
         <el-table-column label="销售人" prop="goodsUserId"></el-table-column>
-        <el-table-column label="店铺名称" prop="name"></el-table-column>
-        <el-table-column label="商品ID" prop="name"></el-table-column>
-        <el-table-column label="优惠券名称" prop="name"></el-table-column>
-        <el-table-column label="上线时间" prop="name"></el-table-column>
-        <el-table-column label="下线时间" prop="name"></el-table-column>
-        <el-table-column label="结算金额" prop="name"></el-table-column>
-        <el-table-column label="结算量" prop="name"></el-table-column>
-        <el-table-column label="服务费单价" prop="name"></el-table-column>
-        <el-table-column label="转入账户" prop="name"></el-table-column>
-        <el-table-column label="打款日期" prop="name"></el-table-column>
+        <el-table-column label="店铺名称" prop="goodsShopName"></el-table-column>
+        <el-table-column label="商品ID" prop="goodsId"></el-table-column>
+        <el-table-column label="优惠券名称" prop="goodsYhqName"></el-table-column>
+        <el-table-column label="上线时间" prop="goodsStarttime"></el-table-column>
+        <el-table-column label="下线时间" prop="goodsEndtime"></el-table-column>
+        <el-table-column label="结算金额" prop="goodsPayMoney"></el-table-column>
+        <el-table-column label="结算量" prop="goodsNums"></el-table-column>
+        <el-table-column label="服务费单价" prop="goodsService"></el-table-column>
+        <el-table-column label="转入账户" prop="goodszhuanghu"></el-table-column>
+        <el-table-column label="打款日期" prop="dakuanriqi"></el-table-column>
       </el-table>
-    <Page style="text-align:right;margin-top:10px;" :page="page1" @change="bindData"/>
+    <!-- <Page style="text-align:right;margin-top:10px;" :page="page1" @change="bindData"/> -->
     </el-dialog>
   </div>
 </template>
@@ -194,11 +194,13 @@ export default {
         this.groupList = res
       })
     },
-    showOtherRecords (cmShopName) {
-      getGoodsDetail({cmShopName},this.page1.pageNum,this.page1.pageSize).then(res=>{
-        res.rows.forEach((item,index)=>{
+    showOtherRecords (cmShopId,shopName) {
+      getGoodsDetail(cmShopId).then(res=>{
+        if (res[0]) {
+           res.forEach((item,index)=>{
             item.goodsEndtime = this.getMyDate(item.goodsEndtime)
             item.goodsStarttime = this.getMyDate(item.goodsStarttime)
+            item.goodsShopName = shopName
            this.groupList.forEach(obj=>{
                 if(item.goodsGroupId == obj.groupId && item.goodsDeptId == obj.groupDeptId){
                   item.goodsGroupId = obj.groupName
@@ -215,6 +217,10 @@ export default {
                 }
               })
             })
+            this.otherRecordsTableData = res
+            console.log(res)
+        }
+       
       })
       this.otherRecordsVisiable = true
     },
@@ -224,7 +230,7 @@ export default {
       const params = this.form
       this.loading = true
       getCheckmonkeyPage(params, page, rows).then(res => {
-            res.rows.forEach((item,index)=>{
+          res.rows.forEach((item,index)=>{
               item.cmApplyTime = this.getMyDate(item.cmApplyTime)
               item.cmBackTime = this.getMyDate(item.cmBackTime)
               this.groupList.forEach(obj=>{
@@ -243,6 +249,7 @@ export default {
                 }
               })
             })
+            
         console.log(res)
         this.checkingTableData = res.rows
         this.page.total = res.total

@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://122.51.12.232:8080/taoke-web-0.0.1-SNAPSHOT/',
+       // target: 'http://122.51.12.232:8080/taoke-web-0.0.1-SNAPSHOT/',
         target: 'http://127.0.0.1:9101',
         pathRewrite: {
           '^/api': ''

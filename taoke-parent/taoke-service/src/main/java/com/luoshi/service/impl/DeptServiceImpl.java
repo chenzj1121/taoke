@@ -29,17 +29,17 @@ public class DeptServiceImpl implements DeptService {
 	 * 查询全部
 	 */
 	@Override
-	public List<TbDept> findAll(TbDept dept) {
-		TbDeptExample example=new TbDeptExample();
-		com.luoshi.pojo.TbDeptExample.Criteria criteria = example.createCriteria();
-		
-		if(dept!=null){			
-						if(dept.getDeptName()!=null && dept.getDeptName().length()>0){
-				criteria.andDeptNameLike("%"+dept.getDeptName()+"%");
-			}
-	
-		}
-		return deptMapper.selectByExample(example);
+	public List<TbDept> findAll() {
+//		TbDeptExample example=new TbDeptExample();
+//		com.luoshi.pojo.TbDeptExample.Criteria criteria = example.createCriteria();
+//		
+//		if(dept!=null){			
+//						if(dept.getDeptName()!=null && dept.getDeptName().length()>0){
+//				criteria.andDeptNameLike("%"+dept.getDeptName()+"%");
+//			}
+//	
+//		}
+		return deptMapper.selectByExample(null);
 	}
 
 	/**

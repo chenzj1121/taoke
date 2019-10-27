@@ -82,41 +82,75 @@ public class CoopController {
 	 * @param coop
 	 * @return
 	 */
-	@RequestMapping("/add")
-	public Result add(@RequestBody TbCoop coop,@RequestParam(value="file",required=false) MultipartFile[] file){
+//	@RequestMapping("/add")
+//	public Result add(@RequestBody TbCoop coop,@RequestParam(value="file",required=false) MultipartFile[] file){
+//		try {
+//			 //定义序号
+//		    int count=1;
+//		    for (MultipartFile mf : file) {
+//			if(!mf.isEmpty()){
+//				// 使用UUID给图片重命名，并去掉四个“-”
+//				String name = UUID.randomUUID().toString().replaceAll("-", "");
+//				// 获取文件的扩展名
+//				String ext = FilenameUtils.getExtension(mf
+//				.getOriginalFilename());  
+//				// 设置图片上传路径
+//				String url = request.getSession().getServletContext()
+//				.getRealPath("/upload");
+//				System.out.println(url);
+//				// 以绝对路径保存重名命后的图片
+//				mf.transferTo(new File(url + "/" + name + "." + ext));
+//				// 把图片存储路径保存到数据库
+//				String path="upload/" + name + "." + ext;
+//				if(count==1){
+//					//
+//					coop.setCoopMainpicture(path);
+//				}else if(count==2){
+//					coop.setCoopPicture(path);
+//				}else if(count==3){
+//					coop.setCoopRealShot(path);
+//				}
+//			}  
+//			count++;
+//		}  
+//			coopService.add(coop);
+//			return new Result(true, "增加成功");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return new Result(false, "增加失败");
+//		}
+//	}
+			@RequestMapping("/add")
+			public Result add(@RequestBody TbCoop coop){
+				try {
+					coopService.add(coop);
+					return new Result(true, "增加成功");
+				} catch (Exception e) {
+					e.printStackTrace();
+					return new Result(false, "增加失败");
+				}
+			}
+	
+	
+	@RequestMapping("/up")
+	public Result up(@RequestParam(value="file",required=false) MultipartFile file){
 		try {
-			 //定义序号
-		    int count=1;
-		    for (MultipartFile mf : file) {
-			if(!mf.isEmpty()){
+
 				// 使用UUID给图片重命名，并去掉四个“-”
 				String name = UUID.randomUUID().toString().replaceAll("-", "");
 				// 获取文件的扩展名
-				String ext = FilenameUtils.getExtension(mf
-				.getOriginalFilename());  
+				String ext = FilenameUtils.getExtension(file.getOriginalFilename());  
 				// 设置图片上传路径
-				String url = request.getSession().getServletContext()
-				.getRealPath("/upload");
+				String url = request.getSession().getServletContext().getRealPath("/upload");
 				System.out.println(url);
 				// 以绝对路径保存重名命后的图片
-				mf.transferTo(new File(url + "/" + name + "." + ext));
+				file.transferTo(new File(url + "/" + name + "." + ext));
 				// 把图片存储路径保存到数据库
 				String path="upload/" + name + "." + ext;
-				if(count==1){
-					coop.setCoopMainpicture(path);
-				}else if(count==2){
-					coop.setCoopPicture(path);
-				}else if(count==3){
-					coop.setCoopRealShot(path);
-				}
-			}  
-			count++;
-		}  
-			coopService.add(coop);
-			return new Result(true, "增加成功");
+				return new Result(true, path);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "增加失败");
+			   return new Result(false, "上传失败");
 		}
 	}
 	

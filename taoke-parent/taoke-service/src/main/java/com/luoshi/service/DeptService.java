@@ -12,9 +12,10 @@ public interface DeptService {
 
 	/**
 	 * 返回全部列表
+	 * @param dept 
 	 * @return
 	 */
-	public List<TbDept> findAll();
+	public List<TbDept> findAll(TbDept dept);
 	
 	
 	/**

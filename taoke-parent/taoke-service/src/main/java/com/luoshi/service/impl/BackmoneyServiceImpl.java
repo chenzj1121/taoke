@@ -99,11 +99,29 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 			if(user.getType().equals("2")) {
 				criteria.andBmUserIdEqualTo(user.getId());
 			}
+			//根据店铺名称查找
 			if(backmoney.getBmShopName()!=null && backmoney.getBmShopName().length()>0){
 				criteria.andBmShopNameLike("%"+backmoney.getBmShopName()+"%");
 			}
+			//根据商品id
+			if(backmoney.getBmGoodsId()!=null ){
+				criteria.andBmGoodsIdEqualTo(backmoney.getBmGoodsId());
+			}
+			//优惠券名称
 			if(backmoney.getBmYhqName()!=null && backmoney.getBmYhqName().length()>0){
 				criteria.andBmYhqNameLike("%"+backmoney.getBmYhqName()+"%");
+			}
+			//上线时间
+			if(backmoney.getBmOnlineTime()!=null ){
+				criteria.andBmOnlineTimeEqualTo(backmoney.getBmOnlineTime());
+			}
+			//下线时间
+			if(backmoney.getBmOfflineTime()!=null ){
+				criteria.andBmOfflineTimeEqualTo(backmoney.getBmOfflineTime());
+			}
+			//状态
+			if(backmoney.getBmType()!=null) {
+				criteria.andBmTypeEqualTo(backmoney.getBmType());
 			}
 			if(backmoney.getBmType()!=null && backmoney.getBmType().length()>0){
 				criteria.andBmTypeLike("%"+backmoney.getBmType()+"%");

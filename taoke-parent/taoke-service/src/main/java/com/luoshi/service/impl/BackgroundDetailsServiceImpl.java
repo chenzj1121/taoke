@@ -156,6 +156,15 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			if(backgroundDetails.getOrdersType()!=null){
 				criteria.andOrdersTypeEqualTo(backgroundDetails.getOrdersType());
 			}
+			//结算金额排序
+			if(backgroundDetails.getPayMoney()!=null) {
+				if("1".equals(backgroundDetails.getPayMoney())) {
+					example.setOrderByClause("`pay_money` ASC,id ASC");
+				}else if("2".equals(backgroundDetails.getPayMoney())) {
+					example.setOrderByClause("`pay_money` DESC,id ASC");
+				}
+				
+			}
 			
 		}
 		

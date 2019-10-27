@@ -1464,6 +1464,146 @@ public class TbCheckmoneysExample {
             addCriterion("cm_shop_id not between", value1, value2, "cmShopId");
             return (Criteria) this;
         }
+
+        public Criteria andCmDkPhoteIsNull() {
+            addCriterion("cm_dk_phote is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteIsNotNull() {
+            addCriterion("cm_dk_phote is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteEqualTo(String value) {
+            addCriterion("cm_dk_phote =", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteNotEqualTo(String value) {
+            addCriterion("cm_dk_phote <>", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteGreaterThan(String value) {
+            addCriterion("cm_dk_phote >", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteGreaterThanOrEqualTo(String value) {
+            addCriterion("cm_dk_phote >=", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteLessThan(String value) {
+            addCriterion("cm_dk_phote <", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteLessThanOrEqualTo(String value) {
+            addCriterion("cm_dk_phote <=", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteLike(String value) {
+            addCriterion("cm_dk_phote like", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteNotLike(String value) {
+            addCriterion("cm_dk_phote not like", value, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteIn(List<String> values) {
+            addCriterion("cm_dk_phote in", values, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteNotIn(List<String> values) {
+            addCriterion("cm_dk_phote not in", values, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteBetween(String value1, String value2) {
+            addCriterion("cm_dk_phote between", value1, value2, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmDkPhoteNotBetween(String value1, String value2) {
+            addCriterion("cm_dk_phote not between", value1, value2, "cmDkPhote");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongIsNull() {
+            addCriterion("cm_beiyong is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongIsNotNull() {
+            addCriterion("cm_beiyong is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongEqualTo(String value) {
+            addCriterion("cm_beiyong =", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongNotEqualTo(String value) {
+            addCriterion("cm_beiyong <>", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongGreaterThan(String value) {
+            addCriterion("cm_beiyong >", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongGreaterThanOrEqualTo(String value) {
+            addCriterion("cm_beiyong >=", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongLessThan(String value) {
+            addCriterion("cm_beiyong <", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongLessThanOrEqualTo(String value) {
+            addCriterion("cm_beiyong <=", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongLike(String value) {
+            addCriterion("cm_beiyong like", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongNotLike(String value) {
+            addCriterion("cm_beiyong not like", value, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongIn(List<String> values) {
+            addCriterion("cm_beiyong in", values, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongNotIn(List<String> values) {
+            addCriterion("cm_beiyong not in", values, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongBetween(String value1, String value2) {
+            addCriterion("cm_beiyong between", value1, value2, "cmBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBeiyongNotBetween(String value1, String value2) {
+            addCriterion("cm_beiyong not between", value1, value2, "cmBeiyong");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

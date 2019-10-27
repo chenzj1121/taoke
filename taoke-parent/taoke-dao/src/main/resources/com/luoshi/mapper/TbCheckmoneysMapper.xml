@@ -23,6 +23,8 @@
     <result column="cm_fc_money" property="cmFcMoney" jdbcType="DOUBLE" />
     <result column="cm_yhq_type" property="cmYhqType" jdbcType="VARCHAR" />
     <result column="cm_shop_id" property="cmShopId" jdbcType="INTEGER" />
+    <result column="cm_dk_phote" property="cmDkPhote" jdbcType="VARCHAR" />
+    <result column="cm_beiyong" property="cmBeiyong" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -86,7 +88,7 @@
     cm_id, cm_sell_dept, cm_dept, cm_user_id, cm_shop_name, cm_shop_type, cm_js_money, 
     cm_fk_money, cm_sy_money, cm_js_nums, cm_fw_price, cm_yhq_photo, cm_load_customer, 
     cm_apply_time, cm_type, cm_yhq_name, cm_back_time, cm_text, cm_fc_money, cm_yhq_type, 
-    cm_shop_id
+    cm_shop_id, cm_dk_phote, cm_beiyong
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbCheckmoneysExample" >
     select
@@ -125,16 +127,16 @@
       cm_js_nums, cm_fw_price, cm_yhq_photo, 
       cm_load_customer, cm_apply_time, cm_type, 
       cm_yhq_name, cm_back_time, cm_text, 
-      cm_fc_money, cm_yhq_type, cm_shop_id
-      )
+      cm_fc_money, cm_yhq_type, cm_shop_id, 
+      cm_dk_phote, cm_beiyong)
     values (#{cmId,jdbcType=INTEGER}, #{cmSellDept,jdbcType=VARCHAR}, #{cmDept,jdbcType=VARCHAR}, 
       #{cmUserId,jdbcType=INTEGER}, #{cmShopName,jdbcType=VARCHAR}, #{cmShopType,jdbcType=VARCHAR}, 
       #{cmJsMoney,jdbcType=DOUBLE}, #{cmFkMoney,jdbcType=DOUBLE}, #{cmSyMoney,jdbcType=DOUBLE}, 
       #{cmJsNums,jdbcType=INTEGER}, #{cmFwPrice,jdbcType=DOUBLE}, #{cmYhqPhoto,jdbcType=VARCHAR}, 
       #{cmLoadCustomer,jdbcType=VARCHAR}, #{cmApplyTime,jdbcType=TIMESTAMP}, #{cmType,jdbcType=VARCHAR}, 
       #{cmYhqName,jdbcType=VARCHAR}, #{cmBackTime,jdbcType=TIMESTAMP}, #{cmText,jdbcType=VARCHAR}, 
-      #{cmFcMoney,jdbcType=DOUBLE}, #{cmYhqType,jdbcType=VARCHAR}, #{cmShopId,jdbcType=INTEGER}
-      )
+      #{cmFcMoney,jdbcType=DOUBLE}, #{cmYhqType,jdbcType=VARCHAR}, #{cmShopId,jdbcType=INTEGER}, 
+      #{cmDkPhote,jdbcType=VARCHAR}, #{cmBeiyong,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbCheckmoneys" >
     insert into tb_checkmoneys
@@ -202,6 +204,12 @@
       <if test="cmShopId != null" >
         cm_shop_id,
       </if>
+      <if test="cmDkPhote != null" >
+        cm_dk_phote,
+      </if>
+      <if test="cmBeiyong != null" >
+        cm_beiyong,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cmId != null" >
@@ -266,6 +274,12 @@
       </if>
       <if test="cmShopId != null" >
         #{cmShopId,jdbcType=INTEGER},
+      </if>
+      <if test="cmDkPhote != null" >
+        #{cmDkPhote,jdbcType=VARCHAR},
+      </if>
+      <if test="cmBeiyong != null" >
+        #{cmBeiyong,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -341,6 +355,12 @@
       <if test="record.cmShopId != null" >
         cm_shop_id = #{record.cmShopId,jdbcType=INTEGER},
       </if>
+      <if test="record.cmDkPhote != null" >
+        cm_dk_phote = #{record.cmDkPhote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmBeiyong != null" >
+        cm_beiyong = #{record.cmBeiyong,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -368,7 +388,9 @@
       cm_text = #{record.cmText,jdbcType=VARCHAR},
       cm_fc_money = #{record.cmFcMoney,jdbcType=DOUBLE},
       cm_yhq_type = #{record.cmYhqType,jdbcType=VARCHAR},
-      cm_shop_id = #{record.cmShopId,jdbcType=INTEGER}
+      cm_shop_id = #{record.cmShopId,jdbcType=INTEGER},
+      cm_dk_phote = #{record.cmDkPhote,jdbcType=VARCHAR},
+      cm_beiyong = #{record.cmBeiyong,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -436,6 +458,12 @@
       <if test="cmShopId != null" >
         cm_shop_id = #{cmShopId,jdbcType=INTEGER},
       </if>
+      <if test="cmDkPhote != null" >
+        cm_dk_phote = #{cmDkPhote,jdbcType=VARCHAR},
+      </if>
+      <if test="cmBeiyong != null" >
+        cm_beiyong = #{cmBeiyong,jdbcType=VARCHAR},
+      </if>
     </set>
     where cm_id = #{cmId,jdbcType=INTEGER}
   </update>
@@ -460,7 +488,9 @@
       cm_text = #{cmText,jdbcType=VARCHAR},
       cm_fc_money = #{cmFcMoney,jdbcType=DOUBLE},
       cm_yhq_type = #{cmYhqType,jdbcType=VARCHAR},
-      cm_shop_id = #{cmShopId,jdbcType=INTEGER}
+      cm_shop_id = #{cmShopId,jdbcType=INTEGER},
+      cm_dk_phote = #{cmDkPhote,jdbcType=VARCHAR},
+      cm_beiyong = #{cmBeiyong,jdbcType=VARCHAR}
     where cm_id = #{cmId,jdbcType=INTEGER}
   </update>
 </mapper>

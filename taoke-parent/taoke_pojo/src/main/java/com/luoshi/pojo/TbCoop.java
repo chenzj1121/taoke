@@ -79,6 +79,10 @@ public class TbCoop {
 
     private String coopPayType;
 
+    private String coopGoodsTitle;
+
+    private String coopBeiyong;
+
     public Integer getCoopId() {
         return coopId;
     }
@@ -381,5 +385,21 @@ public class TbCoop {
 
     public void setCoopPayType(String coopPayType) {
         this.coopPayType = coopPayType == null ? null : coopPayType.trim();
+    }
+
+    public String getCoopGoodsTitle() {
+        return coopGoodsTitle;
+    }
+
+    public void setCoopGoodsTitle(String coopGoodsTitle) {
+        this.coopGoodsTitle = coopGoodsTitle == null ? null : coopGoodsTitle.trim();
+    }
+
+    public String getCoopBeiyong() {
+        return coopBeiyong;
+    }
+
+    public void setCoopBeiyong(String coopBeiyong) {
+        this.coopBeiyong = coopBeiyong == null ? null : coopBeiyong.trim();
     }
 }

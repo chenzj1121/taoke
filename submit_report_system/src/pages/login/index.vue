@@ -22,6 +22,7 @@
 <script>
 import { setUser } from '@/utils/auth'
 import { reqLogin } from '@/api'
+import { Base64 } from 'js-base64'
 export default {
   data () {
     const passwordValidator = (rule, value, callback) => {
@@ -61,6 +62,7 @@ export default {
           // this.loading = false
           // this.$sucmsg('登录成功!')
           // this.$router.replace({ path: '/home' })
+          this.loginForm.password = Base64.encode(this.loginForm.password)
           reqLogin(this.loginForm).then(res => {
             // console.log(res)
             if(res.success){
@@ -71,7 +73,7 @@ export default {
               this.$sucmsg('登录成功!')
               this.$router.replace({ path: '/home' })
             }else{
-               this.$message.error(res.message);
+               this.$message.error("账号密码错误");
             }
           })
             .catch(err => {

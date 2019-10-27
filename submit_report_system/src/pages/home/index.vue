@@ -42,21 +42,24 @@ export default {
        year
     }
     findTarget(userId,year,month).then(res=>{
-      this.loading = false
-      let list = {
-        target: res.workTarget,
+      if (res) {
+          let list = {
+            target: res.workTarget,
+          }
+          let nowDay = date.getDate();
+          let fullDay = new Date(date.getFullYear(),(date.getMonth()+1),0).getDate() //当月总天数
+          list.shouldBeDone = (list.target/fullDay*nowDay).toFixed(2);
+          list.hasDone = res.firstWeekCustom+res.secondWeekCustom+res.thirdWeekCustom+res.fourthWeekCustom+res.fifthWeekCustom
+          list.donePercent = (list.hasDone/list.target*100).toFixed(2)+"%";
+          list.diff = (list.target - list.hasDone)>0?"-"+ (list.target - list.hasDone):"+"+ (list.target - list.hasDone)*(-1)
+          list.plannedSpeed = (nowDay/fullDay*100).toFixed(2)+"%"
+          list.monthDays = fullDay;
+          list.day =nowDay;
+          list.diff2 = ((list.hasDone/list.target-nowDay/fullDay)*100).toFixed(2)+"%"
+          this.tableData.push(list)
       }
-      let nowDay = date.getDate();
-      let fullDay = new Date(date.getFullYear(),(date.getMonth()+1),0).getDate() //当月总天数
-      list.shouldBeDone = (list.target/fullDay*nowDay).toFixed(2);
-      list.hasDone = res.firstWeekCustom+res.secondWeekCustom+res.thirdWeekCustom+res.fourthWeekCustom+res.fifthWeekCustom
-      list.donePercent = (list.hasDone/list.target*100).toFixed(2)+"%";
-      list.diff = (list.target - list.hasDone)>0?"-"+ (list.target - list.hasDone):"+"+ (list.target - list.hasDone)*(-1)
-      list.plannedSpeed = (nowDay/fullDay*100).toFixed(2)+"%"
-      list.monthDays = fullDay;
-      list.day =nowDay;
-      list.diff2 = ((list.hasDone/list.target-nowDay/fullDay)*100).toFixed(2)+"%"
-      this.tableData.push(list)
+      this.loading = false
+    
       
     })
   },

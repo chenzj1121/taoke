@@ -2,7 +2,7 @@ import ajax from './axios'
 
 // const PRE_URL 
 
-export const PRE_URL = ''
+export const PRE_URL = '/api'
 
 export const reqLogin = (user) => ajax(PRE_URL+'/login.do', user, 'post')
 
@@ -103,6 +103,9 @@ export const delUserById = (param) => ajax(PRE_URL + '/sysUser/delete.do?ids=' +
 export const uploadPic = (param) => ajax(PRE_URL + '/coop/up.do', param, 'post')
 
 export const findCoopById = (param) => ajax(PRE_URL + '/coop/findOne.do?id='+ param,'', 'post')
+
+export const updateCoop = (param) => ajax(PRE_URL + '/coop/update.do', param, 'post')
+
 
 
 

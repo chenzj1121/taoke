@@ -119,17 +119,24 @@
           <i class="el-icon-plus"></i>
         </el-upload> -->
           <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
-        <form enctype="multipart/form-data" target="nm_iframe" id="form" style="display:inline">
-        <input type="file" id="yhq" name="file" @change="upload">
+        <form enctype="multipart/form-data" target="nm_iframe" style="display:inline">
+        <input type="file" class="yhq" name="file" @change="upload" style="display:none" data-id="1" >
+         <div class="picBox"  @click="openPic">
+          点击添加图片
+          <img class="showPic" src="" >
+        </div>
         </form>
+       
       </el-form-item>
       <br/>
       <el-form-item label="打款截图：">
-        <!-- <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
-          list-type="picture-card">
-          <i class="el-icon-plus"></i>
-        </el-upload> -->
+        <form enctype="multipart/form-data" target="nm_iframe" style="display:inline">
+        <input type="file" class="yhq" name="file" @change="upload" style="display:none" data-id="2" >
+         <div class="picBox"  @click="openPic">
+          点击添加图片
+          <img class="showPic" src="" >
+        </div>
+        </form>
       </el-form-item>
       <br/>
       <el-form-item label="转入账户">
@@ -199,16 +206,50 @@ export default {
     this.userInfo= getUser()
   },
   methods: {
-    upload(){
-      let form = document.getElementById("form")
-          var formData = new FormData() ;
+    getObjectURL(file) {  
+    var url = null;  
+    if (window.createObjcectURL != undefined) {  
+        url = window.createOjcectURL(file);  
+    } else if (window.URL != undefined) {  
+        url = window.URL.createObjectURL(file);  
+    } else if (window.webkitURL != undefined) {  
+        url = window.webkitURL.createObjectURL(file);  
+    }  
+    return url;  
+   },
+   openPic(e){
+       e.currentTarget.previousElementSibling.click()
+   },
+    upload(e){
+          let form  = e.currentTarget.parentElement
+      // let form = document.getElementById("form")
+          let formData = new FormData() ;
           let file = document.getElementsByName("file")[0].files[0]
           let fileType = file.name.split(".")[1]
           let fileName = file.name.split(".")[0]
-          formData.append('file',file);
+         if(!/\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/.test('.'+fileType)){
+            this.$errmsg("请上传图片格式文件")
+         }else{
+           let url = this.getObjectURL(file)
+           let picBox = e.currentTarget.nextElementSibling.getElementsByClassName("showPic")[0]
+           let type = e.currentTarget.getAttribute("data-id")
+           console.log(type)
+           formData.append('file',file);
           uploadPic(formData).then(res=>{
+            if (res.success) {
+              picBox.setAttribute("src",url)
+              picBox.style.display = 'block'
+              if (type==1) {
+                this.form.cmYhqPhoto = res.message
+              }else{
+                this.form.cmYhqType = res.message
+              }
+            }else{
+              this.$errmsg(res.message)
+            }
             console.log(res)
           })
+         }
         },
     addGoods(){
       this.multipleSelection.forEach((item,index)=>{
@@ -321,6 +362,25 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.picBox{
+  width: 180px;
+  height: 180px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 180px;
+  color: #409EFF;
+  cursor: pointer;
+  position: relative;
+  .showPic{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+}
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;

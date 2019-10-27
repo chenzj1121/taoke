@@ -9,11 +9,11 @@
           <el-radio label="零点" name="zero" v-model="form.coopZero"/>
           <el-radio label="非零点" name="zero" v-model="form.coopZero"/>
         </el-form-item>
-        <el-form-item prop="goodTitle" label="商品标题：" :rules="[
+        <el-form-item prop="coopGoodsTitle" label="商品标题：" :rules="[
             { required: true, message: '请输入商品标题' },
             { min: 10, max: 20, message: '商品标题在10~20字之间', trigger: 'blur' }
           ]">
-          <el-input v-model="form.goodTitle"/>
+          <el-input v-model="form.coopGoodsTitle"/>
         </el-form-item>
         <el-form-item label="商品ID：">
           <div class="flex">
@@ -149,7 +149,7 @@
 
 <script>
 import axios from 'axios'
-import {getSysRole,getGoodsInfo,addCoop,findCoopById} from '@/api'
+import {getSysRole,getGoodsInfo,addCoop,findCoopById,updateCoop} from '@/api'
 import {getUser} from "@/utils/auth"
 export default {
   data () {
@@ -237,6 +237,16 @@ export default {
       this.$refs.form.validate(valid => {
         if(valid){
           if (this.flag) {
+            if (this.isUpadte) {
+              updateCoop(this.form).then(res=>{
+                if (res.success) {
+                  this.$sucmsg(res.message)
+                  this.$router.go(-1)
+                }else {
+                  this.$errmsg(res.message)
+                }
+              })
+            }else{
               console.log(this.form)
               this.form.coopTbtime = new Date()
               addCoop(this.form).then(res=>{
@@ -248,8 +258,9 @@ export default {
                   this.$errmsg(res.message)
                 }
               })
+            }
           }else{
-            this.$("请检测商品")
+            this.$errmsg("请检测商品")
           }
          
         }else{

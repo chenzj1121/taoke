@@ -76,12 +76,12 @@
       <el-table-column prop="cmFwPrice" label="服务费单价"></el-table-column>
       <el-table-column prop="cmYhqPhoto" label="优惠券截图">
         <template slot-scope="scope">
-          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+          <img :src="`${PRE_URL}/`+scope.row.cmYhqPhoto"  min-width="70" height="70">
         </template>
       </el-table-column>
       <el-table-column prop="name" label="打款截图">
          <template slot-scope="scope">
-          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+          <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70">
         </template>
       </el-table-column>
       <el-table-column prop="cmLoadCustomer" label="转入账户"></el-table-column>
@@ -90,7 +90,11 @@
       <el-table-column prop="cmYhqName" label="优惠券名称"></el-table-column>
       <el-table-column prop="cmBackTime" label="到款时间"></el-table-column>
       <el-table-column prop="cmText" label="备注"></el-table-column>
-      <el-table-column prop="cmYhqType" label="券截图"></el-table-column>
+      <el-table-column prop="cmYhqType" label="券截图">
+         <template slot-scope="scope">
+          <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70">
+        </template>
+      </el-table-column>
       <el-table-column label="再次提交" width="120px">
         <template>
           <el-button size="mini" type="success">再次提交</el-button>
@@ -128,7 +132,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail} from '@/api'
+import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL} from '@/api'
 export default {
   components: {
     Page
@@ -174,7 +178,8 @@ export default {
       otherRecordsVisiable: false,
         deptList:[],
         groupList:[],
-        userList:[]
+        userList:[],
+        PRE_URL,
     }
   },
 

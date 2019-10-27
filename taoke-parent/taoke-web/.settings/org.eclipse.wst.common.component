@@ -10,6 +10,9 @@
         <dependent-module archiveName="taoke-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/taoke-service/taoke-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="taoke_pojo-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/taoke_pojo/taoke_pojo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="taoke-web"/>
         <property name="java-output-path" value="/taoke-web/target/classes"/>
     </wb-module>

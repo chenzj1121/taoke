@@ -113,19 +113,23 @@
         <br/>
       </div>
       <el-form-item label="优惠券使用情况截图：">
-        <el-upload
+        <!-- <el-upload
           action="https://jsonplaceholder.typicode.com/posts/"
           list-type="picture-card">
           <i class="el-icon-plus"></i>
-        </el-upload>
+        </el-upload> -->
+          <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
+        <form enctype="multipart/form-data" target="nm_iframe" id="form" style="display:inline">
+        <input type="file" id="yhq" name="file" @change="upload">
+        </form>
       </el-form-item>
       <br/>
       <el-form-item label="打款截图：">
-        <el-upload
+        <!-- <el-upload
           action="https://jsonplaceholder.typicode.com/posts/"
           list-type="picture-card">
           <i class="el-icon-plus"></i>
-        </el-upload>
+        </el-upload> -->
       </el-form-item>
       <br/>
       <el-form-item label="转入账户">
@@ -153,7 +157,7 @@
 </template>
 
 <script>
-import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney,addGoodsDetail} from '@/api'
+import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney,addGoodsDetail,uploadPic} from '@/api'
 import {getUser} from "@/utils/auth"
 import Page from '@/components/page'
 export default {
@@ -195,6 +199,17 @@ export default {
     this.userInfo= getUser()
   },
   methods: {
+    upload(){
+      let form = document.getElementById("form")
+          var formData = new FormData() ;
+          let file = document.getElementsByName("file")[0].files[0]
+          let fileType = file.name.split(".")[1]
+          let fileName = file.name.split(".")[0]
+          formData.append('file',file);
+          uploadPic(formData).then(res=>{
+            console.log(res)
+          })
+        },
     addGoods(){
       this.multipleSelection.forEach((item,index)=>{
         item.goodsId =  item.coopGoodsId

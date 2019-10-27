@@ -133,7 +133,7 @@
             <span class="flex">
               <el-button size="mini" type="primary" @click="viewGood(scope.row.coopGoodsId)">查看商品</el-button>
               <el-button size="mini">撤回</el-button>
-              <el-button size="mini" type="warning">重新提报</el-button>
+              <el-button size="mini" type="warning" @click="reCoop(scope.row.coopBossId,scope.row.coopId)">重新提报</el-button>
               <el-button size="mini" type="primary" @click="nav2Checking(scope.row)">查款</el-button>
               <el-button size="mini" type="warning">返/退款</el-button>
             </span>
@@ -147,7 +147,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney} from '@/api'
+import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -215,7 +215,14 @@ export default {
     this.bindData()
   },
   methods: {
-   
+   reCoop(id,coopId){
+     getShopById(id).then(res=>{
+       if (res) {
+          this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail' ,params:res,query:{coopId}})
+       }
+       console.log(res)
+     })
+   },
     viewGood(id){
          window.open(`https://item.taobao.com/item.htm?ft=t&id=${id}`);   
     },

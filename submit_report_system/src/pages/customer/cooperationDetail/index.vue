@@ -149,7 +149,7 @@
 
 <script>
 import axios from 'axios'
-import {getSysRole,getGoodsInfo,addCoop} from '@/api'
+import {getSysRole,getGoodsInfo,addCoop,findCoopById} from '@/api'
 import {getUser} from "@/utils/auth"
 export default {
   data () {
@@ -162,7 +162,8 @@ export default {
       },
       shopDetail:{},
       optionList:[],
-      flag :false
+      flag :false,
+      isUpadte:false,
     }
   },
   mounted(){
@@ -181,8 +182,18 @@ export default {
           }
         });
     }
+    if (this.$route.query.coopId) {
+      this.isUpadte = true;
+      this.getCoopDetail()
+    }
   },
   methods: {
+    getCoopDetail(){
+      findCoopById(this.$route.query.coopId).then(res=>{
+        console.log(res)
+        this.form = res
+      })
+    },
     checkGood(id){
       if (id) {
         getGoodsInfo(id).then(res=>{

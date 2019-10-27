@@ -242,7 +242,7 @@ export default {
               if (type==1) {
                 this.form.cmYhqPhoto = res.message
               }else{
-                this.form.cmYhqType = res.message
+                this.form.cmDkPhoto = res.message
               }
             }else{
               this.$errmsg(res.message)

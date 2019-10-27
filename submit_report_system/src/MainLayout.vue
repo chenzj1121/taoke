@@ -14,7 +14,7 @@
       </el-row>
     </el-header>
     <el-main>
-      <router-view/>
+      <router-view :type="type"/>
     </el-main>
   </el-container>
 </template>

@@ -23,7 +23,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column label="序号" type="index"></el-table-column>
       <el-table-column label="小组名称" prop="groupName"></el-table-column>
-      <el-table-column label="所属部门" prop="dept.deptName"></el-table-column>
+      <el-table-column label="所属部门" prop="groupDeptId"></el-table-column>
       <el-table-column label="创建时间" prop="createTime"></el-table-column>
       <el-table-column label="修改小组">
         <template slot-scope="scope">
@@ -117,6 +117,14 @@ export default {
       param.op = this.op
       param.orderBy = this.orderBy
       getGroupByPage(param).then(res => {
+        res.forEach((item,index)=>{
+            this.deptList.forEach(obj=>{
+               if ( item.groupDeptId == obj.deptId){
+                 item.groupDeptId = obj.deptName
+               }
+            })
+        })
+        console.log(res)
         this.groupList = res
       })
     },
@@ -171,9 +179,9 @@ export default {
     }
   },
   created () {
+    this.getDeptList()
     this.getGroupList()
     this.getUserList()
-    this.getDeptList()
   }
 }
 </script>

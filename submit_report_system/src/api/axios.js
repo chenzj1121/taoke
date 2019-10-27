@@ -22,7 +22,7 @@ export default function ajax (url, data = {}, type = 'GET') {
         if (err.response.data && err.response.data.message) {
           Vue.prototype.$message.error(err.response.data.message)
         } else {
-          Vue.prototype.$message.error('there is something warn')
+          Vue.prototype.$message.error('网络出错了！')
         }
         reject(err)
       })

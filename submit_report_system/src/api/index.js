@@ -78,6 +78,8 @@ export const findCoop = (id) => ajax(PRE_URL + '/coop/findOne.do?id='+id,'post')
 export const addBackMoney = (obj) => ajax(PRE_URL + `/backmoney/add.do`,obj,'post')
 export const addGoodsDetail = (obj) => ajax(PRE_URL + `/goods/add.do`,obj,'post')
 export const getGoodsDetail = (obj) => ajax(PRE_URL + `/goods/findByShop.do?shopId=${obj}`,'','post')
+export const delUserById = (param) => ajax(PRE_URL + '/sysUser/delete.do?ids=' + param, 'post')
+
 
 
 

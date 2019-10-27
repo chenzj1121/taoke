@@ -73,7 +73,7 @@
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <el-form-item prop="coopUserId" label="责任人">
+        <el-form-item v-if="type!=2" prop="coopUserId" label="责任人">
           <el-select v-model="form.name">
             <el-option v-for="(option, index) in dutyPersonOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
@@ -148,6 +148,8 @@
 <script>
 import Page from '@/components/page'
 import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney} from '@/api'
+import {getUser} from "@/utils/auth"
+
 export default {
   components: {
     Page
@@ -203,9 +205,11 @@ export default {
       userList:[],
       // groupList:{},
       deptList:[],
+      type:2,
     }
   },
   mounted () {
+    this.type = getUser().type
     this.getUserList()
     this.getDeptList()
     this.bindData()

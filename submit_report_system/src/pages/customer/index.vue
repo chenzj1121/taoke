@@ -60,6 +60,7 @@
           <el-form-item prop="endPrice">
             <el-input :value="form.endPrice" type="number"></el-input>
           </el-form-item>
+          <div v-if="type!=2">
           <el-form-item label="部门:" label-width="60px">
             <div>
               <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">
@@ -84,6 +85,7 @@
               </el-select>
             </div>
           </el-form-item>
+          </div>
           <br>
           <!-- <el-form-item label="资料类型:" label-width="80px">
             <div>
@@ -169,13 +171,12 @@
 
 <script>
 import {getUserByList, getShopList, deleteShopById,updateShop,getDeptByList,getGroupByList,getUserById,getGroupMember} from '@/api'
+import { getUser } from '@/utils/auth'
 import pagination from '@/components/page'
 import maturities from '@/assets/maturity'
-
 export default {
   components: {
     pagination,
-    
   },
   data () {
     return {
@@ -196,9 +197,11 @@ export default {
       userList:[],
       gruopList2:[],//部门联动-小组
       memberList:[],//部门联动-员工
+      type:2,
     }
   },
   mounted () {
+    this.type = getUser().type;
     this.getDeptList()
     this.getUserList()
     this.getGroupList()

@@ -23,8 +23,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="用户角色:" prop="userRole">
-         <el-select v-model="user.userRole">
-            <el-option v-for="(group, index) in groupList" :key="index" :label="group.groupName" :value="group.groupId"></el-option>
+         <el-select :value="user.type" disabled>
+            <el-option v-for="(item, index) in roleList" :key="index" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -38,17 +38,20 @@
 <script>
 import { getUser, setUser } from '@/utils/auth'
 import { updUser, getDeptByList, getGroupByList } from '@/api/index'
+import roleList from '@/assets/role.js'
 export default {
   data () {
     return {
       user: getUser() || {},
       groupList: [],
-      deptList: []
+      deptList: [],
+      roleList,
     }
   },
   created () {
     this.getGroupList()
     this.getDeptList()
+    console.log(this.user)
   },
   methods: {
     getDeptList () {

@@ -91,6 +91,7 @@ export default {
   },
   mounted () {
     this.bindData()
+    this.type = getUser().type
   },
   data () {
     return {
@@ -105,7 +106,8 @@ export default {
         { label: '是', value: true },
         { label: '否', value: false }
       ],
-      publicCustomerTableData: []
+      publicCustomerTableData: [],
+      type:2,
     }
   },
   methods: {

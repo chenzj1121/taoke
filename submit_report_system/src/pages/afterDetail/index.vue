@@ -2,6 +2,7 @@
   <div>
     <div class="title">后台明细</div>
     <el-form inline size="mini">
+      <div v-if="type!=2">
       <el-form-item label="销售部">
        <el-select v-model="form.deptId" placeholder="请选择" @change="getGroup(form.deptId)">
               <el-option value="" label="全部"></el-option>
@@ -20,6 +21,7 @@
                 <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
               </el-select>
       </el-form-item>
+      </div>
       <el-form-item label="店铺名称">
         <el-input v-model="form.shopName"></el-input>
       </el-form-item>
@@ -115,6 +117,7 @@
 <script>
 import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList,PRE_URL,uploadDetail} from "@/api/index"
 import Page from '@/components/page'
+import { getUser } from '@/utils/auth'
 export default {
    components: {
     Page
@@ -147,9 +150,11 @@ export default {
       groupList:[],
       gruopList2:[],//部门联动-小组
       memberList:[],//部门联动-员工
+      type:2,
     }
   },
   mounted(){
+    this.type = getUser().type
     this.getUserList()
     this.getGroupList()
     this.getDeptList()

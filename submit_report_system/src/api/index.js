@@ -4,56 +4,56 @@ import ajax from './axios'
 
 export const PRE_URL = '/api'
 
-export const reqLogin = (user) => ajax(PRE_URL + '/login.do', user, 'post')
+export const reqLogin = (user) => ajax('/login.do', user, 'post')
 
-export const getUserByPage = (sysUser, pageNum, pageSize) => ajax(PRE_URL + `/sysUser/search.do?pageNum=${pageNum}&pageSize=${pageSize}`, sysUser, 'post')
+export const getUserByPage = (sysUser, pageNum, pageSize) => ajax(`/sysUser/search.do?pageNum=${pageNum}&pageSize=${pageSize}`, sysUser, 'post')
 
-export const updUser = (param) => ajax(PRE_URL + '/sysUser/update.do', param, 'post')
+export const updUser = (param) => ajax('/sysUser/update.do', param, 'post')
 
-export const addUser = (param) => ajax(PRE_URL + '/sysUser/add.do', param, 'post')
+export const addUser = (param) => ajax('/sysUser/add.do', param, 'post')
 
-export const getUserById = (id) => ajax(PRE_URL + '/sysUser/findOne.do?id=' + id, 'get')
+export const getUserById = (id) => ajax('/sysUser/findOne.do?id=' + id, 'get')
 
-export const getDeptByPage = (param, page, rows) => ajax(PRE_URL + `/dept/search.do?page=${page}&rows=${rows}`, param, 'post')
+export const getDeptByPage = (param, page, rows) => ajax(`/dept/search.do?page=${page}&rows=${rows}`, param, 'post')
 
-export const getDeptByList = () => ajax(PRE_URL + '/dept/findAll.do', '', 'post')
+export const getDeptByList = () => ajax('/dept/findAll.do', '', 'post')
 
-export const getDeptById = (param) => ajax(PRE_URL + '/dept/gfindOne.do?id=' + param, 'get')
+export const getDeptById = (param) => ajax('/dept/gfindOne.do?id=' + param, 'get')
 
-export const delDeptById = (param) => ajax(PRE_URL + '/dept/delete.do?ids=' + param, 'post')
+export const delDeptById = (param) => ajax('/dept/delete.do?ids=' + param, 'post')
 
-export const addDept = (param) => ajax(PRE_URL + '/dept/add.do', param, 'post')
+export const addDept = (param) => ajax('/dept/add.do', param, 'post')
 
-export const updDept = (param) => ajax(PRE_URL + '/dept/update.do', param, 'post')
+export const updDept = (param) => ajax('/dept/update.do', param, 'post')
 
-export const getUserByList = () => ajax(PRE_URL + '/sysUser/findAll.do', '', 'post')
+export const getUserByList = () => ajax('/sysUser/findAll.do', '', 'post')
 
-export const getGroupByPage = (param) => ajax(PRE_URL + '/group/findAll.do', param, 'post')
+export const getGroupByPage = (param) => ajax('/group/findAll.do', param, 'post')
 
-// export const getGroupByList = () => ajax(PRE_URL + '/dept/findAll.do', '', 'post')
-export const getGroupByList = () => ajax(PRE_URL + '/group/findAll.do', '', 'post')
+// export const getGroupByList = () => ajax('/dept/findAll.do', '', 'post')
+export const getGroupByList = () => ajax('/group/findAll.do', '', 'post')
 
-export const getGroupById = (param) => ajax(PRE_URL + '/group/findOne.do?id=' + param, 'get')
+export const getGroupById = (param) => ajax('/group/findOne.do?id=' + param, 'get')
 
-export const delGroupById = (param) => ajax(PRE_URL + '/group/delete.do?ids=' + param, 'get')
+export const delGroupById = (param) => ajax('/group/delete.do?ids=' + param, 'get')
 
-export const addGroup = (param) => ajax(PRE_URL + '/group/add.do', param, 'post')
+export const addGroup = (param) => ajax('/group/add.do', param, 'post')
 
-export const updGroup = (param) => ajax(PRE_URL + '/group/update.do', param, 'post')
+export const updGroup = (param) => ajax('/group/update.do', param, 'post')
 
-export const getShopList = (shop, page, rows) => ajax(PRE_URL + `/shop/search.do?page=${page}&rows=${rows}`, shop, 'post')
+export const getShopList = (shop, page, rows) => ajax(`/shop/search.do?page=${page}&rows=${rows}`, shop, 'post')
 
-export const getShopById = id => ajax(PRE_URL + `/shop/findOne.do`, { id })
+export const getShopById = id => ajax(`/shop/findOne.do`, { id })
 
-export const addShop = (shop) => ajax(PRE_URL + `/shop/add.do`, shop, 'post')
+export const addShop = (shop) => ajax(`/shop/add.do`, shop, 'post')
 
-export const updateShop = shop => ajax(PRE_URL + `/shop/update.do`, shop, 'post')
+export const updateShop = shop => ajax(`/shop/update.do`, shop, 'post')
 
-export const deleteShopById = id => ajax(PRE_URL + `/shop/delete.do?ids=${id}`, 'post')
+export const deleteShopById = id => ajax(`/shop/delete.do?ids=${id}`, 'post')
 
-export const getCooperationPage = (form, page, rows) => ajax(PRE_URL + `/coop/search.do?page=${page}&rows=${rows}`, form, 'post')
+export const getCooperationPage = (form, page, rows) => ajax(`/coop/search.do?page=${page}&rows=${rows}`, form, 'post')
 
-export const getCheckmonkeyPage = (form, page, rows) => ajax(PRE_URL + `/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
+export const getCheckmonkeyPage = (form, page, rows) => ajax(`/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
 
 //10-18 lambor
 export const addTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/add.do',target, 'post')

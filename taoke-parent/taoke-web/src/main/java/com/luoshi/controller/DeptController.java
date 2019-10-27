@@ -29,8 +29,8 @@ public class DeptController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbDept> findAll(@RequestBody TbDept dept){			
-		return deptService.findAll(dept);
+	public List<TbDept> findAll(){			
+		return deptService.findAll();
 	}
 
 	

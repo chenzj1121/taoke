@@ -15,7 +15,7 @@ public interface DeptService {
 	 * @param dept 
 	 * @return
 	 */
-	public List<TbDept> findAll(TbDept dept);
+	public List<TbDept> findAll();
 	
 	
 	/**

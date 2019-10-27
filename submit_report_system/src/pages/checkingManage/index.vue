@@ -81,7 +81,7 @@
       </el-table-column>
       <el-table-column prop="name" label="打款截图">
          <template slot-scope="scope">
-          <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70">
+          <img :src="`${PRE_URL}/`+scope.row.cmDkPhote"  min-width="70" height="70">
         </template>
       </el-table-column>
       <el-table-column prop="cmLoadCustomer" label="转入账户"></el-table-column>

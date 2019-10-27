@@ -45,6 +45,10 @@ public class TbCheckmoneys {
 
     private Integer cmShopId;
 
+    private String cmDkPhote;
+
+    private String cmBeiyong;
+
     public Integer getCmId() {
         return cmId;
     }
@@ -211,5 +215,21 @@ public class TbCheckmoneys {
 
     public void setCmShopId(Integer cmShopId) {
         this.cmShopId = cmShopId;
+    }
+
+    public String getCmDkPhote() {
+        return cmDkPhote;
+    }
+
+    public void setCmDkPhote(String cmDkPhote) {
+        this.cmDkPhote = cmDkPhote == null ? null : cmDkPhote.trim();
+    }
+
+    public String getCmBeiyong() {
+        return cmBeiyong;
+    }
+
+    public void setCmBeiyong(String cmBeiyong) {
+        this.cmBeiyong = cmBeiyong == null ? null : cmBeiyong.trim();
     }
 }

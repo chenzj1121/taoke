@@ -31,6 +31,23 @@ export default new Router({
           component: () => import('@/pages/home')
         },
         {
+          path:'/tiBao',
+          name: 'tiBao',
+          component: Layout,
+          redirect:'/tiBao/index',
+          children:[{
+            path:'index',
+            name:'tiBaoIndex',
+            component: () => import('@/pages/tiBao')
+          },
+          {
+            path:'userList',
+            name:'tiBaoUser',
+            component: () => import('@/pages/tiBao/userList')
+          }
+          ]
+        },
+        {
           // 私海客户
           path: '/customer',
           name: 'customer',

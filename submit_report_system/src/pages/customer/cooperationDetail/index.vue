@@ -119,10 +119,10 @@
           <el-input type="number" v-model="form.coopPayNum"></el-input>
         </el-form-item>
         <el-form-item label="线上线下结算：">
-          <el-radio label="线上结算" v-model="form.settleStatus"/>
-          <el-radio label="线下结算" v-model="form.settleStatus"/>
+          <el-radio label="线上结算" v-model="form.coopPayType"/>
+          <el-radio label="线下结算" v-model="form.coopPayType"/>
         </el-form-item>
-        <el-form-item prop="coopHeadId" label="团长ID" v-if="form.settleStatus === '线上结算'" :rules="form.settleStatus === '线上结算'?[{ required: true, message: '请输入团长ID' }]:''">
+        <el-form-item prop="coopHeadId" label="团长ID" v-if="form.coopPayType === '线上结算'" :rules="form.coopPayType === '线上结算'?[{ required: true, message: '请输入团长ID' }]:''">
           <el-input type="number" v-model="form.coopHeadId"/>
         </el-form-item>
         <el-form-item label="上传实拍图：">
@@ -155,7 +155,7 @@ export default {
   data () {
     return {
       form: {
-        settleStatus: "线上结算",
+        coopPayType: "线上结算",
         coopActivity:"常规单",
         beginTime:"立即开始",
         coopZero:"零点"
@@ -202,7 +202,7 @@ export default {
             this.form.coopPttype = "已上线"
           }else{
             this.$sucmsg("验证完成，未上线")
-            this.form.coopPttype = "未找到"
+            this.form.coopPttype = "未上线"
           }
           this.flag = true;
         })

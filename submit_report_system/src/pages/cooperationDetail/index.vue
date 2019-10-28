@@ -83,8 +83,8 @@
             <el-option v-for="(option, index) in isExamineOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="name" label="结算类型">
-          <el-select v-model="form.name">
+        <el-form-item prop="coopPayType" label="结算类型">
+          <el-select v-model="form.coopPayType">
             <el-option v-for="(option, index) in settleStatusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
@@ -132,10 +132,10 @@
           <template slot-scope="scope">
             <span class="flex">
               <el-button size="mini" type="primary" @click="viewGood(scope.row.coopGoodsId)">查看商品</el-button>
-              <el-button size="mini">撤回</el-button>
+              <el-button size="mini" @click="delCoop(scope.row.coopId,scope.row.coopCustomer)">撤回</el-button>
               <el-button size="mini" type="warning" @click="reCoop(scope.row.coopBossId,scope.row.coopId)">重新提报</el-button>
               <el-button size="mini" type="primary" @click="nav2Checking(scope.row)">查款</el-button>
-              <el-button size="mini" type="warning">返/退款</el-button>
+              <!-- <el-button size="mini" type="warning">返/退款</el-button> -->
             </span>
           </template>
         </el-table-column>
@@ -147,7 +147,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById} from '@/api'
+import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -197,7 +197,7 @@ export default {
         { label: '未查款', value: '未查款' }
       ],
       settleStatusOptions: [ // 结算类型
-        { label: '全部', value: '全部' },
+        { label: '全部', value: '' },
         { label: '线上结算', value: '线上结算' },
         { label: '线下结算', value: '线下结算' }
       ],
@@ -215,6 +215,27 @@ export default {
     this.bindData()
   },
   methods: {
+    delCoop(id,name){
+      this.$confirm(`是否撤销【${name}】的该条提报?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+       delCoopById(id).then(res=>{
+         if (res.success) {
+           this.$sucmsg(res.message)
+           this.bindData()
+         }else{
+           this.$errmsg(res.message)
+         }
+       })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
    reCoop(id,coopId){
      getShopById(id).then(res=>{
        if (res) {

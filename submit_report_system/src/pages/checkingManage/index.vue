@@ -3,7 +3,7 @@
     <div class="title">查款管理</div>
     <el-form inline size="mini" label-position="left" label-width="120px;">
       <el-form-item label="店铺名称：">
-        <el-input v-model="form.shopName"></el-input>
+        <el-input v-model="form.cmShopName"></el-input>
       </el-form-item>
       <el-form-item label="优惠券名称：">
         <el-input v-model="form.cmYhqName"></el-input>
@@ -44,7 +44,7 @@
         <el-input type="number" v-model="form.cmFwPrice"></el-input>
       </el-form-item>
       <el-form-item label="结算金额排序：">
-        <el-select v-model="form.name">
+        <el-select v-model="form.cmJsMoney">
           <el-option v-for="(option, index) in orderByOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
@@ -165,9 +165,9 @@ export default {
         { label: '退回申请', value: 'name' }
       ],
       orderByOptions: [
-        { label: '全部', value: 'name' },
-        { label: '由高到低', value: 'name' },
-        { label: '由低到高', value: 'name' }
+        { label: '全部', value: ' ' },
+        { label: '由高到低', value: '2' },
+        { label: '由低到高', value: '1' }
       ],
       checkingTableData: [
         { name: 'name', id: 1 }

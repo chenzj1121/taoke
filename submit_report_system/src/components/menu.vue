@@ -26,6 +26,11 @@
       <el-menu-item index="/systemManager/dept" v-if="type!=2">部门管理</el-menu-item>
       <el-menu-item index="/systemManager/group" v-if="type!=2">小组管理</el-menu-item>
     </el-submenu>
+     <el-submenu index="4">
+      <template slot="title">提报管理</template>
+      <el-menu-item index="/tiBao/index" >提报管理</el-menu-item>
+      <el-menu-item index="/tiBao/userList">提报人员管理</el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 

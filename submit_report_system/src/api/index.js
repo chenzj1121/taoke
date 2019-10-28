@@ -106,6 +106,9 @@ export const findCoopById = (param) => ajax(PRE_URL + '/coop/findOne.do?id='+ pa
 
 export const updateCoop = (param) => ajax(PRE_URL + '/coop/update.do', param, 'post')
 
+export const delCoopById = (param) => ajax(PRE_URL + '/coop/delete.do?ids=' + param, 'post')
+
+
 
 
 

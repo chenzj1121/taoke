@@ -72,7 +72,7 @@
         <el-form-item label="优惠券链接：">
           <div class="flex">
             <el-input v-model="form.coopCoupon"></el-input>
-            <el-button type="primary"  @click="viewGood(form.coopCoupon)">查看优惠券</el-button>
+            <el-button type="primary"  @click="viewGood(form.coopCoupon,1)">查看优惠券</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="coopYhqnums" label="优惠券总量：" :rules="[{ required: true, message: '请输入优惠卷总量' }]" >
@@ -198,10 +198,10 @@ export default {
       if (id) {
         getGoodsInfo(id).then(res=>{
           if(res.code==0){
-            this.$sucmsg("此商品已经存在")
+            this.$sucmsg("验证完成，已上线")
             this.form.coopPttype = "已上线"
           }else{
-            this.$sucmsg("商品不存在")
+            this.$sucmsg("验证完成，未上线")
             this.form.coopPttype = "未找到"
           }
           this.flag = true;
@@ -211,9 +211,13 @@ export default {
       }
         
     },
-    viewGood(id){
+    viewGood(id,type){
       if (id) {
+        if (type==1) {
+          window.open(id)
+        }else{
          window.open(`https://item.taobao.com/item.htm?ft=t&id=${id}`);   
+        }
       }else{
         this.$message("请先填写")
       }

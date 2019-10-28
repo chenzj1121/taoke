@@ -303,7 +303,7 @@ export default {
         this.tableData = res.rows
         console.log(res.rows)
           res.rows.forEach((item,index)=>{
-            // item.group =""+item.shopDeptId+item.shopGroupId
+                item.shopGroupId = parseInt(item.shopGroupId)
               this.groupList.forEach(obj=>{
                 if(item.shopDeptId == obj.groupDeptId && item.shopGroupId == obj.groupId){
                   item.group = obj.groupName

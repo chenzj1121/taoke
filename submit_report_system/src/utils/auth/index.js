@@ -22,3 +22,14 @@ export const setUser = user => {
 export const deleteUser = () => {
   Cookie.remove(USER)
 }
+
+export const getMyDate =(str)=> {
+      var oDate = new Date(str)
+      let oYear = oDate.getFullYear()
+      let oMonth = oDate.getMonth()+1
+      let oDay = oDate.getDate()
+      let oHour =oDate.getHours()
+      let oMin = oDate.getMinutes()
+      let oTime = oYear +'-'+ oMonth +'-'+oDay+" "+oHour+":"+oMin
+      return oTime;
+      }

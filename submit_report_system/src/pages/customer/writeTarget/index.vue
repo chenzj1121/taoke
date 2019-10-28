@@ -80,7 +80,7 @@ export default {
         this.form.workTarget = count
         callback()
       } else {
-        callback(new Error('月到账目标应当等于每一周的到账目标之和'))
+        callback(new Error('月到账目标应当等于每一周的在线目标之和'))
       }
     }
     return {

@@ -88,6 +88,7 @@ export default {
           this.form.shopGroupId = getUser().groupId;
           this.form.shopUserId2 = getUser().id;
           this.form.shopUseId = getUser().id;
+          this.form.createTime = new Date(); //添加创建时间
           console.log('params', this.form)
           this.form.privateType = '1'
           addShop(this.form).then(response => {

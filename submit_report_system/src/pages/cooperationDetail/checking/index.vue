@@ -290,7 +290,12 @@ export default {
     let oYear = oDate.getFullYear()
     let oMonth = oDate.getMonth()+1
     let oDay = oDate.getDate()
-    let oTime = oYear +'-'+ oMonth +'-'+oDay
+     let oHour =oDate.getHours()
+    let oMin = oDate.getMinutes()
+    if (oMin <10) {
+      oMin = "0"+oMin
+    }
+    let oTime = oYear +'-'+ oMonth +'-'+oDay+" "+oHour+":"+oMin
     return oTime;
     },
     addCheck(){

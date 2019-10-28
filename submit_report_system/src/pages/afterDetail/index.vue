@@ -79,7 +79,7 @@
           <!-- <el-button size="small" type="primary">点击上传</el-button> -->
            <input type="file"  name="file" style="display:none" id="filebox" @change="upload">
             <input type="hidden"  id="ssFile" name="ssFile">
-          <el-button size="small" type="primary" @click="openFile">导入表格</el-button>
+          <el-button size="small" type="primary" @click="openFile" v-if="type==0">导入表格</el-button>
 
           <!-- <input type="submit" @click="upload"> -->
         </form> 

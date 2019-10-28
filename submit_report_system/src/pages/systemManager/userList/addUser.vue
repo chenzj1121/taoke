@@ -34,7 +34,7 @@
         <el-form-item label="用户角色:" prop="type">
           <!-- <el-input v-model="form.userRole"></el-input> -->
           <el-select v-model="form.type">
-            <el-option v-for="(role, index) in roleList" :key="index" :value="role.index" :label="role.label"></el-option>
+            <el-option v-for="(role, index) in roleList" :key="index" :value="role.value" :label="role.label"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -53,7 +53,8 @@ import { Base64 } from 'js-base64'
 export default {
   data () {
     return {
-      form: {},
+      form: {
+      },
       roleList,
       groupList: [],
       deptList: []
@@ -76,6 +77,7 @@ export default {
       })
     },
     createUser () {
+      this.form.type = this.form.type?this.form.type:2
       this.form.password = Base64.encode(this.form.password)
       addUser(this.form).then(res => {
         this.back()

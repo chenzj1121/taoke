@@ -84,6 +84,22 @@ public class ShopController {
 	}	
 	
 	/**
+	 * 提报
+	 * @param shop
+	 * @return
+	 */
+	@RequestMapping("/tibao")
+	public Result tibao(@RequestBody TbShop shop){
+		try {
+			shopService.update(shop);
+			return new Result(true, "提报成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "提报失败");
+		}
+	}	
+	
+	/**
 	 * 获取实体
 	 * @param id
 	 * @return

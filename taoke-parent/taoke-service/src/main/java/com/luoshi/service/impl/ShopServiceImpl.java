@@ -66,6 +66,10 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public void add(TbShop shop) {
 		shop.setCreateTime(new Date());
+		shop.setNextTime(new Date());
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		shop.setShopUseId(user.getId());
 		shopMapper.insert(shop);		
 	}
 

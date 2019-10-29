@@ -60,7 +60,7 @@
           <el-form-item prop="endPrice">
             <el-input :value="form.endPrice" type="number"></el-input>
           </el-form-item>
-          <div v-if="type!=2">
+          <div v-if="type==0 || type==1">
           <el-form-item label="部门:" label-width="60px">
             <div>
               <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">

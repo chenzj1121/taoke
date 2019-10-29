@@ -1,13 +1,14 @@
 <template>
     <div>
         <div class="title">提报管理</div>
-         <el-form inline size="mini" label-position="left" label-width="120px;">
+         <el-form inline size="mini" label-position="left" label-width="120px;" ref="form" :model="form">
       <el-form-item label="店铺名称：">
         <el-input v-model="form.cmShopName"></el-input>
       </el-form-item>
       <el-form-item label="商品ID：">
         <el-input v-model="form.cmYhqName"></el-input>
       </el-form-item>
+      <br>
       <el-form-item label="提交时间：">
         <el-date-picker
           v-model="form.cmApplyTimeBegin"
@@ -21,6 +22,7 @@
           type="date">
         </el-date-picker>
       </el-form-item>
+      <br>
        <el-form-item label="上线时间：">
         <el-date-picker
           v-model="form.cmApplyTimeBegin"
@@ -34,6 +36,7 @@
           type="date">
         </el-date-picker>
       </el-form-item>
+      <br>
        <el-form-item label="下线时间：">
         <el-date-picker
           v-model="form.cmApplyTimeBegin"
@@ -47,9 +50,10 @@
           type="date">
         </el-date-picker>
       </el-form-item>
+      <br>
       <el-form-item label="部门:" label-width="60px">
             <div>
-              <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">
+              <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
               </el-select>
@@ -57,7 +61,7 @@
           </el-form-item>
           <el-form-item label="组别:" label-width="60px">
             <div>
-              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.shopDeptId,form.shopGroupId)">
+              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.shopGroupId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
               </el-select>
@@ -65,15 +69,20 @@
           </el-form-item>
           <el-form-item label="部门人员:" label-width="80px">
             <div>
-              <el-select v-model="form.shopUserId2" placeholder="请选择" >
+              <el-select v-model="form.coopUserId" placeholder="请选择" >
                 <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
               </el-select>
             </div>
           </el-form-item>
+      <br>
       <el-form-item>
         <el-button type="primary" @click="bindData">查询</el-button>
         <el-button @click="() => {this.form = {}; this.bindData()}">重置</el-button>
+      </el-form-item>
+       <el-form-item>
+        <el-button type="primary">手动分配</el-button>
+        <el-button type="primary">批量审核</el-button>
       </el-form-item>
     </el-form>
      <el-table
@@ -95,7 +104,7 @@
         <el-table-column label="优惠券信息" prop="coopYhqName"></el-table-column>
         <el-table-column label="商品主图"  prop="coopMainpicture">
             <template slot-scope="scope" >
-                
+
                 <img :src="scope.row.coopMainpicture" min-width="50" height="50" alt="">
             </template>
         </el-table-column>
@@ -105,7 +114,7 @@
             </template>
         </el-table-column>
         <el-table-column label="部门" prop="coopDeptId"></el-table-column>
-        <el-table-column label="组别" prop="dakuanriqi"></el-table-column>
+        <!-- <el-table-column label="组别" prop="dakuanriqi"></el-table-column> -->
         <el-table-column label="销售人员" prop="coopUserId"></el-table-column>
         <el-table-column label="上线时间" prop="coopStarttime"></el-table-column>
         <el-table-column label="是否零点提报" prop="dakuanriqi"></el-table-column>
@@ -162,7 +171,7 @@ export default {
     },
     getGroup(id){
         this.form.shopGroupId = null;
-        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+        if( this.form.coopUserId){ this.form.coopUserId = null;}
         this.gruopList2 = []
         this.memberList = []
       if(id){
@@ -174,7 +183,7 @@ export default {
       }
     },
     getMember(deptId,groupId){
-        if( this.form.shopUserId2){ this.form.shopUserId2 = null;}
+        if( this.form.coopUserId){ this.form.coopUserId = null;}
       this.memberList = [];
       if(deptId && groupId){
         getGroupMember(deptId,groupId).then(res=>{
@@ -199,14 +208,15 @@ export default {
       this.loading = true
       getCooperationPage(form, page, rows).then(res => {
          res.rows.forEach((item,index)=>{
-        //    let list =["coopEndtime","coopStarttime","coopTbtime"]
-        //    list.forEach(obj=>{
-        //      item[obj] = this.getMyDate(item[obj])
-        //     // console.log(oTime)
-        //    })
-            // item.coopEndtime = new Date(item.coopEndtime);
-            // item.coopStarttime = new Date(item.coopStarttime);
-            // item.coopTbtime = new Date(item.coopTbtime)
+             item.coopTbtime = this.getMyDate(item.coopTbtime)
+             item.coopStarttime = this.getMyDate(item.coopStarttime)
+            //  item.shengheTime
+            // this.groupList.forEach((obj)=>{
+            //      if(item.deptId == obj.groupDeptId && item.groupId ==obj.groupId){
+            //           item.groupName = obj.groupName
+            //           item.deptName = obj.groupName
+            //       }
+            //   })
               this.deptList.forEach(obj=>{
                 if(item.coopDeptId == obj.deptId ){
                   item.coopDeptId = obj.deptName
@@ -228,7 +238,21 @@ export default {
         .catch(() => {
           this.loading = false
         })
+    },
+    getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+    let oHour =oDate.getHours()
+    let oMin = oDate.getMinutes()
+    if (oMin <10) {
+      oMin = "0"+oMin
     }
+    let oTime = oYear +'-'+ oMonth +'-'+oDay+" "+oHour+":"+oMin
+    return oTime;
+    }
+
     }
     
 }

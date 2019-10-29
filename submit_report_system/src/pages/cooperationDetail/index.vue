@@ -73,7 +73,7 @@
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <el-form-item v-if="type!=2" prop="coopUserId" label="责任人">
+        <el-form-item v-if="type==0 ||type ==1" prop="coopUserId" label="责任人">
           <el-select v-model="form.name">
             <el-option v-for="(option, index) in dutyPersonOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>

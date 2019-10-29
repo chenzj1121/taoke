@@ -2,7 +2,7 @@
   <div>
     <div class="title">后台明细</div>
     <el-form inline size="mini">
-      <div v-if="type!=2">
+      <div v-if="type==0 || type ==1">
       <el-form-item label="销售部">
        <el-select v-model="form.deptId" placeholder="请选择" @change="getGroup(form.deptId)">
               <el-option value="" label="全部"></el-option>

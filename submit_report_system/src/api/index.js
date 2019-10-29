@@ -18,7 +18,7 @@ export const getDeptByPage = (param, page, rows) => ajax(PRE_URL+`/dept/search.d
 
 export const getDeptByList = () => ajax(PRE_URL+'/dept/findAll.do', '', 'post')
 
-export const getDeptById = (param) => ajax(PRE_URL+'/dept/gfindOne.do?id=' + param, 'get')
+export const getDeptById = (param) => ajax(PRE_URL+'/dept/findOne.do?id=' + param, 'get')
 
 export const delDeptById = (param) => ajax(PRE_URL+'/dept/delete.do?ids=' + param, 'post')
 
@@ -34,6 +34,8 @@ export const getGroupByPage = (param) => ajax(PRE_URL+'/group/findAll.do', param
 export const getGroupByList = () => ajax(PRE_URL+'/group/findAll.do', '', 'post')
 
 export const getGroupById = (param) => ajax(PRE_URL+'/group/findOne.do?id=' + param, 'get')
+
+export const getGroupByDeptId = (param) => ajax(PRE_URL+'/group/findByDept.do?deptId=' + param, 'get')
 
 export const delGroupById = (param) => ajax(PRE_URL+'/group/delete.do?ids=' + param, 'get')
 

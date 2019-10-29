@@ -44,7 +44,10 @@ public class ShopServiceImpl implements ShopService {
 	 */
 	@Override
 	public List<TbShop> findAll() {
-		return shopMapper.selectByExample(null);
+		TbShopExample example=new TbShopExample();
+		com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("id DESC");
+		return shopMapper.selectByExample(example);
 	}
 
 	/**
@@ -123,6 +126,7 @@ public class ShopServiceImpl implements ShopService {
 		com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
 		HttpSession session = request.getSession();
 		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		example.setOrderByClause("id DESC");
 		if(shop!=null){
 			//如果是员工只能查询本人
 			if(user.getType().equals("2")) {

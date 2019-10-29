@@ -96,6 +96,7 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 		com.luoshi.pojo.TbCheckmoneysExample.Criteria criteria = example.createCriteria();
 		HttpSession session = request.getSession();
 		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		example.setOrderByClause("cm_id DESC");
 		if(checkmoneys!=null){		
 			if(user.getType().equals("2")) {
 				criteria.andCmUserIdEqualTo(user.getId());
@@ -119,11 +120,14 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 				criteria.andCmTypeEqualTo(checkmoneys.getCmType());
 			}
 			//结算金额排序
+			
+			System.out.println("传递"+checkmoneys.getCmJsMoney());
+			String string = String.valueOf(checkmoneys.getCmJsMoney());
 			if(checkmoneys.getCmJsMoney()!=null) {
-				if("1".equals(checkmoneys.getCmJsMoney())) {
-					example.setOrderByClause("`cm_js_money` ASC,id ASC");
-				}else if("2".equals(checkmoneys.getCmJsMoney())) {
-					example.setOrderByClause("`cm_js_money` DESC,id ASC");
+				if("1.0".equals(string)) {
+					example.setOrderByClause("cm_js_money ASC");
+				}else if("2.0".equals(string)) {
+					example.setOrderByClause("cm_js_money DESC");
 				}
 				
 			}

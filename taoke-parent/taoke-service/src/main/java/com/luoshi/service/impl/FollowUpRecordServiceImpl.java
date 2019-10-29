@@ -94,6 +94,7 @@ public class FollowUpRecordServiceImpl implements FollowUpRecordService {
 		com.luoshi.pojo.TbFollowUpRecordExample.Criteria criteria = example.createCriteria();
 		HttpSession session = request.getSession();
 		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		example.setOrderByClause("id DESC");
 		if(followUpRecord!=null){
 			
 			if(followUpRecord.getRecord()!=null && followUpRecord.getRecord().length()>0){

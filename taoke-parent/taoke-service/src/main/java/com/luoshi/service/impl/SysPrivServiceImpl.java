@@ -87,7 +87,7 @@ public class SysPrivServiceImpl implements SysPrivService {
 		
 		TbSysPrivExample example=new TbSysPrivExample();
 		com.luoshi.pojo.TbSysPrivExample.Criteria criteria = example.createCriteria();
-		
+		example.setOrderByClause("id DESC");
 		if(sysPriv!=null){			
 						if(sysPriv.getName()!=null && sysPriv.getName().length()>0){
 				criteria.andNameLike("%"+sysPriv.getName()+"%");

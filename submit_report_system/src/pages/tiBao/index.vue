@@ -3,15 +3,15 @@
         <div class="title">提报管理</div>
          <el-form inline size="mini" label-position="left" label-width="120px;" ref="form" :model="form">
       <el-form-item label="店铺名称：">
-        <el-input v-model="form.cmShopName"></el-input>
+        <el-input v-model="form.coopCustomer"></el-input>
       </el-form-item>
       <el-form-item label="商品ID：">
-        <el-input v-model="form.cmYhqName"></el-input>
+        <el-input v-model="form.coopGoodsId"></el-input>
       </el-form-item>
       <br>
       <el-form-item label="提交时间：">
         <el-date-picker
-          v-model="form.cmApplyTimeBegin"
+          v-model="form.coopTbTime"
           type="date">
         </el-date-picker>
       </el-form-item>

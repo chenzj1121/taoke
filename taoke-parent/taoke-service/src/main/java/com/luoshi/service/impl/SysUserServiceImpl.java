@@ -32,7 +32,10 @@ public class SysUserServiceImpl implements SysUserService {
 	 */
 	@Override
 	public List<TbSysUser> findAll() {
-		return sysUserMapper.selectByExample(null);
+		TbSysUserExample example=new TbSysUserExample();
+		com.luoshi.pojo.TbSysUserExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("id DESC");
+		return sysUserMapper.selectByExample(example);
 	}
 
 	/**
@@ -116,7 +119,7 @@ public class SysUserServiceImpl implements SysUserService {
 		
 		TbSysUserExample example=new TbSysUserExample();
 		com.luoshi.pojo.TbSysUserExample.Criteria criteria = example.createCriteria();
-		
+		example.setOrderByClause("id DESC");
 		if(sysUser!=null){			
 			if(sysUser.getSalt()!=null && sysUser.getSalt().length()>0){
 				criteria.andSaltLike("%"+sysUser.getSalt()+"%");

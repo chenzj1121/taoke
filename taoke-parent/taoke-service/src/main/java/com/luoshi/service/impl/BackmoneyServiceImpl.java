@@ -94,6 +94,7 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 		Criteria criteria = example.createCriteria();
 		HttpSession session = request.getSession();
 		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		example.setOrderByClause("bm_id DESC");
 		if(backmoney!=null){
 			//如果是员工只能查询本人
 			if(user.getType().equals("2")) {

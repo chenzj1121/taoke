@@ -96,7 +96,7 @@ public class DeptServiceImpl implements DeptService {
 		
 		TbDeptExample example=new TbDeptExample();
 		com.luoshi.pojo.TbDeptExample.Criteria criteria = example.createCriteria();
-		
+		example.setOrderByClause("dept_id DESC");
 		if(dept!=null){			
 						if(dept.getDeptName()!=null && dept.getDeptName().length()>0){
 				criteria.andDeptNameLike("%"+dept.getDeptName()+"%");

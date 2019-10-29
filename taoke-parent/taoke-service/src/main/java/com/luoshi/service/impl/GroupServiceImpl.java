@@ -30,7 +30,10 @@ public class GroupServiceImpl implements GroupService {
 	 */
 	@Override
 	public List<TbGroup> findAll() {
-		return groupMapper.selectByExample(null);
+		TbGroupExample example=new TbGroupExample();
+		com.luoshi.pojo.TbGroupExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("group_id DESC");
+		return groupMapper.selectByExample(example);
 	}
 
 	/**
@@ -96,7 +99,7 @@ public class GroupServiceImpl implements GroupService {
 		
 		TbGroupExample example=new TbGroupExample();
 		com.luoshi.pojo.TbGroupExample.Criteria criteria = example.createCriteria();
-		
+		example.setOrderByClause("group_id DESC");
 		if(group!=null){			
 						if(group.getGroupName()!=null && group.getGroupName().length()>0){
 				criteria.andGroupNameLike("%"+group.getGroupName()+"%");

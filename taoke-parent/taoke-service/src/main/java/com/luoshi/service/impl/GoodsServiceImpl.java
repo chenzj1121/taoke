@@ -31,7 +31,10 @@ public class GoodsServiceImpl implements GoodsService {
 	 */
 	@Override
 	public List<TbGoods> findAll() {
-		return goodsMapper.selectByExample(null);
+		TbGoodsExample example=new TbGoodsExample();
+		com.luoshi.pojo.TbGoodsExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("goods_id DESC");
+		return goodsMapper.selectByExample(example);
 	}
 
 	/**
@@ -88,7 +91,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		TbGoodsExample example=new TbGoodsExample();
 		com.luoshi.pojo.TbGoodsExample.Criteria criteria = example.createCriteria();
-		
+		example.setOrderByClause("goods_id DESC");
 		if(goods!=null){			
 			if(goods.getGoodsYhqName()!=null && goods.getGoodsYhqName().length()>0){
 				criteria.andGoodsYhqNameLike("%"+goods.getGoodsYhqName()+"%");

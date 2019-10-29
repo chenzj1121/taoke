@@ -112,6 +112,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 		Criteria criteria = example.createCriteria();
 		HttpSession session = request.getSession();
 		TbSysUser user = (TbSysUser) session.getAttribute("user");
+		example.setOrderByClause("id DESC");
 		if(backgroundDetails!=null){
 			if(user.getType().equals("2")) {
 				criteria.andUseIdEqualTo(user.getId());
@@ -159,9 +160,9 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			//结算金额排序
 			if(backgroundDetails.getPayMoney()!=null) {
 				if("1".equals(backgroundDetails.getPayMoney())) {
-					example.setOrderByClause("`pay_money` ASC,id ASC");
+					example.setOrderByClause("pay_money ASC");
 				}else if("2".equals(backgroundDetails.getPayMoney())) {
-					example.setOrderByClause("`pay_money` DESC,id ASC");
+					example.setOrderByClause("pay_money DESC");
 				}
 				
 			}

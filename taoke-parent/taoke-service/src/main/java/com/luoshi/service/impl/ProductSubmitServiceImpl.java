@@ -33,7 +33,10 @@ public class ProductSubmitServiceImpl implements ProductSubmitService {
 	 */
 	@Override
 	public List<TbProductSubmit> findAll() {
-		return productSubmitMapper.selectByExample(null);
+		TbProductSubmitExample example=new TbProductSubmitExample();
+		com.luoshi.pojo.TbProductSubmitExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("id DESC");
+		return productSubmitMapper.selectByExample(example);
 	}
 
 	/**
@@ -90,7 +93,7 @@ public class ProductSubmitServiceImpl implements ProductSubmitService {
 		
 		TbProductSubmitExample example=new TbProductSubmitExample();
 		com.luoshi.pojo.TbProductSubmitExample.Criteria criteria = example.createCriteria();
-		
+		example.setOrderByClause("id DESC");
 		if(productSubmit!=null){			
 						if(productSubmit.getCustomName()!=null && productSubmit.getCustomName().length()>0){
 				criteria.andCustomNameLike("%"+productSubmit.getCustomName()+"%");

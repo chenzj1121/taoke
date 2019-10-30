@@ -36,7 +36,6 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 	 */
 	@Override
 	public List<TbCheckmoneys> findAll() {
-		System.out.println("123");
 		return checkmoneysMapper.selectByExample(null);
 	}
 

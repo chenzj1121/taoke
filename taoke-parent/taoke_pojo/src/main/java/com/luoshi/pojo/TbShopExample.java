@@ -1675,62 +1675,52 @@ public class TbShopExample {
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyEqualTo(String value) {
+        public Criteria andRefundsMoneyEqualTo(Double value) {
             addCriterion("refunds_money =", value, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyNotEqualTo(String value) {
+        public Criteria andRefundsMoneyNotEqualTo(Double value) {
             addCriterion("refunds_money <>", value, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyGreaterThan(String value) {
+        public Criteria andRefundsMoneyGreaterThan(Double value) {
             addCriterion("refunds_money >", value, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyGreaterThanOrEqualTo(Double double1) {
-            addCriterion("refunds_money >=", double1, "refundsMoney");
+        public Criteria andRefundsMoneyGreaterThanOrEqualTo(Double value) {
+            addCriterion("refunds_money >=", value, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyLessThan(Double double1) {
-            addCriterion("refunds_money <", double1, "refundsMoney");
+        public Criteria andRefundsMoneyLessThan(Double value) {
+            addCriterion("refunds_money <", value, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyLessThanOrEqualTo(String value) {
+        public Criteria andRefundsMoneyLessThanOrEqualTo(Double value) {
             addCriterion("refunds_money <=", value, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyLike(String value) {
-            addCriterion("refunds_money like", value, "refundsMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundsMoneyNotLike(String value) {
-            addCriterion("refunds_money not like", value, "refundsMoney");
-            return (Criteria) this;
-        }
-
-        public Criteria andRefundsMoneyIn(List<String> values) {
+        public Criteria andRefundsMoneyIn(List<Double> values) {
             addCriterion("refunds_money in", values, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyNotIn(List<String> values) {
+        public Criteria andRefundsMoneyNotIn(List<Double> values) {
             addCriterion("refunds_money not in", values, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyBetween(String value1, String value2) {
+        public Criteria andRefundsMoneyBetween(Double value1, Double value2) {
             addCriterion("refunds_money between", value1, value2, "refundsMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRefundsMoneyNotBetween(String value1, String value2) {
+        public Criteria andRefundsMoneyNotBetween(Double value1, Double value2) {
             addCriterion("refunds_money not between", value1, value2, "refundsMoney");
             return (Criteria) this;
         }
@@ -1745,62 +1735,52 @@ public class TbShopExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(Date date) {
-            addCriterion("create_time =", date, "createTime");
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(String value) {
+        public Criteria andCreateTimeNotEqualTo(Date value) {
             addCriterion("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(String value) {
+        public Criteria andCreateTimeGreaterThan(Date value) {
             addCriterion("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(String value) {
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(String value) {
+        public Criteria andCreateTimeLessThan(Date value) {
             addCriterion("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(String value) {
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
             addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLike(String value) {
-            addCriterion("create_time like", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotLike(String value) {
-            addCriterion("create_time not like", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIn(List<String> values) {
+        public Criteria andCreateTimeIn(List<Date> values) {
             addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<String> values) {
+        public Criteria andCreateTimeNotIn(List<Date> values) {
             addCriterion("create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(String value1, String value2) {
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
             addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(String value1, String value2) {
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
@@ -2535,62 +2515,52 @@ public class TbShopExample {
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdEqualTo(String value) {
+        public Criteria andShopGroupIdEqualTo(Integer value) {
             addCriterion("shop_group_id =", value, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdNotEqualTo(String value) {
+        public Criteria andShopGroupIdNotEqualTo(Integer value) {
             addCriterion("shop_group_id <>", value, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdGreaterThan(String value) {
+        public Criteria andShopGroupIdGreaterThan(Integer value) {
             addCriterion("shop_group_id >", value, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdGreaterThanOrEqualTo(String value) {
+        public Criteria andShopGroupIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("shop_group_id >=", value, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdLessThan(String value) {
+        public Criteria andShopGroupIdLessThan(Integer value) {
             addCriterion("shop_group_id <", value, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdLessThanOrEqualTo(String value) {
+        public Criteria andShopGroupIdLessThanOrEqualTo(Integer value) {
             addCriterion("shop_group_id <=", value, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdLike(String value) {
-            addCriterion("shop_group_id like", value, "shopGroupId");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopGroupIdNotLike(String value) {
-            addCriterion("shop_group_id not like", value, "shopGroupId");
-            return (Criteria) this;
-        }
-
-        public Criteria andShopGroupIdIn(List<String> values) {
+        public Criteria andShopGroupIdIn(List<Integer> values) {
             addCriterion("shop_group_id in", values, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdNotIn(List<String> values) {
+        public Criteria andShopGroupIdNotIn(List<Integer> values) {
             addCriterion("shop_group_id not in", values, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdBetween(String value1, String value2) {
+        public Criteria andShopGroupIdBetween(Integer value1, Integer value2) {
             addCriterion("shop_group_id between", value1, value2, "shopGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andShopGroupIdNotBetween(String value1, String value2) {
+        public Criteria andShopGroupIdNotBetween(Integer value1, Integer value2) {
             addCriterion("shop_group_id not between", value1, value2, "shopGroupId");
             return (Criteria) this;
         }
@@ -2732,6 +2702,266 @@ public class TbShopExample {
 
         public Criteria andShopOperateQqNotBetween(String value1, String value2) {
             addCriterion("shop_operate_qq not between", value1, value2, "shopOperateQq");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeIsNull() {
+            addCriterion("shop_tb_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeIsNotNull() {
+            addCriterion("shop_tb_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeEqualTo(String value) {
+            addCriterion("shop_tb_type =", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeNotEqualTo(String value) {
+            addCriterion("shop_tb_type <>", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeGreaterThan(String value) {
+            addCriterion("shop_tb_type >", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("shop_tb_type >=", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeLessThan(String value) {
+            addCriterion("shop_tb_type <", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeLessThanOrEqualTo(String value) {
+            addCriterion("shop_tb_type <=", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeLike(String value) {
+            addCriterion("shop_tb_type like", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeNotLike(String value) {
+            addCriterion("shop_tb_type not like", value, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeIn(List<String> values) {
+            addCriterion("shop_tb_type in", values, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeNotIn(List<String> values) {
+            addCriterion("shop_tb_type not in", values, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeBetween(String value1, String value2) {
+            addCriterion("shop_tb_type between", value1, value2, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTypeNotBetween(String value1, String value2) {
+            addCriterion("shop_tb_type not between", value1, value2, "shopTbType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeIsNull() {
+            addCriterion("shop_tb_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeIsNotNull() {
+            addCriterion("shop_tb_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeEqualTo(Date value) {
+            addCriterion("shop_tb_time =", value, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeNotEqualTo(Date value) {
+            addCriterion("shop_tb_time <>", value, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeGreaterThan(Date value) {
+            addCriterion("shop_tb_time >", value, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("shop_tb_time >=", value, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeLessThan(Date value) {
+            addCriterion("shop_tb_time <", value, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeLessThanOrEqualTo(Date value) {
+            addCriterion("shop_tb_time <=", value, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeIn(List<Date> values) {
+            addCriterion("shop_tb_time in", values, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeNotIn(List<Date> values) {
+            addCriterion("shop_tb_time not in", values, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeBetween(Date value1, Date value2) {
+            addCriterion("shop_tb_time between", value1, value2, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbTimeNotBetween(Date value1, Date value2) {
+            addCriterion("shop_tb_time not between", value1, value2, "shopTbTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdIsNull() {
+            addCriterion("shop_tb_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdIsNotNull() {
+            addCriterion("shop_tb_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdEqualTo(Integer value) {
+            addCriterion("shop_tb_id =", value, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdNotEqualTo(Integer value) {
+            addCriterion("shop_tb_id <>", value, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdGreaterThan(Integer value) {
+            addCriterion("shop_tb_id >", value, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("shop_tb_id >=", value, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdLessThan(Integer value) {
+            addCriterion("shop_tb_id <", value, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdLessThanOrEqualTo(Integer value) {
+            addCriterion("shop_tb_id <=", value, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdIn(List<Integer> values) {
+            addCriterion("shop_tb_id in", values, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdNotIn(List<Integer> values) {
+            addCriterion("shop_tb_id not in", values, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdBetween(Integer value1, Integer value2) {
+            addCriterion("shop_tb_id between", value1, value2, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("shop_tb_id not between", value1, value2, "shopTbId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzIsNull() {
+            addCriterion("shop_tb_bz is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzIsNotNull() {
+            addCriterion("shop_tb_bz is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzEqualTo(String value) {
+            addCriterion("shop_tb_bz =", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzNotEqualTo(String value) {
+            addCriterion("shop_tb_bz <>", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzGreaterThan(String value) {
+            addCriterion("shop_tb_bz >", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzGreaterThanOrEqualTo(String value) {
+            addCriterion("shop_tb_bz >=", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzLessThan(String value) {
+            addCriterion("shop_tb_bz <", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzLessThanOrEqualTo(String value) {
+            addCriterion("shop_tb_bz <=", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzLike(String value) {
+            addCriterion("shop_tb_bz like", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzNotLike(String value) {
+            addCriterion("shop_tb_bz not like", value, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzIn(List<String> values) {
+            addCriterion("shop_tb_bz in", values, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzNotIn(List<String> values) {
+            addCriterion("shop_tb_bz not in", values, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzBetween(String value1, String value2) {
+            addCriterion("shop_tb_bz between", value1, value2, "shopTbBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopTbBzNotBetween(String value1, String value2) {
+            addCriterion("shop_tb_bz not between", value1, value2, "shopTbBz");
             return (Criteria) this;
         }
     }

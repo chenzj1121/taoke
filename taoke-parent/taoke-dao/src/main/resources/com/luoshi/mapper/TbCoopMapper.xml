@@ -19,6 +19,7 @@
     <result column="coop_endTime" property="coopEndtime" jdbcType="TIMESTAMP" />
     <result column="coop_back" property="coopBack" jdbcType="DOUBLE" />
     <result column="coop_dept_id" property="coopDeptId" jdbcType="INTEGER" />
+    <result column="coop_group_id" property="coopGroupId" jdbcType="INTEGER" />
     <result column="coop_user_id" property="coopUserId" jdbcType="INTEGER" />
     <result column="coop_yhq_name" property="coopYhqName" jdbcType="VARCHAR" />
     <result column="coop_boss_name" property="coopBossName" jdbcType="VARCHAR" />
@@ -42,6 +43,10 @@
     <result column="coop_pay_type" property="coopPayType" jdbcType="VARCHAR" />
     <result column="coop_goods_title" property="coopGoodsTitle" jdbcType="VARCHAR" />
     <result column="coop_beiyong" property="coopBeiyong" jdbcType="VARCHAR" />
+    <result column="coop_shenhe_id" property="coopShenheId" jdbcType="INTEGER" />
+    <result column="coop_shenhe_time" property="coopShenheTime" jdbcType="TIMESTAMP" />
+    <result column="coop_tbType" property="coopTbtype" jdbcType="VARCHAR" />
+    <result column="coop_shenhe_bz" property="coopShenheBz" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -104,11 +109,12 @@
   <sql id="Base_Column_List" >
     coop_id, coop_type, coop_ptType, coop_xdwType, coop_customer, coop_mainPicture, coop_activity, 
     coop_goods_Id, coop_zero, coop_alterPrice, coop_yhqNums, coop_yjScale, coop_tbTime, 
-    coop_startTime, coop_endTime, coop_back, coop_dept_id, coop_user_id, coop_yhq_name, 
-    coop_boss_name, coop_message, coop_shop, coop_tbMessage, coop_shop_fl, coop_picture, 
-    coop_promotion, coop_coupon, coop_color, coop_service_fee, coop_per_time, coop_coupon_num, 
-    coop_tapbao_price, coop_pay_num, coop_Head_id, coop_real_shot, coop_boss_id, coop_check_money, 
-    coop_pay_type, coop_goods_title, coop_beiyong
+    coop_startTime, coop_endTime, coop_back, coop_dept_id, coop_group_id, coop_user_id, 
+    coop_yhq_name, coop_boss_name, coop_message, coop_shop, coop_tbMessage, coop_shop_fl, 
+    coop_picture, coop_promotion, coop_coupon, coop_color, coop_service_fee, coop_per_time, 
+    coop_coupon_num, coop_tapbao_price, coop_pay_num, coop_Head_id, coop_real_shot, coop_boss_id, 
+    coop_check_money, coop_pay_type, coop_goods_title, coop_beiyong, coop_shenhe_id, 
+    coop_shenhe_time, coop_tbType, coop_shenhe_bz
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbCoopExample" >
     select
@@ -146,29 +152,33 @@
       coop_activity, coop_goods_Id, coop_zero, 
       coop_alterPrice, coop_yhqNums, coop_yjScale, 
       coop_tbTime, coop_startTime, coop_endTime, 
-      coop_back, coop_dept_id, coop_user_id, 
-      coop_yhq_name, coop_boss_name, coop_message, 
-      coop_shop, coop_tbMessage, coop_shop_fl, 
-      coop_picture, coop_promotion, coop_coupon, 
-      coop_color, coop_service_fee, coop_per_time, 
-      coop_coupon_num, coop_tapbao_price, coop_pay_num, 
-      coop_Head_id, coop_real_shot, coop_boss_id, 
-      coop_check_money, coop_pay_type, coop_goods_title, 
-      coop_beiyong)
+      coop_back, coop_dept_id, coop_group_id, 
+      coop_user_id, coop_yhq_name, coop_boss_name, 
+      coop_message, coop_shop, coop_tbMessage, 
+      coop_shop_fl, coop_picture, coop_promotion, 
+      coop_coupon, coop_color, coop_service_fee, 
+      coop_per_time, coop_coupon_num, coop_tapbao_price, 
+      coop_pay_num, coop_Head_id, coop_real_shot, 
+      coop_boss_id, coop_check_money, coop_pay_type, 
+      coop_goods_title, coop_beiyong, coop_shenhe_id, 
+      coop_shenhe_time, coop_tbType, coop_shenhe_bz
+      )
     values (#{coopId,jdbcType=INTEGER}, #{coopType,jdbcType=VARCHAR}, #{coopPttype,jdbcType=VARCHAR}, 
       #{coopXdwtype,jdbcType=VARCHAR}, #{coopCustomer,jdbcType=VARCHAR}, #{coopMainpicture,jdbcType=VARCHAR}, 
       #{coopActivity,jdbcType=VARCHAR}, #{coopGoodsId,jdbcType=BIGINT}, #{coopZero,jdbcType=VARCHAR}, 
       #{coopAlterprice,jdbcType=DOUBLE}, #{coopYhqnums,jdbcType=INTEGER}, #{coopYjscale,jdbcType=VARCHAR}, 
       #{coopTbtime,jdbcType=TIMESTAMP}, #{coopStarttime,jdbcType=TIMESTAMP}, #{coopEndtime,jdbcType=TIMESTAMP}, 
-      #{coopBack,jdbcType=DOUBLE}, #{coopDeptId,jdbcType=INTEGER}, #{coopUserId,jdbcType=INTEGER}, 
-      #{coopYhqName,jdbcType=VARCHAR}, #{coopBossName,jdbcType=VARCHAR}, #{coopMessage,jdbcType=VARCHAR}, 
-      #{coopShop,jdbcType=VARCHAR}, #{coopTbmessage,jdbcType=VARCHAR}, #{coopShopFl,jdbcType=INTEGER}, 
-      #{coopPicture,jdbcType=VARCHAR}, #{coopPromotion,jdbcType=VARCHAR}, #{coopCoupon,jdbcType=VARCHAR}, 
-      #{coopColor,jdbcType=VARCHAR}, #{coopServiceFee,jdbcType=DOUBLE}, #{coopPerTime,jdbcType=TIMESTAMP}, 
-      #{coopCouponNum,jdbcType=DOUBLE}, #{coopTapbaoPrice,jdbcType=DOUBLE}, #{coopPayNum,jdbcType=INTEGER}, 
-      #{coopHeadId,jdbcType=BIGINT}, #{coopRealShot,jdbcType=VARCHAR}, #{coopBossId,jdbcType=INTEGER}, 
-      #{coopCheckMoney,jdbcType=VARCHAR}, #{coopPayType,jdbcType=VARCHAR}, #{coopGoodsTitle,jdbcType=VARCHAR}, 
-      #{coopBeiyong,jdbcType=VARCHAR})
+      #{coopBack,jdbcType=DOUBLE}, #{coopDeptId,jdbcType=INTEGER}, #{coopGroupId,jdbcType=INTEGER}, 
+      #{coopUserId,jdbcType=INTEGER}, #{coopYhqName,jdbcType=VARCHAR}, #{coopBossName,jdbcType=VARCHAR}, 
+      #{coopMessage,jdbcType=VARCHAR}, #{coopShop,jdbcType=VARCHAR}, #{coopTbmessage,jdbcType=VARCHAR}, 
+      #{coopShopFl,jdbcType=INTEGER}, #{coopPicture,jdbcType=VARCHAR}, #{coopPromotion,jdbcType=VARCHAR}, 
+      #{coopCoupon,jdbcType=VARCHAR}, #{coopColor,jdbcType=VARCHAR}, #{coopServiceFee,jdbcType=DOUBLE}, 
+      #{coopPerTime,jdbcType=TIMESTAMP}, #{coopCouponNum,jdbcType=DOUBLE}, #{coopTapbaoPrice,jdbcType=DOUBLE}, 
+      #{coopPayNum,jdbcType=INTEGER}, #{coopHeadId,jdbcType=BIGINT}, #{coopRealShot,jdbcType=VARCHAR}, 
+      #{coopBossId,jdbcType=INTEGER}, #{coopCheckMoney,jdbcType=VARCHAR}, #{coopPayType,jdbcType=VARCHAR}, 
+      #{coopGoodsTitle,jdbcType=VARCHAR}, #{coopBeiyong,jdbcType=VARCHAR}, #{coopShenheId,jdbcType=INTEGER}, 
+      #{coopShenheTime,jdbcType=TIMESTAMP}, #{coopTbtype,jdbcType=VARCHAR}, #{coopShenheBz,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbCoop" >
     insert into tb_coop
@@ -223,6 +233,9 @@
       </if>
       <if test="coopDeptId != null" >
         coop_dept_id,
+      </if>
+      <if test="coopGroupId != null" >
+        coop_group_id,
       </if>
       <if test="coopUserId != null" >
         coop_user_id,
@@ -293,6 +306,18 @@
       <if test="coopBeiyong != null" >
         coop_beiyong,
       </if>
+      <if test="coopShenheId != null" >
+        coop_shenhe_id,
+      </if>
+      <if test="coopShenheTime != null" >
+        coop_shenhe_time,
+      </if>
+      <if test="coopTbtype != null" >
+        coop_tbType,
+      </if>
+      <if test="coopShenheBz != null" >
+        coop_shenhe_bz,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="coopId != null" >
@@ -345,6 +370,9 @@
       </if>
       <if test="coopDeptId != null" >
         #{coopDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="coopGroupId != null" >
+        #{coopGroupId,jdbcType=INTEGER},
       </if>
       <if test="coopUserId != null" >
         #{coopUserId,jdbcType=INTEGER},
@@ -415,6 +443,18 @@
       <if test="coopBeiyong != null" >
         #{coopBeiyong,jdbcType=VARCHAR},
       </if>
+      <if test="coopShenheId != null" >
+        #{coopShenheId,jdbcType=INTEGER},
+      </if>
+      <if test="coopShenheTime != null" >
+        #{coopShenheTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coopTbtype != null" >
+        #{coopTbtype,jdbcType=VARCHAR},
+      </if>
+      <if test="coopShenheBz != null" >
+        #{coopShenheBz,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.luoshi.pojo.TbCoopExample" resultType="java.lang.Integer" >
@@ -476,6 +516,9 @@
       </if>
       <if test="record.coopDeptId != null" >
         coop_dept_id = #{record.coopDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.coopGroupId != null" >
+        coop_group_id = #{record.coopGroupId,jdbcType=INTEGER},
       </if>
       <if test="record.coopUserId != null" >
         coop_user_id = #{record.coopUserId,jdbcType=INTEGER},
@@ -546,6 +589,18 @@
       <if test="record.coopBeiyong != null" >
         coop_beiyong = #{record.coopBeiyong,jdbcType=VARCHAR},
       </if>
+      <if test="record.coopShenheId != null" >
+        coop_shenhe_id = #{record.coopShenheId,jdbcType=INTEGER},
+      </if>
+      <if test="record.coopShenheTime != null" >
+        coop_shenhe_time = #{record.coopShenheTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.coopTbtype != null" >
+        coop_tbType = #{record.coopTbtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coopShenheBz != null" >
+        coop_shenhe_bz = #{record.coopShenheBz,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -570,6 +625,7 @@
       coop_endTime = #{record.coopEndtime,jdbcType=TIMESTAMP},
       coop_back = #{record.coopBack,jdbcType=DOUBLE},
       coop_dept_id = #{record.coopDeptId,jdbcType=INTEGER},
+      coop_group_id = #{record.coopGroupId,jdbcType=INTEGER},
       coop_user_id = #{record.coopUserId,jdbcType=INTEGER},
       coop_yhq_name = #{record.coopYhqName,jdbcType=VARCHAR},
       coop_boss_name = #{record.coopBossName,jdbcType=VARCHAR},
@@ -592,7 +648,11 @@
       coop_check_money = #{record.coopCheckMoney,jdbcType=VARCHAR},
       coop_pay_type = #{record.coopPayType,jdbcType=VARCHAR},
       coop_goods_title = #{record.coopGoodsTitle,jdbcType=VARCHAR},
-      coop_beiyong = #{record.coopBeiyong,jdbcType=VARCHAR}
+      coop_beiyong = #{record.coopBeiyong,jdbcType=VARCHAR},
+      coop_shenhe_id = #{record.coopShenheId,jdbcType=INTEGER},
+      coop_shenhe_time = #{record.coopShenheTime,jdbcType=TIMESTAMP},
+      coop_tbType = #{record.coopTbtype,jdbcType=VARCHAR},
+      coop_shenhe_bz = #{record.coopShenheBz,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -647,6 +707,9 @@
       </if>
       <if test="coopDeptId != null" >
         coop_dept_id = #{coopDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="coopGroupId != null" >
+        coop_group_id = #{coopGroupId,jdbcType=INTEGER},
       </if>
       <if test="coopUserId != null" >
         coop_user_id = #{coopUserId,jdbcType=INTEGER},
@@ -717,6 +780,18 @@
       <if test="coopBeiyong != null" >
         coop_beiyong = #{coopBeiyong,jdbcType=VARCHAR},
       </if>
+      <if test="coopShenheId != null" >
+        coop_shenhe_id = #{coopShenheId,jdbcType=INTEGER},
+      </if>
+      <if test="coopShenheTime != null" >
+        coop_shenhe_time = #{coopShenheTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coopTbtype != null" >
+        coop_tbType = #{coopTbtype,jdbcType=VARCHAR},
+      </if>
+      <if test="coopShenheBz != null" >
+        coop_shenhe_bz = #{coopShenheBz,jdbcType=VARCHAR},
+      </if>
     </set>
     where coop_id = #{coopId,jdbcType=INTEGER}
   </update>
@@ -738,6 +813,7 @@
       coop_endTime = #{coopEndtime,jdbcType=TIMESTAMP},
       coop_back = #{coopBack,jdbcType=DOUBLE},
       coop_dept_id = #{coopDeptId,jdbcType=INTEGER},
+      coop_group_id = #{coopGroupId,jdbcType=INTEGER},
       coop_user_id = #{coopUserId,jdbcType=INTEGER},
       coop_yhq_name = #{coopYhqName,jdbcType=VARCHAR},
       coop_boss_name = #{coopBossName,jdbcType=VARCHAR},
@@ -760,7 +836,11 @@
       coop_check_money = #{coopCheckMoney,jdbcType=VARCHAR},
       coop_pay_type = #{coopPayType,jdbcType=VARCHAR},
       coop_goods_title = #{coopGoodsTitle,jdbcType=VARCHAR},
-      coop_beiyong = #{coopBeiyong,jdbcType=VARCHAR}
+      coop_beiyong = #{coopBeiyong,jdbcType=VARCHAR},
+      coop_shenhe_id = #{coopShenheId,jdbcType=INTEGER},
+      coop_shenhe_time = #{coopShenheTime,jdbcType=TIMESTAMP},
+      coop_tbType = #{coopTbtype,jdbcType=VARCHAR},
+      coop_shenhe_bz = #{coopShenheBz,jdbcType=VARCHAR}
     where coop_id = #{coopId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -29,6 +29,8 @@ public class TbGoods {
 
     private Long goodsFid;
 
+    private String goodsShopName;
+
     public Long getGoodsId() {
         return goodsId;
     }
@@ -131,5 +133,13 @@ public class TbGoods {
 
     public void setGoodsFid(Long goodsFid) {
         this.goodsFid = goodsFid;
+    }
+
+    public String getGoodsShopName() {
+        return goodsShopName;
+    }
+
+    public void setGoodsShopName(String goodsShopName) {
+        this.goodsShopName = goodsShopName == null ? null : goodsShopName.trim();
     }
 }

@@ -133,12 +133,6 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(checkmoneys.getCmType()!=null) {
 				criteria.andCmTypeEqualTo(checkmoneys.getCmType());
 			}
-			if(checkmoneys.getCmSellDept()!=null && checkmoneys.getCmSellDept().length()>0){
-				criteria.andCmSellDeptLike("%"+checkmoneys.getCmSellDept()+"%");
-			}
-			if(checkmoneys.getCmDept()!=null && checkmoneys.getCmDept().length()>0){
-				criteria.andCmDeptLike("%"+checkmoneys.getCmDept()+"%");
-			}
 			
 			//店铺名称
 			if(checkmoneys.getCmShopName()!=null && checkmoneys.getCmShopName().length()>0){

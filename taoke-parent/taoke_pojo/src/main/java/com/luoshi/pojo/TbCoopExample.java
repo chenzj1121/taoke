@@ -1205,6 +1205,66 @@ public class TbCoopExample {
             return (Criteria) this;
         }
 
+        public Criteria andCoopGroupIdIsNull() {
+            addCriterion("coop_group_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdIsNotNull() {
+            addCriterion("coop_group_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdEqualTo(Integer value) {
+            addCriterion("coop_group_id =", value, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdNotEqualTo(Integer value) {
+            addCriterion("coop_group_id <>", value, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdGreaterThan(Integer value) {
+            addCriterion("coop_group_id >", value, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coop_group_id >=", value, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdLessThan(Integer value) {
+            addCriterion("coop_group_id <", value, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdLessThanOrEqualTo(Integer value) {
+            addCriterion("coop_group_id <=", value, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdIn(List<Integer> values) {
+            addCriterion("coop_group_id in", values, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdNotIn(List<Integer> values) {
+            addCriterion("coop_group_id not in", values, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdBetween(Integer value1, Integer value2) {
+            addCriterion("coop_group_id between", value1, value2, "coopGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopGroupIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("coop_group_id not between", value1, value2, "coopGroupId");
+            return (Criteria) this;
+        }
+
         public Criteria andCoopUserIdIsNull() {
             addCriterion("coop_user_id is null");
             return (Criteria) this;
@@ -2722,6 +2782,266 @@ public class TbCoopExample {
 
         public Criteria andCoopBeiyongNotBetween(String value1, String value2) {
             addCriterion("coop_beiyong not between", value1, value2, "coopBeiyong");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdIsNull() {
+            addCriterion("coop_shenhe_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdIsNotNull() {
+            addCriterion("coop_shenhe_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdEqualTo(Integer value) {
+            addCriterion("coop_shenhe_id =", value, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdNotEqualTo(Integer value) {
+            addCriterion("coop_shenhe_id <>", value, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdGreaterThan(Integer value) {
+            addCriterion("coop_shenhe_id >", value, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coop_shenhe_id >=", value, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdLessThan(Integer value) {
+            addCriterion("coop_shenhe_id <", value, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdLessThanOrEqualTo(Integer value) {
+            addCriterion("coop_shenhe_id <=", value, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdIn(List<Integer> values) {
+            addCriterion("coop_shenhe_id in", values, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdNotIn(List<Integer> values) {
+            addCriterion("coop_shenhe_id not in", values, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdBetween(Integer value1, Integer value2) {
+            addCriterion("coop_shenhe_id between", value1, value2, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("coop_shenhe_id not between", value1, value2, "coopShenheId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeIsNull() {
+            addCriterion("coop_shenhe_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeIsNotNull() {
+            addCriterion("coop_shenhe_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeEqualTo(Date value) {
+            addCriterion("coop_shenhe_time =", value, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeNotEqualTo(Date value) {
+            addCriterion("coop_shenhe_time <>", value, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeGreaterThan(Date value) {
+            addCriterion("coop_shenhe_time >", value, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("coop_shenhe_time >=", value, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeLessThan(Date value) {
+            addCriterion("coop_shenhe_time <", value, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeLessThanOrEqualTo(Date value) {
+            addCriterion("coop_shenhe_time <=", value, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeIn(List<Date> values) {
+            addCriterion("coop_shenhe_time in", values, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeNotIn(List<Date> values) {
+            addCriterion("coop_shenhe_time not in", values, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeBetween(Date value1, Date value2) {
+            addCriterion("coop_shenhe_time between", value1, value2, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheTimeNotBetween(Date value1, Date value2) {
+            addCriterion("coop_shenhe_time not between", value1, value2, "coopShenheTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeIsNull() {
+            addCriterion("coop_tbType is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeIsNotNull() {
+            addCriterion("coop_tbType is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeEqualTo(String value) {
+            addCriterion("coop_tbType =", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeNotEqualTo(String value) {
+            addCriterion("coop_tbType <>", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeGreaterThan(String value) {
+            addCriterion("coop_tbType >", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_tbType >=", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeLessThan(String value) {
+            addCriterion("coop_tbType <", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeLessThanOrEqualTo(String value) {
+            addCriterion("coop_tbType <=", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeLike(String value) {
+            addCriterion("coop_tbType like", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeNotLike(String value) {
+            addCriterion("coop_tbType not like", value, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeIn(List<String> values) {
+            addCriterion("coop_tbType in", values, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeNotIn(List<String> values) {
+            addCriterion("coop_tbType not in", values, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeBetween(String value1, String value2) {
+            addCriterion("coop_tbType between", value1, value2, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbtypeNotBetween(String value1, String value2) {
+            addCriterion("coop_tbType not between", value1, value2, "coopTbtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzIsNull() {
+            addCriterion("coop_shenhe_bz is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzIsNotNull() {
+            addCriterion("coop_shenhe_bz is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzEqualTo(String value) {
+            addCriterion("coop_shenhe_bz =", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzNotEqualTo(String value) {
+            addCriterion("coop_shenhe_bz <>", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzGreaterThan(String value) {
+            addCriterion("coop_shenhe_bz >", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzGreaterThanOrEqualTo(String value) {
+            addCriterion("coop_shenhe_bz >=", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzLessThan(String value) {
+            addCriterion("coop_shenhe_bz <", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzLessThanOrEqualTo(String value) {
+            addCriterion("coop_shenhe_bz <=", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzLike(String value) {
+            addCriterion("coop_shenhe_bz like", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzNotLike(String value) {
+            addCriterion("coop_shenhe_bz not like", value, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzIn(List<String> values) {
+            addCriterion("coop_shenhe_bz in", values, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzNotIn(List<String> values) {
+            addCriterion("coop_shenhe_bz not in", values, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzBetween(String value1, String value2) {
+            addCriterion("coop_shenhe_bz between", value1, value2, "coopShenheBz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopShenheBzNotBetween(String value1, String value2) {
+            addCriterion("coop_shenhe_bz not between", value1, value2, "coopShenheBz");
             return (Criteria) this;
         }
     }

@@ -165,143 +165,123 @@ public class TbCheckmoneysExample {
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptIsNull() {
-            addCriterion("cm_sell_dept is null");
+        public Criteria andCmDeptIdIsNull() {
+            addCriterion("cm_dept_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptIsNotNull() {
-            addCriterion("cm_sell_dept is not null");
+        public Criteria andCmDeptIdIsNotNull() {
+            addCriterion("cm_dept_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptEqualTo(String value) {
-            addCriterion("cm_sell_dept =", value, "cmSellDept");
+        public Criteria andCmDeptIdEqualTo(Integer value) {
+            addCriterion("cm_dept_id =", value, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptNotEqualTo(String value) {
-            addCriterion("cm_sell_dept <>", value, "cmSellDept");
+        public Criteria andCmDeptIdNotEqualTo(Integer value) {
+            addCriterion("cm_dept_id <>", value, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptGreaterThan(String value) {
-            addCriterion("cm_sell_dept >", value, "cmSellDept");
+        public Criteria andCmDeptIdGreaterThan(Integer value) {
+            addCriterion("cm_dept_id >", value, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptGreaterThanOrEqualTo(String value) {
-            addCriterion("cm_sell_dept >=", value, "cmSellDept");
+        public Criteria andCmDeptIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cm_dept_id >=", value, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptLessThan(String value) {
-            addCriterion("cm_sell_dept <", value, "cmSellDept");
+        public Criteria andCmDeptIdLessThan(Integer value) {
+            addCriterion("cm_dept_id <", value, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptLessThanOrEqualTo(String value) {
-            addCriterion("cm_sell_dept <=", value, "cmSellDept");
+        public Criteria andCmDeptIdLessThanOrEqualTo(Integer value) {
+            addCriterion("cm_dept_id <=", value, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptLike(String value) {
-            addCriterion("cm_sell_dept like", value, "cmSellDept");
+        public Criteria andCmDeptIdIn(List<Integer> values) {
+            addCriterion("cm_dept_id in", values, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptNotLike(String value) {
-            addCriterion("cm_sell_dept not like", value, "cmSellDept");
+        public Criteria andCmDeptIdNotIn(List<Integer> values) {
+            addCriterion("cm_dept_id not in", values, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptIn(List<String> values) {
-            addCriterion("cm_sell_dept in", values, "cmSellDept");
+        public Criteria andCmDeptIdBetween(Integer value1, Integer value2) {
+            addCriterion("cm_dept_id between", value1, value2, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptNotIn(List<String> values) {
-            addCriterion("cm_sell_dept not in", values, "cmSellDept");
+        public Criteria andCmDeptIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("cm_dept_id not between", value1, value2, "cmDeptId");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptBetween(String value1, String value2) {
-            addCriterion("cm_sell_dept between", value1, value2, "cmSellDept");
+        public Criteria andCmGroupIdIsNull() {
+            addCriterion("cm_group_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSellDeptNotBetween(String value1, String value2) {
-            addCriterion("cm_sell_dept not between", value1, value2, "cmSellDept");
+        public Criteria andCmGroupIdIsNotNull() {
+            addCriterion("cm_group_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptIsNull() {
-            addCriterion("cm_dept is null");
+        public Criteria andCmGroupIdEqualTo(Integer value) {
+            addCriterion("cm_group_id =", value, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptIsNotNull() {
-            addCriterion("cm_dept is not null");
+        public Criteria andCmGroupIdNotEqualTo(Integer value) {
+            addCriterion("cm_group_id <>", value, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptEqualTo(String value) {
-            addCriterion("cm_dept =", value, "cmDept");
+        public Criteria andCmGroupIdGreaterThan(Integer value) {
+            addCriterion("cm_group_id >", value, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptNotEqualTo(String value) {
-            addCriterion("cm_dept <>", value, "cmDept");
+        public Criteria andCmGroupIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cm_group_id >=", value, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptGreaterThan(String value) {
-            addCriterion("cm_dept >", value, "cmDept");
+        public Criteria andCmGroupIdLessThan(Integer value) {
+            addCriterion("cm_group_id <", value, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptGreaterThanOrEqualTo(String value) {
-            addCriterion("cm_dept >=", value, "cmDept");
+        public Criteria andCmGroupIdLessThanOrEqualTo(Integer value) {
+            addCriterion("cm_group_id <=", value, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptLessThan(String value) {
-            addCriterion("cm_dept <", value, "cmDept");
+        public Criteria andCmGroupIdIn(List<Integer> values) {
+            addCriterion("cm_group_id in", values, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptLessThanOrEqualTo(String value) {
-            addCriterion("cm_dept <=", value, "cmDept");
+        public Criteria andCmGroupIdNotIn(List<Integer> values) {
+            addCriterion("cm_group_id not in", values, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptLike(String value) {
-            addCriterion("cm_dept like", value, "cmDept");
+        public Criteria andCmGroupIdBetween(Integer value1, Integer value2) {
+            addCriterion("cm_group_id between", value1, value2, "cmGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCmDeptNotLike(String value) {
-            addCriterion("cm_dept not like", value, "cmDept");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmDeptIn(List<String> values) {
-            addCriterion("cm_dept in", values, "cmDept");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmDeptNotIn(List<String> values) {
-            addCriterion("cm_dept not in", values, "cmDept");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmDeptBetween(String value1, String value2) {
-            addCriterion("cm_dept between", value1, value2, "cmDept");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmDeptNotBetween(String value1, String value2) {
-            addCriterion("cm_dept not between", value1, value2, "cmDept");
+        public Criteria andCmGroupIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("cm_group_id not between", value1, value2, "cmGroupId");
             return (Criteria) this;
         }
 

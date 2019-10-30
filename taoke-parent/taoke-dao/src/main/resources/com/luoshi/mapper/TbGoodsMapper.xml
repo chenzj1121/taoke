@@ -15,6 +15,7 @@
     <result column="goods_group_id" property="goodsGroupId" jdbcType="INTEGER" />
     <result column="goods_user_id" property="goodsUserId" jdbcType="INTEGER" />
     <result column="goods_FID" property="goodsFid" jdbcType="BIGINT" />
+    <result column="goods_shop_name" property="goodsShopName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,7 +78,7 @@
   <sql id="Base_Column_List" >
     goods_id, goods_starttime, goods_endtime, goods_yhq_name, goods_nums, goods_price, 
     goods_service, goods_pay_money, goods_shop_id, goods_dept_id, goods_group_id, goods_user_id, 
-    goods_FID
+    goods_FID, goods_shop_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbGoodsExample" >
     select
@@ -114,12 +115,12 @@
       goods_yhq_name, goods_nums, goods_price, 
       goods_service, goods_pay_money, goods_shop_id, 
       goods_dept_id, goods_group_id, goods_user_id, 
-      goods_FID)
+      goods_FID, goods_shop_name)
     values (#{goodsId,jdbcType=BIGINT}, #{goodsStarttime,jdbcType=TIMESTAMP}, #{goodsEndtime,jdbcType=TIMESTAMP}, 
       #{goodsYhqName,jdbcType=VARCHAR}, #{goodsNums,jdbcType=INTEGER}, #{goodsPrice,jdbcType=DOUBLE}, 
       #{goodsService,jdbcType=DOUBLE}, #{goodsPayMoney,jdbcType=DOUBLE}, #{goodsShopId,jdbcType=INTEGER}, 
       #{goodsDeptId,jdbcType=INTEGER}, #{goodsGroupId,jdbcType=INTEGER}, #{goodsUserId,jdbcType=INTEGER}, 
-      #{goodsFid,jdbcType=BIGINT})
+      #{goodsFid,jdbcType=BIGINT}, #{goodsShopName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbGoods" >
     insert into tb_goods
@@ -163,6 +164,9 @@
       <if test="goodsFid != null" >
         goods_FID,
       </if>
+      <if test="goodsShopName != null" >
+        goods_shop_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="goodsId != null" >
@@ -203,6 +207,9 @@
       </if>
       <if test="goodsFid != null" >
         #{goodsFid,jdbcType=BIGINT},
+      </if>
+      <if test="goodsShopName != null" >
+        #{goodsShopName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -254,6 +261,9 @@
       <if test="record.goodsFid != null" >
         goods_FID = #{record.goodsFid,jdbcType=BIGINT},
       </if>
+      <if test="record.goodsShopName != null" >
+        goods_shop_name = #{record.goodsShopName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -273,7 +283,8 @@
       goods_dept_id = #{record.goodsDeptId,jdbcType=INTEGER},
       goods_group_id = #{record.goodsGroupId,jdbcType=INTEGER},
       goods_user_id = #{record.goodsUserId,jdbcType=INTEGER},
-      goods_FID = #{record.goodsFid,jdbcType=BIGINT}
+      goods_FID = #{record.goodsFid,jdbcType=BIGINT},
+      goods_shop_name = #{record.goodsShopName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -317,6 +328,9 @@
       <if test="goodsFid != null" >
         goods_FID = #{goodsFid,jdbcType=BIGINT},
       </if>
+      <if test="goodsShopName != null" >
+        goods_shop_name = #{goodsShopName,jdbcType=VARCHAR},
+      </if>
     </set>
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </update>
@@ -333,7 +347,8 @@
       goods_dept_id = #{goodsDeptId,jdbcType=INTEGER},
       goods_group_id = #{goodsGroupId,jdbcType=INTEGER},
       goods_user_id = #{goodsUserId,jdbcType=INTEGER},
-      goods_FID = #{goodsFid,jdbcType=BIGINT}
+      goods_FID = #{goodsFid,jdbcType=BIGINT},
+      goods_shop_name = #{goodsShopName,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </update>
 </mapper>

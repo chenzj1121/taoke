@@ -5,9 +5,9 @@ import java.util.Date;
 public class TbCheckmoneys {
     private Integer cmId;
 
-    private String cmSellDept;
+    private Integer cmDeptId;
 
-    private String cmDept;
+    private Integer cmGroupId;
 
     private Integer cmUserId;
 
@@ -57,20 +57,20 @@ public class TbCheckmoneys {
         this.cmId = cmId;
     }
 
-    public String getCmSellDept() {
-        return cmSellDept;
+    public Integer getCmDeptId() {
+        return cmDeptId;
     }
 
-    public void setCmSellDept(String cmSellDept) {
-        this.cmSellDept = cmSellDept == null ? null : cmSellDept.trim();
+    public void setCmDeptId(Integer cmDeptId) {
+        this.cmDeptId = cmDeptId;
     }
 
-    public String getCmDept() {
-        return cmDept;
+    public Integer getCmGroupId() {
+        return cmGroupId;
     }
 
-    public void setCmDept(String cmDept) {
-        this.cmDept = cmDept == null ? null : cmDept.trim();
+    public void setCmGroupId(Integer cmGroupId) {
+        this.cmGroupId = cmGroupId;
     }
 
     public Integer getCmUserId() {

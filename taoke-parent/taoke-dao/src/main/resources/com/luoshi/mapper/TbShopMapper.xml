@@ -25,8 +25,8 @@
     <result column="next_time" property="nextTime" jdbcType="TIMESTAMP" />
     <result column="follow_up_record" property="followUpRecord" jdbcType="VARCHAR" />
     <result column="refunds_time" property="refundsTime" jdbcType="VARCHAR" />
-    <result column="refunds_money" property="refundsMoney" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="refunds_money" property="refundsMoney" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="data_type" property="dataType" jdbcType="VARCHAR" />
     <result column="operator_user_id" property="operatorUserId" jdbcType="INTEGER" />
     <result column="Extension" property="extension" jdbcType="INTEGER" />
@@ -38,9 +38,13 @@
     <result column="private_type" property="privateType" jdbcType="VARCHAR" />
     <result column="private_user_id" property="privateUserId" jdbcType="INTEGER" />
     <result column="shop_bz" property="shopBz" jdbcType="VARCHAR" />
-    <result column="shop_group_id" property="shopGroupId" jdbcType="VARCHAR" />
+    <result column="shop_group_id" property="shopGroupId" jdbcType="INTEGER" />
     <result column="shop_user_name" property="shopUserName" jdbcType="VARCHAR" />
     <result column="shop_operate_qq" property="shopOperateQq" jdbcType="VARCHAR" />
+    <result column="shop_tb_type" property="shopTbType" jdbcType="VARCHAR" />
+    <result column="shop_tb_time" property="shopTbTime" jdbcType="TIMESTAMP" />
+    <result column="shop_tb_id" property="shopTbId" jdbcType="INTEGER" />
+    <result column="shop_tb_bz" property="shopTbBz" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -106,7 +110,8 @@
     shop_type, main_operate, shop_tbType, shop_jsType, shop_Real_shooting, operate_phone, 
     next_time, follow_up_record, refunds_time, refunds_money, create_time, data_type, 
     operator_user_id, Extension, taoke_type, cooperation, cooperation_num, entry_num, 
-    Spare, private_type, private_user_id, shop_bz, shop_group_id, shop_user_name, shop_operate_qq
+    Spare, private_type, private_user_id, shop_bz, shop_group_id, shop_user_name, shop_operate_qq, 
+    shop_tb_type, shop_tb_time, shop_tb_id, shop_tb_bz
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbShopExample" >
     select
@@ -151,8 +156,9 @@
       Extension, taoke_type, cooperation, 
       cooperation_num, entry_num, Spare, 
       private_type, private_user_id, shop_bz, 
-      shop_group_id, shop_user_name, shop_operate_qq
-      )
+      shop_group_id, shop_user_name, shop_operate_qq, 
+      shop_tb_type, shop_tb_time, shop_tb_id, 
+      shop_tb_bz)
     values (#{id,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{wangwangaccount,jdbcType=VARCHAR}, 
       #{shopProduct,jdbcType=VARCHAR}, #{shopUseId,jdbcType=INTEGER}, #{shopBoss,jdbcType=VARCHAR}, 
       #{shopPhone,jdbcType=VARCHAR}, #{shopDeptId,jdbcType=INTEGER}, #{shopUserId2,jdbcType=INTEGER}, 
@@ -160,13 +166,14 @@
       #{shopUrl,jdbcType=VARCHAR}, #{maturity,jdbcType=VARCHAR}, #{shopType,jdbcType=VARCHAR}, 
       #{mainOperate,jdbcType=VARCHAR}, #{shopTbtype,jdbcType=VARCHAR}, #{shopJstype,jdbcType=VARCHAR}, 
       #{shopRealShooting,jdbcType=VARCHAR}, #{operatePhone,jdbcType=VARCHAR}, #{nextTime,jdbcType=TIMESTAMP}, 
-      #{followUpRecord,jdbcType=VARCHAR}, #{refundsTime,jdbcType=VARCHAR}, #{refundsMoney,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR}, #{operatorUserId,jdbcType=INTEGER}, 
+      #{followUpRecord,jdbcType=VARCHAR}, #{refundsTime,jdbcType=VARCHAR}, #{refundsMoney,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{dataType,jdbcType=VARCHAR}, #{operatorUserId,jdbcType=INTEGER}, 
       #{extension,jdbcType=INTEGER}, #{taokeType,jdbcType=VARCHAR}, #{cooperation,jdbcType=VARCHAR}, 
       #{cooperationNum,jdbcType=INTEGER}, #{entryNum,jdbcType=INTEGER}, #{spare,jdbcType=VARCHAR}, 
       #{privateType,jdbcType=VARCHAR}, #{privateUserId,jdbcType=INTEGER}, #{shopBz,jdbcType=VARCHAR}, 
-      #{shopGroupId,jdbcType=VARCHAR}, #{shopUserName,jdbcType=VARCHAR}, #{shopOperateQq,jdbcType=VARCHAR}
-      )
+      #{shopGroupId,jdbcType=INTEGER}, #{shopUserName,jdbcType=VARCHAR}, #{shopOperateQq,jdbcType=VARCHAR}, 
+      #{shopTbType,jdbcType=VARCHAR}, #{shopTbTime,jdbcType=TIMESTAMP}, #{shopTbId,jdbcType=INTEGER}, 
+      #{shopTbBz,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbShop" >
     insert into tb_shop
@@ -288,6 +295,18 @@
       <if test="shopOperateQq != null" >
         shop_operate_qq,
       </if>
+      <if test="shopTbType != null" >
+        shop_tb_type,
+      </if>
+      <if test="shopTbTime != null" >
+        shop_tb_time,
+      </if>
+      <if test="shopTbId != null" >
+        shop_tb_id,
+      </if>
+      <if test="shopTbBz != null" >
+        shop_tb_bz,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -360,10 +379,10 @@
         #{refundsTime,jdbcType=VARCHAR},
       </if>
       <if test="refundsMoney != null" >
-        #{refundsMoney,jdbcType=VARCHAR},
+        #{refundsMoney,jdbcType=DOUBLE},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="dataType != null" >
         #{dataType,jdbcType=VARCHAR},
@@ -399,13 +418,25 @@
         #{shopBz,jdbcType=VARCHAR},
       </if>
       <if test="shopGroupId != null" >
-        #{shopGroupId,jdbcType=VARCHAR},
+        #{shopGroupId,jdbcType=INTEGER},
       </if>
       <if test="shopUserName != null" >
         #{shopUserName,jdbcType=VARCHAR},
       </if>
       <if test="shopOperateQq != null" >
         #{shopOperateQq,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTbType != null" >
+        #{shopTbType,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTbTime != null" >
+        #{shopTbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopTbId != null" >
+        #{shopTbId,jdbcType=INTEGER},
+      </if>
+      <if test="shopTbBz != null" >
+        #{shopTbBz,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -488,10 +519,10 @@
         refunds_time = #{record.refundsTime,jdbcType=VARCHAR},
       </if>
       <if test="record.refundsMoney != null" >
-        refunds_money = #{record.refundsMoney,jdbcType=VARCHAR},
+        refunds_money = #{record.refundsMoney,jdbcType=DOUBLE},
       </if>
       <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.dataType != null" >
         data_type = #{record.dataType,jdbcType=VARCHAR},
@@ -527,13 +558,25 @@
         shop_bz = #{record.shopBz,jdbcType=VARCHAR},
       </if>
       <if test="record.shopGroupId != null" >
-        shop_group_id = #{record.shopGroupId,jdbcType=VARCHAR},
+        shop_group_id = #{record.shopGroupId,jdbcType=INTEGER},
       </if>
       <if test="record.shopUserName != null" >
         shop_user_name = #{record.shopUserName,jdbcType=VARCHAR},
       </if>
       <if test="record.shopOperateQq != null" >
         shop_operate_qq = #{record.shopOperateQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopTbType != null" >
+        shop_tb_type = #{record.shopTbType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopTbTime != null" >
+        shop_tb_time = #{record.shopTbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shopTbId != null" >
+        shop_tb_id = #{record.shopTbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopTbBz != null" >
+        shop_tb_bz = #{record.shopTbBz,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -565,8 +608,8 @@
       next_time = #{record.nextTime,jdbcType=TIMESTAMP},
       follow_up_record = #{record.followUpRecord,jdbcType=VARCHAR},
       refunds_time = #{record.refundsTime,jdbcType=VARCHAR},
-      refunds_money = #{record.refundsMoney,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
+      refunds_money = #{record.refundsMoney,jdbcType=DOUBLE},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       data_type = #{record.dataType,jdbcType=VARCHAR},
       operator_user_id = #{record.operatorUserId,jdbcType=INTEGER},
       Extension = #{record.extension,jdbcType=INTEGER},
@@ -578,9 +621,13 @@
       private_type = #{record.privateType,jdbcType=VARCHAR},
       private_user_id = #{record.privateUserId,jdbcType=INTEGER},
       shop_bz = #{record.shopBz,jdbcType=VARCHAR},
-      shop_group_id = #{record.shopGroupId,jdbcType=VARCHAR},
+      shop_group_id = #{record.shopGroupId,jdbcType=INTEGER},
       shop_user_name = #{record.shopUserName,jdbcType=VARCHAR},
-      shop_operate_qq = #{record.shopOperateQq,jdbcType=VARCHAR}
+      shop_operate_qq = #{record.shopOperateQq,jdbcType=VARCHAR},
+      shop_tb_type = #{record.shopTbType,jdbcType=VARCHAR},
+      shop_tb_time = #{record.shopTbTime,jdbcType=TIMESTAMP},
+      shop_tb_id = #{record.shopTbId,jdbcType=INTEGER},
+      shop_tb_bz = #{record.shopTbBz,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -655,10 +702,10 @@
         refunds_time = #{refundsTime,jdbcType=VARCHAR},
       </if>
       <if test="refundsMoney != null" >
-        refunds_money = #{refundsMoney,jdbcType=VARCHAR},
+        refunds_money = #{refundsMoney,jdbcType=DOUBLE},
       </if>
       <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="dataType != null" >
         data_type = #{dataType,jdbcType=VARCHAR},
@@ -694,13 +741,25 @@
         shop_bz = #{shopBz,jdbcType=VARCHAR},
       </if>
       <if test="shopGroupId != null" >
-        shop_group_id = #{shopGroupId,jdbcType=VARCHAR},
+        shop_group_id = #{shopGroupId,jdbcType=INTEGER},
       </if>
       <if test="shopUserName != null" >
         shop_user_name = #{shopUserName,jdbcType=VARCHAR},
       </if>
       <if test="shopOperateQq != null" >
         shop_operate_qq = #{shopOperateQq,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTbType != null" >
+        shop_tb_type = #{shopTbType,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTbTime != null" >
+        shop_tb_time = #{shopTbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopTbId != null" >
+        shop_tb_id = #{shopTbId,jdbcType=INTEGER},
+      </if>
+      <if test="shopTbBz != null" >
+        shop_tb_bz = #{shopTbBz,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -729,8 +788,8 @@
       next_time = #{nextTime,jdbcType=TIMESTAMP},
       follow_up_record = #{followUpRecord,jdbcType=VARCHAR},
       refunds_time = #{refundsTime,jdbcType=VARCHAR},
-      refunds_money = #{refundsMoney,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
+      refunds_money = #{refundsMoney,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       data_type = #{dataType,jdbcType=VARCHAR},
       operator_user_id = #{operatorUserId,jdbcType=INTEGER},
       Extension = #{extension,jdbcType=INTEGER},
@@ -742,9 +801,13 @@
       private_type = #{privateType,jdbcType=VARCHAR},
       private_user_id = #{privateUserId,jdbcType=INTEGER},
       shop_bz = #{shopBz,jdbcType=VARCHAR},
-      shop_group_id = #{shopGroupId,jdbcType=VARCHAR},
+      shop_group_id = #{shopGroupId,jdbcType=INTEGER},
       shop_user_name = #{shopUserName,jdbcType=VARCHAR},
-      shop_operate_qq = #{shopOperateQq,jdbcType=VARCHAR}
+      shop_operate_qq = #{shopOperateQq,jdbcType=VARCHAR},
+      shop_tb_type = #{shopTbType,jdbcType=VARCHAR},
+      shop_tb_time = #{shopTbTime,jdbcType=TIMESTAMP},
+      shop_tb_id = #{shopTbId,jdbcType=INTEGER},
+      shop_tb_bz = #{shopTbBz,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

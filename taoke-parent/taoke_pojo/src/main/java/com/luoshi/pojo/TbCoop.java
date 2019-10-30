@@ -37,6 +37,8 @@ public class TbCoop {
 
     private Integer coopDeptId;
 
+    private Integer coopGroupId;
+
     private Integer coopUserId;
 
     private String coopYhqName;
@@ -82,6 +84,14 @@ public class TbCoop {
     private String coopGoodsTitle;
 
     private String coopBeiyong;
+
+    private Integer coopShenheId;
+
+    private Date coopShenheTime;
+
+    private String coopTbtype;
+
+    private String coopShenheBz;
 
     public Integer getCoopId() {
         return coopId;
@@ -217,6 +227,14 @@ public class TbCoop {
 
     public void setCoopDeptId(Integer coopDeptId) {
         this.coopDeptId = coopDeptId;
+    }
+
+    public Integer getCoopGroupId() {
+        return coopGroupId;
+    }
+
+    public void setCoopGroupId(Integer coopGroupId) {
+        this.coopGroupId = coopGroupId;
     }
 
     public Integer getCoopUserId() {
@@ -401,5 +419,37 @@ public class TbCoop {
 
     public void setCoopBeiyong(String coopBeiyong) {
         this.coopBeiyong = coopBeiyong == null ? null : coopBeiyong.trim();
+    }
+
+    public Integer getCoopShenheId() {
+        return coopShenheId;
+    }
+
+    public void setCoopShenheId(Integer coopShenheId) {
+        this.coopShenheId = coopShenheId;
+    }
+
+    public Date getCoopShenheTime() {
+        return coopShenheTime;
+    }
+
+    public void setCoopShenheTime(Date coopShenheTime) {
+        this.coopShenheTime = coopShenheTime;
+    }
+
+    public String getCoopTbtype() {
+        return coopTbtype;
+    }
+
+    public void setCoopTbtype(String coopTbtype) {
+        this.coopTbtype = coopTbtype == null ? null : coopTbtype.trim();
+    }
+
+    public String getCoopShenheBz() {
+        return coopShenheBz;
+    }
+
+    public void setCoopShenheBz(String coopShenheBz) {
+        this.coopShenheBz = coopShenheBz == null ? null : coopShenheBz.trim();
     }
 }

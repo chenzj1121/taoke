@@ -75,11 +75,19 @@ public class TbShop {
 
     private String shopBz;
 
-    private String shopGroupId;
+    private Integer shopGroupId;
 
     private String shopUserName;
 
     private String shopOperateQq;
+
+    private String shopTbType;
+
+    private Date shopTbTime;
+
+    private Integer shopTbId;
+
+    private String shopTbBz;
 
     public Integer getId() {
         return id;
@@ -266,22 +274,22 @@ public class TbShop {
     }
 
     public Double getRefundsMoney() {
-		return refundsMoney;
-	}
+        return refundsMoney;
+    }
 
-	public void setRefundsMoney(Double refundsMoney) {
-		this.refundsMoney = refundsMoney;
-	}
+    public void setRefundsMoney(Double refundsMoney) {
+        this.refundsMoney = refundsMoney;
+    }
 
-	public Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+        this.createTime = createTime;
+    }
 
-	public String getDataType() {
+    public String getDataType() {
         return dataType;
     }
 
@@ -369,12 +377,12 @@ public class TbShop {
         this.shopBz = shopBz == null ? null : shopBz.trim();
     }
 
-    public String getShopGroupId() {
+    public Integer getShopGroupId() {
         return shopGroupId;
     }
 
-    public void setShopGroupId(String shopGroupId) {
-        this.shopGroupId = shopGroupId == null ? null : shopGroupId.trim();
+    public void setShopGroupId(Integer shopGroupId) {
+        this.shopGroupId = shopGroupId;
     }
 
     public String getShopUserName() {
@@ -391,5 +399,37 @@ public class TbShop {
 
     public void setShopOperateQq(String shopOperateQq) {
         this.shopOperateQq = shopOperateQq == null ? null : shopOperateQq.trim();
+    }
+
+    public String getShopTbType() {
+        return shopTbType;
+    }
+
+    public void setShopTbType(String shopTbType) {
+        this.shopTbType = shopTbType == null ? null : shopTbType.trim();
+    }
+
+    public Date getShopTbTime() {
+        return shopTbTime;
+    }
+
+    public void setShopTbTime(Date shopTbTime) {
+        this.shopTbTime = shopTbTime;
+    }
+
+    public Integer getShopTbId() {
+        return shopTbId;
+    }
+
+    public void setShopTbId(Integer shopTbId) {
+        this.shopTbId = shopTbId;
+    }
+
+    public String getShopTbBz() {
+        return shopTbBz;
+    }
+
+    public void setShopTbBz(String shopTbBz) {
+        this.shopTbBz = shopTbBz == null ? null : shopTbBz.trim();
     }
 }

@@ -894,6 +894,76 @@ public class TbGoodsExample {
             addCriterion("goods_FID not between", value1, value2, "goodsFid");
             return (Criteria) this;
         }
+
+        public Criteria andGoodsShopNameIsNull() {
+            addCriterion("goods_shop_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameIsNotNull() {
+            addCriterion("goods_shop_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameEqualTo(String value) {
+            addCriterion("goods_shop_name =", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameNotEqualTo(String value) {
+            addCriterion("goods_shop_name <>", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameGreaterThan(String value) {
+            addCriterion("goods_shop_name >", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameGreaterThanOrEqualTo(String value) {
+            addCriterion("goods_shop_name >=", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameLessThan(String value) {
+            addCriterion("goods_shop_name <", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameLessThanOrEqualTo(String value) {
+            addCriterion("goods_shop_name <=", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameLike(String value) {
+            addCriterion("goods_shop_name like", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameNotLike(String value) {
+            addCriterion("goods_shop_name not like", value, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameIn(List<String> values) {
+            addCriterion("goods_shop_name in", values, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameNotIn(List<String> values) {
+            addCriterion("goods_shop_name not in", values, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameBetween(String value1, String value2) {
+            addCriterion("goods_shop_name between", value1, value2, "goodsShopName");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsShopNameNotBetween(String value1, String value2) {
+            addCriterion("goods_shop_name not between", value1, value2, "goodsShopName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

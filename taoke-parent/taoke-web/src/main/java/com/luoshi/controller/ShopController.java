@@ -1,10 +1,15 @@
 package com.luoshi.controller;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.luoshi.pojo.TbShop;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.ShopService;
 
 import entity.PageResult;
@@ -20,6 +25,8 @@ public class ShopController {
 
 	@Autowired
 	private ShopService shopService;
+	@Autowired
+    private HttpServletRequest request;
 	
 	/**
 	 * 返回全部列表
@@ -91,6 +98,11 @@ public class ShopController {
 	@RequestMapping("/tibao")
 	public Result tibao(@RequestBody TbShop shop){
 		try {
+			shop.setShopTbType("1");
+			shop.setShopTbTime(new Date());
+			HttpSession session = request.getSession();
+			TbSysUser user = (TbSysUser) session.getAttribute("user");
+			shop.setShopTbId(user.getId());
 			shopService.update(shop);
 			return new Result(true, "提报成功");
 		} catch (Exception e) {

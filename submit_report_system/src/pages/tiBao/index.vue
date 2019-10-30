@@ -18,35 +18,35 @@
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.cmApplyTimeEnd"
+          v-model="form.coopTbTimeEnd"
           type="date">
         </el-date-picker>
       </el-form-item>
       <br>
        <el-form-item label="上线时间：">
         <el-date-picker
-          v-model="form.cmApplyTimeBegin"
+          v-model="form.coopStartTime"
           type="date">
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.cmApplyTimeEnd"
+          v-model="form.coopStartTimeEnd"
           type="date">
         </el-date-picker>
       </el-form-item>
       <br>
        <el-form-item label="下线时间：">
         <el-date-picker
-          v-model="form.cmApplyTimeBegin"
+          v-model="form.coopEndTime"
           type="date">
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.cmApplyTimeEnd"
+          v-model="form.coopEndTimeEnd"
           type="date">
         </el-date-picker>
       </el-form-item>
@@ -206,7 +206,7 @@ export default {
       const page = this.page.pageNum
       const rows = this.page.pageSize
       this.loading = true
-      getCooperationPage(form, page, rows).then(res => {
+      getCooperationPage(form, page, rows,form.coopTbTimeEnd,form.coopStartTimeEnd,form.coopEndTimeEnd).then(res => {
          res.rows.forEach((item,index)=>{
              item.coopTbtime = this.getMyDate(item.coopTbtime)
              item.coopStarttime = this.getMyDate(item.coopStarttime)

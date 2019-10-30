@@ -18,7 +18,7 @@
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.coopTbTimeEnd"
+          v-model="TbMaxTime"
           type="date">
         </el-date-picker>
       </el-form-item>
@@ -104,7 +104,6 @@
         <el-table-column label="优惠券信息" prop="coopYhqName"></el-table-column>
         <el-table-column label="商品主图"  prop="coopMainpicture">
             <template slot-scope="scope" >
-
                 <img :src="scope.row.coopMainpicture" min-width="50" height="50" alt="">
             </template>
         </el-table-column>
@@ -121,10 +120,14 @@
         <el-table-column label="提报状态" prop="coopZero"></el-table-column>
         <el-table-column label="提报人员" prop="tibao"></el-table-column>
         <el-table-column label="审核" >
-            <el-button>审核</el-button>
+           <template slot-scope="scope" >
+            <el-button type="primary" size="mini" @click="check(scope.row.coopId)">审核</el-button>
+         </template>
         </el-table-column>
         <el-table-column label="查看">
-            <el-button>查看</el-button>
+         <template slot-scope="scope" >
+            <el-button type="primary" size="mini" @click="viewCoop(scope.row.coopId)">查看</el-button>
+         </template>
         </el-table-column>
       </el-table>
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="bineData()" />
@@ -153,7 +156,8 @@ export default {
                 total: 10
             },
             loading:false,
-            cooperationDetailTableData:[]
+            cooperationDetailTableData:[],
+            TbMaxTime:null,
         }
     },
     mounted(){
@@ -164,6 +168,20 @@ export default {
         this.bindData()
     },
     methods:{
+      check(coopId){
+        if (coopId) {
+          this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail',query:{coopId,check:true}})
+        }else{
+          this.$errmsg("无数据")
+        }
+      },
+      viewCoop(coopId){
+        if (coopId) {
+          this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail',query:{coopId,view:true}})
+        }else{
+          this.$errmsg("无数据")
+        }
+      },
     getUserList(){
       getUserByList().then(res=>{
         this.userList = res
@@ -206,7 +224,7 @@ export default {
       const page = this.page.pageNum
       const rows = this.page.pageSize
       this.loading = true
-      getCooperationPage(form, page, rows,form.coopTbTimeEnd,form.coopStartTimeEnd,form.coopEndTimeEnd).then(res => {
+      getCooperationPage(form, page,rows,this.TbMaxTime,this.form.coopStartTimeEnd,this.form.coopEndTimeEnd).then(res => {
          res.rows.forEach((item,index)=>{
              item.coopTbtime = this.getMyDate(item.coopTbtime)
              item.coopStarttime = this.getMyDate(item.coopStarttime)

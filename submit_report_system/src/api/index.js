@@ -53,7 +53,7 @@ export const updateShop = shop => ajax(PRE_URL+`/shop/update.do`, shop, 'post')
 
 export const deleteShopById = id => ajax(PRE_URL+`/shop/delete.do?ids=${id}`, 'post')
 
-export const getCooperationPage = (form, page, rows) => ajax(PRE_URL+`/coop/search.do?page=${page}&rows=${rows}`, form, 'post')
+export const getCooperationPage = (form, page, rows,TbMaxTime,maxStartTime,endTime) => ajax(PRE_URL+`/coop/search.do?page=${page}&rows=${rows}`, form, 'post')
 
 export const getCheckmonkeyPage = (form, page, rows) => ajax(PRE_URL+`/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
 

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="content">
-      <el-form ref="form" :model="form" label-width="120px" size="mini">
+      <el-form ref="form" :model="form" label-width="120px" size="mini" :disabled="disabled">
         <el-form-item label="商家客户：">
           <el-input v-model="form.coopCustomer" disabled/>
         </el-form-item>
@@ -28,7 +28,7 @@
           <el-radio label="淘抢购" v-model="form.coopActivity"/>
         </el-form-item>
         <el-form-item label="商品分类：">
-          <el-select v-model="form.coopFl">
+          <el-select v-model="form.coopShopFl">
              <el-option v-for="(item,index) in optionList" :key="index" :value="item.id" :label="item.name">{{item.name}}</el-option>
           </el-select>
         </el-form-item>
@@ -138,11 +138,17 @@
           <el-radio label="选单网" v-model="form.name"/>
           <el-radio label="好单库" v-model="form.name"/>
         </el-form-item> -->
-        <el-form-item>
-          <el-button type="primary" @click="submit">提交</el-button>
+        <el-form-item v-if="!check&&!view">
+          <el-button type="primary" @click="submit">{{isUpadte==true?'修改':'提交'}}</el-button>
           <el-button @click="back">返回</el-button>
         </el-form-item>
       </el-form>
+      <div class="checkBtn" v-if="check || view">
+      <el-button type="primary" v-if="check">通过</el-button>
+      <el-button type="danger" v-if="check">退回</el-button>
+      <el-button type="warning" @click="back">返回</el-button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -164,34 +170,56 @@ export default {
       optionList:[],
       flag :false,
       isUpadte:false,
+      check:false,
+      view:false,
+      disabled:false,
     }
   },
   mounted(){
     this.getRole()
-    this.shopDetail = this.$route.params
-    this.form.coopCustomer = this.shopDetail.shopName;
-    this.form.coopDeptId=getUser().deptId
-    this.form.coopUserId=getUser().id
-    this.form.coopBossName = this.shopDetail.shopBoss
-    this.form.coopBossId = this.shopDetail.id
-    if(!this.shopDetail.shopName) {
+    // console.log(this.$route.params)
+    // this.form = this.$route.params
+   
+    
+    if (this.$route.query.coopId) {
+      this.isUpadte = true;
+      this.getCoopDetail();
+    }else{
+      if(!this.$route.params.shopBoss) {
        this.$alert('未检测到店铺', '警告', {
           confirmButtonText: '确定',
           callback: action => {
               this.$router.go(-1)
           }
         });
+      }
+      this.form.coopDeptId=getUser().deptId
+      this.form.coopGroupId = getUser().grouopId
+      this.form.coopUserId=getUser().id
+      this.shopDetail = this.$route.params
+      this.form.coopCustomer = this.shopDetail.shopName;
+      this.form.coopBossId = this.shopDetail.id
+      this.form.coopBossName = this.shopDetail.shopBoss
     }
-    if (this.$route.query.coopId) {
-      this.isUpadte = true;
-      this.getCoopDetail()
+    if (this.$route.query.check) {
+        this.check = true
+        this.disabled = true
+    }
+    if (this.$route.query.view) {
+        this.view = true
+        this.disabled = true
+
     }
   },
   methods: {
     getCoopDetail(){
       findCoopById(this.$route.query.coopId).then(res=>{
         console.log(res)
+        res.beginTime =res.coopYjscale?"预告":'立即开始'
         this.form = res
+        this.form.coopDeptId=getUser().deptId
+        this.form.coopGroupId = getUser().grouopId
+        this.form.coopUserId=getUser().id
       })
     },
     checkGood(id){
@@ -243,6 +271,7 @@ export default {
           if (this.flag) {
             if (this.isUpadte) {
               this.form.coopTbtime = new Date()
+         
               updateCoop(this.form).then(res=>{
                 if (res.success) {
                   this.$sucmsg(res.message)
@@ -252,6 +281,9 @@ export default {
                 }
               })
             }else{
+              if (this.form.beginTime === '立即开始') {
+                this.form.coopStarttime = new Date() //若立即开始
+              }
               console.log(this.form)
               this.form.coopTbtime = new Date()
               addCoop(this.form).then(res=>{
@@ -286,5 +318,10 @@ export default {
 .content {
   width: 60%;
   margin: 0 auto;
+}
+.checkBtn{
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
 }
 </style>

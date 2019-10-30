@@ -242,6 +242,7 @@ export default {
         if(valid){
           if (this.flag) {
             if (this.isUpadte) {
+              this.form.coopTbtime = new Date()
               updateCoop(this.form).then(res=>{
                 if (res.success) {
                   this.$sucmsg(res.message)

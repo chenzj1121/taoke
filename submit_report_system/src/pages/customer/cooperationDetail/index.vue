@@ -144,12 +144,23 @@
         </el-form-item>
       </el-form>
       <div class="checkBtn" v-if="check || view">
-      <el-button type="primary" v-if="check">通过</el-button>
-      <el-button type="danger" v-if="check">退回</el-button>
+      <el-button type="primary" v-if="check" @click="pass">通过</el-button>
+      <el-button type="danger" v-if="check" @click="reject">退回</el-button>
       <el-button type="warning" @click="back">返回</el-button>
       </div>
-
     </div>
+    <el-dialog title="拒绝理由" :visible.sync="dialogTableVisible">
+      <el-input
+      type="textarea"
+      :rows="2"
+      placeholder="请输入拒绝理由"
+      v-model="form.coopShenheBz">
+    </el-input>
+    <div style="padding:20px 0;">
+    <el-button type="primary" @click="rejectSub" >提交</el-button>
+    <el-button type="success" @click="dialogTableVisible=false">返回</el-button>
+    </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -173,14 +184,11 @@ export default {
       check:false,
       view:false,
       disabled:false,
+      dialogTableVisible:false
     }
   },
   mounted(){
     this.getRole()
-    // console.log(this.$route.params)
-    // this.form = this.$route.params
-   
-    
     if (this.$route.query.coopId) {
       this.isUpadte = true;
       this.getCoopDetail();
@@ -204,6 +212,7 @@ export default {
     if (this.$route.query.check) {
         this.check = true
         this.disabled = true
+     
     }
     if (this.$route.query.view) {
         this.view = true
@@ -212,6 +221,33 @@ export default {
     }
   },
   methods: {
+    rejectSub(){
+       if (this.form.coopShenheBz) {
+        this.form.coopTbtype = "拒绝"
+        this.form.coopShenheId = getUser().id;
+        this.form.coopShenheTime = new Date();
+         this.update()
+       }else{
+         this.$errmsg("请输入拒绝理由")
+       }
+    },
+    pass(){
+          this.$confirm('您即将通过该条提报, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+            this.form.coopShenheId = getUser().id;
+            this.form.coopShenheTime = new Date();
+            this.form.coopTbtype = "通过"
+            this.update()
+        }).catch(() => {
+         
+        });
+    },
+    reject(){
+      this.dialogTableVisible = true
+    },
     getCoopDetail(){
       findCoopById(this.$route.query.coopId).then(res=>{
         console.log(res)
@@ -221,6 +257,16 @@ export default {
         this.form.coopGroupId = getUser().grouopId
         this.form.coopUserId=getUser().id
       })
+    },
+    update(){
+         updateCoop(this.form).then(res=>{
+            if (res.success) {
+              this.$sucmsg("审核成功")
+              this.$router.go(-1)
+            }else{
+              this.$errmsg(res.message)
+            }
+          })
     },
     checkGood(id){
       if (id) {
@@ -271,7 +317,6 @@ export default {
           if (this.flag) {
             if (this.isUpadte) {
               this.form.coopTbtime = new Date()
-         
               updateCoop(this.form).then(res=>{
                 if (res.success) {
                   this.$sucmsg(res.message)
@@ -286,6 +331,7 @@ export default {
               }
               console.log(this.form)
               this.form.coopTbtime = new Date()
+              this.form.coopTbtype = '待审核'
               addCoop(this.form).then(res=>{
                 console.log(res)
                 if (res.success) {

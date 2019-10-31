@@ -116,13 +116,19 @@
         <!-- <el-table-column label="组别" prop="dakuanriqi"></el-table-column> -->
         <el-table-column label="销售人员" prop="coopUserId"></el-table-column>
         <el-table-column label="上线时间" prop="coopStarttime"></el-table-column>
-        <el-table-column label="是否零点提报" prop="dakuanriqi"></el-table-column>
-        <el-table-column label="提报状态" prop="coopZero"></el-table-column>
-        <el-table-column label="提报人员" prop="tibao"></el-table-column>
+        <el-table-column label="是否零点提报" prop="coopZero"></el-table-column>
+        <el-table-column label="提报状态" prop="coopTbtype">
+           <template slot-scope="scope" >
+             <p :class="scope.row.coopTbtype=='待审核'?'shenhe':'jieshu'">{{scope.row.coopTbtype}}</p>
+             <p class="checkReject" v-if="scope.row.coopTbtype=='拒绝'">(查看)</p>
+           </template>
+        </el-table-column>
+        <el-table-column label="提报人员" prop="coopShenheId"></el-table-column>
         <el-table-column label="审核" >
            <template slot-scope="scope" >
-            <el-button type="primary" size="mini" @click="check(scope.row.coopId)">审核</el-button>
-         </template>
+            <p v-if="scope.row.coopTbtype=='拒绝' ||scope.row.coopTbtype=='通过' ">已审核</p> 
+            <el-button  v-if="scope.row.coopTbtype=='待审核'" type="primary" size="mini" @click="check(scope.row.coopId)">审核</el-button>
+          </template>
         </el-table-column>
         <el-table-column label="查看">
          <template slot-scope="scope" >
@@ -242,7 +248,10 @@ export default {
               })
               this.userList.forEach(obj=>{
                 if(item.coopUserId ==obj.id ){
-                  item.coopUser = obj.username
+                  item.coopUserId = obj.username
+                }
+                if (item.coopShenheId==obj.id) {
+                  item.coopShenheId = obj.username
                 }
               })
    
@@ -280,5 +289,18 @@ export default {
   padding: 10px;
   background: #eee;
   margin-bottom: 10px;
+}
+.shenhe{
+  font-size:14px;
+  color:"red";
+  font-weight:bold;
+}
+.jieshu{
+color: gray;
+}
+.checkReject{
+  display:inline;
+  cursor: pointer;
+  color: blue;
 }
 </style>

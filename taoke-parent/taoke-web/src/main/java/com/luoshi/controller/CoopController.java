@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dtk.util.HttpUtils;
 import com.dtk.util.SignMD5Util;
 import com.luoshi.pojo.TbCoop;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.CoopService;
 
 import entity.PageResult;
@@ -167,6 +169,26 @@ public class CoopController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Result(false, "修改失败");
+		}
+	}	
+	
+	/**
+	 * 审核
+	 * @param coop
+	 * @return
+	 */
+	@RequestMapping("/shenhe")
+	public Result shenhe(@RequestBody TbCoop coop){
+		try {
+			HttpSession session = request.getSession();
+			TbSysUser user = (TbSysUser) session.getAttribute("user");
+			coop.setCoopShenheId(user.getId());
+			coop.setCoopShenheTime(new Date());
+			coopService.update(coop);
+			return new Result(true, "审核成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "审核失败");
 		}
 	}	
 	

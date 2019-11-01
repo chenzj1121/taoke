@@ -63,6 +63,9 @@ public interface CoopService {
 	 public PageResult findPage(TbCoop coop, int page, int rows, Date tbMaxTime, Date maxStartTime, Date endTime);
 
 
+	public void fenpei(int[] coopids, int userId);
+
+
 
 
 	

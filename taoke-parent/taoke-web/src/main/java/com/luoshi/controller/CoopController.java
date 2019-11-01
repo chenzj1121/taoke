@@ -218,6 +218,23 @@ public class CoopController {
 		}
 	}
 	
+	/**
+	 * 分配提报人员
+	 * @param coop
+	 * @return
+	 */
+	@RequestMapping("/fenpei")
+	public Result shenhe(int [] coopids, int userId){
+		try {
+			
+			coopService.fenpei(coopids,userId);
+			return new Result(true, "分配成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "分配失败");
+		}
+	}	
+	
 		/**
 	 * 查询+分页
 	 * @param brand

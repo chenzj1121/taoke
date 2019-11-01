@@ -106,7 +106,12 @@
         size="mini">
         <el-table-column type="selection"></el-table-column>
         <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column prop="coopType" label="提报状态"></el-table-column>
+        <el-table-column prop="coopTbtype" label="提报状态">
+           <template slot-scope="scope" >
+             <p :class="scope.row.coopTbtype=='待审核'?'shenhe':'jieshu'">{{scope.row.coopTbtype}}</p>
+             <p class="checkReject" v-if="scope.row.coopTbtype=='拒绝'" @click="checkReason(scope.row)">(查看)</p>
+           </template>
+        </el-table-column>
         <el-table-column prop="coopPttype" label="平台状态"></el-table-column>
         <el-table-column prop="coopCustomer" label="商家客户"></el-table-column>
         <el-table-column prop="coopMainpicture" label="商家主图">
@@ -142,17 +147,20 @@
       </el-table>
       <Page style="text-align:right;margin-top:10px;" :page="page" @change="bindData"/>
     </el-row>
+     <ReasonBox v-if="viewReason" @func="closeBox" :data='reason'/>
   </div>
 </template>
 
 <script>
 import Page from '@/components/page'
+import ReasonBox from "@/components/reason"
 import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
   components: {
-    Page
+    Page,
+    ReasonBox
   },
   data () {
     return {
@@ -206,6 +214,8 @@ export default {
       // groupList:{},
       deptList:[],
       type:2,
+      viewReason:false,
+      reason:{},
     }
   },
   mounted () {
@@ -215,6 +225,14 @@ export default {
     this.bindData()
   },
   methods: {
+    checkReason(data){
+      this.viewReason = true;
+      this.reason =data;
+    },
+    closeBox(data){
+      console.log(data)
+      this.viewReason = data
+    },
     delCoop(id,name){
       this.$confirm(`是否撤销【${name}】的该条提报?`, '提示', {
         confirmButtonText: '确定',
@@ -331,5 +349,10 @@ export default {
 }
 .el-button+.el-button {
   margin-left: 2px;
+}
+.checkReject{
+  display:inline;
+  cursor: pointer;
+  color: blue;
 }
 </style>

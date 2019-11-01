@@ -81,8 +81,8 @@
         <el-button @click="() => {this.form = {}; this.bindData()}">重置</el-button>
       </el-form-item>
        <el-form-item>
-        <el-button type="primary">手动分配</el-button>
-        <el-button type="primary">批量审核</el-button>
+        <el-button type="primary" @click="distribution">手动分配</el-button>
+        <el-button type="primary" @click="batchReview">批量审核</el-button>
       </el-form-item>
     </el-form>
      <el-table
@@ -92,10 +92,13 @@
          size="mini"
         v-loading="loading"
         :data="cooperationDetailTableData"
+        ref="multipleTable"
+        @selection-change="handleSelectionChange"
       >
+        <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" label="序号"></el-table-column>
         <el-table-column label="提交时间" prop="coopTbtime"></el-table-column>
-        <el-table-column label="审核时间" prop="shengheTime"></el-table-column>
+        <el-table-column label="审核时间" prop="coopShenheTime"></el-table-column>
         <el-table-column label="店铺名称" prop="coopCustomer"></el-table-column>
         <el-table-column label="活动类型" prop="coopActivity"></el-table-column>
         <el-table-column label="商品ID" prop="coopGoodsId"></el-table-column>
@@ -112,18 +115,18 @@
                 <img :src="scope.row.coopPicture" min-width="50" height="50" alt="">
             </template>
         </el-table-column>
-        <el-table-column label="部门" prop="coopDeptId"></el-table-column>
+        <el-table-column label="部门" prop="bumen"></el-table-column>
         <!-- <el-table-column label="组别" prop="dakuanriqi"></el-table-column> -->
-        <el-table-column label="销售人员" prop="coopUserId"></el-table-column>
+        <el-table-column label="销售人员" prop="xiaoshou"></el-table-column>
         <el-table-column label="上线时间" prop="coopStarttime"></el-table-column>
         <el-table-column label="是否零点提报" prop="coopZero"></el-table-column>
         <el-table-column label="提报状态" prop="coopTbtype">
            <template slot-scope="scope" >
              <p :class="scope.row.coopTbtype=='待审核'?'shenhe':'jieshu'">{{scope.row.coopTbtype}}</p>
-             <p class="checkReject" v-if="scope.row.coopTbtype=='拒绝'">(查看)</p>
+             <p class="checkReject" v-if="scope.row.coopTbtype=='拒绝'" @click="checkReason(scope.row)">(查看)</p>
            </template>
         </el-table-column>
-        <el-table-column label="提报人员" prop="coopShenheId"></el-table-column>
+        <el-table-column label="提报人员" prop="shenhe"></el-table-column>
         <el-table-column label="审核" >
            <template slot-scope="scope" >
             <p v-if="scope.row.coopTbtype=='拒绝' ||scope.row.coopTbtype=='通过' ">已审核</p> 
@@ -137,16 +140,22 @@
         </el-table-column>
       </el-table>
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="bineData()" />
+    <ReasonBox v-if="viewReason" @func="closeBox" :data='reason'/>
+     <el-dialog title="分配员工" :visible.sync="fenpei">
+     </el-dialog>
     </div>
 </template>
 <script>
 import Page from '@/components/page'
-import {getUserByList,getDeptByList,getGroupByList,getUserById,getGroupMember,getCooperationPage} from '@/api'
+import ReasonBox from "@/components/reason"
+import {getUserByList,getDeptByList,getGroupByList,getUserById,getGroupMember,getCooperationPage,updateCoop} from '@/api'
 import {getUser} from "@/utils/auth"
+import axios from "axios"
 
 export default {
     components:{
-        Page
+        Page,
+        ReasonBox
     },
     data(){
         return{
@@ -164,6 +173,13 @@ export default {
             loading:false,
             cooperationDetailTableData:[],
             TbMaxTime:null,
+            viewReason:false,
+            reason:{},
+            multipleSelection: [],
+            sucList:0,
+            errList:0,
+            length:0,
+            fenpei:false,
         }
     },
     mounted(){
@@ -174,6 +190,65 @@ export default {
         this.bindData()
     },
     methods:{
+      distribution(){
+        if (this.multipleSelection[0]) {
+          this.fenpei = true;
+        }else{
+          this.$message("请选择目标")
+        }
+      },
+      handleSelectionChange(val){
+        this.multipleSelection = val;
+      },
+      batchReview(){
+        this.length = this.multipleSelection.length
+        if (this.length==0) {
+          this.$message("请选择目标")
+        }else{
+         this.$confirm(`您即将批量通过${this.length}该条提报, 是否继续?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+              this.multipleSelection.forEach((item,index)=>{
+              item.coopShenheId = getUser().id;
+              item.coopShenheTime = new Date();
+              item.coopTbtype = "通过";
+              item.coopTbtime = new Date(item.coopTbtime)
+              item.coopStarttime = new Date(item.coopStarttime)
+              item.coopShenheTime = new Date(item.coopShenheTime)
+              this.update(item,index)
+           })
+          this.bindData()
+        }).catch(() => {
+         
+        });
+        }
+        
+      },
+      async update(item,index){
+          updateCoop(item).then(res=>{
+              if (res.success) {
+                this.sucList+=1
+              }else{
+                 this.$errmsg("第"+index+1+"条数据，店铺：【"+item.coopCustomer+"】"+res.message)
+                this.errList+=1
+              }
+               if ((index+1) ==this.length ) {
+                this.$alert(`${this.sucList}条数据批量处理完毕，${this.errList}条失败`, '提示', {
+                confirmButtonText: '确定',
+                })
+              }
+            }) 
+      },
+      checkReason(data){
+        this.viewReason = true;
+        this.reason =data;
+      },
+      closeBox(data){
+        console.log(data)
+        this.viewReason = data
+      },
       check(coopId){
         if (coopId) {
           this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail',query:{coopId,check:true}})
@@ -232,26 +307,20 @@ export default {
       this.loading = true
       getCooperationPage(form, page,rows,this.TbMaxTime,this.form.coopStartTimeEnd,this.form.coopEndTimeEnd).then(res => {
          res.rows.forEach((item,index)=>{
-             item.coopTbtime = this.getMyDate(item.coopTbtime)
-             item.coopStarttime = this.getMyDate(item.coopStarttime)
-            //  item.shengheTime
-            // this.groupList.forEach((obj)=>{
-            //      if(item.deptId == obj.groupDeptId && item.groupId ==obj.groupId){
-            //           item.groupName = obj.groupName
-            //           item.deptName = obj.groupName
-            //       }
-            //   })
+             item.coopTbtime = item.coopTbtime?this.getMyDate(item.coopTbtime):''
+             item.coopStarttime = item.coopStarttime?this.getMyDate(item.coopStarttime):''
+             item.coopShenheTime = item.coopShenheTime?this.getMyDate(item.coopShenheTime):''
               this.deptList.forEach(obj=>{
                 if(item.coopDeptId == obj.deptId ){
-                  item.coopDeptId = obj.deptName
+                  item.bumen = obj.deptName
                 }
               })
               this.userList.forEach(obj=>{
                 if(item.coopUserId ==obj.id ){
-                  item.coopUserId = obj.username
+                  item.xiaoshou = obj.username
                 }
                 if (item.coopShenheId==obj.id) {
-                  item.coopShenheId = obj.username
+                  item.shenhe = obj.username
                 }
               })
    

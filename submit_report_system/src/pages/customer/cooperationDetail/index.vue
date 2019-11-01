@@ -156,6 +156,14 @@
       placeholder="请输入拒绝理由"
       v-model="form.coopShenheBz">
     </el-input>
+     <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
+      <form enctype="multipart/form-data" target="nm_iframe" style="display:inline;">
+      <input type="file" class="yhq" name="file" @change="upload" style="display:none" >
+        <div class="picBox"  @click="openPic">
+        点击添加图片
+        <img class="showPic" src="" >
+      </div>
+     </form>
     <div style="padding:20px 0;">
     <el-button type="primary" @click="rejectSub" >提交</el-button>
     <el-button type="success" @click="dialogTableVisible=false">返回</el-button>
@@ -166,7 +174,7 @@
 
 <script>
 import axios from 'axios'
-import {getSysRole,getGoodsInfo,addCoop,findCoopById,updateCoop} from '@/api'
+import {getSysRole,getGoodsInfo,addCoop,findCoopById,updateCoop,uploadPic} from '@/api'
 import {getUser} from "@/utils/auth"
 export default {
   data () {
@@ -188,6 +196,7 @@ export default {
     }
   },
   mounted(){
+    
     this.getRole()
     if (this.$route.query.coopId) {
       this.isUpadte = true;
@@ -221,6 +230,46 @@ export default {
     }
   },
   methods: {
+     getObjectURL(file) {  
+    var url = null;  
+    if (window.createObjcectURL != undefined) {  
+        url = window.createOjcectURL(file);  
+    } else if (window.URL != undefined) {  
+        url = window.URL.createObjectURL(file);  
+    } else if (window.webkitURL != undefined) {  
+        url = window.webkitURL.createObjectURL(file);  
+    }  
+    return url;  
+   },
+   openPic(e){
+       e.currentTarget.previousElementSibling.click()
+   },
+    upload(e){
+          let form  = e.currentTarget.parentElement
+          let formData = new FormData() ;
+          let file = document.getElementsByName("file")[0].files[0]
+          let fileType = file.name.split(".")[1]
+          let fileName = file.name.split(".")[0]
+         if(!/\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/.test('.'+fileType)){
+            this.$errmsg("请上传图片格式文件")
+         }else{
+           let url = this.getObjectURL(file)
+           let picBox = e.currentTarget.nextElementSibling.getElementsByClassName("showPic")[0]
+           let type = e.currentTarget.getAttribute("data-id")
+           console.log(type)
+           formData.append('file',file);
+          uploadPic(formData).then(res=>{
+            if (res.success) {
+              picBox.setAttribute("src",url)
+              picBox.style.display = 'block'
+                this.form.coopBeiyong = res.message
+            }else{
+              this.$errmsg(res.message)
+            }
+            console.log(res)
+          })
+         }
+      },
     rejectSub(){
        if (this.form.coopShenheBz) {
         this.form.coopTbtype = "拒绝"
@@ -317,6 +366,9 @@ export default {
           if (this.flag) {
             if (this.isUpadte) {
               this.form.coopTbtime = new Date()
+              this.form.coopTbtype = '待审核'
+              this.form.coopShenheId = null;
+              this.form.coopShenheTime = null;
               updateCoop(this.form).then(res=>{
                 if (res.success) {
                   this.$sucmsg(res.message)
@@ -369,5 +421,25 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding: 20px 0;
+}
+.picBox{
+  width: 180px;
+  height: 180px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 180px;
+  color: #409EFF;
+  cursor: pointer;
+  position: relative;
+  margin-top: 20px;
+  .showPic{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
 }
 </style>

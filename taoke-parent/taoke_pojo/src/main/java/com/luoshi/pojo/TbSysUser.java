@@ -19,6 +19,10 @@ public class TbSysUser {
 
     private Integer groupId;
 
+    private Integer maxTb;
+
+    private Integer nowTb;
+
     public Integer getId() {
         return id;
     }
@@ -89,5 +93,21 @@ public class TbSysUser {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
+    }
+
+    public Integer getMaxTb() {
+        return maxTb;
+    }
+
+    public void setMaxTb(Integer maxTb) {
+        this.maxTb = maxTb;
+    }
+
+    public Integer getNowTb() {
+        return nowTb;
+    }
+
+    public void setNowTb(Integer nowTb) {
+        this.nowTb = nowTb;
     }
 }

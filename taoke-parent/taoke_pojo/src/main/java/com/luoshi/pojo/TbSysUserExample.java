@@ -703,6 +703,126 @@ public class TbSysUserExample {
             addCriterion("group_id not between", value1, value2, "groupId");
             return (Criteria) this;
         }
+
+        public Criteria andMaxTbIsNull() {
+            addCriterion("max_tb is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbIsNotNull() {
+            addCriterion("max_tb is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbEqualTo(Integer value) {
+            addCriterion("max_tb =", value, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbNotEqualTo(Integer value) {
+            addCriterion("max_tb <>", value, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbGreaterThan(Integer value) {
+            addCriterion("max_tb >", value, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbGreaterThanOrEqualTo(Integer value) {
+            addCriterion("max_tb >=", value, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbLessThan(Integer value) {
+            addCriterion("max_tb <", value, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbLessThanOrEqualTo(Integer value) {
+            addCriterion("max_tb <=", value, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbIn(List<Integer> values) {
+            addCriterion("max_tb in", values, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbNotIn(List<Integer> values) {
+            addCriterion("max_tb not in", values, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbBetween(Integer value1, Integer value2) {
+            addCriterion("max_tb between", value1, value2, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxTbNotBetween(Integer value1, Integer value2) {
+            addCriterion("max_tb not between", value1, value2, "maxTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbIsNull() {
+            addCriterion("now_tb is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbIsNotNull() {
+            addCriterion("now_tb is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbEqualTo(Integer value) {
+            addCriterion("now_tb =", value, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbNotEqualTo(Integer value) {
+            addCriterion("now_tb <>", value, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbGreaterThan(Integer value) {
+            addCriterion("now_tb >", value, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbGreaterThanOrEqualTo(Integer value) {
+            addCriterion("now_tb >=", value, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbLessThan(Integer value) {
+            addCriterion("now_tb <", value, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbLessThanOrEqualTo(Integer value) {
+            addCriterion("now_tb <=", value, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbIn(List<Integer> values) {
+            addCriterion("now_tb in", values, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbNotIn(List<Integer> values) {
+            addCriterion("now_tb not in", values, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbBetween(Integer value1, Integer value2) {
+            addCriterion("now_tb between", value1, value2, "nowTb");
+            return (Criteria) this;
+        }
+
+        public Criteria andNowTbNotBetween(Integer value1, Integer value2) {
+            addCriterion("now_tb not between", value1, value2, "nowTb");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

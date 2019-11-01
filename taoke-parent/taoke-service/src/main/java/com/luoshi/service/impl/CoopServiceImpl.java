@@ -172,5 +172,15 @@ public class CoopServiceImpl implements CoopService {
 		Page<TbCoop> page= (Page<TbCoop>)coopMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
+
+		@Override
+		public void fenpei(int[] coopids, int userId) {
+			for(int id:coopids){
+				TbCoop coop = coopMapper.selectByPrimaryKey(id);
+				coop.setCoopShenheId(userId);
+				coopMapper.updateByPrimaryKey(coop);
+			}	
+			
+		}
 	
 }

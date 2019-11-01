@@ -11,6 +11,8 @@
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="max_tb" property="maxTb" jdbcType="INTEGER" />
+    <result column="now_tb" property="nowTb" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, salt, username, password, realname, phone, type, dept_id, group_id
+    id, salt, username, password, realname, phone, type, dept_id, group_id, max_tb, now_tb
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbSysUserExample" >
     select
@@ -106,12 +108,12 @@
   <insert id="insert" parameterType="com.luoshi.pojo.TbSysUser" >
     insert into tb_sys_user (id, salt, username, 
       password, realname, phone, 
-      type, dept_id, group_id
-      )
+      type, dept_id, group_id, 
+      max_tb, now_tb)
     values (#{id,jdbcType=INTEGER}, #{salt,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}
-      )
+      #{type,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
+      #{maxTb,jdbcType=INTEGER}, #{nowTb,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbSysUser" >
     insert into tb_sys_user
@@ -143,6 +145,12 @@
       <if test="groupId != null" >
         group_id,
       </if>
+      <if test="maxTb != null" >
+        max_tb,
+      </if>
+      <if test="nowTb != null" >
+        now_tb,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -171,6 +179,12 @@
       </if>
       <if test="groupId != null" >
         #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="maxTb != null" >
+        #{maxTb,jdbcType=INTEGER},
+      </if>
+      <if test="nowTb != null" >
+        #{nowTb,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -210,6 +224,12 @@
       <if test="record.groupId != null" >
         group_id = #{record.groupId,jdbcType=INTEGER},
       </if>
+      <if test="record.maxTb != null" >
+        max_tb = #{record.maxTb,jdbcType=INTEGER},
+      </if>
+      <if test="record.nowTb != null" >
+        now_tb = #{record.nowTb,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +245,9 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
       dept_id = #{record.deptId,jdbcType=INTEGER},
-      group_id = #{record.groupId,jdbcType=INTEGER}
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      max_tb = #{record.maxTb,jdbcType=INTEGER},
+      now_tb = #{record.nowTb,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +279,12 @@
       <if test="groupId != null" >
         group_id = #{groupId,jdbcType=INTEGER},
       </if>
+      <if test="maxTb != null" >
+        max_tb = #{maxTb,jdbcType=INTEGER},
+      </if>
+      <if test="nowTb != null" >
+        now_tb = #{nowTb,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -269,7 +297,9 @@
       phone = #{phone,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       dept_id = #{deptId,jdbcType=INTEGER},
-      group_id = #{groupId,jdbcType=INTEGER}
+      group_id = #{groupId,jdbcType=INTEGER},
+      max_tb = #{maxTb,jdbcType=INTEGER},
+      now_tb = #{nowTb,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

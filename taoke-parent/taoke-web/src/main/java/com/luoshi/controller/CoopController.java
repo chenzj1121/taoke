@@ -21,6 +21,7 @@ import com.dtk.util.SignMD5Util;
 import com.luoshi.pojo.TbCoop;
 import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.CoopService;
+import com.luoshi.service.SysUserService;
 
 import entity.PageResult;
 import entity.Result;
@@ -35,6 +36,9 @@ public class CoopController {
 
 	@Autowired
 	private CoopService coopService;
+	
+	@Autowired
+	private SysUserService sysUserService;
 	
 	@Autowired
 	private HttpServletRequest request;
@@ -226,8 +230,14 @@ public class CoopController {
 	@RequestMapping("/fenpei")
 	public Result shenhe(int [] coopids, int userId){
 		try {
+			TbSysUser user = sysUserService.findOne(userId);
+			int i = coopids.length;
 			
+			if(user.getMaxTb()>=user.getNowTb()+i){
 			coopService.fenpei(coopids,userId);
+			}else{
+				return new Result(false, "分配失败，已超过最大上限");
+			}
 			return new Result(true, "分配成功");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luoshi.mapper.TbCoopMapper;
+import com.luoshi.mapper.TbSysUserMapper;
 import com.luoshi.pojo.TbBackmoneyExample.Criteria;
 import com.luoshi.pojo.TbCoop;
 import com.luoshi.pojo.TbCoopExample;
@@ -29,6 +30,8 @@ public class CoopServiceImpl implements CoopService {
 
 	@Autowired
 	private TbCoopMapper coopMapper;
+	@Autowired
+	private TbSysUserMapper sysUserMapper;
 	@Autowired
 	private HttpServletRequest request;
 	/**
@@ -177,8 +180,17 @@ public class CoopServiceImpl implements CoopService {
 		public void fenpei(int[] coopids, int userId) {
 			for(int id:coopids){
 				TbCoop coop = coopMapper.selectByPrimaryKey(id);
+				if(coop.getCoopShenheId()!=null){
+					Integer userId2 = coop.getCoopShenheId();
+					TbSysUser user = sysUserMapper.selectByPrimaryKey(userId2);
+					user.setNowTb(user.getNowTb()-1);
+					sysUserMapper.updateByPrimaryKey(user);
+				}
 				coop.setCoopShenheId(userId);
+				TbSysUser user2 = sysUserMapper.selectByPrimaryKey(userId);
+				user2.setNowTb(user2.getNowTb()+1);
 				coopMapper.updateByPrimaryKey(coop);
+				
 			}	
 			
 		}

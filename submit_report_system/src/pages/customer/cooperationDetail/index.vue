@@ -1,61 +1,62 @@
 <template>
   <div class="wrap">
     <div class="content">
-      <el-form ref="form" :model="form" label-width="120px" size="mini" :disabled="disabled">
+      <el-form ref="form" :model="form" label-width="120px" size="mini">
         <el-form-item label="商家客户：">
-          <el-input v-model="form.coopCustomer" disabled/>
+          <el-input  v-model="form.coopCustomer" disabled/>
         </el-form-item>
         <el-form-item label="零点提报：">
-          <el-radio label="零点" name="zero" v-model="form.coopZero"/>
-          <el-radio label="非零点" name="zero" v-model="form.coopZero"/>
+          <el-radio label="零点" name="zero" v-model="form.coopZero" :disabled="disabled"/>
+          <el-radio label="非零点" name="zero" v-model="form.coopZero" :disabled="disabled"/>
         </el-form-item>
         <el-form-item prop="coopGoodsTitle" label="商品标题：" :rules="[
             { required: true, message: '请输入商品标题' },
             { min: 10, max: 20, message: '商品标题在10~20字之间', trigger: 'blur' }
           ]">
-          <el-input v-model="form.coopGoodsTitle"/>
+          <el-input :disabled="disabled" v-model="form.coopGoodsTitle" />
         </el-form-item>
         <el-form-item label="商品ID：">
-          <div class="flex">
-            <el-input v-model="form.coopGoodsId" type="number"/>
-            <el-button type="primary" @click="checkGood(form.coopGoodsId)">检测</el-button>
-            <el-button type="primary" @click="viewGood(form.coopGoodsId)" :disabled="true">查看商品</el-button>
+          <div class="flex"> 
+            <el-input :disabled="disabled" v-model="form.coopGoodsId" type="number" />
+            <el-button type="primary" @click="checkGood(form.coopGoodsId)" :disabled="disabled">检测</el-button>
+            <el-button type="primary" @click="viewGood(form.coopGoodsId)" >查看商品</el-button>
           </div>
         </el-form-item>
         <el-form-item label="商品活动：" value="常规单">
-          <el-radio label="常规单" v-model="form.coopActivity"/>
-          <el-radio label="聚划算" v-model="form.coopActivity"/>
-          <el-radio label="淘抢购" v-model="form.coopActivity"/>
+          <el-radio  :disabled="disabled" label="常规单" v-model="form.coopActivity"/>
+          <el-radio  :disabled="disabled" label="聚划算" v-model="form.coopActivity"/>
+          <el-radio  :disabled="disabled" label="淘抢购" v-model="form.coopActivity"/>
         </el-form-item>
         <el-form-item label="商品分类：">
-          <el-select v-model="form.coopShopFl">
+          <el-select  :disabled="disabled" v-model="form.coopShopFl">
              <el-option v-for="(item,index) in optionList" :key="index" :value="item.id" :label="item.name">{{item.name}}</el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="coopMainpicture" label="商品主图：" :rules="[{ required: true, message: '请输入商品主图' }]">
           <div class="flex">
-            <el-input v-model="form.coopMainpicture"></el-input>
+            <el-input :disabled="disabled" v-model="form.coopMainpicture"></el-input>
             <el-button type="primary" @click="viewMainPic(form.coopMainpicture)">查看主图</el-button>
           </div>
         </el-form-item>
         <el-form-item label="商品营销图：">
           <div class="flex">
-            <el-input v-model="form.coopPicture"></el-input>
+            <el-input :disabled="disabled" v-model="form.coopPicture"></el-input>
             <el-button type="primary" @click="viewMainPic(form.coopPicture)">查看营销图</el-button>
           </div>
         </el-form-item>
         <el-form-item label="推广文案：">
-          <el-input type="textarea" v-model="form.coopPromotion"></el-input>
+          <el-input :disabled="disabled" type="textarea" v-model="form.coopPromotion"></el-input>
         </el-form-item>
         <el-form-item label="特色文案：">
-          <el-input type="textarea" v-model="form.coopColor"></el-input>
+          <el-input :disabled="disabled" type="textarea" v-model="form.coopColor"></el-input>
         </el-form-item>
         <el-form-item label="开始时间">
-          <el-radio v-model="form.beginTime" label="立即开始"></el-radio>
-          <el-radio v-model="form.beginTime" label="预告"></el-radio>
+          <el-radio  :disabled="disabled" v-model="form.beginTime" label="立即开始"></el-radio>
+          <el-radio  :disabled="disabled" v-model="form.beginTime" label="预告"></el-radio>
         </el-form-item>
         <el-form-item prop="coopStarttime" label="预告时间" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入预告时间' }]">
           <el-date-picker
+          :disabled="disabled"
             v-model="form.coopStarttime"
             type="date"
             placeholder="选择日期"
@@ -67,31 +68,32 @@
           <el-radio label="妈妈券（无链接）" v-model="form.name"/>
         </el-form-item> -->
         <el-form-item label="优惠券名称：">
-          <el-input v-model="form.coopYhqName"></el-input>
+          <el-input :disabled="disabled" v-model="form.coopYhqName"></el-input>
         </el-form-item>
         <el-form-item label="优惠券链接：">
           <div class="flex">
-            <el-input v-model="form.coopCoupon"></el-input>
+            <el-input :disabled="disabled" v-model="form.coopCoupon"></el-input>
             <el-button type="primary"  @click="viewGood(form.coopCoupon,1)">查看优惠券</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="coopYhqnums" label="优惠券总量：" :rules="[{ required: true, message: '请输入优惠卷总量' }]" >
           <div class="flex">
-            <el-input type="number" v-model="form.coopYhqnums" ></el-input>
+            <el-input :disabled="disabled" type="number" v-model="form.coopYhqnums" ></el-input>
             <!-- <span style="width: 130px;">数量大于等于600</span> -->
           </div>
         </el-form-item>
           <el-form-item prop="coopAlterprice" label="券后价：" :rules="[{ required: true, message: '请输入券后价格' }]">
-          <el-input type="number" v-model="form.coopAlterprice"></el-input>
+          <el-input :disabled="disabled" type="number" v-model="form.coopAlterprice"></el-input>
         </el-form-item>
         <el-form-item prop="coopYjscale" label="佣金比例：" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入佣金比例' }]">
-          <el-input type="number" v-model="form.coopYjscale"></el-input>
+          <el-input :disabled="disabled" type="number" v-model="form.coopYjscale"></el-input>
         </el-form-item>
         <el-form-item  prop="coopServiceFee" label="服务费单价：" :rules="[{ required: true, message: '请输入服务单价' }]">
-          <el-input v-model="form.coopServiceFee"></el-input>
+          <el-input :disabled="disabled" v-model="form.coopServiceFee"></el-input>
         </el-form-item>
         <el-form-item prop="coopEndtime" label="结束时间：" :rules="[{ required: true, message: '请输入结束时间' }]">
           <el-date-picker
+          :disabled="disabled"
             v-model="form.coopEndtime"
             type="date"
             placeholder="请选择日期"
@@ -100,6 +102,7 @@
         </el-form-item>
         <el-form-item prop="coopPerTime" label="预汇款时间：" :rules="[{ required: true, message: '请输入预汇款时间' }]">
           <el-date-picker
+          :disabled="disabled"
             v-model="form.coopPerTime"
             type="date"
             placeholder="请选择日期"
@@ -107,30 +110,30 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="备注">
-          <el-input type="textarea" v-model="form.coopMessage"></el-input>
+          <el-input :disabled="disabled" type="textarea" v-model="form.coopMessage"></el-input>
         </el-form-item>
         <el-form-item label="券面额：">
-          <el-input type="number" v-model="form.coopCouponNum"></el-input>
+          <el-input :disabled="disabled" type="number" v-model="form.coopCouponNum"></el-input>
         </el-form-item>
         <el-form-item label="淘宝价：">
-          <el-input type="number" v-model="form.coopTapbaoPrice"></el-input>
+          <el-input :disabled="disabled" type="number" v-model="form.coopTapbaoPrice"></el-input>
         </el-form-item>
         <el-form-item label="拍几件：" >
-          <el-input type="number" v-model="form.coopPayNum"></el-input>
+          <el-input :disabled="disabled" type="number" v-model="form.coopPayNum"></el-input>
         </el-form-item>
         <el-form-item label="线上线下结算：">
-          <el-radio label="线上结算" v-model="form.coopPayType"/>
-          <el-radio label="线下结算" v-model="form.coopPayType"/>
+          <el-radio  :disabled="disabled" label="线上结算" v-model="form.coopPayType"/>
+          <el-radio  :disabled="disabled" label="线下结算" v-model="form.coopPayType"/>
         </el-form-item>
         <el-form-item prop="coopHeadId" label="团长ID" v-if="form.coopPayType === '线上结算'" :rules="form.coopPayType === '线上结算'?[{ required: true, message: '请输入团长ID' }]:''">
-          <el-input type="number" v-model="form.coopHeadId"/>
+          <el-input :disabled="disabled" type="number" v-model="form.coopHeadId"/>
         </el-form-item>
         <el-form-item label="上传实拍图：">
           <div class="flex">
-            <el-input v-model="form.coopRealShot"></el-input>
-            <!-- <el-input v-model="form.coopRealShot"></el-input>
-            <el-input v-model="form.coopRealShot"></el-input>
-            <el-input v-model="form.coopRealShot"></el-input> -->
+            <el-input :disabled="disabled" v-model="form.coopRealShot"></el-input>
+            <!-- <el-input :disabled="disabled" v-model="form.coopRealShot"></el-input>
+            <el-input :disabled="disabled" v-model="form.coopRealShot"></el-input>
+            <el-input :disabled="disabled" v-model="form.coopRealShot"></el-input> -->
           </div>
         </el-form-item>
         <!-- <el-form-item label="选择平台：">
@@ -150,7 +153,7 @@
       </div>
     </div>
     <el-dialog title="拒绝理由" :visible.sync="dialogTableVisible">
-      <el-input
+      <el-input :disabled="disabled"
       type="textarea"
       :rows="2"
       placeholder="请输入拒绝理由"

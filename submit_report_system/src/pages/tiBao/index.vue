@@ -163,7 +163,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import {getUserByList,getDeptByList,getGroupByList,getUserById,getGroupMember,getCooperationPage,updateCoop} from '@/api'
+import {getUserByList,getDeptByList,getGroupByList,getUserById,getGroupMember,getCooperationPage,updateCoop,fenpei} from '@/api'
 import {getUser} from "@/utils/auth"
 import axios from "axios"
 
@@ -206,16 +206,17 @@ export default {
     },
     methods:{
       fenpeiUser(){
-        let userInfo = {}
-        getUserById(this.form.coopUserId).then(res=>{
-            userInfo = res;
+        if (this.form.coopUserId) {
             this.multipleSelection.forEach((item,index)=>{
-              if (!item.coopShenheId) {
-                item.coopShenheId = this.form.coopUserId
-                item.coopTbtime = new Date(item.coopTbtime)
-                item.coopStarttime = new Date(item.coopStarttime)
-                item.coopShenheTime = new Date(item.coopShenheTime)
-                this.update(item,index)
+              if (item.coopTbtype=='待审核') {
+                fenpei(item.coopId,this.form.coopUserId).then(res=>{
+                  console.log(res)
+                })
+                // item.coopShenheId = this.form.coopUserId
+                // item.coopTbtime = new Date(item.coopTbtime)
+                // item.coopStarttime = new Date(item.coopStarttime)
+                // item.coopShenheTime = new Date(item.coopShenheTime)
+                // this.update(item,index)
               }else{
                 this.$message("第"+(index*1+1)+'条已被审核,无法分配')
               }
@@ -223,8 +224,10 @@ export default {
             this.form = {}
             this.bindData()
             this.fenpei = false;
-        })
-        
+        }else{
+          this.$errmsg("请选择员工")
+        }
+          
       },
       distribution(){
         if (this.multipleSelection[0]) {

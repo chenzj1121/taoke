@@ -12,7 +12,7 @@
           </el-form-item>
         <el-form-item>
             <el-button type="primary" @click="bindData">查询</el-button>
-            <el-button @click="() => {this.form = {}; this.bindData()}">重置</el-button>
+            <el-button @click="() => {this.form = {deptId:4}; this.bindData()}">重置</el-button>
         </el-form-item>
         </el-form>
          <el-table

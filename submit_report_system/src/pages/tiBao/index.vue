@@ -146,18 +146,14 @@
      <el-dialog title="分配员工" :visible.sync="fenpei">
        <el-form>
          <el-form-item label="组别:" label-width="60px">
-            <div>
               <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.shopGroupId)">
                 <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
               </el-select>
-            </div>
           </el-form-item>
           <el-form-item label="部门人员:" label-width="80px">
-            <div>
               <el-select v-model="form.coopUserId" placeholder="请选择" >
                 <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
               </el-select>
-            </div>
           </el-form-item>
           <el-button type="primary" size="mini" @click="fenpeiUser">确定</el-button>
           </el-form>

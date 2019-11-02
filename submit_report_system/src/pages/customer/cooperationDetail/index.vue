@@ -19,7 +19,7 @@
           <div class="flex">
             <el-input v-model="form.coopGoodsId" type="number"/>
             <el-button type="primary" @click="checkGood(form.coopGoodsId)">检测</el-button>
-            <el-button type="primary" @click="viewGood(form.coopGoodsId)">查看商品</el-button>
+            <el-button type="primary" @click="viewGood(form.coopGoodsId)" :disabled="true">查看商品</el-button>
           </div>
         </el-form-item>
         <el-form-item label="商品活动：" value="常规单">

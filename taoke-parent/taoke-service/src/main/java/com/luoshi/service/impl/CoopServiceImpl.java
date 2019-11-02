@@ -103,6 +103,10 @@ public class CoopServiceImpl implements CoopService {
 			if(user.getType().equals("2")) {
 				criteria.andCoopUserIdEqualTo(user.getId());
 			}
+			//审核员工
+			if(user.getType().equals("5")) {
+				criteria.andCoopShenheIdEqualTo(user.getId());
+			}
 			//提报状态
 			if(coop.getCoopType()!=null && coop.getCoopType().length()>0){
 				criteria.andCoopTypeEqualTo(coop.getCoopType());

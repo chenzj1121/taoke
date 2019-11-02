@@ -24,24 +24,30 @@
         :data="userList"
       >
         <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column label="组别" prop="groupId"></el-table-column>
+        <el-table-column label="组别" prop="group"></el-table-column>
         <el-table-column label="姓名" prop="realname"></el-table-column>
         <el-table-column label="手机" prop="phone"></el-table-column>
-        <el-table-column label="未审核单数" prop="shengheTime"></el-table-column>
+        <el-table-column label="未审核单数" prop="nowTb"></el-table-column>
         <el-table-column label="分配顺序" prop="shengheTime"></el-table-column>
         <el-table-column label="账号" prop="username"></el-table-column>
-        <el-table-column label="待审核上限" prop="shengheTime"></el-table-column>
+        <el-table-column label="待审核上限" prop="maxTb"></el-table-column>
         <el-table-column label="设置审核上限数量" prop="shengheTime">
             <template slot-scope="scope" >
-                <a href="#">上限单量设置</a>
+                <el-button type="primary" size="mini" @click="resize(scope.row)">上限单量设置</el-button>
             </template>
         </el-table-column>
    </el-table>
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="bineData()" />
+     <el-dialog title="设置上限" :visible.sync="line" >
+         <div class="max">
+         <el-input v-model="userInfo.maxTb" placeholder="请输入内容" style="width:50px;"></el-input>
+         <el-button size="mini"  style="margin-left:100px;" @click="updateMax">修改</el-button>
+         </div>
+     </el-dialog>
     </div>
 </template>
 <script>
-import {getUserByPage,getGroupByDeptId,getGroupByList} from '@/api'
+import {getUserByPage,getGroupByDeptId,getGroupByList,updUser} from '@/api'
 import Page from '@/components/page'
 export default {
     components:{
@@ -61,6 +67,9 @@ export default {
             userList:[],
             groupList:[],
             groupList2:[],
+            line:false,
+            max:0,
+            userInfo:{},
         }
     },
     mounted(){
@@ -68,6 +77,21 @@ export default {
         this.bindData()
     },
     methods:{
+        updateMax(){
+            updUser(this.userInfo).then(res=>{
+                if (res.success) {
+                    this.$sucmsg(res.message)
+                    this.line = false;
+                    this.bindData()
+                }else{
+                    this.$errmsg(res.message)
+                }
+            })
+        },
+        resize(item){
+            this.line = true;
+            this.userInfo = item
+        },
         getTibaoGroup(){
             getGroupByList().then(res=>{
 
@@ -88,7 +112,7 @@ export default {
                 res.rows.forEach(item=>{
                     this.groupList.forEach(obj=>{
                     if (item.groupId == obj.groupId) {
-                        item.groupId = obj.groupName
+                        item.group = obj.groupName
                         }
                     })
                 })
@@ -105,5 +129,14 @@ export default {
   padding: 10px;
   background: #eee;
   margin-bottom: 10px;
+}
+.max{
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+<style>
+.el-table td, .el-table th{
+  text-align: center !important;
 }
 </style>

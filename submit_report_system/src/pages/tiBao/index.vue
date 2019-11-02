@@ -51,6 +51,7 @@
         </el-date-picker>
       </el-form-item>
       <br>
+      <div v-if="type ==4||type==2" >
       <el-form-item label="部门:" label-width="60px">
             <div>
               <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">
@@ -75,12 +76,13 @@
               </el-select>
             </div>
           </el-form-item>
+          </div>
       <br>
       <el-form-item>
         <el-button type="primary" @click="bindData">查询</el-button>
         <el-button @click="() => {this.form = {}; this.bindData()}">重置</el-button>
       </el-form-item>
-       <el-form-item>
+       <el-form-item v-if="type ==4||type==2">
         <el-button type="primary" @click="distribution">手动分配</el-button>
         <el-button type="primary" @click="batchReview">批量审核</el-button>
       </el-form-item>
@@ -142,6 +144,23 @@
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="bineData()" />
     <ReasonBox v-if="viewReason" @func="closeBox" :data='reason'/>
      <el-dialog title="分配员工" :visible.sync="fenpei">
+       <el-form>
+         <el-form-item label="组别:" label-width="60px">
+            <div>
+              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.shopGroupId)">
+                <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
+              </el-select>
+            </div>
+          </el-form-item>
+          <el-form-item label="部门人员:" label-width="80px">
+            <div>
+              <el-select v-model="form.coopUserId" placeholder="请选择" >
+                <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
+              </el-select>
+            </div>
+          </el-form-item>
+          <el-button type="primary" size="mini" @click="fenpeiUser">确定</el-button>
+          </el-form>
      </el-dialog>
     </div>
 </template>
@@ -190,8 +209,31 @@ export default {
         this.bindData()
     },
     methods:{
+      fenpeiUser(){
+        let userInfo = {}
+        getUserById(this.form.coopUserId).then(res=>{
+            userInfo = res;
+            this.multipleSelection.forEach((item,index)=>{
+              if (!item.coopShenheId) {
+                item.coopShenheId = this.form.coopUserId
+                item.coopTbtime = new Date(item.coopTbtime)
+                item.coopStarttime = new Date(item.coopStarttime)
+                item.coopShenheTime = new Date(item.coopShenheTime)
+                this.update(item,index)
+              }else{
+                this.$message("第"+(index*1+1)+'条已被审核,无法分配')
+              }
+            })
+            this.form = {}
+            this.bindData()
+            this.fenpei = false;
+        })
+        
+      },
       distribution(){
         if (this.multipleSelection[0]) {
+          this.getGroup(4);
+          this.form.coopDeptId = 4;
           this.fenpei = true;
         }else{
           this.$message("请选择目标")
@@ -199,9 +241,9 @@ export default {
       },
       handleSelectionChange(val){
         this.multipleSelection = val;
+        this.length = this.multipleSelection.length
       },
       batchReview(){
-        this.length = this.multipleSelection.length
         if (this.length==0) {
           this.$message("请选择目标")
         }else{
@@ -371,5 +413,10 @@ color: gray;
   display:inline;
   cursor: pointer;
   color: blue;
+}
+</style>
+<style>
+.el-table td,.el-table th{
+  text-align: center !important;
 }
 </style>

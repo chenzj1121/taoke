@@ -20,16 +20,16 @@
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">系统管理</template>
-      <el-menu-item index="/systemManager/userList" v-if="type==0 ||type==1 ||type==4">用户管理</el-menu-item>
+      <el-menu-item index="/systemManager/userList" v-if="type==2 ||type==1 ||type==4">用户管理</el-menu-item>
       <el-menu-item index="/systemManager/own">个人设置</el-menu-item>
       <el-menu-item index="/systemManager/modifyPassword">密码修改</el-menu-item>
-      <el-menu-item index="/systemManager/dept" v-if="type==0 ||type==1 ||type==4">部门管理</el-menu-item>
-      <el-menu-item index="/systemManager/group" v-if="type==0 ||type==1 ||type==4">小组管理</el-menu-item>
+      <el-menu-item index="/systemManager/dept" v-if="type==2 ||type==1 ||type==4">部门管理</el-menu-item>
+      <el-menu-item index="/systemManager/group" v-if="type==2 ||type==1 ||type==4">小组管理</el-menu-item>
     </el-submenu>
      <el-submenu index="4">
       <template slot="title">提报管理</template>
       <el-menu-item index="/tiBao/index" >提报管理</el-menu-item>
-      <el-menu-item index="/tiBao/userList">提报人员管理</el-menu-item>
+      <el-menu-item index="/tiBao/userList" v-if="type==2 ||type==4">提报人员管理</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

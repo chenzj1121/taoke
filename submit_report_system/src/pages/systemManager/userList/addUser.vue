@@ -77,7 +77,9 @@ export default {
       })
     },
     createUser () {
-      this.form.type = this.form.type?this.form.type:2
+      // this.form.type = this.form.type?this.form.type:2
+      this.form.maxTb = (this.form.type==4 || this.form.type==5)?20:'';
+      this.form.nowTb = (this.form.type==4 || this.form.type==5)?0:'';
       this.form.password = Base64.encode(this.form.password)
       addUser(this.form).then(res => {
         this.back()

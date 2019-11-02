@@ -5,7 +5,7 @@ import {getUser}　from "../utils/auth/index"
 
 Vue.use(Router)
 function shouWei(to,from,next){
-  if(getUser().type==0 ||getUser().type==1 ||getUser().type==4){
+  if(getUser().type==2 ||getUser().type==1 ||getUser().type==4){
     next()
   }else{
     alert("对不起，你没有权限")
@@ -43,6 +43,7 @@ export default new Router({
           {
             path:'userList',
             name:'tiBaoUser',
+            beforeEnter: (to, from, next) => {shouWei(to,from,next)},
             component: () => import('@/pages/tiBao/userList')
           }
           ]

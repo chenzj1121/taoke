@@ -1,7 +1,7 @@
 <template>
     <div id="reasonBox">
         <div class="mainBox">
-            <div class="title">
+            <div class="title1">
                 <p>拒绝理由</p>
                 <div class="shenheInfo">
                     <p>审核人：{{data.coopUserId}}</p>
@@ -70,7 +70,7 @@ export default {
         padding: 30px 10px;
         border-radius: 10px;
     }
-    .title{
+    .title1{
         text-align: left;
         padding: 10px;
         font-size: 18px;

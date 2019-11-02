@@ -53,7 +53,9 @@ public class SysUserServiceImpl implements SysUserService {
 	 */
 	@Override
 	public void add(TbSysUser sysUser) {
+		if(sysUser.getType()==null ){
 		sysUser.setType("0");
+		}
 		sysUserMapper.insert(sysUser);		
 	}
 

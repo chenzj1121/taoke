@@ -198,7 +198,7 @@ public class CoopServiceImpl implements CoopService {
 				TbSysUser user2 = sysUserMapper.selectByPrimaryKey(userId);
 				user2.setNowTb(user2.getNowTb()+1);
 				coopMapper.updateByPrimaryKey(coop);
-				
+				sysUserMapper.updateByPrimaryKey(user2);
 			}	
 			
 		}

@@ -75,12 +75,12 @@ export default {
       this.form.fourthWeek = parseInt(fourthWeek)
       this.form.fifthWeek = parseInt(fifthWeek)
       value = parseInt(value)
-      const count = this.form.firstWeek + this.form.secondWeek + this.form.thirdWeek + this.form.fourthWeek + this.form.fifthWeek
+      const count = this.form.firstWeekCustom + this.form.secondWeekCustom + this.form.thirdWeekCustom + this.form.fourthWeekCustom + this.form.fifthWeekCustom
       if (value === count) {
         this.form.workTarget = count
         callback()
       } else {
-        callback(new Error('月到账目标应当等于每一周的在线目标之和'))
+        callback(new Error('月到账目标应当等于每一周的到账目标之和'))
       }
     }
     return {

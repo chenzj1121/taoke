@@ -79,12 +79,12 @@
      </dependency>
 	<dependency>
 		<groupId>com.luoshi</groupId>
-		<artifactId>taoke-dao</artifactId>
+		<artifactId>taoke_pojo</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>com.luoshi</groupId>
-		<artifactId>taoke_pojo</artifactId>
+		<artifactId>taoke-dao</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
   </dependencies>  

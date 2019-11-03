@@ -201,6 +201,7 @@ export default {
   methods: {
     reSubmit(item){
       console.log(item)
+      this.$router.push({ path: '/cooperationDetail/checking',query:{id:item.cmShopId,cid:item.cmId}})
     },
     getUserList(){
       getUserByList().then(res=>{

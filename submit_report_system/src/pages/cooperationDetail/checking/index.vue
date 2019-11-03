@@ -78,8 +78,8 @@
       </el-form-item>
       <br/>
       <el-form-item label="是否填写返款：" :rules="[{ required: true, message: '不能为空' }]">
-        <el-radio v-model="form.isChecking" :label="true">是</el-radio>
-        <el-radio v-model="form.isChecking" :label="false">否</el-radio>
+        <el-radio v-model="form.isChecking" :label="true"  :disabled="isUpdate">是</el-radio>
+        <el-radio v-model="form.isChecking" :label="false"  :disabled="isUpdate">否</el-radio>
       </el-form-item>
       <br/>
       <div v-if="form.isChecking">
@@ -164,7 +164,7 @@
 </template>
 
 <script>
-import { getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney,addGoodsDetail,uploadPic} from '@/api'
+import {upCheckMoney,PRE_URL, getMoreShop,getHisCoop,addCheckMoney,findCoop,getShopById,addBackMoney,addGoodsDetail,uploadPic,findCMbyId} from '@/api'
 import {getUser} from "@/utils/auth"
 import Page from '@/components/page'
 export default {
@@ -194,18 +194,52 @@ export default {
       dialogVisible:false,
       shopDetail:{},
       userInfo:{},
+      PRE_URL,
+      isUpdate:false,
 
     }
   },
   mounted(){
-    if (!this.$route.query.id) {
+    if (!this.$route.query.id || !this.$route.query.cid) {
       this.$router.go(-1);
       this.$errmsg("失去店铺数据,请重新进入")
     }
-    this.getShop(this.$route.query.id)
+    if (this.$route.query.cid) {
+      this.isUpdate = true
+      this.getShop(this.$route.query.id)
+    }
+    this.getCM(this.$route.query.cid)
     this.userInfo= getUser()
   },
   methods: {
+    getCM(id){
+      findCMbyId(id).then(res=>{
+          this.form = res
+          console.log(res)
+          let ele = document.getElementsByClassName("showPic");
+          for(let i=0;i<2;i++){
+           switch(i){
+             case 0:
+               if (res.cmYhqPhoto) {
+                  ele[0].style.display="block"
+                 ele[0].setAttribute("src",`${this.PRE_URL}/${res.cmYhqPhoto}`);
+               }
+             break;
+             case 1: 
+              if (res.cmDkPhote) {
+                  ele[1].style.display="block"
+                  ele[1].setAttribute("src",`${this.PRE_URL}/${res.cmDkPhote}`);
+              }
+             break;
+             default:
+               break;
+           }
+          }
+          // ele.forEach((item,index)=>{
+            console.log(ele)
+          // })
+      })
+    },
     getObjectURL(file) {  
     var url = null;  
     if (window.createObjcectURL != undefined) {  
@@ -224,7 +258,8 @@ export default {
           let form  = e.currentTarget.parentElement
       // let form = document.getElementById("form")
           let formData = new FormData() ;
-          let file = document.getElementsByName("file")[0].files[0]
+          console.log(e)
+          let file = e.currentTarget.files[0]
           let fileType = file.name.split(".")[1]
           let fileName = file.name.split(".")[0]
          if(!/\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/.test('.'+fileType)){
@@ -299,14 +334,23 @@ export default {
     return oTime;
     },
     addCheck(){
+      this.form.cmApplyTime = new Date()
+      if (this.isUpdate) {
+        upCheckMoney(this.form).then(res=>{
+            if (res.success) {
+            this.$sucmsg(res.message)
+            }else{
+                this.$errmsg(res.message)
+            }
+        })
+      }else{
       this.form.cmUserId = this.userInfo.id
       this.form.cmSellDept = this.userInfo.groupId
       this.form.cmDept = this.userInfo.deptId;
       this.form.cmShopName =this.shopDetail.shopName
       this.form.cmShopId = this.shopDetail.id
-      this.form.cmApplyTime = new Date()
-      console.log(this.form)
-      console.log(this.userInfo)
+      // console.log(this.form)
+      // console.log(this.userInfo)
       addCheckMoney(this.form).then(res=>{
         if (res.success) {
             this.$sucmsg(res.message)
@@ -316,6 +360,7 @@ export default {
       })
       if (this.form.isChecking) {
        this.addBack()
+      }
       }
     },
     addBack(){

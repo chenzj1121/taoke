@@ -93,6 +93,10 @@ export const getHisCoop = (obj,page,rows) => ajax(PRE_URL + `/coop/search.do?pag
 
 export const addCheckMoney = (obj) => ajax(PRE_URL + `/checkmoneys/add.do`,obj,'post')
 
+export const upCheckMoney = (obj) => ajax(PRE_URL + `/checkmoneys/update.do`,obj,'post')
+
+export const findCMbyId = (obj) => ajax(PRE_URL + `/checkmoneys/findOne.do?id=${obj}`,'post')
+
 export const findCoop = (id) => ajax(PRE_URL + '/coop/findOne.do?id='+id,'post')
 
 export const addBackMoney = (obj) => ajax(PRE_URL + `/backmoney/add.do`,obj,'post')

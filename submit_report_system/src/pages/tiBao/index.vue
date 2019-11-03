@@ -222,6 +222,9 @@ export default {
               if (item.coopTbtype=='待审核') {
                    fenpei(item.coopId,this.form.coopUserId).then(res=>{
                         console.log(res)
+                        if (res.success) {
+                          this.$success(res.message)
+                        }
                     })
                 // item.coopShenheId = this.form.coopUserId
                 // item.coopTbtime = new Date(item.coopTbtime)

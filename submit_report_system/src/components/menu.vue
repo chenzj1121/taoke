@@ -9,7 +9,7 @@
     active-text-color="#ffd04b"
   >
     <el-menu-item index="/home">系统首页</el-menu-item>
-    <el-submenu index="2" v-if="type==2 ||type==1 || type==0">
+    <el-submenu index="2" v-if="type==1 || type==0|| type ==2">
       <template slot="title" >客户信息</template>
       <el-menu-item index="/customer">私海客户</el-menu-item>
       <el-menu-item index="/public">公海客户</el-menu-item>
@@ -20,16 +20,16 @@
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">系统管理</template>
-      <el-menu-item index="/systemManager/userList" v-if="type==2 ||type==1 ||type==4">用户管理</el-menu-item>
+      <el-menu-item index="/systemManager/userList" v-if="type==0 ||type==1 || type==4">用户管理</el-menu-item>
       <el-menu-item index="/systemManager/own">个人设置</el-menu-item>
       <el-menu-item index="/systemManager/modifyPassword">密码修改</el-menu-item>
-      <el-menu-item index="/systemManager/dept" v-if="type==2 ||type==1 ||type==4">部门管理</el-menu-item>
-      <el-menu-item index="/systemManager/group" v-if="type==2 ||type==1 ||type==4">小组管理</el-menu-item>
+      <el-menu-item index="/systemManager/dept" v-if="type==0">部门管理</el-menu-item>
+      <el-menu-item index="/systemManager/group" v-if="type==0">小组管理</el-menu-item>
     </el-submenu>
-     <el-submenu index="4"  v-if="type==2 ||type==4 || type==5">
+     <el-submenu index="4"  v-if="type==0 ||type==4 || type==5">
       <template slot="title" >提报管理</template>
       <el-menu-item index="/tiBao/index"  >提报管理</el-menu-item>
-      <el-menu-item index="/tiBao/userList" v-if="type==2 ||type==4">提报人员管理</el-menu-item>
+      <el-menu-item index="/tiBao/userList" v-if="type==0 ||type==4">提报人员管理</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

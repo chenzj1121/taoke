@@ -189,11 +189,17 @@ public class CoopServiceImpl implements CoopService {
 					TbSysUser user = sysUserMapper.selectByPrimaryKey(userId2);
 					user.setNowTb(user.getNowTb()-1);
 					sysUserMapper.updateByPrimaryKey(user);
+				}else{
+					Integer userId2 = coop.getCoopShenheId();
+					TbSysUser user = sysUserMapper.selectByPrimaryKey(userId2);
+					user.setNowTb(0);
+					sysUserMapper.updateByPrimaryKey(user);
 				}
 				coop.setCoopShenheId(userId);
 				TbSysUser user2 = sysUserMapper.selectByPrimaryKey(userId);
 				user2.setNowTb(user2.getNowTb()+1);
 				coopMapper.updateByPrimaryKey(coop);
+				sysUserMapper.updateByPrimaryKey(user2);
 				
 			}	
 			

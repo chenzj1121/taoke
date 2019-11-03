@@ -63,7 +63,12 @@
       <el-table-column prop="bmText" label="备注"></el-table-column>
       <el-table-column prop="bmYhqPhoto" label="优惠券图片">
         <template slot-scope="scope">
-          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+            <el-image 
+              style="width: 60px; height: 60px"
+              :src="`${PRE_URL}/${scope.row.bmYhqPhoto}`" 
+              :preview-src-list="[`${PRE_URL}/${scope.row.bmYhqPhoto}`]">
+            </el-image>
+          <!-- <img src="http://iph.href.lu/200x200"  min-width="70" height="70"> -->
         </template>
       </el-table-column>
       <el-table-column prop="bmConfirmType" label="确认状态"></el-table-column>
@@ -72,7 +77,12 @@
       </el-table-column>
       <el-table-column prop="bmMakePhoto" label="打款截图">
          <template slot-scope="scope">
-          <img src="http://iph.href.lu/200x200"  min-width="70" height="70">
+            <el-image 
+              style="width: 60px; height: 60px"
+              :src="`${PRE_URL}/${scope.row.bmMakePhoto}`" 
+              :preview-src-list="[`${PRE_URL}/${scope.row.bmMakePhoto}`]">
+            </el-image>
+          <!-- <img src="http://iph.href.lu/200x200"  min-width="70" height="70"> -->
         </template>
       </el-table-column>
     </el-table>
@@ -141,7 +151,7 @@
 </template>
 
 <script>
-import {getBackMoney,getUserByList, getDeptByList,getGroupByList} from '@/api'
+import {PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList} from '@/api'
 import Page from '@/components/page'
 export default {
     components: {
@@ -185,6 +195,7 @@ export default {
        userList:[],
       groupList:[],
       deptList:[],
+      PRE_URL,
     }
   },
   mounted(){

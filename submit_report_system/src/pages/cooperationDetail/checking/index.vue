@@ -371,6 +371,8 @@ export default {
         this.form.bmJsMoney = this.form.cmJsMoney
         this.form.bmYhqName =this.form.cmYhqName
         this.form.bmBackType = this.form.isAlipay
+        this.form.bmYhqPhoto = this.form.cmYhqPhoto
+        this.form.bmMakePhoto = this.form.cmDkPhote
             addBackMoney(this.form).then(res=>{
             if (res.success) {
                   this.$sucmsg(res.message)

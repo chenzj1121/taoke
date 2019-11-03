@@ -51,7 +51,7 @@
         </el-date-picker>
       </el-form-item>
       <br>
-      <div v-if="type ==4||type==2" >
+      <div v-if="type ==4||type==0" >
       <el-form-item label="部门:" label-width="60px">
             <div>
               <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">
@@ -82,7 +82,7 @@
         <el-button type="primary" @click="bindData">查询</el-button>
         <el-button @click="() => {this.form = {}; this.bindData()}">重置</el-button>
       </el-form-item>
-       <el-form-item v-if="type ==4||type==2">
+       <el-form-item v-if="type ==4||type==0">
         <el-button type="primary" @click="distribution">手动分配</el-button>
         <el-button type="primary" @click="batchReview">批量审核</el-button>
       </el-form-item>
@@ -224,6 +224,8 @@ export default {
                         console.log(res)
                         if (res.success) {
                           this.$success(res.message)
+                        }else{
+                          this.$errmsg(res.message)
                         }
                     })
                 // item.coopShenheId = this.form.coopUserId

@@ -22,13 +22,13 @@
           <el-input v-model="form.phone"></el-input>
         </el-form-item>
         <el-form-item label="部门:" prop="deptId">
-          <el-select v-model="form.deptId"  clearable>
+          <el-select v-model="form.deptId"  clearable @change="getGroup">
             <el-option v-for="(dept, index) in deptList" :key="index" :label="dept.deptName" :value="dept.deptId"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="小组:" prop="groupId">
           <el-select v-model="form.groupId"  clearable>
-            <el-option v-for="(group, index) in groupList" :key="index" :label="group.groupName" :value="group.groupId"></el-option>
+            <el-option v-for="(group, index) in groupList2" :key="index" :label="group.groupName" :value="group.groupId"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="用户角色:" prop="type">
@@ -57,7 +57,8 @@ export default {
       },
       roleList,
       groupList: [],
-      deptList: []
+      deptList: [],
+      groupList2:[],
     }
   },
   created () {
@@ -68,6 +69,17 @@ export default {
     getDeptList () {
       getDeptByList().then(res => {
         this.deptList = res
+      })
+    },
+    getGroup(){
+      this.groupList2 = []
+      if (this.form.groupId) {
+        this.form.groupId = null;
+      }
+      this.groupList.forEach(item=>{
+        if (item.groupDeptId == this.form.deptId) {
+          this.groupList2.push(item)
+        }
       })
     },
     getGroupList () {

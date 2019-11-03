@@ -4,10 +4,10 @@
     <div class="content">
       <el-form ref="user" :model="user" label-width="120px" label-position="left" size="mini">
         <el-form-item prop="username" label="用户名:" required>
-          <el-input v-model="user.username"></el-input>
+          <el-input v-model="user.username" ></el-input>
         </el-form-item>
-        <el-form-item prop="password" label="密码:" required>
-            <el-input v-model="user.password"></el-input>
+        <el-form-item prop="password" label="密码:" required style="display:none">
+            <el-input v-model="user.password" :auto-complete="false"></el-input>
         </el-form-item>
         <el-form-item label="新密码" prop="newPassword">
             <el-input type="password" v-model="newPassword" autocomplete="off"></el-input>

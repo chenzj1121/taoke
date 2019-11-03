@@ -134,7 +134,7 @@ public class BackgroundDetailsController {
        HttpServletRequest request,
        HttpServletResponse response) throws IOException {
         //模拟文件，myfile.txt为需要下载的文件  
-        String path = request.getSession().getServletContext().getRealPath("statics\\moban")+"\\"+filename;  
+        String path = request.getSession().getServletContext().getRealPath("statics/moban")+"/"+filename;  
         //获取输入流  
         InputStream bis = new BufferedInputStream(new FileInputStream(new File(path)));
         //转码，免得文件名中文乱码  

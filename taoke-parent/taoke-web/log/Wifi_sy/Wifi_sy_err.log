@@ -3703,3 +3703,184 @@ Caused by: java.net.ConnectException: Connection refused: connect
 	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:258)
 	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:305)
 	... 15 more
+2019-11-03 22:19:56 [org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:351):[ERROR]] Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in file [D:\shop\taoke\taoke-parent\taoke-web\target\classes\spring\applicationContext_shiro.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in file [D:\shop\taoke\taoke-parent\taoke-web\target\classes\spring\applicationContext_shiro.xml]: Cannot resolve reference to bean 'erpRealm' while setting bean property 'realm'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'erpRealm': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.luoshi.service.SysUserService com.luoshi.service.ErpRealm.sysUserService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sysUserServiceImpl' defined in URL [jar:file:/D:/Program%20Files/bos_repository/com/luoshi/taoke-service/0.0.1-SNAPSHOT/taoke-service-0.0.1-SNAPSHOT.jar!/com/luoshi/service/impl/SysUserServiceImpl.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.luoshi.service.impl.SysUserServiceImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:359)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1481)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1226)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:240)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:687)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:523)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:444)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:326)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in file [D:\shop\taoke\taoke-parent\taoke-web\target\classes\spring\applicationContext_shiro.xml]: Cannot resolve reference to bean 'erpRealm' while setting bean property 'realm'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'erpRealm': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.luoshi.service.SysUserService com.luoshi.service.ErpRealm.sysUserService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sysUserServiceImpl' defined in URL [jar:file:/D:/Program%20Files/bos_repository/com/luoshi/taoke-service/0.0.1-SNAPSHOT/taoke-service-0.0.1-SNAPSHOT.jar!/com/luoshi/service/impl/SysUserServiceImpl.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.luoshi.service.impl.SysUserServiceImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:359)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1481)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1226)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:351)
+	... 24 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'erpRealm': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.luoshi.service.SysUserService com.luoshi.service.ErpRealm.sysUserService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sysUserServiceImpl' defined in URL [jar:file:/D:/Program%20Files/bos_repository/com/luoshi/taoke-service/0.0.1-SNAPSHOT/taoke-service-0.0.1-SNAPSHOT.jar!/com/luoshi/service/impl/SysUserServiceImpl.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.luoshi.service.impl.SysUserServiceImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:351)
+	... 34 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.luoshi.service.SysUserService com.luoshi.service.ErpRealm.sysUserService; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sysUserServiceImpl' defined in URL [jar:file:/D:/Program%20Files/bos_repository/com/luoshi/taoke-service/0.0.1-SNAPSHOT/taoke-service-0.0.1-SNAPSHOT.jar!/com/luoshi/service/impl/SysUserServiceImpl.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.luoshi.service.impl.SysUserServiceImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 42 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sysUserServiceImpl' defined in URL [jar:file:/D:/Program%20Files/bos_repository/com/luoshi/taoke-service/0.0.1-SNAPSHOT/taoke-service-0.0.1-SNAPSHOT.jar!/com/luoshi/service/impl/SysUserServiceImpl.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.luoshi.service.impl.SysUserServiceImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1105)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1050)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1116)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
+	... 44 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.luoshi.service.impl.SysUserServiceImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:89)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1098)
+	... 55 more
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	The import com.luoshi.mapper cannot be resolved
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+	TbSysUserMapper cannot be resolved to a type
+
+	at com.luoshi.service.impl.SysUserServiceImpl.<init>(SysUserServiceImpl.java:11)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
+	... 57 more

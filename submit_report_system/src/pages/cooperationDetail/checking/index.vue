@@ -200,9 +200,11 @@ export default {
     }
   },
   mounted(){
-    if (!this.$route.query.id || !this.$route.query.cid) {
-      this.$router.go(-1);
-      this.$errmsg("失去店铺数据,请重新进入")
+    if (this.$route.query.id || this.$route.query.cid) {
+     
+    }else{
+        this.$router.go(-1);
+        this.$errmsg("失去店铺数据,请重新进入")
     }
     if (this.$route.query.cid) {
       this.isUpdate = true

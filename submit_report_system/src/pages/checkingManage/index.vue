@@ -96,8 +96,8 @@
         </template>
       </el-table-column>
       <el-table-column label="再次提交" width="120px">
-        <template>
-          <el-button size="mini" type="success">再次提交</el-button>
+        <template slot-scope="scope">
+          <el-button size="mini" type="success" @click="reSubmit(scope.row)">再次提交</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -184,6 +184,9 @@ export default {
   },
 
   methods: {
+    reSubmit(item){
+      console.log(item)
+    },
     getUserList(){
       getUserByList().then(res=>{
         this.userList = res

@@ -110,7 +110,7 @@ export const updateCoop = (param) => ajax(PRE_URL + '/coop/update.do', param, 'p
 
 export const delCoopById = (param) => ajax(PRE_URL + '/coop/delete.do?ids=' + param, 'post')
 
-export const fenpei = (coopids,userId) => ajax(PRE_URL + '/coop/fenpei.do?coopids=' + coopids+'&userId='+userId, 'post')
+export const fenpei = (coopids,userId) => ajax(PRE_URL + `/coop/fenpei.do?coopids=${coopids}&userId=${userId}`, 'get')
 
 
 

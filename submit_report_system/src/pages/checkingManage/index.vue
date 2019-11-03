@@ -76,12 +76,22 @@
       <el-table-column prop="cmFwPrice" label="服务费单价"></el-table-column>
       <el-table-column prop="cmYhqPhoto" label="优惠券截图">
         <template slot-scope="scope">
-          <img :src="`${PRE_URL}/`+scope.row.cmYhqPhoto"  min-width="70" height="70">
+          <!-- <img :src="`${PRE_URL}/`+scope.row.cmYhqPhoto"  min-width="70" height="70"> -->
+            <el-image 
+            style="width: 70px; height: 70px"
+            :src="`${PRE_URL}/`+scope.row.cmYhqPhoto" 
+            :preview-src-list="[`${PRE_URL}/${scope.row.cmYhqPhoto}`]">
+          </el-image>
         </template>
       </el-table-column>
       <el-table-column prop="name" label="打款截图">
          <template slot-scope="scope">
-          <img :src="`${PRE_URL}/`+scope.row.cmDkPhote"  min-width="70" height="70">
+          <!-- <img :src="`${PRE_URL}/`+scope.row.cmDkPhote"  min-width="70" height="70"> -->
+           <el-image 
+            style="width: 70px; height: 70px"
+            :src="`${PRE_URL}/`+scope.row.cmDkPhote" 
+            :preview-src-list="[`${PRE_URL}/${scope.row.cmDkPhote}`]">
+          </el-image>
         </template>
       </el-table-column>
       <el-table-column prop="cmLoadCustomer" label="转入账户"></el-table-column>
@@ -92,7 +102,12 @@
       <el-table-column prop="cmText" label="备注"></el-table-column>
       <el-table-column prop="cmYhqType" label="券截图">
          <template slot-scope="scope">
-          <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70">
+           <el-image 
+            style="width: 70px; height: 70px"
+            :src="`${PRE_URL}/`+scope.row.cmYhqType" 
+            :preview-src-list="[`${PRE_URL}/${scope.row.cmYhqType}`]">
+          </el-image>
+          <!-- <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70"> -->
         </template>
       </el-table-column>
       <el-table-column label="再次提交" width="120px">

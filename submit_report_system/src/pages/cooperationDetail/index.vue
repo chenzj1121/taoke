@@ -116,7 +116,12 @@
         <el-table-column prop="coopCustomer" label="商家客户"></el-table-column>
         <el-table-column prop="coopMainpicture" label="商家主图">
                 <template   slot-scope="scope">            
-                    <img :src="scope.row.coopMainpicture"  min-width="70" height="70" />
+                    <!-- <img :src="scope.row.coopMainpicture"  min-width="70" height="70" /> -->
+                     <el-image 
+                      style="width: 70px; height: 70px"
+                      :src="scope.row.coopMainpicture" 
+                      :preview-src-list="[`${scope.row.coopMainpicture}`]">
+                    </el-image>
                 </template>   
         </el-table-column>
         <el-table-column prop="coopActivity" label="商家活动"></el-table-column>
@@ -154,7 +159,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import { getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById} from '@/api'
+import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -216,6 +221,7 @@ export default {
       type:2,
       viewReason:false,
       reason:{},
+      PRE_URL,
     }
   },
   mounted () {

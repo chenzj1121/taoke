@@ -109,12 +109,22 @@
         <el-table-column label="优惠券信息" prop="coopYhqName"></el-table-column>
         <el-table-column label="商品主图"  prop="coopMainpicture">
             <template slot-scope="scope" >
-                <img :src="scope.row.coopMainpicture" min-width="50" height="50" alt="">
+                <!-- <img :src="scope.row.coopMainpicture" min-width="50" height="50" alt=""> -->
+                 <el-image 
+                      style="width: 60px; height: 60px"
+                      :src="scope.row.coopMainpicture" 
+                      :preview-src-list="[`${scope.row.coopMainpicture}`]">
+                  </el-image>
             </template>
         </el-table-column>
         <el-table-column label="营销主图"   prop="coopPicture">
              <template slot-scope="scope" >
-                <img :src="scope.row.coopPicture" min-width="50" height="50" alt="">
+                <!-- <img :src="scope.row.coopPicture" min-width="60" height="60" alt=""> -->
+                  <el-image 
+                      style="width: 60px; height: 60px"
+                      :src="scope.row.coopPicture" 
+                      :preview-src-list="[`${scope.row.coopPicture}`]">
+                  </el-image>
             </template>
         </el-table-column>
         <el-table-column label="部门" prop="bumen"></el-table-column>
@@ -141,7 +151,7 @@
          </template>
         </el-table-column>
       </el-table>
-    <Page style="text-align: right;margin-top: 10px;" :page="page" @change="bineData()" />
+    <Page style="text-align: right;margin-top: 10px;" :page="page" @change="bindData" />
     <ReasonBox v-if="viewReason" @func="closeBox" :data='reason'/>
      <el-dialog title="分配员工" :visible.sync="fenpei">
        <el-form>
@@ -207,11 +217,12 @@ export default {
     methods:{
       fenpeiUser(){
         if (this.form.coopUserId) {
+          let list = [];
             this.multipleSelection.forEach((item,index)=>{
               if (item.coopTbtype=='待审核') {
-                fenpei(item.coopId,this.form.coopUserId).then(res=>{
-                  console.log(res)
-                })
+                   fenpei(item.coopId,this.form.coopUserId).then(res=>{
+                        console.log(res)
+                    })
                 // item.coopShenheId = this.form.coopUserId
                 // item.coopTbtime = new Date(item.coopTbtime)
                 // item.coopStarttime = new Date(item.coopStarttime)
@@ -221,6 +232,7 @@ export default {
                 this.$message("第"+(index*1+1)+'条已被审核,无法分配')
               }
             })
+           
             this.form = {}
             this.bindData()
             this.fenpei = false;

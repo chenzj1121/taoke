@@ -27,6 +27,7 @@
 <script>
 import { getUser, setUser } from '@/utils/auth'
 import { updUser, getUserById } from '@/api/index'
+import { Base64 } from 'js-base64'
 export default {
   data () {
     return {
@@ -52,7 +53,7 @@ export default {
         this.$message.error('两次密码填写不一致')
         this.newPasswordConfirm = ''
       } else {
-        this.user.password = this.newPassword
+         this.user.password = Base64.encode(this.newPassword)
         updUser(this.user).then(res => {
           this.savaUser2Cookie(this.user)
           this.$message({

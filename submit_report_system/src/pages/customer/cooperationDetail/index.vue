@@ -153,7 +153,7 @@
       </div>
     </div>
     <el-dialog title="拒绝理由" :visible.sync="dialogTableVisible">
-      <el-input :disabled="disabled"
+      <el-input
       type="textarea"
       :rows="2"
       placeholder="请输入拒绝理由"

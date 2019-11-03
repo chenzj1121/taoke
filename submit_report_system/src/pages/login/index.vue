@@ -65,11 +65,12 @@ export default {
           this.loginForm.password = Base64.encode(this.loginForm.password)
           reqLogin(this.loginForm).then(res => {
             // console.log(res)
+              this.loading = false
+
             if(res.success){
                const { username, realname, phone, deptId, groupId, id,type} = res.data
               const user = { username, realname, phone, deptId, groupId, id,type }
               this.savaUser2Cookie(user)
-              this.loading = false
               this.$sucmsg('登录成功!')
               this.$router.replace({ path: '/home' })
             }else{

@@ -173,7 +173,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import {getUserByList,getDeptByList,getGroupByList,getUserById,getGroupMember,getCooperationPage,updateCoop,fenpei} from '@/api'
+import {getUserByList,getDeptByList,getGroupByList,getUserById,getGroupMember,getCooperationPage,updateCoop,fenpei,shenhe} from '@/api'
 import {getUser} from "@/utils/auth"
 import axios from "axios"
 
@@ -223,9 +223,17 @@ export default {
                    fenpei(item.coopId,this.form.coopUserId).then(res=>{
                         console.log(res)
                         if (res.success) {
-                          this.$success(res.message)
+                             this.sucList+=1;
                         }else{
                           this.$errmsg(res.message)
+                          this.errList+=1;
+                        }
+                         if ((index+1) ==this.length ) {
+                          this.$alert(`${this.sucList}条数据批量处理完毕，${this.errList}条失败`, '提示', {
+                          confirmButtonText: '确定',
+                          })
+                          this.sucList =0;
+                          this.errList =0;
                         }
                     })
                 // item.coopShenheId = this.form.coopUserId
@@ -248,8 +256,8 @@ export default {
       },
       distribution(){
         if (this.multipleSelection[0]) {
-          this.getGroup(4);
-          this.form.coopDeptId = 4;
+          this.getGroup(sessionStorage.deptId);
+          this.form.coopDeptId = sessionStorage.deptId;
           this.fenpei = true;
         }else{
           this.$message("请选择目标")
@@ -285,7 +293,7 @@ export default {
         
       },
       async update(item,index){
-          updateCoop(item).then(res=>{
+          shenhe(item).then(res=>{
               if (res.success) {
                 this.sucList+=1
               }else{
@@ -296,6 +304,8 @@ export default {
                 this.$alert(`${this.sucList}条数据批量处理完毕，${this.errList}条失败`, '提示', {
                 confirmButtonText: '确定',
                 })
+                this.sucList =0;
+                this.errList =0;
               }
             }) 
       },

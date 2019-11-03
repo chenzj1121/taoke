@@ -12,7 +12,7 @@
           </el-form-item>
         <el-form-item>
             <el-button type="primary" @click="bindData">查询</el-button>
-            <el-button @click="() => {this.form = {deptId:4}; this.bindData()}">重置</el-button>
+            <el-button @click="() => {this.form = {deptId:this.deptId}; this.bindData()}">重置</el-button>
         </el-form-item>
         </el-form>
          <el-table
@@ -62,7 +62,7 @@ export default {
                 total: 10
             },
             form:{
-                deptId:4,
+                deptId:sessionStorage.deptId,
             },
             userList:[],
             groupList:[],
@@ -70,6 +70,7 @@ export default {
             line:false,
             max:0,
             userInfo:{},
+            deptId:sessionStorage.deptId,
         }
     },
     mounted(){

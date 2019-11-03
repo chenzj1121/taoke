@@ -177,7 +177,7 @@
 
 <script>
 import axios from 'axios'
-import {getSysRole,getGoodsInfo,addCoop,findCoopById,updateCoop,uploadPic} from '@/api'
+import {getSysRole,getGoodsInfo,addCoop,findCoopById,updateCoop,uploadPic,shenhe} from '@/api'
 import {getUser} from "@/utils/auth"
 export default {
   data () {
@@ -293,6 +293,7 @@ export default {
             this.form.coopShenheTime = new Date();
             this.form.coopTbtype = "通过"
             this.update()
+            
         }).catch(() => {
          
         });
@@ -311,7 +312,7 @@ export default {
       })
     },
     update(){
-         updateCoop(this.form).then(res=>{
+         shenhe(this.form).then(res=>{
             if (res.success) {
               this.$sucmsg("审核成功")
               this.$router.go(-1)

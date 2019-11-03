@@ -189,6 +189,10 @@ public class CoopController {
 			coop.setCoopShenheId(user.getId());
 			coop.setCoopShenheTime(new Date());
 			coopService.update(coop);
+			Integer id = coop.getCoopShenheId();
+			TbSysUser user2 = sysUserService.findOne(id);
+			user2.setNowTb(user2.getNowTb()-1);
+			sysUserService.update(user2);
 			return new Result(true, "审核成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -232,7 +236,12 @@ public class CoopController {
 		try {
 			TbSysUser user = sysUserService.findOne(userId);
 			int i = coopids.length;
-			
+			if(user.getMaxTb()==null){
+				user.setMaxTb(40);
+			}
+		    if (user.getNowTb()==null){
+		    	user.setNowTb(0);
+		    }
 			if(user.getMaxTb()>=user.getNowTb()+i){
 			coopService.fenpei(coopids,userId);
 			}else{

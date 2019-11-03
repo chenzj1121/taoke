@@ -232,7 +232,12 @@ public class CoopController {
 		try {
 			TbSysUser user = sysUserService.findOne(userId);
 			int i = coopids.length;
-			
+			if(user.getMaxTb()==null){
+				user.setMaxTb(40);
+			}
+		    if (user.getNowTb()==null){
+		    	user.setNowTb(0);
+		    }
 			if(user.getMaxTb()>=user.getNowTb()+i){
 			coopService.fenpei(coopids,userId);
 			}else{

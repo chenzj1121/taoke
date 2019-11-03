@@ -189,6 +189,10 @@ public class CoopController {
 			coop.setCoopShenheId(user.getId());
 			coop.setCoopShenheTime(new Date());
 			coopService.update(coop);
+			Integer id = coop.getCoopShenheId();
+			TbSysUser user2 = sysUserService.findOne(id);
+			user2.setNowTb(user2.getNowTb()-1);
+			sysUserService.update(user2);
 			return new Result(true, "审核成功");
 		} catch (Exception e) {
 			e.printStackTrace();

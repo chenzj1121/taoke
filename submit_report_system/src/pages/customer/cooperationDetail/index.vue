@@ -303,12 +303,16 @@ export default {
     },
     getCoopDetail(){
       findCoopById(this.$route.query.coopId).then(res=>{
-        console.log(res)
         res.beginTime =res.coopYjscale?"预告":'立即开始'
         this.form = res
-        this.form.coopDeptId=getUser().deptId
-        this.form.coopGroupId = getUser().grouopId
-        this.form.coopUserId=getUser().id
+        if (this.check) {
+        }else{
+          this.form.coopDeptId=getUser().deptId
+          this.form.coopGroupId = getUser().grouopId
+          this.form.coopUserId=getUser().id
+        }
+       
+        console.log(this.form)
       })
     },
     update(){

@@ -4216,3 +4216,6 @@ Caused by: java.lang.Error: Unresolved compilation problems:
 	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
 	... 57 more
+2019-11-04 00:23:41 [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:354:[WARN]] Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: "null"
+2019-11-04 00:24:06 [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:354:[WARN]] Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: ""
+2019-11-04 00:24:11 [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:354:[WARN]] Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: ""

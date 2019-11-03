@@ -62,7 +62,7 @@ export default {
                 total: 10
             },
             form:{
-                deptId:sessionStorage.deptId,
+                deptId:sessionStorage.deptId?sessionStorage.deptId:'',
             },
             userList:[],
             groupList:[],
@@ -74,8 +74,13 @@ export default {
         }
     },
     mounted(){
-        this.getGroupList()
-        this.bindData()
+        if (sessionStorage.deptId) {
+            this.getGroupList()
+            this.bindData()
+        }else{
+            this.$message('无提报组信息')
+        }
+        
     },
     methods:{
         updateMax(){

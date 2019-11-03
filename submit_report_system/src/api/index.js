@@ -3,7 +3,11 @@ import ajax from './axios'
 // const PRE_URL 
 
 //export const PRE_URL = '/api'
+<<<<<<< HEAD
 export const PRE_URL = '/api'
+=======
+export const PRE_URL = ''
+>>>>>>> 4d4aa2c2fab53d7d7a100a2782683801d5edf8ff
 
 export const reqLogin = (user) => ajax(PRE_URL+'/login.do', user, 'post')
 

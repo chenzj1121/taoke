@@ -180,8 +180,12 @@ public class CoopServiceImpl implements CoopService {
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
-		@Override
 		public void fenpei(int[] coopids, int userId) {
+			TbSysUser user11 = sysUserMapper.selectByPrimaryKey(userId);
+			if(user11.getNowTb()==null){
+			user11.setNowTb(0);
+			sysUserMapper.updateByPrimaryKey(user11);
+			}
 			for(int id:coopids){
 				TbCoop coop = coopMapper.selectByPrimaryKey(id);
 				if(coop.getCoopShenheId()!=null){
@@ -189,18 +193,12 @@ public class CoopServiceImpl implements CoopService {
 					TbSysUser user = sysUserMapper.selectByPrimaryKey(userId2);
 					user.setNowTb(user.getNowTb()-1);
 					sysUserMapper.updateByPrimaryKey(user);
-				}else{
-					Integer userId2 = coop.getCoopShenheId();
-					TbSysUser user = sysUserMapper.selectByPrimaryKey(userId2);
-					user.setNowTb(0);
-					sysUserMapper.updateByPrimaryKey(user);
 				}
 				coop.setCoopShenheId(userId);
 				TbSysUser user2 = sysUserMapper.selectByPrimaryKey(userId);
 				user2.setNowTb(user2.getNowTb()+1);
 				coopMapper.updateByPrimaryKey(coop);
 				sysUserMapper.updateByPrimaryKey(user2);
-				
 			}	
 			
 		}

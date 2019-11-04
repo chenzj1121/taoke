@@ -184,6 +184,10 @@ public class CoopController {
 	@RequestMapping("/shenhe")
 	public Result shenhe(@RequestBody TbCoop coop){
 		try {
+			
+			if(coop.getCoopTbtype().equals("待修改")) {
+				return new Result(false, "已撤回，无法审核");
+			}else{
 			HttpSession session = request.getSession();
 			TbSysUser user = (TbSysUser) session.getAttribute("user");
 			coop.setCoopShenheId(user.getId());
@@ -197,6 +201,7 @@ public class CoopController {
 			
 			sysUserService.update(user2);
 			return new Result(true, "审核成功");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Result(false, "审核失败");

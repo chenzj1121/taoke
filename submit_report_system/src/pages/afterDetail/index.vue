@@ -191,7 +191,8 @@ export default {
       let fileType = file.name.split(".")[1]
       let fileName = file.name.split(".")[0]
       if(fileType=="xls" || fileType =="xlsx"){
-        formData.append(fileName,file);
+        formData.append("filebox",file);
+        console.log("filebox"+formData)
          uploadDetail(formData).then(res=>{
             // if(res.success){
             // }else{

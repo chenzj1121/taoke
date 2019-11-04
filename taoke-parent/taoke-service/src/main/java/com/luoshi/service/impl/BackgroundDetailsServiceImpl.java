@@ -209,21 +209,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				for(int i = 1; i <= lastRow; i++){
 					if(sheet.getRow(i).getCell(0)!=null && sheet.getRow(i).getCell(0)!=null) {
 					details = new TbBackgroundDetails();
-				/*	productSubmit.setName(sheet.getRow(i).getCell(0).getStringCellValue());//供应商名称
-					//判断是否已经存在，通过名称来判断
-					List<Supplier> list = supplierDao.getList(null, supplier, null);
-					if(list.size() > 0){
-						supplier = list.get(0);
-					}
-					supplier.setAddress(sheet.getRow(i).getCell(1).getStringCellValue());//地址
-					supplier.setContact(sheet.getRow(i).getCell(2).getStringCellValue());//联系人
-					supplier.setTele(sheet.getRow(i).getCell(3).getStringCellValue());//电话
-					supplier.setEmail(sheet.getRow(i).getCell(4).getStringCellValue());//Email
-					if(list.size() == 0){
-						//新增
-						supplier.setType(type);
-						supplierDao.add(supplier);
-					}*/
+				
 					if(sheet.getRow(i).getCell(0).getStringCellValue()!=null) {
 					for(int j=0; j<16;j++) {
 					sheet.getRow(i).getCell(j).setCellType(CellType.STRING);

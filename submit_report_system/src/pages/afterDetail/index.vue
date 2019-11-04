@@ -95,6 +95,7 @@
       <el-table-column label="所属部门" prop="deptName"></el-table-column>
       <el-table-column label="组别" prop="groupName"></el-table-column>
       <el-table-column label="责任人" prop="creater"></el-table-column>
+      <el-table-column label="订单状态" prop="zhuangtai"></el-table-column>
       <el-table-column label="店铺名称" prop="shopName"></el-table-column>
       <el-table-column label="商品ID" prop="goodsId"></el-table-column>
       <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
@@ -125,7 +126,7 @@ export default {
   data () {
     return {
       form: {
-        ordersType:'订单结算'
+        
       },
       departmentOptions: [],
       groupOptions: [],

@@ -24,11 +24,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luoshi.mapper.TbBackgroundDetailsMapper;
+import com.luoshi.mapper.TbCoopMapper;
+import com.luoshi.mapper.TbSysUserMapper;
 import com.luoshi.pojo.TbBackgroundDetails;
 import com.luoshi.pojo.TbBackgroundDetailsExample;
+import com.luoshi.pojo.TbCoopExample;
 import com.luoshi.pojo.TbProductSubmit;
 import com.luoshi.pojo.TbSysUser;
 import com.luoshi.pojo.TbBackgroundDetailsExample.Criteria;
+import com.luoshi.pojo.TbCoop;
 import com.luoshi.service.BackgroundDetailsService;
 
 import entity.PageResult;
@@ -46,7 +50,12 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	private TbBackgroundDetailsMapper backgroundDetailsMapper;
 	
 	@Autowired
+	private TbCoopMapper coopMapper;
+	
+	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private TbSysUserMapper sysUserMapper;
 	
 	/**
 	 * 查询全部
@@ -207,6 +216,8 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				int lastRow=sheet.getLastRowNum();
 				TbBackgroundDetails details = null;
 				for(int i = 1; i <= lastRow; i++){
+					
+					
 					if(sheet.getRow(i).getCell(0)!=null && sheet.getRow(i).getCell(0)!=null) {
 					details = new TbBackgroundDetails();
 				
@@ -215,12 +226,25 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					sheet.getRow(i).getCell(j).setCellType(CellType.STRING);
 					}
 					}
+					long ddid = Long.parseLong(sheet.getRow(i).getCell(15).getStringCellValue());
+					long long1 = Long.parseLong( sheet.getRow(i).getCell(3).getStringCellValue());
+					TbCoopExample example=new TbCoopExample();
+					com.luoshi.pojo.TbCoopExample.Criteria criteria = example.createCriteria();
+					
+					criteria.andCoopHeadIdEqualTo(ddid);
+					criteria.andCoopGoodsIdEqualTo(long1);
+					List<TbCoop> list = coopMapper.selectByExample(example);
+					TbCoop coop= list.get(0);
+					if(coop!=null){
+						TbSysUser user = sysUserMapper.selectByPrimaryKey(coop.getCoopUserId());
+						details.setUseId(user.getId());
+						details.setDeptId(user.getDeptId());
+						details.setGroupId(user.getGroupId());
+					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					HttpSession session = request.getSession();
-					TbSysUser user = (TbSysUser) session.getAttribute("user");
-					details.setUseId(user.getId());
-					details.setDeptId(user.getDeptId());
-					details.setGroupId(user.getGroupId());
+//					HttpSession session = request.getSession();
+//					TbSysUser user = (TbSysUser) session.getAttribute("user");
+
 					details.setCreateTime(sdf.parse(sheet.getRow(i).getCell(0).getStringCellValue()));
 					details.setClickTime(sdf.parse(sheet.getRow(i).getCell(1).getStringCellValue()));
 					details.setShopMessage(sheet.getRow(i).getCell(2).getStringCellValue());

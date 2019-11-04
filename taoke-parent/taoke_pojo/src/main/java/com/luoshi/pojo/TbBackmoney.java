@@ -55,6 +55,8 @@ public class TbBackmoney {
 
     private String bmBackAccountNumber;
 
+    private String bmDingdanType;
+
     public Integer getBmId() {
         return bmId;
     }
@@ -261,5 +263,13 @@ public class TbBackmoney {
 
     public void setBmBackAccountNumber(String bmBackAccountNumber) {
         this.bmBackAccountNumber = bmBackAccountNumber == null ? null : bmBackAccountNumber.trim();
+    }
+
+    public String getBmDingdanType() {
+        return bmDingdanType;
+    }
+
+    public void setBmDingdanType(String bmDingdanType) {
+        this.bmDingdanType = bmDingdanType == null ? null : bmDingdanType.trim();
     }
 }

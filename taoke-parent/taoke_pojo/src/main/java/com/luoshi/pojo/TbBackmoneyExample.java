@@ -1804,6 +1804,76 @@ public class TbBackmoneyExample {
             addCriterion("bm_back_account_number not between", value1, value2, "bmBackAccountNumber");
             return (Criteria) this;
         }
+
+        public Criteria andBmDingdanTypeIsNull() {
+            addCriterion("bm_dingdan_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeIsNotNull() {
+            addCriterion("bm_dingdan_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeEqualTo(String value) {
+            addCriterion("bm_dingdan_type =", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeNotEqualTo(String value) {
+            addCriterion("bm_dingdan_type <>", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeGreaterThan(String value) {
+            addCriterion("bm_dingdan_type >", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("bm_dingdan_type >=", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeLessThan(String value) {
+            addCriterion("bm_dingdan_type <", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeLessThanOrEqualTo(String value) {
+            addCriterion("bm_dingdan_type <=", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeLike(String value) {
+            addCriterion("bm_dingdan_type like", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeNotLike(String value) {
+            addCriterion("bm_dingdan_type not like", value, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeIn(List<String> values) {
+            addCriterion("bm_dingdan_type in", values, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeNotIn(List<String> values) {
+            addCriterion("bm_dingdan_type not in", values, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeBetween(String value1, String value2) {
+            addCriterion("bm_dingdan_type between", value1, value2, "bmDingdanType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmDingdanTypeNotBetween(String value1, String value2) {
+            addCriterion("bm_dingdan_type not between", value1, value2, "bmDingdanType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

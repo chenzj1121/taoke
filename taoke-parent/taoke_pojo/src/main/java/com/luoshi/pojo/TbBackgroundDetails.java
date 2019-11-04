@@ -45,6 +45,10 @@ public class TbBackgroundDetails {
 
     private Long gdId;
 
+    private String goodsType;
+
+    private String beiyong;
+
     public Integer getId() {
         return id;
     }
@@ -77,17 +81,15 @@ public class TbBackgroundDetails {
         this.shopMessage = shopMessage == null ? null : shopMessage.trim();
     }
 
-    
-
     public Long getGoodsId() {
-		return goodsId;
-	}
+        return goodsId;
+    }
 
-	public void setGoodsId(Long goodsId) {
-		this.goodsId = goodsId;
-	}
+    public void setGoodsId(Long goodsId) {
+        this.goodsId = goodsId;
+    }
 
-	public Integer getUseId() {
+    public Integer getUseId() {
         return useId;
     }
 
@@ -148,7 +150,7 @@ public class TbBackgroundDetails {
     }
 
     public void setOrdersType(String ordersType) {
-        this.ordersType = ordersType;
+        this.ordersType = ordersType == null ? null : ordersType.trim();
     }
 
     public Double getOrdersFl() {
@@ -213,5 +215,21 @@ public class TbBackgroundDetails {
 
     public void setGdId(Long gdId) {
         this.gdId = gdId;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType == null ? null : goodsType.trim();
+    }
+
+    public String getBeiyong() {
+        return beiyong;
+    }
+
+    public void setBeiyong(String beiyong) {
+        this.beiyong = beiyong == null ? null : beiyong.trim();
     }
 }

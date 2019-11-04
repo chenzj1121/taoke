@@ -6,7 +6,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="click_time" property="clickTime" jdbcType="TIMESTAMP" />
     <result column="shop_message" property="shopMessage" jdbcType="VARCHAR" />
-    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
     <result column="use_id" property="useId" jdbcType="INTEGER" />
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
@@ -14,7 +14,7 @@
     <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
     <result column="goods_counts" property="goodsCounts" jdbcType="INTEGER" />
     <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
-    <result column="orders_type" property="ordersType" jdbcType="INTEGER" />
+    <result column="orders_type" property="ordersType" jdbcType="VARCHAR" />
     <result column="orders_fl" property="ordersFl" jdbcType="DOUBLE" />
     <result column="pay" property="pay" jdbcType="DOUBLE" />
     <result column="pay_about" property="payAbout" jdbcType="DOUBLE" />
@@ -23,6 +23,8 @@
     <result column="money_about" property="moneyAbout" jdbcType="DOUBLE" />
     <result column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="gd_id" property="gdId" jdbcType="BIGINT" />
+    <result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+    <result column="beiyong" property="beiyong" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -85,7 +87,7 @@
   <sql id="Base_Column_List" >
     id, create_time, click_time, shop_message, goods_id, use_id, dept_id, group_id, aliwangwang, 
     shop_name, goods_counts, goods_price, orders_type, orders_fl, pay, pay_about, pay_time, 
-    pay_money, money_about, order_id, gd_id
+    pay_money, money_about, order_id, gd_id, goods_type, beiyong
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbBackgroundDetailsExample" >
     select
@@ -124,16 +126,16 @@
       shop_name, goods_counts, goods_price, 
       orders_type, orders_fl, pay, 
       pay_about, pay_time, pay_money, 
-      money_about, order_id, gd_id
-      )
+      money_about, order_id, gd_id, 
+      goods_type, beiyong)
     values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{clickTime,jdbcType=TIMESTAMP}, 
-      #{shopMessage,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{useId,jdbcType=INTEGER}, 
+      #{shopMessage,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{useId,jdbcType=INTEGER}, 
       #{deptId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, #{aliwangwang,jdbcType=VARCHAR}, 
       #{shopName,jdbcType=VARCHAR}, #{goodsCounts,jdbcType=INTEGER}, #{goodsPrice,jdbcType=DOUBLE}, 
-      #{ordersType,jdbcType=INTEGER}, #{ordersFl,jdbcType=DOUBLE}, #{pay,jdbcType=DOUBLE}, 
+      #{ordersType,jdbcType=VARCHAR}, #{ordersFl,jdbcType=DOUBLE}, #{pay,jdbcType=DOUBLE}, 
       #{payAbout,jdbcType=DOUBLE}, #{payTime,jdbcType=TIMESTAMP}, #{payMoney,jdbcType=DOUBLE}, 
-      #{moneyAbout,jdbcType=DOUBLE}, #{orderId,jdbcType=BIGINT}, #{gdId,jdbcType=BIGINT}
-      )
+      #{moneyAbout,jdbcType=DOUBLE}, #{orderId,jdbcType=BIGINT}, #{gdId,jdbcType=BIGINT}, 
+      #{goodsType,jdbcType=VARCHAR}, #{beiyong,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbBackgroundDetails" >
     insert into tb_background_details
@@ -201,6 +203,12 @@
       <if test="gdId != null" >
         gd_id,
       </if>
+      <if test="goodsType != null" >
+        goods_type,
+      </if>
+      <if test="beiyong != null" >
+        beiyong,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -216,7 +224,7 @@
         #{shopMessage,jdbcType=VARCHAR},
       </if>
       <if test="goodsId != null" >
-        #{goodsId,jdbcType=INTEGER},
+        #{goodsId,jdbcType=BIGINT},
       </if>
       <if test="useId != null" >
         #{useId,jdbcType=INTEGER},
@@ -240,7 +248,7 @@
         #{goodsPrice,jdbcType=DOUBLE},
       </if>
       <if test="ordersType != null" >
-        #{ordersType,jdbcType=INTEGER},
+        #{ordersType,jdbcType=VARCHAR},
       </if>
       <if test="ordersFl != null" >
         #{ordersFl,jdbcType=DOUBLE},
@@ -266,6 +274,12 @@
       <if test="gdId != null" >
         #{gdId,jdbcType=BIGINT},
       </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="beiyong != null" >
+        #{beiyong,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.luoshi.pojo.TbBackgroundDetailsExample" resultType="java.lang.Integer" >
@@ -290,7 +304,7 @@
         shop_message = #{record.shopMessage,jdbcType=VARCHAR},
       </if>
       <if test="record.goodsId != null" >
-        goods_id = #{record.goodsId,jdbcType=INTEGER},
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
       </if>
       <if test="record.useId != null" >
         use_id = #{record.useId,jdbcType=INTEGER},
@@ -314,7 +328,7 @@
         goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.ordersType != null" >
-        orders_type = #{record.ordersType,jdbcType=INTEGER},
+        orders_type = #{record.ordersType,jdbcType=VARCHAR},
       </if>
       <if test="record.ordersFl != null" >
         orders_fl = #{record.ordersFl,jdbcType=DOUBLE},
@@ -340,6 +354,12 @@
       <if test="record.gdId != null" >
         gd_id = #{record.gdId,jdbcType=BIGINT},
       </if>
+      <if test="record.goodsType != null" >
+        goods_type = #{record.goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beiyong != null" >
+        beiyong = #{record.beiyong,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -351,7 +371,7 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       click_time = #{record.clickTime,jdbcType=TIMESTAMP},
       shop_message = #{record.shopMessage,jdbcType=VARCHAR},
-      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
       use_id = #{record.useId,jdbcType=INTEGER},
       dept_id = #{record.deptId,jdbcType=INTEGER},
       group_id = #{record.groupId,jdbcType=INTEGER},
@@ -359,7 +379,7 @@
       shop_name = #{record.shopName,jdbcType=VARCHAR},
       goods_counts = #{record.goodsCounts,jdbcType=INTEGER},
       goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
-      orders_type = #{record.ordersType,jdbcType=INTEGER},
+      orders_type = #{record.ordersType,jdbcType=VARCHAR},
       orders_fl = #{record.ordersFl,jdbcType=DOUBLE},
       pay = #{record.pay,jdbcType=DOUBLE},
       pay_about = #{record.payAbout,jdbcType=DOUBLE},
@@ -367,7 +387,9 @@
       pay_money = #{record.payMoney,jdbcType=DOUBLE},
       money_about = #{record.moneyAbout,jdbcType=DOUBLE},
       order_id = #{record.orderId,jdbcType=BIGINT},
-      gd_id = #{record.gdId,jdbcType=BIGINT}
+      gd_id = #{record.gdId,jdbcType=BIGINT},
+      goods_type = #{record.goodsType,jdbcType=VARCHAR},
+      beiyong = #{record.beiyong,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -385,7 +407,7 @@
         shop_message = #{shopMessage,jdbcType=VARCHAR},
       </if>
       <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=INTEGER},
+        goods_id = #{goodsId,jdbcType=BIGINT},
       </if>
       <if test="useId != null" >
         use_id = #{useId,jdbcType=INTEGER},
@@ -409,7 +431,7 @@
         goods_price = #{goodsPrice,jdbcType=DOUBLE},
       </if>
       <if test="ordersType != null" >
-        orders_type = #{ordersType,jdbcType=INTEGER},
+        orders_type = #{ordersType,jdbcType=VARCHAR},
       </if>
       <if test="ordersFl != null" >
         orders_fl = #{ordersFl,jdbcType=DOUBLE},
@@ -435,6 +457,12 @@
       <if test="gdId != null" >
         gd_id = #{gdId,jdbcType=BIGINT},
       </if>
+      <if test="goodsType != null" >
+        goods_type = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="beiyong != null" >
+        beiyong = #{beiyong,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -443,7 +471,7 @@
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       click_time = #{clickTime,jdbcType=TIMESTAMP},
       shop_message = #{shopMessage,jdbcType=VARCHAR},
-      goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=BIGINT},
       use_id = #{useId,jdbcType=INTEGER},
       dept_id = #{deptId,jdbcType=INTEGER},
       group_id = #{groupId,jdbcType=INTEGER},
@@ -451,7 +479,7 @@
       shop_name = #{shopName,jdbcType=VARCHAR},
       goods_counts = #{goodsCounts,jdbcType=INTEGER},
       goods_price = #{goodsPrice,jdbcType=DOUBLE},
-      orders_type = #{ordersType,jdbcType=INTEGER},
+      orders_type = #{ordersType,jdbcType=VARCHAR},
       orders_fl = #{ordersFl,jdbcType=DOUBLE},
       pay = #{pay,jdbcType=DOUBLE},
       pay_about = #{payAbout,jdbcType=DOUBLE},
@@ -459,7 +487,9 @@
       pay_money = #{payMoney,jdbcType=DOUBLE},
       money_about = #{moneyAbout,jdbcType=DOUBLE},
       order_id = #{orderId,jdbcType=BIGINT},
-      gd_id = #{gdId,jdbcType=BIGINT}
+      gd_id = #{gdId,jdbcType=BIGINT},
+      goods_type = #{goodsType,jdbcType=VARCHAR},
+      beiyong = #{beiyong,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

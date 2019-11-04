@@ -28,6 +28,7 @@
     <result column="bm_back_bl" property="bmBackBl" jdbcType="VARCHAR" />
     <result column="bm_back_account" property="bmBackAccount" jdbcType="VARCHAR" />
     <result column="bm_back_account_number" property="bmBackAccountNumber" jdbcType="VARCHAR" />
+    <result column="bm_dingdan_type" property="bmDingdanType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -92,7 +93,7 @@
     bm_online_time, bm_offline_time, bm_type, bm_make_money, bm_back_money, bm_surplus, 
     bm_make_account, bm_make_time, bm_create_time, bm_text, bm_yhq_photo, bm_confirm_type, 
     bm_make_photo, bm_byzd, bm_back_type, bm_user_name, bm_back_bl, bm_back_account, 
-    bm_back_account_number
+    bm_back_account_number, bm_dingdan_type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbBackmoneyExample" >
     select
@@ -133,7 +134,8 @@
       bm_create_time, bm_text, bm_yhq_photo, 
       bm_confirm_type, bm_make_photo, bm_byzd, 
       bm_back_type, bm_user_name, bm_back_bl, 
-      bm_back_account, bm_back_account_number)
+      bm_back_account, bm_back_account_number, bm_dingdan_type
+      )
     values (#{bmId,jdbcType=INTEGER}, #{bmDeptId,jdbcType=INTEGER}, #{bmGroupId,jdbcType=INTEGER}, 
       #{bmUserId,jdbcType=INTEGER}, #{bmShopName,jdbcType=VARCHAR}, #{bmGoodsId,jdbcType=INTEGER}, 
       #{bmYhqName,jdbcType=VARCHAR}, #{bmOnlineTime,jdbcType=TIMESTAMP}, #{bmOfflineTime,jdbcType=TIMESTAMP}, 
@@ -142,7 +144,8 @@
       #{bmCreateTime,jdbcType=TIMESTAMP}, #{bmText,jdbcType=VARCHAR}, #{bmYhqPhoto,jdbcType=VARCHAR}, 
       #{bmConfirmType,jdbcType=VARCHAR}, #{bmMakePhoto,jdbcType=VARCHAR}, #{bmByzd,jdbcType=VARCHAR}, 
       #{bmBackType,jdbcType=VARCHAR}, #{bmUserName,jdbcType=VARCHAR}, #{bmBackBl,jdbcType=VARCHAR}, 
-      #{bmBackAccount,jdbcType=VARCHAR}, #{bmBackAccountNumber,jdbcType=VARCHAR})
+      #{bmBackAccount,jdbcType=VARCHAR}, #{bmBackAccountNumber,jdbcType=VARCHAR}, #{bmDingdanType,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbBackmoney" >
     insert into tb_backmoney
@@ -225,6 +228,9 @@
       <if test="bmBackAccountNumber != null" >
         bm_back_account_number,
       </if>
+      <if test="bmDingdanType != null" >
+        bm_dingdan_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="bmId != null" >
@@ -304,6 +310,9 @@
       </if>
       <if test="bmBackAccountNumber != null" >
         #{bmBackAccountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bmDingdanType != null" >
+        #{bmDingdanType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -394,6 +403,9 @@
       <if test="record.bmBackAccountNumber != null" >
         bm_back_account_number = #{record.bmBackAccountNumber,jdbcType=VARCHAR},
       </if>
+      <if test="record.bmDingdanType != null" >
+        bm_dingdan_type = #{record.bmDingdanType,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -426,7 +438,8 @@
       bm_user_name = #{record.bmUserName,jdbcType=VARCHAR},
       bm_back_bl = #{record.bmBackBl,jdbcType=VARCHAR},
       bm_back_account = #{record.bmBackAccount,jdbcType=VARCHAR},
-      bm_back_account_number = #{record.bmBackAccountNumber,jdbcType=VARCHAR}
+      bm_back_account_number = #{record.bmBackAccountNumber,jdbcType=VARCHAR},
+      bm_dingdan_type = #{record.bmDingdanType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -509,6 +522,9 @@
       <if test="bmBackAccountNumber != null" >
         bm_back_account_number = #{bmBackAccountNumber,jdbcType=VARCHAR},
       </if>
+      <if test="bmDingdanType != null" >
+        bm_dingdan_type = #{bmDingdanType,jdbcType=VARCHAR},
+      </if>
     </set>
     where bm_id = #{bmId,jdbcType=INTEGER}
   </update>
@@ -538,7 +554,8 @@
       bm_user_name = #{bmUserName,jdbcType=VARCHAR},
       bm_back_bl = #{bmBackBl,jdbcType=VARCHAR},
       bm_back_account = #{bmBackAccount,jdbcType=VARCHAR},
-      bm_back_account_number = #{bmBackAccountNumber,jdbcType=VARCHAR}
+      bm_back_account_number = #{bmBackAccountNumber,jdbcType=VARCHAR},
+      bm_dingdan_type = #{bmDingdanType,jdbcType=VARCHAR}
     where bm_id = #{bmId,jdbcType=INTEGER}
   </update>
 </mapper>

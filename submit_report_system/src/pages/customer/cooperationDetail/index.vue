@@ -126,7 +126,7 @@
           <el-radio   label="线下结算" v-model="form.coopPayType"/>
         </el-form-item>
         <el-form-item prop="coopHeadId" label="团长ID" v-if="form.coopPayType === '线上结算'" :rules="form.coopPayType === '线上结算'?[{ required: true, message: '请输入团长ID' }]:''">
-          <el-input  type="number" v-model="form.coopHeadId"/>
+          <el-input  type="txt" v-model="form.coopHeadId"/>
         </el-form-item>
         <el-form-item label="上传实拍图：">
           <div class="flex">

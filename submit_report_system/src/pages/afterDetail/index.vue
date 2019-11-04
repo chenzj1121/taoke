@@ -49,7 +49,7 @@
         <el-input v-model="form.orderId"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="form.ordersType">
+        <el-select v-model="form.goodsType">
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
@@ -95,7 +95,7 @@
       <el-table-column label="所属部门" prop="deptName"></el-table-column>
       <el-table-column label="组别" prop="groupName"></el-table-column>
       <el-table-column label="责任人" prop="creater"></el-table-column>
-      <el-table-column label="订单状态" prop="zhuangtai"></el-table-column>
+      <el-table-column label="订单状态" prop="goodsType"></el-table-column>
       <el-table-column label="店铺名称" prop="shopName"></el-table-column>
       <el-table-column label="商品ID" prop="goodsId"></el-table-column>
       <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
@@ -126,12 +126,13 @@ export default {
   data () {
     return {
       form: {
-        
+        goodsType:"订单结算"
       },
       departmentOptions: [],
       groupOptions: [],
       principalOptions: [],
       statusOptions: [
+        { label: '全部', value: null },
         { label: '订单结算', value: '订单结算' },
         { label: '订单付款', value: '订单付款' },
         { label: '订单成功', value: '订单成功' },

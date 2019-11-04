@@ -205,7 +205,7 @@ export default {
       this.isUpadte = true;
       this.getCoopDetail();
     }else{
-      if(!this.$route.params.shopBoss) {
+      if(!this.$route.params) {
        this.$alert('未检测到店铺', '警告', {
           confirmButtonText: '确定',
           callback: action => {

@@ -33,10 +33,10 @@
           <el-table-column prop="coopServiceFee" label="服务费单价" ></el-table-column>
         </el-table>
           <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getCoopDetail"/>
-          <el-button  @click="saveCoop" >保存</el-button>
+          <el-button  @click="saveCoop">保存</el-button>
         </el-dialog>
         <el-button type="primary" @click="dialogVisible = true">新建</el-button>
-        <el-button type="success">一键保存</el-button>
+        <el-button type="success" @click="addGoods">一键保存</el-button>
          <el-table
          style="margin-top:20px;width:1000px"
            :data="multipleSelection"
@@ -66,7 +66,10 @@
             <span>保存</span>
           </el-table-column> -->
          </el-table>
+          <div  style="margin-top:20px;">
          <el-button type="primary" @click="addGoods">保存</el-button>
+          </div>
+          
       </el-form-item>
       <br/>
       <el-form-item label="优惠券名称：" :rules="[{ required: true, message: '不能为空' }]">
@@ -208,9 +211,9 @@ export default {
     }
     if (this.$route.query.cid) {
       this.isUpdate = true
-      this.getShop(this.$route.query.id)
+      this.getCM(this.$route.query.cid)
     }
-    this.getCM(this.$route.query.cid)
+    this.getShop(this.$route.query.id)
     this.userInfo= getUser()
   },
   methods: {
@@ -289,25 +292,29 @@ export default {
          }
         },
     addGoods(){
-      this.multipleSelection.forEach((item,index)=>{
-        item.goodsId =  item.coopGoodsId
-        item.goodsStarttime = item.coopStarttime
-        item.goodsEndtime =item.coopEndtime
-        item.goodsPayMoney = item.coopServiceFee
-        item.goodsShopId = this.$route.query.id
-        item.goodsDeptId =this.userInfo.deptId
-        item.goodsGroupId =this.userInfo.groupId
-        item.goodsUserId =this.userInfo.id
-        item.goodsService = item.coopServiceFee
+      if (this.multipleSelection[0]) {
+        this.multipleSelection.forEach((item,index)=>{
+          item.goodsId =  item.coopGoodsId
+          item.goodsStarttime = item.coopStarttime
+          item.goodsEndtime =item.coopEndtime
+          item.goodsPayMoney = item.coopServiceFee
+          item.goodsShopId = this.$route.query.id
+          item.goodsDeptId =this.userInfo.deptId
+          item.goodsGroupId =this.userInfo.groupId
+          item.goodsUserId =this.userInfo.id
+          item.goodsService = item.coopServiceFee
         // item.goodsShopName = item.coopCustomer
-        addGoodsDetail(item).then(res=>{
-            if (res.success) {
-              this.$sucmsg("商品信息，第"+index+"条数据传输成功")
-            }else{
-               this.$errmsg("商品信息，第"+index+"条数据传输失败")
-            }
-        })  
-      })
+          addGoodsDetail(item).then(res=>{
+              if (res.success) {
+                this.$sucmsg("商品信息，第"+index+"条数据传输成功")
+              }else{
+                this.$errmsg("商品信息，第"+index+"条数据传输失败")
+              }
+          })  
+        })
+      
+      }
+        
       console.log(this.multipleSelection)
     },
     getShop(id){

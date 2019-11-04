@@ -62,7 +62,7 @@ export default {
                 total: 10
             },
             form:{
-                deptId:sessionStorage.deptId?sessionStorage.deptId:'',
+                deptId:sessionStorage.coopDeptId?sessionStorage.coopDeptId:'',
             },
             userList:[],
             groupList:[],
@@ -70,11 +70,11 @@ export default {
             line:false,
             max:0,
             userInfo:{},
-            deptId:sessionStorage.deptId,
+            deptId:sessionStorage.coopDeptId,
         }
     },
     mounted(){
-        if (sessionStorage.deptId) {
+        if (sessionStorage.coopDeptId) {
             this.getGroupList()
             this.bindData()
         }else{

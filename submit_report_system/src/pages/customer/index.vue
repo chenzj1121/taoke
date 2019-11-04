@@ -61,17 +61,17 @@
             <el-input :value="form.endPrice" type="number"></el-input>
           </el-form-item>
           <div v-if="type==0 || type==1">
-          <el-form-item label="部门:" label-width="60px">
+          <el-form-item label="部门:" label-width="60px" v-if="isBoss">
             <div>
-              <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)">
+              <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)" >
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
               </el-select>
             </div>
           </el-form-item>
-          <el-form-item label="组别:" label-width="60px">
+          <el-form-item label="组别:" label-width="60px" v-if="isBoss">
             <div>
-              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.shopDeptId,form.shopGroupId)">
+              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.shopDeptId,form.shopGroupId)" >
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
               </el-select>
@@ -197,7 +197,9 @@ export default {
       userList:[],
       gruopList2:[],//部门联动-小组
       memberList:[],//部门联动-员工
+      deptList2:[],
       type:2,
+      isBoss:false,
     }
   },
   mounted () {
@@ -206,6 +208,13 @@ export default {
     this.getUserList()
     this.getGroupList()
     this.bindData()
+    if (this.type==0) {
+      this.isBoss =true
+    }else{
+      this.form.deptId = sessionStorage.userDeptId
+      this.form.groupId = sessionStorage.userGroupId
+      this.getMember( this.form.deptId,this.form.groupId)
+    }
   },
   methods: {
     getUserList(){

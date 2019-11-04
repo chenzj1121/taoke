@@ -52,7 +52,7 @@
       </el-form-item>
       <br>
       <div v-if="type ==4||type==0" >
-      <el-form-item label="部门:" label-width="60px">
+      <el-form-item label="部门:" label-width="60px" v-if="isBoss">
             <div>
               <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">
               <el-option value="" label="全部"></el-option>
@@ -60,7 +60,7 @@
               </el-select>
             </div>
           </el-form-item>
-          <el-form-item label="组别:" label-width="60px">
+          <el-form-item label="组别:" label-width="60px" v-if="isBoss">
             <div>
               <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.shopGroupId)">
               <el-option value="" label="全部"></el-option>
@@ -205,6 +205,7 @@ export default {
             errList:0,
             length:0,
             fenpei:false,
+            isBoss:false,
         }
     },
     mounted(){
@@ -213,6 +214,14 @@ export default {
         this.getUserList()
         this.getGroupList()
         this.bindData()
+        if (this.type==0) {
+          this.isBoss =true
+        }else{
+          this.form.deptId = sessionStorage.userDeptId
+          this.form.groupId = sessionStorage.userGroupId
+          this.getMember( this.form.deptId,this.form.groupId)
+        }
+        
     },
     methods:{
       fenpeiUser(){
@@ -242,7 +251,7 @@ export default {
                 // item.coopShenheTime = new Date(item.coopShenheTime)
                 // this.update(item,index)
               }else{
-                this.$message("第"+(index*1+1)+'条已被审核,无法分配')
+                this.$message("第"+(index*1+1)+'条并非待审核状态,无法分配')
               }
             })
            
@@ -256,8 +265,8 @@ export default {
       },
       distribution(){
         if (this.multipleSelection[0]) {
-          this.getGroup(sessionStorage.deptId);
-          this.form.coopDeptId = sessionStorage.deptId;
+          this.getGroup(sessionStorage.coopDeptId);
+          this.form.coopDeptId = sessionStorage.coopDeptId;
           this.fenpei = true;
         }else{
           this.$message("请选择目标")

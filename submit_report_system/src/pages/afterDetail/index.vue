@@ -3,13 +3,13 @@
     <div class="title">后台明细</div>
     <el-form inline size="mini">
       <div v-if="type==0 || type ==1">
-      <el-form-item label="销售部">
+      <el-form-item label="销售部" v-if="isBoss">
        <el-select v-model="form.deptId" placeholder="请选择" @change="getGroup(form.deptId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
               </el-select>
       </el-form-item>
-      <el-form-item label="组别">
+      <el-form-item label="组别" v-if="isBoss">
          <el-select v-model="form.groupId" placeholder="请选择" @change="getMember(form.deptId,form.groupId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
@@ -79,7 +79,7 @@
           <!-- <el-button size="small" type="primary">点击上传</el-button> -->
            <input type="file"  name="file" style="display:none" id="filebox" @change="upload">
             <input type="hidden"  id="ssFile" name="ssFile">
-          <el-button size="small" type="primary" @click="openFile" v-if="type==0 || type==1">导入表格</el-button>
+          <el-button size="mini" type="primary" @click="openFile" v-if="type==0">导入表格</el-button>
 
           <!-- <input type="submit" @click="upload"> -->
         </form> 
@@ -124,7 +124,9 @@ export default {
   },
   data () {
     return {
-      form: {},
+      form: {
+        ordersType:'订单结算'
+      },
       departmentOptions: [],
       groupOptions: [],
       principalOptions: [],
@@ -151,6 +153,7 @@ export default {
       gruopList2:[],//部门联动-小组
       memberList:[],//部门联动-员工
       type:2,
+      isBoss:false,
     }
   },
   mounted(){
@@ -159,6 +162,13 @@ export default {
     this.getGroupList()
     this.getDeptList()
     this.getDetailList()
+     if (this.type==0) {
+      this.isBoss =true
+    }else{
+      this.form.deptId = sessionStorage.userDeptId
+      this.form.groupId = sessionStorage.userGroupId
+      this.getMember( this.form.deptId,this.form.groupId)
+    }
   },
   methods:{
     openFile(){
@@ -192,12 +202,12 @@ export default {
       let fileName = file.name.split(".")[0]
       if(fileType=="xls" || fileType =="xlsx"){
         formData.append("filebox",file);
-        console.log("filebox"+formData)
          uploadDetail(formData).then(res=>{
-            // if(res.success){
-            // }else{
-            //   this.$errmsg(res.message)
-            // }
+            if(res.success){
+              this.$sucmsg(res.message)
+            }else{
+              this.$errmsg(res.message)
+            }
           })
       }else{
         this.$errmsg("请上传excel格式文件")

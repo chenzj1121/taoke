@@ -66,7 +66,6 @@ export default {
           reqLogin(this.loginForm).then(res => {
             // console.log(res)
               this.loading = false
-
             if(res.success){
                const { username, realname, phone, deptId, groupId, id,type} = res.data
               const user = { username, realname, phone, deptId, groupId, id,type }
@@ -78,7 +77,6 @@ export default {
             }
           })
             .catch(err => {
-              console.log(err)
               this.loginForm.password = undefined
               this.loading = false
             })

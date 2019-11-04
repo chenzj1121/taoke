@@ -4,6 +4,7 @@
 
 <script>
 import {getDeptByList} from "@/api"
+import { getUser } from '@/utils/auth'
 /* eslint-disable */
 /**
  * @description 简单的显示路由的组件
@@ -12,13 +13,13 @@ export default {
   mounted(){
     getDeptByList().then(res=>{
       res.forEach(item => {
-          if (item.deptName=='提报组') {
-            sessionStorage.setItem("deptId",item.deptId)
+          if (item.deptName=='提报部') {
+            sessionStorage.setItem("coopDeptId",item.deptId)
           }
       });
-      
     })
-          console.log(sessionStorage.deptId)
+    sessionStorage.setItem("userDeptId",getUser().deptId)
+    sessionStorage.setItem("userGroupId",getUser().groupId)
 
   },
   methods:{

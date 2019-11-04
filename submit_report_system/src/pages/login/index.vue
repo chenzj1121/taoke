@@ -3,7 +3,7 @@
     <div class="form_box">
         <el-form ref="loginForm" :rules="rules" :model="loginForm">
           <h1 class="title">
-            Login Form
+           武汉嘿购科技有限公司
           </h1>
           <el-form-item prop="username">
             <el-input v-model="loginForm.username" class="form_input" prefix-icon="el-icon-user-solid"></el-input>

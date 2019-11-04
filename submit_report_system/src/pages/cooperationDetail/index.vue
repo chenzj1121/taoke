@@ -142,7 +142,7 @@
           <template slot-scope="scope">
             <span class="flex">
               <el-button size="mini" type="primary" @click="viewGood(scope.row.coopGoodsId)">查看商品</el-button>
-              <el-button size="mini" @click="delCoop(scope.row.coopId,scope.row.coopCustomer)">撤回</el-button>
+              <el-button size="mini" v-if="scope.row.coopTbtype =='待审核'" @click="delCoop(scope.row.coopId,scope.row.coopCustomer,scope.row.coopTbtype)">撤回</el-button>
               <el-button size="mini" type="warning" @click="reCoop(scope.row.coopBossId,scope.row.coopId)">重新提报</el-button>
               <el-button size="mini" type="primary" @click="nav2Checking(scope.row)">查款</el-button>
               <!-- <el-button size="mini" type="warning">返/退款</el-button> -->
@@ -239,7 +239,8 @@ export default {
       console.log(data)
       this.viewReason = data
     },
-    delCoop(id,name){
+    delCoop(id,name,type){
+      console.log(type)
       this.$confirm(`是否撤销【${name}】的该条提报?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

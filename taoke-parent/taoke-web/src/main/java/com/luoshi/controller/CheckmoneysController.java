@@ -110,6 +110,8 @@ public class CheckmoneysController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
+		System.out.println("时间"+maxTime);
+		System.out.println(backTime);
 		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows,maxTime,backTime);		
 	}
 	

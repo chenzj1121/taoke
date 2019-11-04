@@ -63,10 +63,10 @@
         <el-button type="primary" @click="getDetailList">查询</el-button>
       </el-form-item>
       <el-form-item label="付款服务费总额">
-        <el-input v-model="form.pay"></el-input>
+        <el-input v-model="form.payNum"></el-input>
       </el-form-item>
       <el-form-item label="结算服务费总额">
-        <el-input v-model="form.payMoney"></el-input>
+        <el-input v-model="form.checkNum"></el-input>
       </el-form-item>
       <el-form-item>
         <span>驳回消息 0 条</span>
@@ -126,7 +126,9 @@ export default {
   data () {
     return {
       form: {
-        goodsType:"订单结算"
+        goodsType:"订单结算",
+        payNum:0,
+        checkNum:0,
       },
       departmentOptions: [],
       groupOptions: [],
@@ -255,9 +257,12 @@ export default {
                   item.creater = obj.username
                 }
               })
+          // this.form.payNum= (this.form.payNum+item.payAbout)
+
           })
-      this.page.total = res.total
-      this.afterDetailTableData = res.rows
+          // this.form.payNum = this.form.payNum.toFixed(2)
+          this.page.total = res.total
+          this.afterDetailTableData = res.rows
     })
     },
       getGroup(id){

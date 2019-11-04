@@ -184,8 +184,8 @@ public class CoopController {
 	@RequestMapping("/shenhe")
 	public Result shenhe(@RequestBody TbCoop coop){
 		try {
-			
-			if(coop.getCoopTbtype().equals("待修改")) {
+			TbCoop tbCoop = coopService.findOne(coop.getCoopId());
+			if(tbCoop.getCoopTbtype().equals("待修改")) {
 				return new Result(false, "已撤回，无法审核");
 			}else{
 			HttpSession session = request.getSession();

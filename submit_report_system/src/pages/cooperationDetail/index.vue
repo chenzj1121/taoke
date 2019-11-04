@@ -130,11 +130,11 @@
         <el-table-column prop="coopAlterprice" label="券后价"></el-table-column>
         <el-table-column prop="coopYhqnums" label="优惠券总量"></el-table-column>
         <el-table-column prop="coopYjscale" label="佣金比例"></el-table-column>
-        <el-table-column prop="coopTbtime" label="提报时间"  width="100px"></el-table-column>
-        <el-table-column prop="coopStarttime" label="上线时间" width="100px"></el-table-column>
-        <el-table-column prop="coopEndtime" label="结束时间"  width="100px"></el-table-column>
+        <el-table-column prop="coopTbtime1" label="提报时间"  width="100px"></el-table-column>
+        <el-table-column prop="coopStarttime1" label="上线时间" width="100px"></el-table-column>
+        <el-table-column prop="coopEndtime1" label="结束时间"  width="100px"></el-table-column>
         <el-table-column prop="coopBack" label="回款金额"></el-table-column>
-        <el-table-column prop="coopDeptId" label="部门"></el-table-column>
+        <el-table-column prop="coopDept" label="部门"></el-table-column>
         <el-table-column prop="coopUser" label="责任人"></el-table-column>
         <el-table-column prop="coopYhqName" label="优惠券名称"></el-table-column>
         <el-table-column prop="coopMessage" label="备注"></el-table-column>
@@ -142,7 +142,7 @@
           <template slot-scope="scope">
             <span class="flex">
               <el-button size="mini" type="primary" @click="viewGood(scope.row.coopGoodsId)">查看商品</el-button>
-              <el-button size="mini" v-if="scope.row.coopTbtype =='待审核'" @click="delCoop(scope.row.coopId,scope.row.coopCustomer,scope.row.coopTbtype)">撤回</el-button>
+              <el-button size="mini" v-if="scope.row.coopTbtype =='待审核'" @click="delCoop(scope.row)">撤回</el-button>
               <el-button size="mini" type="warning" @click="reCoop(scope.row.coopBossId,scope.row.coopId)">重新提报</el-button>
               <el-button size="mini" type="primary" @click="nav2Checking(scope.row)">查款</el-button>
               <!-- <el-button size="mini" type="warning">返/退款</el-button> -->
@@ -159,7 +159,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById} from '@/api'
+import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -239,21 +239,21 @@ export default {
       console.log(data)
       this.viewReason = data
     },
-    delCoop(id,name,type){
-      console.log(type)
-      this.$confirm(`是否撤销【${name}】的该条提报?`, '提示', {
+    delCoop(item){
+      this.$confirm(`是否撤销【${item.coopCustomer}】的该条提报?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-       delCoopById(id).then(res=>{
-         if (res.success) {
-           this.$sucmsg(res.message)
-           this.bindData()
-         }else{
-           this.$errmsg(res.message)
-         }
-       })
+          item.coopTbtype ="待修改"
+          updateCoop(item).then(res=>{
+          if (res.success) {
+            this.$sucmsg(res.message)
+            this.bindData()
+          }else{
+            this.$errmsg(res.message)
+          }
+        })
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -297,7 +297,7 @@ export default {
          res.rows.forEach((item,index)=>{
            let list =["coopEndtime","coopStarttime","coopTbtime"]
            list.forEach(obj=>{
-             item[obj] = this.getMyDate(item[obj])
+             item[obj+'1'] = this.getMyDate(item[obj])
             // console.log(oTime)
            })
             // item.coopEndtime = new Date(item.coopEndtime);
@@ -305,7 +305,7 @@ export default {
             // item.coopTbtime = new Date(item.coopTbtime)
               this.deptList.forEach(obj=>{
                 if(item.coopDeptId == obj.deptId ){
-                  item.coopDeptId = obj.deptName
+                  item.coopDept = obj.deptName
                 }
               })
               this.userList.forEach(obj=>{

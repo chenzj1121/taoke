@@ -6,8 +6,8 @@
           <el-input  v-model="form.coopCustomer" disabled/>
         </el-form-item>
         <el-form-item label="零点提报：">
-          <el-radio label="零点" name="zero" v-model="form.coopZero" />
           <el-radio label="非零点" name="zero" v-model="form.coopZero" />
+          <el-radio label="零点" name="zero" v-model="form.coopZero" />
         </el-form-item>
         <el-form-item prop="coopGoodsTitle" label="商品标题：" :rules="[
             { required: true, message: '请输入商品标题' },
@@ -18,7 +18,7 @@
         <el-form-item label="商品ID：">
           <div class="flex"> 
             <el-input  v-model="form.coopGoodsId" type="number" />
-            <el-button type="primary" @click="checkGood(form.coopGoodsId)" >检测</el-button>
+            <!-- <el-button type="primary" @click="checkGood(form.coopGoodsId)" >检测</el-button> -->
             <el-button type="primary" @click="viewGood(form.coopGoodsId)" >查看商品</el-button>
           </div>
         </el-form-item>
@@ -186,7 +186,7 @@ export default {
         coopPayType: "线上结算",
         coopActivity:"常规单",
         beginTime:"立即开始",
-        coopZero:"零点"
+        coopZero:"coopZero"
       },
       shopDetail:{},
       optionList:[],

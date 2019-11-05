@@ -60,9 +60,26 @@
       :data="checkingTableData">
       <el-table-column type="selection"></el-table-column>
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column prop="cmSellDept" label="销售部"></el-table-column>
-      <el-table-column prop="cmDept" label="部门"></el-table-column>
-      <el-table-column prop="cmUserId" label="责任人"></el-table-column>
+        <el-table-column prop="cmType" label="查款状态">
+         <template slot-scope="scope">
+           <el-popover
+            placement="right"
+            width="300"
+            trigger="click">
+            <div style="text-align: center;">
+              <p>您正在进行查款审核操作</p>
+              <div style="padding-top:20px;">
+              <el-button size="mini" type="danger" @click="checkForYes(scope.row)">通过</el-button>
+              <el-button size="mini" type="warning" @click="checkForNo(scope.row)">拒绝</el-button>
+              </div>
+            </div>
+           <el-button slot="reference" :disabled="type!=0 || scope.row.cmType!='待审核' " size="mini" :type="scope.row.cmType=='拒绝'?'danger':(scope.row.cmType=='待审核'?'warning':'')">{{scope.row.cmType}}</el-button>
+           </el-popover>
+         </template>
+      </el-table-column>
+      <el-table-column prop="cmSellDeptName" label="销售部"></el-table-column>
+      <el-table-column prop="cmDeptName" label="部门"></el-table-column>
+      <el-table-column prop="cmUserName" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
           <span class="link" @click="showOtherRecords(scope.row.cmShopId,scope.row.cmShopName)">{{ scope.row.cmShopName }}</span>
@@ -96,7 +113,7 @@
       </el-table-column>
       <el-table-column prop="cmLoadCustomer" label="转入账户"></el-table-column>
       <el-table-column prop="cmApplyTime" label="申请时间"></el-table-column>
-      <el-table-column prop="cmType" label="查款状态"></el-table-column>
+    
       <el-table-column prop="cmYhqName" label="优惠券名称"></el-table-column>
       <el-table-column prop="cmBackTime" label="到款时间"></el-table-column>
       <el-table-column prop="cmText" label="备注"></el-table-column>
@@ -142,12 +159,37 @@
       </el-table>
     <!-- <Page style="text-align:right;margin-top:10px;" :page="page1" @change="bindData"/> -->
     </el-dialog>
+    <el-dialog
+      title="请选择返款时间"
+      width="25%"
+      :visible.sync="backTimeBox">
+      <el-date-picker
+      v-model="checkObj.cmBackTime"
+      type="date"
+      placeholder="选择日期"
+      required>
+    </el-date-picker>
+    <el-button type="warning" @click="submitBackTime" style="margin-left:10px;">提交</el-button>
+    </el-dialog>
+     <el-dialog
+      title="请填写拒绝原因"
+      width="40%"
+      :visible.sync="rejectBox">
+     <el-input
+      type="textarea"
+      autosize
+      placeholder="请输入内容"
+      v-model="checkObj.cmBeiyong">
+    </el-input>
+    <el-button type="warning" size="mini"  @click="submitReject" style="margin-top:20px;">提交</el-button>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import Page from '@/components/page'
-import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL} from '@/api'
+import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL,upCheckMoney} from '@/api'
+import { getUser } from '../../utils/auth'
 export default {
   components: {
     Page
@@ -157,6 +199,7 @@ export default {
     this.getGroupList()
     this.getDeptList()
     this.bindData()
+    this.type = getUser().type
   },
   data () {
     return {
@@ -195,10 +238,56 @@ export default {
         groupList:[],
         userList:[],
         PRE_URL,
+        type:2,
+        backTimeBox:false,
+        rejectBox:false,
+        checkObj:{},
     }
   },
-
   methods: {
+    checkForNo(item){
+      this.rejectBox= true,
+      this.checkObj = item
+    },
+    checkForYes(item){
+      this.backTimeBox = true
+      this.checkObj = item
+    },
+    submitBackTime(){
+      console.log(this.checkObj.cmBackTime)
+      if (this.checkObj.cmBackTime && this.checkObj) {
+      this.checkObj.cmType ='通过'
+      this.checkObj.cmApplyTime = new Date(this.checkObj.cmApplyTime)
+        upCheckMoney(this.checkObj).then(res=>{
+            if (res.success) {
+              this.$sucmsg(res.message)
+            }else{
+              this.$errmsg(res.message)
+            }
+            this.backTimeBox = false
+            this.bindData()
+        })
+      }else{
+        this.$errmsg("请选择返款日期")
+      }
+    },
+  submitReject(){
+    if (this.checkObj.cmBeiyong && this.checkObj) {
+          this.checkObj.cmApplyTime = new Date(this.checkObj.cmApplyTime)
+          this.checkObj.cmBackTime = new Date(this.checkObj.cmBackTime)
+          this.checkObj.cmType = '拒绝'
+          upCheckMoney(this.checkObj).then(res=>{
+              if (res.success) {
+                this.$sucmsg(res.message)
+              }else{
+                this.$errmsg(res.message)
+              }
+              this.bindData()
+          })
+    }else{
+       this.$errmsg("请填写拒绝理由")
+    }
+    },
     reSubmit(item){
       console.log(item)
       this.$router.push({ path: '/cooperationDetail/checking',query:{id:item.cmShopId,cid:item.cmId}})
@@ -222,8 +311,8 @@ export default {
       getGoodsDetail(cmShopId).then(res=>{
         if (res[0]) {
            res.forEach((item,index)=>{
-            item.goodsEndtime = this.getMyDate(item.goodsEndtime)
-            item.goodsStarttime = this.getMyDate(item.goodsStarttime)
+            item.goodsEndtime =  item.goodsEndtime?this.getMyDate(item.goodsEndtime):''
+            item.goodsStarttime = item.goodsEndtime?this.getMyDate(item.goodsStarttime):''
             item.goodsShopName = shopName
            this.groupList.forEach(obj=>{
                 if(item.goodsGroupId == obj.groupId && item.goodsDeptId == obj.groupDeptId){
@@ -255,21 +344,21 @@ export default {
       this.loading = true
       getCheckmonkeyPage(params, page, rows).then(res => {
           res.rows.forEach((item,index)=>{
-              item.cmApplyTime = this.getMyDate(item.cmApplyTime)
-              item.cmBackTime = this.getMyDate(item.cmBackTime)
+              item.cmApplyTime =item.cmApplyTime? this.getMyDate(item.cmApplyTime):''
+              item.cmBackTime =  item.cmBackTime?this.getMyDate(item.cmBackTime):''
               this.groupList.forEach(obj=>{
                 if(item.cmSellDept == obj.groupId && item.cmDept == obj.groupDeptId){
-                  item.cmSellDept = obj.groupName
+                  item.cmSellDeptName = obj.groupName
                 }
               })
               this.userList.forEach(obj=>{
                 if(item.cmUserId ==obj.id ){
-                  item.cmUserId = obj.username
+                  item.cmUserName = obj.username
                 }
               })
               this.deptList.forEach(obj=>{
                 if(item.cmDept == obj.deptId){
-                  item.cmDept = obj.deptName
+                  item.cmDeptName = obj.deptName
                 }
               })
             })

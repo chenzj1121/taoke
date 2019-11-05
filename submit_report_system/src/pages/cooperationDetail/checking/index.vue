@@ -32,17 +32,17 @@
           <el-table-column prop="coopYhqName" label="优惠券名称" ></el-table-column>
           <el-table-column prop="coopServiceFee" label="服务费单价" ></el-table-column>
         </el-table>
-          <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getCoopDetail"/>
+          <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getCoopDetail($route.query.id,shopDetail.shopName)"/>
           <el-button  @click="saveCoop">保存</el-button>
         </el-dialog>
         <el-button type="primary" @click="dialogVisible = true">新建</el-button>
         <el-button type="success" @click="addGoods">一键保存</el-button>
          <el-table
          style="margin-top:20px;width:1000px"
-           :data="multipleSelection"
+           :data="checkList"
             :row-style="{ textAlign:'center' }"
             :header-cell-style="{ textAlign: 'center', background: '#eee' }"
-            v-if="multipleSelection[0]?true:false">
+            v-if="checkList[0]?true:false">
            <el-table-column prop="coopGoodsId" label="商品ID"></el-table-column>
            <el-table-column prop="coopStarttime" label="推广开始时间"></el-table-column>
            <el-table-column prop="coopEndtime" label="推广结束时间"></el-table-column>
@@ -199,6 +199,7 @@ export default {
       userInfo:{},
       PRE_URL,
       isUpdate:false,
+      checkList:[],
 
     }
   },
@@ -292,8 +293,8 @@ export default {
          }
         },
     addGoods(){
-      if (this.multipleSelection[0]) {
-        this.multipleSelection.forEach((item,index)=>{
+      if (this.checkList[0]) {
+        this.checkList.forEach((item,index)=>{
           item.goodsId =  item.coopGoodsId
           item.goodsStarttime = item.coopStarttime
           item.goodsEndtime =item.coopEndtime
@@ -315,7 +316,7 @@ export default {
       
       }
         
-      console.log(this.multipleSelection)
+      console.log(this.checkList)
     },
     getShop(id){
         getShopById(id).then(res=>{
@@ -344,6 +345,7 @@ export default {
     },
     addCheck(){
       this.form.cmApplyTime = new Date()
+      this.form.cmType = "待审核"
       if (this.isUpdate) {
         upCheckMoney(this.form).then(res=>{
             if (res.success) {
@@ -358,8 +360,6 @@ export default {
       this.form.cmDept = this.userInfo.deptId;
       this.form.cmShopName =this.shopDetail.shopName
       this.form.cmShopId = this.shopDetail.id
-      // console.log(this.form)
-      // console.log(this.userInfo)
       addCheckMoney(this.form).then(res=>{
         if (res.success) {
             this.$sucmsg(res.message)
@@ -368,8 +368,10 @@ export default {
         }
       })
       if (this.form.isChecking) {
-       this.addBack()
-      }
+            this.addBack()
+        }else{
+            this.$router.go(-1)
+        }
       }
     },
     addBack(){
@@ -382,9 +384,11 @@ export default {
         this.form.bmBackType = this.form.isAlipay
         this.form.bmYhqPhoto = this.form.cmYhqPhoto
         this.form.bmMakePhoto = this.form.cmDkPhote
+        this.form.bmCreateTime = new Date()
             addBackMoney(this.form).then(res=>{
             if (res.success) {
                   this.$sucmsg(res.message)
+                  this.$router.go(-1)
               }else{
                   this.$errmsg(res.message)
               }
@@ -392,6 +396,10 @@ export default {
     },
     handleSelectionChange(val) {
         this.multipleSelection = val;
+        this.checkList= val
+        // console.log(this.checkList)
+        // console.log(this.multipleSelection)
+
     },
     saveCoop(){
       // console.log(this.multipleSelection)

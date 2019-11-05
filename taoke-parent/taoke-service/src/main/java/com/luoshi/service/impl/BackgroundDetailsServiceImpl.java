@@ -166,6 +166,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			if(backgroundDetails.getOrdersType()!=null){
 				criteria.andOrdersTypeEqualTo(backgroundDetails.getOrdersType());
 			}
+			example.setDistinct(true);
 			//结算金额排序
 			if(backgroundDetails.getPayMoney()!=null) {
 				if("1".equals(backgroundDetails.getPayMoney())) {
@@ -226,20 +227,31 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					sheet.getRow(i).getCell(j).setCellType(CellType.STRING);
 					}
 					}
-					long ddid = Long.parseLong(sheet.getRow(i).getCell(15).getStringCellValue());
+					
+					if(sheet.getRow(i).getCell(16)!=null) {
+						sheet.getRow(i).getCell(16).setCellType(CellType.STRING);
+						}
+					long ddid = Long.parseLong(sheet.getRow(i).getCell(16).getStringCellValue());
 					long long1 = Long.parseLong( sheet.getRow(i).getCell(3).getStringCellValue());
+					System.out.println(ddid);
+					System.out.println(long1);
 					TbCoopExample example=new TbCoopExample();
 					com.luoshi.pojo.TbCoopExample.Criteria criteria = example.createCriteria();
 					
 					criteria.andCoopHeadIdEqualTo(ddid);
 					criteria.andCoopGoodsIdEqualTo(long1);
 					List<TbCoop> list = coopMapper.selectByExample(example);
+					System.out.println(list.size());
+				
+					if(list.size()>0) {
 					TbCoop coop= list.get(0);
+					System.out.println(coop.toString());
 					if(coop!=null){
 						TbSysUser user = sysUserMapper.selectByPrimaryKey(coop.getCoopUserId());
 						details.setUseId(user.getId());
 						details.setDeptId(user.getDeptId());
 						details.setGroupId(user.getGroupId());
+					}
 					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //					HttpSession session = request.getSession();
@@ -273,8 +285,12 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					details.setPayTime(new Date());//结算时间
 					}
 					details.setPayMoney(Double.parseDouble(sheet.getRow(i).getCell(13).getStringCellValue()));//结算金额
-					details.setOrderId(Long.parseLong(sheet.getRow(i).getCell(14).getStringCellValue()));//订单编号
-					details.setGdId(Long.parseLong(sheet.getRow(i).getCell(15).getStringCellValue()));//活动id
+					details.setMoneyAbout(Double.parseDouble(sheet.getRow(i).getCell(14).getStringCellValue()));//预估金额
+					details.setOrderId(Long.parseLong(sheet.getRow(i).getCell(15).getStringCellValue()));//订单编号
+					if(sheet.getRow(i).getCell(16)!=null) {
+					sheet.getRow(i).getCell(16).setCellType(CellType.STRING);
+					details.setGdId(Long.parseLong(sheet.getRow(i).getCell(16).getStringCellValue()));//活动id
+					}
 					backgroundDetailsMapper.insert(details);
 					}
 					

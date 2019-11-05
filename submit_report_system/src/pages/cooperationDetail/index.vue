@@ -143,7 +143,7 @@
             <span class="flex">
               <el-button size="mini" type="primary" @click="viewGood(scope.row.coopGoodsId)">查看商品</el-button>
               <el-button size="mini" v-if="scope.row.coopTbtype =='待审核'" @click="delCoop(scope.row)">撤回</el-button>
-              <el-button size="mini" type="warning" @click="reCoop(scope.row.coopBossId,scope.row.coopId)">重新提报</el-button>
+              <el-button size="mini" type="warning" @click="reCoop(scope.row,scope.row.coopBossId,scope.row.coopId)">重新提报</el-button>
               <el-button size="mini" type="primary" @click="nav2Checking(scope.row)">查款</el-button>
               <!-- <el-button size="mini" type="warning">返/退款</el-button> -->
             </span>
@@ -159,7 +159,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop} from '@/api'
+import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop,addCoop} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -261,13 +261,36 @@ export default {
         })
       })
     },
-   reCoop(id,coopId){
+   reCoop(item,id,coopId){
+     if (item.coopTbtype=="通过") {
+         this.$confirm(`该提报已通过，是否重新创建一条?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        item.coopTbtype ="待审核";
+        item.coopUser = getUser().id
+        item.coopTbtime = new Date()
+        item.coopShenheId = null
+        item.coopShenheBz = null
+        item.coopShenheTime = null
+        item.coopId=null
+        addCoop(item).then(res=>{
+            if (res.success) {
+              this.$sucmsg(res.message)
+            }else{
+              this.$errmsg(res.message)
+            }
+            this.bindData()
+        })
+      }).catch(()=>{})
+     }else{
      getShopById(id).then(res=>{
        if (res) {
           this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail' ,params:res,query:{coopId}})
        }
-       console.log(res)
      })
+     }
    },
     viewGood(id){
          window.open(`https://item.taobao.com/item.htm?ft=t&id=${id}`);   

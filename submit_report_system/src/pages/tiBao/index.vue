@@ -286,13 +286,15 @@ export default {
           type: 'warning'
         }).then(() => {
               this.multipleSelection.forEach((item,index)=>{
-              item.coopShenheId = getUser().id;
-              item.coopShenheTime = new Date();
-              item.coopTbtype = "通过";
-              item.coopTbtime = new Date(item.coopTbtime)
-              item.coopStarttime = new Date(item.coopStarttime)
-              item.coopShenheTime = new Date(item.coopShenheTime)
-              this.update(item,index)
+                if (item.coopTbtype!='通过') {
+                     item.coopShenheId = getUser().id;
+                    item.coopShenheTime = new Date();
+                    item.coopTbtype = "通过";
+                    item.coopTbtime = new Date(item.coopTbtime)
+                    item.coopStarttime = new Date(item.coopStarttime)
+                    item.coopShenheTime = new Date(item.coopShenheTime)
+                    this.update(item,index)
+                }
            })
           this.bindData()
         }).catch(() => {
@@ -306,7 +308,7 @@ export default {
               if (res.success) {
                 this.sucList+=1
               }else{
-                 this.$errmsg("第"+index+1+"条数据，店铺：【"+item.coopCustomer+"】"+res.message)
+                 this.$errmsg("第"+(index*1+1)+"条数据，店铺：【"+item.coopCustomer+"】"+res.message)
                 this.errList+=1
               }
                if ((index+1) ==this.length ) {

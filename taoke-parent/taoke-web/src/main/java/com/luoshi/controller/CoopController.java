@@ -197,8 +197,9 @@ public class CoopController {
 			
 			Integer id = coop.getCoopShenheId();
 			TbSysUser user2 = sysUserService.findOne(id);
+			if(user2.getNowTb()!=null){
 			user2.setNowTb(user2.getNowTb()-1);
-			
+			}
 			sysUserService.update(user2);
 			return new Result(true, "审核成功");
 			}

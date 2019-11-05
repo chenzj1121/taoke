@@ -66,6 +66,9 @@ public interface CoopService {
 	public void fenpei(int[] coopids, int userId);
 
 
+	public int getNums(TbCoop coop, Date tbMaxTime, Date maxStartTime, Date endTime);
+
+
 
 
 	

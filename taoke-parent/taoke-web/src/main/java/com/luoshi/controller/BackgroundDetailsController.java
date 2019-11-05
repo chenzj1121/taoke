@@ -43,6 +43,16 @@ public class BackgroundDetailsController {
 	public List<TbBackgroundDetails> findAll(){			
 		return backgroundDetailsService.findAll();
 	}
+	
+//	/**
+//	 * 返回通过店铺数
+//	 * @return
+//	 */
+//	@RequestMapping("/getNums")
+//	public int  getNums(){			
+//		return backgroundDetailsService.getNums();
+//	}
+	
 	/**
 	 * 根据用户id和商品id返回明细
 	 * @return

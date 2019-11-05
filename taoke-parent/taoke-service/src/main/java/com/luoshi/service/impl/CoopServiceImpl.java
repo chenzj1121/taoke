@@ -108,8 +108,8 @@ public class CoopServiceImpl implements CoopService {
 				criteria.andCoopShenheIdEqualTo(user.getId());
 			}
 			//提报状态
-			if(coop.getCoopType()!=null && coop.getCoopType().length()>0){
-				criteria.andCoopTypeEqualTo(coop.getCoopType());
+			if(coop.getCoopTbtype()!=null && coop.getCoopTbtype().length()>0){
+				criteria.andCoopTbtypeEqualTo(coop.getCoopTbtype());
 			}
 			//活动类型
 			if(coop.getCoopActivity()!=null && coop.getCoopActivity().length()>0){
@@ -201,6 +201,94 @@ public class CoopServiceImpl implements CoopService {
 				sysUserMapper.updateByPrimaryKey(user2);
 			}	
 			
+		}
+
+		@Override
+		public int getNums(TbCoop coop, Date tbMaxTime, Date maxStartTime, Date endTime) {
+			TbCoopExample example=new TbCoopExample();
+			com.luoshi.pojo.TbCoopExample.Criteria criteria = example.createCriteria();
+			HttpSession session = request.getSession();
+			TbSysUser user = (TbSysUser) session.getAttribute("user");
+			example.setOrderByClause("coop_id DESC");
+			if(coop!=null){	
+				if(user.getType().equals("2")) {
+					criteria.andCoopUserIdEqualTo(user.getId());
+				}
+				//审核员工
+				if(user.getType().equals("5")) {
+					criteria.andCoopShenheIdEqualTo(user.getId());
+				}
+				//提报状态
+				if(coop.getCoopType()!=null && coop.getCoopType().length()>0){
+					criteria.andCoopTypeEqualTo(coop.getCoopType());
+				}
+				//活动类型
+				if(coop.getCoopActivity()!=null && coop.getCoopActivity().length()>0){
+					criteria.andCoopActivityEqualTo(coop.getCoopActivity());
+				}
+				//提报时间
+				if(coop.getCoopTbtime()!=null){
+					criteria.andCoopTbtimeGreaterThanOrEqualTo(coop.getCoopTbtime());
+				}
+				//提报时间
+				if(tbMaxTime!=null){
+					criteria.andCoopTbtimeLessThanOrEqualTo(tbMaxTime);
+				}
+				//上线时间区间
+				if(coop.getCoopStarttime()!=null) {
+					criteria.andCoopStarttimeGreaterThanOrEqualTo(coop.getCoopStarttime());
+				}
+				//上线时间
+				if(maxStartTime!=null) {
+					criteria.andCoopStarttimeLessThanOrEqualTo(maxStartTime);
+				}
+				//goodsId
+				if(coop.getCoopGoodsId()!=null){
+					criteria.andCoopGoodsIdEqualTo(coop.getCoopGoodsId());
+				}
+				//下线时间
+				if(coop.getCoopEndtime()!=null) {
+					criteria.andCoopEndtimeGreaterThan(coop.getCoopEndtime());
+				}
+				//下线时间
+				if(endTime!=null) {
+					criteria.andCoopEndtimeLessThanOrEqualTo(endTime);
+				}
+				//责任人
+				if(coop.getCoopUserId()!=null) {
+					criteria.andCoopUserIdEqualTo(coop.getCoopUserId());
+				}
+				//是否查款
+				if(coop.getCoopCheckMoney()!=null) {
+					criteria.andCoopCheckMoneyEqualTo(coop.getCoopCheckMoney());
+				}
+				//结算类型
+				if(coop.getCoopPayType()!=null) {
+					criteria.andCoopPayTypeEqualTo(coop.getCoopPayType());
+				}
+				if(coop.getCoopCustomer()!=null && coop.getCoopCustomer().length()>0){
+					criteria.andCoopCustomerLike("%"+coop.getCoopCustomer()+"%");
+				}
+				//是否零点
+				if(coop.getCoopZero()!=null && coop.getCoopZero().length()>0){
+					criteria.andCoopZeroEqualTo(coop.getCoopZero());
+				}
+				
+				if(coop.getCoopYhqName()!=null && coop.getCoopYhqName().length()>0){
+					criteria.andCoopYhqNameLike("%"+coop.getCoopYhqName()+"%");
+				}
+				if(coop.getCoopMessage()!=null && coop.getCoopMessage().length()>0){
+					criteria.andCoopMessageLike("%"+coop.getCoopMessage()+"%");
+				}
+				if(coop.getCoopShop()!=null && coop.getCoopShop().length()>0){
+					criteria.andCoopShopLike("%"+coop.getCoopShop()+"%");
+				}
+				criteria.andCoopTbtypeEqualTo("通过");
+		
+			}
+			
+			List<TbCoop> list = coopMapper.selectByExample(example);		
+			return list.size();
 		}
 	
 }

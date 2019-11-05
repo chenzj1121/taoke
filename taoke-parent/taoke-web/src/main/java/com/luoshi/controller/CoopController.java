@@ -51,6 +51,19 @@ public class CoopController {
 	public List<TbCoop> findAll(){			
 		return coopService.findAll();
 	}
+	
+	/**
+	 * 返回通过店铺数
+	 * @return
+	 */
+	@RequestMapping("/getNums")
+	public int  getNums(@RequestBody TbCoop coop, Date TbMaxTime, Date maxStartTime, Date endTime){
+		
+		return coopService.getNums(coop,TbMaxTime, maxStartTime, endTime);
+		
+		//return 	
+	}
+	
 	private static final String appSecret = "b94fd7405747ca971f22f0f0ed4b37fb";//应用sercret
     private static final String appKey = "5db14111720ce"; //应用key
     private static final String host = "https://openapi.dataoke.com/api/goods/get-goods-details";//应用服务接口

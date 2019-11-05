@@ -71,6 +71,9 @@ public interface BackgroundDetailsService {
 	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId);
 
 
+	//public int getNums();
+
+
 	//public void doImport(InputStream ins, MultipartFile file);
 
 

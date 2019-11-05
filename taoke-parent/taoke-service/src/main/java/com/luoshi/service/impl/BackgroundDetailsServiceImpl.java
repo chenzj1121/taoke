@@ -64,6 +64,21 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	public List<TbBackgroundDetails> findAll() {
 		return backgroundDetailsMapper.selectByExample(null);
 	}
+	
+	@Override
+	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId) {
+		TbBackgroundDetailsExample example=new TbBackgroundDetailsExample();
+		Criteria criteria = example.createCriteria();
+		//责任人
+		if(useId>0 ) {
+			criteria.andUseIdEqualTo(useId);
+		}
+		//商品id
+		if(goodsId!=null){
+			criteria.andGoodsIdEqualTo(goodsId);
+		}
+		return backgroundDetailsMapper.selectByExample2(example);
+	}
 
 	/**
 	 * 按分页查询
@@ -316,5 +331,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			}
 			
 		}
+
+	
 	
 }

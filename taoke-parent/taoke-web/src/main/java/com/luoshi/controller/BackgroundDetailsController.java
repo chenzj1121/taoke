@@ -43,6 +43,14 @@ public class BackgroundDetailsController {
 	public List<TbBackgroundDetails> findAll(){			
 		return backgroundDetailsService.findAll();
 	}
+	/**
+	 * 根据用户id和商品id返回明细
+	 * @return
+	 */
+	@RequestMapping("/findByGoodId")
+	public List<TbBackgroundDetails> findByGoodId(int useId,Long goodsId ){			
+		return backgroundDetailsService.findByGoodId(useId,goodsId);
+	}
 	
 	
 	/**

@@ -68,6 +68,9 @@ public interface BackgroundDetailsService {
 	public Result doImport(MultipartFile file) throws Exception;
 
 
+	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId);
+
+
 	//public void doImport(InputStream ins, MultipartFile file);
 
 

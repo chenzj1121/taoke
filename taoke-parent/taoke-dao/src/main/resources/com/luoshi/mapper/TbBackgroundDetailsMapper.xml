@@ -106,7 +106,6 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-     GROUP BY shop_name
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>

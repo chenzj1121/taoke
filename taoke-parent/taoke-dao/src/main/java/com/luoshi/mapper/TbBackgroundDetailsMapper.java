@@ -17,6 +17,8 @@ public interface TbBackgroundDetailsMapper {
     int insertSelective(TbBackgroundDetails record);
 
     List<TbBackgroundDetails> selectByExample(TbBackgroundDetailsExample example);
+    //修改前
+    List<TbBackgroundDetails> selectByExample2(TbBackgroundDetailsExample example);
 
     TbBackgroundDetails selectByPrimaryKey(Integer id);
 

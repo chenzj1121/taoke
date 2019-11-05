@@ -4,8 +4,8 @@
       目标填写及分解
     </div>
     <el-form :model="form" ref="form" inline size="mini" label-width="170px"  label-position="left">
-      <el-form-item prop="writeTime" label="当前填写目标时间：">
-        <el-date-picker type="month" v-model="form.writeTime"/>
+      <el-form-item prop="writeTime" label="当前填写目标时间："  >
+        <el-date-picker type="month" v-model="form.writeTime" :disabled='isUpdate' />
       </el-form-item>
       <br/>
       <el-form-item prop="target" label="月到账目标："
@@ -14,43 +14,48 @@
       </el-form-item>
       <br/>
       <br/>
-      <el-form-item prop="firstWeek" label="(第一周)周 在线 目标：">
+      <el-form-item prop="firstWeek" label="(第一周)周 到账 目标："
+       :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.firstWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="firstWeekCustom" label="周 到账 目标："
-        :rules="{ required: true, message: '周到账目标不能为空' }">
+      <el-form-item prop="firstWeekCustom" label="周 在线 目标："
+       >
         <el-input v-model="form.firstWeekCustom" type="number"></el-input>
       </el-form-item>
       <br/>
-      <el-form-item prop="secondWeek" label="(第二周)周 在线 目标：">
+      <el-form-item prop="secondWeek" label="(第二周)周 到账 目标："
+       :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.secondWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="secondWeekCustom" label="周 到账 目标："
-        :rules="{ required: true, message: '周到账目标不能为空' }">
+      <el-form-item prop="secondWeekCustom" label="周 在线 目标："
+       >
         <el-input v-model="form.secondWeekCustom" type="number"></el-input>
       </el-form-item>
       <br/>
-      <el-form-item prop="thirdWeek" label="(第三周)周 在线 目标：">
+      <el-form-item prop="thirdWeek" label="(第三周)周 到账 目标："
+       :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.thirdWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="thirdWeekCustom" label="周 到账 目标："
-        :rules="{ required: true, message: '周到账目标不能为空' }">
+      <el-form-item prop="thirdWeekCustom" label="周 在线 目标："
+       >
         <el-input v-model="form.thirdWeekCustom" type="number"></el-input>
       </el-form-item>
       <br/>
-      <el-form-item prop="fourthWeek" label="(第四周)周 在线 目标：">
+      <el-form-item prop="fourthWeek" label="(第四周)周 到账 目标："
+       :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.fourthWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="fourthWeekCustom" label="周 到账 目标："
-        :rules="{ required: true, message: '周到账目标不能为空' }">
+      <el-form-item prop="fourthWeekCustom" label="周 在线 目标："
+       >
         <el-input v-model="form.fourthWeekCustom" type="number"></el-input>
       </el-form-item>
       <br/>
-      <el-form-item prop="fifthWeek" label="(第五周)周 在线 目标：">
+      <el-form-item prop="fifthWeek" label="(第五周)周 到账 目标："
+       :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.fifthWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="fifthWeekCustom" label="周 到账 目标："
-        :rules="{ required: true, message: '周到账目标不能为空' }">
+      <el-form-item prop="fifthWeekCustom" label="周 在线 目标："
+       >
         <el-input v-model="form.fifthWeekCustom" type="number"></el-input>
       </el-form-item>
       <br/>
@@ -63,7 +68,7 @@
 </template>
 
 <script>
-import { addTarget } from '@/api'
+import { addTarget,findTarget,updateTarget} from '@/api'
 import { getUser } from '../../../utils/auth/index'
 export default {
   data () {
@@ -75,7 +80,7 @@ export default {
       this.form.fourthWeek = parseInt(fourthWeek)
       this.form.fifthWeek = parseInt(fifthWeek)
       value = parseInt(value)
-      const count = this.form.firstWeekCustom + this.form.secondWeekCustom + this.form.thirdWeekCustom + this.form.fourthWeekCustom + this.form.fifthWeekCustom
+      const count = this.form.firstWeek + this.form.secondWeek + this.form.thirdWeek + this.form.fourthWeek + this.form.fifthWeek
       if (value === count) {
         this.form.workTarget = count
         callback()
@@ -104,11 +109,31 @@ export default {
       targetValidator: [
         { required: true, message: '月到账目标不能为空' },
         { validator: countValid, trigger: 'submit' }
-      ]
+      ],
+      isUpdate:false,
     }
   },
   mounted(){
     this.form.userId= getUser().id
+    let userId = getUser().id;
+    let date = new Date();
+    let month = date.getMonth()+1;
+    let year = date.getFullYear()
+    let data = {
+       userId,
+       month,
+       year
+    }
+    findTarget(userId,year,month).then(res=>{
+      if (res) {
+        this.isUpdate = true
+        console.log(this.form.writeTime)
+        this.form = res
+        this.form.target = res.workTarget
+        this.form.writeTime = new Date(`${res.year}-${res.month}`)
+
+        }
+    })
   },
   methods: {
     submit () {
@@ -117,6 +142,19 @@ export default {
           let time = new Date(this.form.writeTime)
           this.form.year = time.getFullYear()
           this.form.month = (time.getMonth()+1)
+          if (this.isUpdate) {
+          updateTarget(this.form).then(res=>{
+              if(res.success){
+              this.$message({
+                message: res.message,
+                type: 'success'
+              });
+              this.$router.go(-1);
+            }else{
+              this.$message.error(res.message);
+            }
+          })
+          }else{
           addTarget(this.form).then(res=>{
             if(res.success){
               this.$message({
@@ -128,6 +166,7 @@ export default {
               this.$message.error(res.message);
             }
           })
+          }
 
         }else{
             this.$message.error('请检查错误');

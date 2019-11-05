@@ -64,16 +64,20 @@
          <template slot-scope="scope">
            <el-popover
             placement="right"
-            width="300"
             trigger="click">
             <div style="text-align: center;">
-              <p>您正在进行查款审核操作</p>
-              <div style="padding-top:20px;">
-              <el-button size="mini" type="danger" @click="checkForYes(scope.row)">通过</el-button>
-              <el-button size="mini" type="warning" @click="checkForNo(scope.row)">拒绝</el-button>
+              <div  v-if="scope.row.cmType=='待审核'">
+              <p style="padding:10px 0;text-align:left" >您正在进行查款审核操作</p>
+              <el-button size="mini" type="warning" @click="checkForYes(scope.row)">通过</el-button>
+              <el-button size="mini" type="danger" @click="checkForNo(scope.row)">拒绝</el-button>
+              </div>
+              <div v-if="scope.row.cmType=='拒绝'">
+                <p style="padding:10px 0;text-align:left">拒绝理由如下:</p>
+                <p style="color:red;">{{scope.row.cmBeiyong}}</p>
               </div>
             </div>
-           <el-button slot="reference" :disabled="type!=0 || scope.row.cmType!='待审核' " size="mini" :type="scope.row.cmType=='拒绝'?'danger':(scope.row.cmType=='待审核'?'warning':'')">{{scope.row.cmType}}</el-button>
+            <!-- <el-button slot="reference" type="danger" >拒绝</el-button> -->
+            <el-button slot="reference" :disabled="(type!=0 || scope.row.cmType=='通过')?(scope.row.cmType=='拒绝'?false:true):false " size="mini" :type="scope.row.cmType=='拒绝'?'danger':(scope.row.cmType=='待审核'?'warning':'')">{{scope.row.cmType=='拒绝'?scope.row.cmType+'(查看)':scope.row.cmType}}</el-button>
            </el-popover>
          </template>
       </el-table-column>
@@ -129,7 +133,7 @@
       </el-table-column>
       <el-table-column label="再次提交" width="120px">
         <template slot-scope="scope">
-          <el-button size="mini" type="success" @click="reSubmit(scope.row)">再次提交</el-button>
+          <el-button v-if="scope.row.cmType!='通过'" size="mini" type="success" @click="reSubmit(scope.row)">再次提交</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -282,6 +286,7 @@ export default {
               }else{
                 this.$errmsg(res.message)
               }
+              this.rejectBox = false
               this.bindData()
           })
     }else{

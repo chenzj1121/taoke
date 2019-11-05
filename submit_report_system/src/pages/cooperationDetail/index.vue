@@ -96,7 +96,7 @@
           &nbsp;&nbsp;
           <!-- <el-button type="primary">下载模板</el-button>
           <el-button type="warning">上传数据</el-button> -->
-          <span style="font-size: 12px;">店铺数： 123</span>
+          <span style="font-size: 12px;">通过数： </span>
         </el-form-item>
       </el-form>
       <el-table

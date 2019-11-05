@@ -315,7 +315,6 @@ export default {
         })
       
       }
-        
       console.log(this.checkList)
     },
     getShop(id){
@@ -327,7 +326,6 @@ export default {
           }else{
             this.$errmsg("未找到信息")
           }
-         
         })
     },
     getMyDate(str) {
@@ -350,6 +348,7 @@ export default {
         upCheckMoney(this.form).then(res=>{
             if (res.success) {
             this.$sucmsg(res.message)
+            this.$router.go(-1)
             }else{
                 this.$errmsg(res.message)
             }

@@ -122,8 +122,8 @@
           <el-input  type="number" v-model="form.coopPayNum"></el-input>
         </el-form-item>
         <el-form-item label="线上线下结算：">
-          <el-radio   label="线上结算" v-model="form.coopPayType"/>
           <el-radio   label="线下结算" v-model="form.coopPayType"/>
+          <el-radio   label="线上结算" v-model="form.coopPayType"/>
         </el-form-item>
         <el-form-item prop="coopHeadId" label="团长ID" v-if="form.coopPayType === '线上结算'" :rules="form.coopPayType === '线上结算'?[{ required: true, message: '请输入团长ID' }]:''">
           <el-input  type="txt" v-model="form.coopHeadId"/>
@@ -183,7 +183,7 @@ export default {
   data () {
     return {
       form: {
-        coopPayType: "线上结算",
+        coopPayType: "线下结算",
         coopActivity:"常规单",
         beginTime:"立即开始",
         coopZero:"coopZero"
@@ -325,23 +325,23 @@ export default {
             }
           })
     },
-    checkGood(id){
-      if (id) {
-        getGoodsInfo(id).then(res=>{
-          if(res.code==0){
-            this.$sucmsg("验证完成，已上线")
-            this.form.coopPttype = "已上线"
-          }else{
-            this.$sucmsg("验证完成，未上线")
-            this.form.coopPttype = "未上线"
-          }
-          this.flag = true;
-        })
-      }else{
-        this.$message("请输入商品id")
-      }
+    // checkGood(id){
+    //   if (id) {
+    //     getGoodsInfo(id).then(res=>{
+    //       if(res.code==0){
+    //         this.$sucmsg("验证完成，已上线")
+    //         this.form.coopPttype = "已上线"
+    //       }else{
+    //         this.$sucmsg("验证完成，未上线")
+    //         this.form.coopPttype = "未上线"
+    //       }
+    //       this.flag = true;
+    //     })
+    //   }else{
+    //     this.$message("请输入商品id")
+    //   }
         
-    },
+    // },
     viewGood(id,type){
       if (id) {
         if (type==1) {
@@ -371,7 +371,7 @@ export default {
     submit(){
       this.$refs.form.validate(valid => {
         if(valid){
-          if (this.flag) {
+          // if (this.flag) {
             if (this.isUpadte) {
               this.form.coopTbtime = new Date()
               this.form.coopTbtype = '待审核'
@@ -402,9 +402,9 @@ export default {
                 }
               })
             }
-          }else{
-            this.$errmsg("请检测商品")
-          }
+          // }else{
+          //   this.$errmsg("请检测商品")
+          // }
          
         }else{
           this.$message("请填写必填项")

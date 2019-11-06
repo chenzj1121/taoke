@@ -37,6 +37,27 @@
       :data="moneyBackTableData">
       <el-table-column type="selection" width="30"></el-table-column>
       <el-table-column type="index" label="序号"></el-table-column>
+      <el-table-column prop="bmConfirmType" label="确认状态">
+              <template slot-scope="scope">
+           <el-popover
+            placement="right"
+            trigger="click">
+            <div style="text-align: center;">
+              <div  v-if="scope.row.bmConfirmType=='待审核'">
+              <p style="padding:10px 0;text-align:left" >您正在进行查款审核操作</p>
+              <el-button size="mini" type="warning" @click="checkForYes(scope.row)">通过</el-button>
+              <el-button size="mini" type="danger" @click="checkForNo(scope.row)">拒绝</el-button>
+              </div>
+              <div v-if="scope.row.bmConfirmType=='拒绝'">
+                <p style="padding:10px 0;text-align:left">拒绝理由如下:</p>
+                <p style="color:red;">{{scope.row.bmByzd}}</p>
+              </div>
+            </div>
+            <!-- <el-button slot="reference" type="danger" >拒绝</el-button> -->
+            <el-button slot="reference" :disabled="(type!=0 || scope.row.bmConfirmType=='通过')?(scope.row.bmConfirmType=='拒绝'?false:true):false " size="mini" :type="scope.row.bmConfirmType=='拒绝'?'danger':(scope.row.bmConfirmType=='待审核'?'warning':'')">{{scope.row.bmConfirmType=='拒绝'?scope.row.bmConfirmType+'(查看)':scope.row.bmConfirmType}}</el-button>
+           </el-popover>
+         </template>
+      </el-table-column>
       <el-table-column prop="dep" label="销售部"></el-table-column>
       <el-table-column prop="group" label="组别"></el-table-column>
       <el-table-column prop="creater" label="销售人"></el-table-column>
@@ -47,8 +68,8 @@
       </el-table-column>
       <el-table-column prop="bmShopName" label="商品ID"></el-table-column>
       <el-table-column prop="bmYhqName" label="优惠券名称"></el-table-column>
-      <el-table-column prop="bmOnlineTime" label="上线时间"></el-table-column>
-      <el-table-column prop="bmOfflineTime" label="下线时间"></el-table-column>
+      <el-table-column prop="bmOnlineTime1" label="上线时间"></el-table-column>
+      <el-table-column prop="bmOfflineTime1" label="下线时间"></el-table-column>
       <el-table-column prop="bmType" label="操作类型"></el-table-column>
       <el-table-column prop="bmMakeMoney" label="打款金额"></el-table-column>
       <el-table-column prop="bmBackMoney" label="返/退款金额"></el-table-column>
@@ -58,8 +79,8 @@
           <span class="link" @click="showAccountInfo(scope.row.id)">{{scope.row.bmBackAccountNumber}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="bmMakeTime" label="打款时间"></el-table-column>
-      <el-table-column prop="bmCreateTime" label="申请时间"></el-table-column>
+      <el-table-column prop="bmMakeTime1" label="打款时间"></el-table-column>
+      <el-table-column prop="bmCreateTime1" label="申请时间"></el-table-column>
       <el-table-column prop="bmText" label="备注"></el-table-column>
       <el-table-column prop="bmYhqPhoto" label="优惠券图片">
         <template slot-scope="scope">
@@ -71,10 +92,7 @@
           <!-- <img src="http://iph.href.lu/200x200"  min-width="70" height="70"> -->
         </template>
       </el-table-column>
-      <el-table-column prop="bmConfirmType" label="确认状态"></el-table-column>
-      <el-table-column prop="bm_back_type" label="再次提交">
-        
-      </el-table-column>
+ 
       <el-table-column prop="bmMakePhoto" label="打款截图">
          <template slot-scope="scope">
             <el-image 
@@ -84,6 +102,11 @@
             </el-image>
           <!-- <img src="http://iph.href.lu/200x200"  min-width="70" height="70"> -->
         </template>
+      </el-table-column>
+      <el-table-column prop="bm_back_type" label="再次提交" width="100px">
+         <template slot-scope="scope">
+           <el-button size="mini" @click='resubmit(scope.row)' disabled>再次提交</el-button>
+         </template>
       </el-table-column>
     </el-table>
     <Page style="text-align:right;margin-top:10px;" :page="page" @change="bindData"/>
@@ -147,12 +170,37 @@
         <el-form-item label="备注："><span>{{ accountInfo.name }}</span></el-form-item>
       </el-form>
     </el-dialog>
+       <el-dialog
+      title="请选择返款时间"
+      width="25%"
+      :visible.sync="backTimeBox">
+      <el-date-picker
+      v-model="checkObj.bmMakeTime"
+      type="date"
+      placeholder="选择日期"
+      required>
+    </el-date-picker>
+    <el-button type="warning" @click="submitBackTime" style="margin-left:10px;">提交</el-button>
+    </el-dialog>
+     <el-dialog
+      title="请填写拒绝原因"
+      width="40%"
+      :visible.sync="rejectBox">
+     <el-input
+      type="textarea"
+      autosize
+      placeholder="请输入内容"
+      v-model="checkObj.bmByzd">
+    </el-input>
+    <el-button type="warning" size="mini"  @click="submitReject" style="margin-top:20px;">提交</el-button>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import {PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList} from '@/api'
+import {PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList,updateBackMoney} from '@/api'
 import Page from '@/components/page'
+import { getUser } from '../../utils/auth'
 export default {
     components: {
     Page
@@ -196,6 +244,10 @@ export default {
       groupList:[],
       deptList:[],
       PRE_URL,
+      type:getUser().type,
+      backTimeBox:false,
+      rejectBox:false,
+      checkObj:{},
     }
   },
   mounted(){
@@ -205,6 +257,53 @@ export default {
     this.bindData()
   },
   methods: {
+    resubmit(item){
+        this.$router.push({ path: '/cooperationDetail/checking',query:{bmId:item.bmId}})
+    },
+      checkForNo(item){
+      this.rejectBox= true,
+      this.checkObj = item
+    },
+    checkForYes(item){
+      this.backTimeBox = true
+      this.checkObj = item
+    },
+    submitBackTime(){
+      console.log(this.checkObj.bmMakeTime)
+      if (this.checkObj.bmMakeTime && this.checkObj) {
+      this.checkObj.bmConfirmType ='通过'
+      this.checkObj.bmCreateTime = new Date(this.checkObj.bmCreateTime)
+        updateBackMoney(this.checkObj).then(res=>{
+            if (res.success) {
+              this.$sucmsg(res.message)
+            }else{
+              this.$errmsg(res.message)
+            }
+            this.backTimeBox = false
+            this.bindData()
+        })
+      }else{
+        this.$errmsg("请选择到款日期")
+      }
+    },
+  submitReject(){
+    if (this.checkObj.bmByzd && this.checkObj) {
+          this.checkObj.bmMakeTime = new Date(this.checkObj.bmMakeTime)
+          this.checkObj.bmCreateTime = new Date(this.checkObj.bmCreateTime)
+          this.checkObj.bmConfirmType = '拒绝'
+          updateBackMoney(this.checkObj).then(res=>{
+              if (res.success) {
+                this.$sucmsg(res.message)
+              }else{
+                this.$errmsg(res.message)
+              }
+              this.rejectBox = false
+              this.bindData()
+          })
+    }else{
+       this.$errmsg("请填写拒绝理由")
+    }
+    },
     downloadFile(){
       downloadDetail("moban").then(res=>{
         console.loading(res)
@@ -234,7 +333,7 @@ export default {
            res.rows.forEach((item,index)=>{
               let list =["bmOfflineTime","bmOnlineTime","bmMakeTime","bmCreateTime"]
               list.forEach(obj=>{
-                item[obj] = this.getMyDate(item[obj])
+                item[obj+'1'] = this.getMyDate(item[obj])
               })
               this.deptList.forEach(obj=>{
                 if(item.bmDeptId == obj.deptId){

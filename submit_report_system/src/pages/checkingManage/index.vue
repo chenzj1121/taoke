@@ -36,7 +36,7 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label="状态：">
-        <el-select v-model="form.name">
+        <el-select v-model="form.cmType">
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
@@ -164,7 +164,7 @@
     <!-- <Page style="text-align:right;margin-top:10px;" :page="page1" @change="bindData"/> -->
     </el-dialog>
     <el-dialog
-      title="请选择返款时间"
+      title="请选择到款时间"
       width="25%"
       :visible.sync="backTimeBox">
       <el-date-picker
@@ -220,11 +220,10 @@ export default {
       },
       loading: false,
       statusOptions: [
-        { label: '全部', value: 'name' },
-        { label: '待确认', value: 'name' },
-        { label: '已确认', value: 'name' },
-        { label: '已修改', value: 'name' },
-        { label: '退回申请', value: 'name' }
+        { label: '全部', value: null },
+        { label: '待审核', value: '待审核' },
+        { label: '通过', value: '通过' },
+        { label: '拒绝', value: '拒绝' },
       ],
       orderByOptions: [
         { label: '全部', value: ' ' },
@@ -272,7 +271,7 @@ export default {
             this.bindData()
         })
       }else{
-        this.$errmsg("请选择返款日期")
+        this.$errmsg("请选择到款日期")
       }
     },
   submitReject(){

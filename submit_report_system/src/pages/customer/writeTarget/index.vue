@@ -5,7 +5,7 @@
     </div>
     <el-form :model="form" ref="form" inline size="mini" label-width="170px"  label-position="left">
       <el-form-item prop="writeTime" label="当前填写目标时间："  >
-        <el-date-picker type="month" v-model="form.writeTime" :disabled='isUpdate' />
+        <el-date-picker type="month" v-model="form.writeTime"  />
       </el-form-item>
       <br/>
       <el-form-item prop="target" label="月到账目标："
@@ -60,7 +60,7 @@
       </el-form-item>
       <br/>
       <el-form-item>
-        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button type="primary" @click="submit">{{isUpdate?'修改':'提交'}}</el-button>
         <el-button @click="back">取消</el-button>
       </el-form-item>
     </el-form>

@@ -12,7 +12,7 @@
     <el-submenu index="2" v-if="type==1 || type==0|| type ==2">
       <template slot="title" >客户信息</template>
       <el-menu-item index="/customer">私海客户</el-menu-item>
-      <el-menu-item index="/public">公海客户</el-menu-item>
+      <el-menu-item index="/public" v-if="type==0 ||type==1">公海客户</el-menu-item>
       <el-menu-item index="/cooperationDetail">合作明细</el-menu-item>
       <el-menu-item index="/checkingManage">查款管理</el-menu-item>
       <el-menu-item index="/moneyBack">返/退款</el-menu-item>

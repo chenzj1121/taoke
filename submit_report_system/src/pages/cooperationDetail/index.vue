@@ -6,13 +6,19 @@
         :model="form"
         ref="form"
         size="mini">
+        <el-form-item prop="shopName" label="店铺名称">
+          <el-input v-model="form.coopCustomer"/>
+        </el-form-item>
+        <el-form-item prop="shopId" label="商品ID">
+          <el-input v-model="form.coopGoodsId"/>
+        </el-form-item>
         <el-form-item prop="coopType" label="提报状态">
-          <el-select v-model="form.coopType">
+          <el-select v-model="form.coopTbtype">
             <el-option v-for="(option, index) in submitOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="name" label="活动类型">
-          <el-select v-model="form.name">
+          <el-select v-model="form.coopActivity">
             <el-option v-for="(option, index) in actionOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
@@ -21,19 +27,31 @@
             <el-option v-for="(option, index) in paybackOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="name" label="提报时间">
+      
+        <el-form-item prop="coopZero" label="是否零点">
+          <el-select v-model="form.coopZero">
+            <el-option v-for="(option, index) in isZeroOptions" :key="index" :label="option.label" :value="option.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <br>
+        <el-form-item prop="tibaoTime" label="提报时间">
            <el-date-picker
-              v-model="form.name"
-              type="daterange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期">
+              v-model="form.coopTbTime"
+              type="date"
+              placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <br/>
+        <span style="position:relative;top:5px;left:-5px;">至</span>
+        <el-form-item prop="tibaoTimeEnd">
+            <el-date-picker
+              v-model="form.coopTbTimeEnd"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
         <el-form-item prop="onlineTimeBegin" label="上线时间">
            <el-date-picker
-              v-model="form.onlineTimeBegin"
+              v-model="form.coopStartTime"
               type="date"
               placeholder="选择日期">
             </el-date-picker>
@@ -41,26 +59,14 @@
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="onlineTimeEnd">
             <el-date-picker
-              v-model="form.onlineTimeEnd"
+              v-model="form.coopStartTimeEnd"
               type="date"
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <el-form-item prop="shopName" label="店铺名称">
-          <el-input v-model="form.shopName"/>
-        </el-form-item>
-        <el-form-item prop="shopId" label="商品ID">
-          <el-input v-model="form.shopId"/>
-        </el-form-item>
-        <el-form-item prop="coopZero" label="是否零点">
-          <el-select v-model="form.coopZero">
-            <el-option v-for="(option, index) in isZeroOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-          </el-select>
-        </el-form-item>
-        <br/>
-        <el-form-item prop="outlineTimeBegin" label="下线时间">
+         <el-form-item prop="outlineTimeBegin" label="下线时间">
            <el-date-picker
-              v-model="form.outlineTimeBegin"
+              v-model="form.coopEndTime"
               type="date"
               placeholder="选择日期">
             </el-date-picker>
@@ -68,11 +74,14 @@
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="outlineTimeEnd">
             <el-date-picker
-              v-model="form.outlineTimeEnd"
+              v-model="form.coopEndTimeEnd"
               type="date"
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
+      
+        <br/>
+       
         <el-form-item v-if="type==0 ||type ==1" prop="coopUserId" label="责任人">
           <el-select v-model="form.name">
             <el-option v-for="(option, index) in dutyPersonOptions" :key="index" :label="option.label" :value="option.value"></el-option>
@@ -91,12 +100,12 @@
         <el-form-item>
           <el-button type="primary" @click="bindData">查询</el-button>
           <el-button @click="() => {this.form = {};this.bindData()}">重置</el-button>&nbsp;&nbsp;&nbsp;
-          <span>驳回消息 0 条</span>
-          <span class="link">点击查看</span>
-          &nbsp;&nbsp;
+          <!-- <span>驳回消息 0 条</span>
+          <span class="link">点击查看</span> -->
+          <!-- &nbsp;&nbsp; -->
           <!-- <el-button type="primary">下载模板</el-button>
           <el-button type="warning">上传数据</el-button> -->
-          <span style="font-size: 12px;">通过数： </span>
+          <span style="font-size: 16px;">通过数：{{passNum}} </span>
         </el-form-item>
       </el-form>
       <el-table
@@ -159,7 +168,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop,addCoop} from '@/api'
+import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop,addCoop,getCooperNum} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -177,40 +186,38 @@ export default {
       },
       loading: false,
       submitOptions: [ // 提报状态options
-        { label: '全部', value: '全部' },
-        { label: '品控驳回', value: '品控驳回' },
-        { label: '大淘客平台审核中', value: '大淘客平台审核中' },
-        { label: '大淘客平台驳回', value: '大淘客平台驳回' },
-        { label: '大淘客在线', value: '大淘客在线' },
-        { label: '大淘客下线', value: '大淘客下线' }
+        { label: '全部', value: null },
+        { label: '待审核', value: '待审核' },
+        { label: '通过', value: '通过' },
+        { label: '拒绝', value: '拒绝' },
       ],
       actionOptions: [ // 活动类型
-        { label: '全部', value: '全部' },
+        { label: '全部', value: null },
         { label: '聚划算', value: '聚划算' },
         { label: '淘抢购', value: '淘抢购' },
         { label: '常规推广', value: '常规推广' }
       ],
       paybackOptions: [ // 回款状态
-        { label: '全部', value: '全部' },
+        { label: '全部', value: null },
         { label: '已回款', value: '已回款' },
         { label: '待回款', value: '待回款' },
         { label: '推广中', value: '推广中' }
       ],
       isZeroOptions: [ // 是否零点
-        { label: '全部', value: '全部' },
+        { label: '全部', value: null },
         { label: '非零点', value: '非零点' },
         { label: '零点', value: '零点' }
       ],
       dutyPersonOptions: [
-        { label: '全部', value: '全部' }
+        { label: '全部', value: null }
       ],
       isExamineOptions: [ // 是否查款
-        { label: '全部', value: '全部' },
+        { label: '全部', value: null },
         { label: '已查款', value: '已查款' },
         { label: '未查款', value: '未查款' }
       ],
       settleStatusOptions: [ // 结算类型
-        { label: '全部', value: '' },
+        { label: '全部', value: null },
         { label: '线上结算', value: '线上结算' },
         { label: '线下结算', value: '线下结算' }
       ],
@@ -222,6 +229,7 @@ export default {
       viewReason:false,
       reason:{},
       PRE_URL,
+      passNum:0,
     }
   },
   mounted () {
@@ -313,9 +321,15 @@ export default {
     // },
     bindData () {
       const form = this.form
+      // form.coopTbTimeEnd = new Date(form.coopTbTimeEnd).getTime();
+      // form.coopStartTimeEnd = new Date(form.coopStartTimeEnd).getTime();
+      // form.coopEndTimeEnd = new Date(form.coopEndTimeEnd).getTime();
       const page = this.page.pageNum
       const rows = this.page.pageSize
       this.loading = true
+      getCooperNum(form, page, rows).then(res=>{
+        this.passNum = res
+      })
       getCooperationPage(form, page, rows).then(res => {
          res.rows.forEach((item,index)=>{
            let list =["coopEndtime","coopStarttime","coopTbtime"]

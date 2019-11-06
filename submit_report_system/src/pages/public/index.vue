@@ -67,7 +67,7 @@
       <el-table-column label="店铺电话" prop="shopPhone"></el-table-column>
       <el-table-column label="领取">
         <template slot-scope="scope">
-          <span class="linkSpan" @click="update(scope.row)">领取</span>
+          <el-button @click="update(scope.row)" size="mini" type="warning">领取</el-button>
         </template>
       </el-table-column>
     </el-table>

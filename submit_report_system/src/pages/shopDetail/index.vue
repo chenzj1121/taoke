@@ -67,7 +67,7 @@
 /**
  * @description 商店详情
  */
-import {getShopById,getCooperationPage} from "@/api"
+import {getShopById,getCooperationPage,getDeptByList,getGroupByList,getUserByList } from "@/api"
 import Form from './form'
 export default {
   components: {
@@ -81,13 +81,34 @@ export default {
       cooperationRecordTableData: [],
       followRecordTableData: [],
       historyRecordTableData: [],
-      shopInfo:{}
+      shopInfo:{},
+      deptList:[],
+      groupList:[],
+      userList:[],
     }
   },
   mounted(){
+    this.getUserList()
+    this.getGroupList()
+    this.getDeptList()
     this.getShopInfo(this.$route.query.id)
   },
   methods: {
+     getUserList(){
+      getUserByList().then(res=>{
+        this.userList = res
+      })
+    },
+     getDeptList () {
+      getDeptByList().then(res => {
+        this.deptList = res
+      })
+    },
+    getGroupList() {
+      getGroupByList().then(res => {
+        this.groupList = res
+      })
+    },
     checkMoney(){
       // getCooperationPage({shopBossId:this.form.id},1,10).then(res=>{
       //   console.log(res)
@@ -96,9 +117,28 @@ export default {
        this.$router.push({path: 'checking',name:"check",query: {id:this.form.id}})
     },
     getShopInfo(id){
-      getShopById(id).then(res=>{
-        this.form = res
-        console.log(res)
+      getShopById(id).then(item=>{
+          this.groupList.forEach(obj=>{
+            item.createTime = this.getMyDate(item.createTime)
+            item.nextTime = this.getMyDate(item.nextTime)
+                if(item.shopDeptId == obj.groupId && item.shopGroupId == obj.groupDeptId){
+                  item.shopGroupId = obj.groupName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.shopUseId ==obj.id ){
+                  item.shopUseId = obj.username
+                }
+                if (item.shopUserId2 == obj.id) {
+                  item.shopUserId2 = obj.username
+                }
+              })
+              this.deptList.forEach(obj=>{
+                if(item.shopDeptId == obj.deptId){
+                  item.shopDeptId = obj.deptName
+                }
+              })
+        this.form = item
       })
     },
     updateInfo () {
@@ -111,6 +151,19 @@ export default {
     },
     back () {
       this.$router.go(-1)
+    },
+     getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+   let oHour =oDate.getHours()
+    let oMin = oDate.getMinutes()
+    if (oMin <10) {
+      oMin = "0"+oMin
+    }
+    let oTime = oYear +'-'+ oMonth +'-'+oDay+" "+oHour+":"+oMin
+    return oTime;
     }
   }
 }

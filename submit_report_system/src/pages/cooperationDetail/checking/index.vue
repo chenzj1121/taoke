@@ -85,7 +85,7 @@
         <el-radio v-model="form.isChecking" :label="false"  :disabled="isUpdate">否</el-radio>
       </el-form-item>
       <br/>
-      <div v-if="form.isChecking">
+      <div v-show="form.isChecking">
         <el-form-item label="销售花名：" :rules="[{ required: true, message: '不能为空' }]">
           <el-input v-model="form.bmUserName"></el-input>
         </el-form-item>
@@ -114,6 +114,9 @@
           <el-input v-model="form.bmBackAccountumber"></el-input>
         </el-form-item>
         <br/>
+        <el-form-item label="返款备注：">
+          <el-input type="textarea" v-model="form.bmText"></el-input>
+        </el-form-item>
       </div>
       <el-form-item label="优惠券使用情况截图：">
         <!-- <el-upload
@@ -152,12 +155,7 @@
         <el-input type="textarea" v-model="form.cmText"></el-input>
       </el-form-item>
       <br/>
-      <div v-if="form.isChecking">
-        <el-form-item label="返款备注：">
-          <el-input type="textarea" v-model="form.name"></el-input>
-        </el-form-item>
-        <br/>
-      </div>
+  
       <el-form-item>
         <el-button type="primary" @click="addCheck">保存</el-button>
         <el-button @click="back">返回</el-button>
@@ -178,7 +176,7 @@ export default {
     return {
       form: {
         isChecking: false,
-        isAlipay: true
+        isAlipay: '支付宝'
       },
       accountOptions: [
         { label: '支付宝', value: '支付宝' },
@@ -204,8 +202,7 @@ export default {
     }
   },
   mounted(){
-    if (this.$route.query.id || this.$route.query.cid) {
-     
+    if (this.$route.query.id || this.$route.query.cid || this.$route.query.bmId) {
     }else{
         this.$router.go(-1);
         this.$errmsg("失去店铺数据,请重新进入")
@@ -296,8 +293,8 @@ export default {
       if (this.checkList[0]) {
         this.checkList.forEach((item,index)=>{
           item.goodsId =  item.coopGoodsId
-          item.goodsStarttime = item.coopStarttime
-          item.goodsEndtime =item.coopEndtime
+          item.goodsStarttime = new Date(item.coopStarttime)
+          item.goodsEndtime = new Date(item.coopEndtime)
           item.goodsPayMoney = item.coopServiceFee
           item.goodsShopId = this.$route.query.id
           item.goodsDeptId =this.userInfo.deptId
@@ -374,6 +371,7 @@ export default {
       }
     },
     addBack(){
+        this.form.bmShopId = this.shopDetail.id
         this.form.bmUserId = this.userInfo.id
         this.form.bmGroupId = this.userInfo.groupId
         this.form.bmDeptId = this.userInfo.deptId;
@@ -383,6 +381,7 @@ export default {
         this.form.bmBackType = this.form.isAlipay
         this.form.bmYhqPhoto = this.form.cmYhqPhoto
         this.form.bmMakePhoto = this.form.cmDkPhote
+        this.form.bmConfirmType = '待审核'
         this.form.bmCreateTime = new Date()
             addBackMoney(this.form).then(res=>{
             if (res.success) {

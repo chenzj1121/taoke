@@ -4,7 +4,7 @@
             <div class="title1">
                 <p>拒绝理由</p>
                 <div class="shenheInfo">
-                    <p>审核人：{{data.coopUserId}}</p>
+                    <p>审核人：{{data.coopUser}}</p>
                     <p>审核时间：{{data.coopShenheTime}}</p>
                  </div>
             </div>
@@ -38,10 +38,31 @@ export default {
             PRE_URL ,
         }
     },
+    created(){
+            this.data.coopShenheTime = this.getMyDate(this.data.coopShenheTime)
+            // this.userList.forEach(item=>{
+            //     if (data.coopShenheId==item.id) {
+            //         data.coopShenheId = item.username
+            //     }
+            // })
+    },
     methods:{
         close(){
             this.$emit("func",false)
         },
+         getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+    let oHour =oDate.getHours()
+    let oMin = oDate.getMinutes()
+    if (oMin <10) {
+      oMin = "0"+oMin
+    }
+    let oTime = oYear +'-'+ oMonth +'-'+oDay+" "+oHour+":"+oMin
+    return oTime;
+    }
     }
 
 }

@@ -13,7 +13,7 @@ export default {
   mounted(){
     getDeptByList().then(res=>{
       res.forEach(item => {
-          if (item.deptName=='提报部') {
+          if (item.deptName=='支持部') {
             sessionStorage.setItem("coopDeptId",item.deptId)
           }
       });

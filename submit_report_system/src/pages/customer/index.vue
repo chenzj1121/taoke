@@ -131,7 +131,7 @@
         </el-table-column>
         <el-table-column prop="wangwangaccount" label="旺旺账号"/>
         <el-table-column prop="maturity" label="成熟度"/>
-        <el-table-column prop="name" label="运营QQ"/>
+        <el-table-column prop="shopOperateQq" label="运营QQ"/>
         <el-table-column prop="nextTime" label="跟进时间"/>
         <el-table-column prop="followUpRecord" label="跟进记录"/>
         <el-table-column prop="refundsTime" label="回款时间"/>
@@ -139,17 +139,17 @@
         <el-table-column prop="shopType" label="店铺类型"/>
         <el-table-column prop="name" label="运营名称"/>
         <el-table-column prop="shopOperatePhone" label="运营电话"/>
-        <el-table-column prop="dataType" label="资料类型"/>
+        <!-- <el-table-column prop="dataType" label="资料类型"/>
         <el-table-column prop="operatorUserId" label="操作人"/>
-        <el-table-column prop="name" label="打标类型"/>
-        <el-table-column label="操作" width="320px">
+        <el-table-column prop="name" label="打标类型"/> -->
+        <el-table-column label="操作" width="250px">
           <template slot-scope="scope">
             <div class="operates">
               <el-row>
                 <el-button type="primary" size="mini" @click="submitReport(scope.row)">提报</el-button>
                 <el-button type="warning" size="mini" @click="nav2Update(scope.row.id)">修改</el-button>
                 <el-button type="primary" size="mini" @click="followRecord(scope.row)">跟进记录</el-button>
-                <el-button type="danger" size="mini" @click="del(scope.row)">删除</el-button>
+                <!-- <el-button type="danger" size="mini" @click="del(scope.row)">删除</el-button> -->
               </el-row>
             </div>
           </template>
@@ -312,7 +312,9 @@ export default {
         this.tableData = res.rows
         console.log(res.rows)
           res.rows.forEach((item,index)=>{
-                item.shopGroupId = parseInt(item.shopGroupId)
+                item.nextTime = item.nextTime?this.getMyDate(item.nextTime):null
+                item.refundsTime = item.refundsTime?this.getMyDate(item.refundsTime):null
+                // item.shopGroupId = parseInt(item.shopGroupId)
               this.groupList.forEach(obj=>{
                 if(item.shopDeptId == obj.groupDeptId && item.shopGroupId == obj.groupId){
                   item.group = obj.groupName
@@ -342,7 +344,6 @@ export default {
           this.loading = false
         })
     },
-
     transTo(){
       let flag  = true;
       if(this.multipleSelection[0]){
@@ -366,6 +367,19 @@ export default {
         this.$message("请选择店铺")
       }
 
+    },
+     getMyDate(str) {
+    var oDate = new Date(str)
+    let oYear = oDate.getFullYear()
+    let oMonth = oDate.getMonth()+1
+    let oDay = oDate.getDate()
+   let oHour =oDate.getHours()
+    let oMin = oDate.getMinutes()
+    if (oMin <10) {
+      oMin = "0"+oMin
+    }
+    let oTime = oYear +'-'+ oMonth +'-'+oDay+" "+oHour+":"+oMin
+    return oTime;
     }
   },
   watch:{

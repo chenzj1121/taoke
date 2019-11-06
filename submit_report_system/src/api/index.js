@@ -55,6 +55,8 @@ export const updateShop = shop => ajax(PRE_URL+`/shop/update.do`, shop, 'post')
 export const deleteShopById = id => ajax(PRE_URL+`/shop/delete.do?ids=${id}`, 'post')
 
 export const getCooperationPage = (form, page, rows,TbMaxTime,maxStartTime,endTime) => ajax(PRE_URL+`/coop/search.do?page=${page}&rows=${rows}`, form, 'post')
+// &TbMaxTime=${TbMaxTime}&maxStartTime=${maxStartTime}&endTime=${endTime}
+export const getCooperNum = (form, page, rows,TbMaxTime,maxStartTime,endTime) => ajax(PRE_URL+`/coop/getNums.do?page=${page}&rows=${rows}`, form, 'post')
 
 export const getCheckmonkeyPage = (form, page, rows) => ajax(PRE_URL+`/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
 
@@ -100,6 +102,8 @@ export const findCMbyId = (obj) => ajax(PRE_URL + `/checkmoneys/findOne.do?id=${
 export const findCoop = (id) => ajax(PRE_URL + '/coop/findOne.do?id='+id,'post')
 
 export const addBackMoney = (obj) => ajax(PRE_URL + `/backmoney/add.do`,obj,'post')
+
+export const updateBackMoney = (obj) => ajax(PRE_URL + `/backmoney/update.do`,obj,'post')
 
 export const addGoodsDetail = (obj) => ajax(PRE_URL + `/goods/add.do`,obj,'post')
 

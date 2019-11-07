@@ -58,7 +58,7 @@ export const getCooperationPage = (form, page, rows,TbMaxTime,maxStartTime,endTi
 // &TbMaxTime=${TbMaxTime}&maxStartTime=${maxStartTime}&endTime=${endTime}
 export const getCooperNum = (form, page, rows,TbMaxTime,maxStartTime,endTime) => ajax(PRE_URL+`/coop/getNums.do?page=${page}&rows=${rows}`, form, 'post')
 
-export const getCheckmonkeyPage = (form, page, rows,maxTime,backTime) => ajax(PRE_URL+`/checkmoneys/search.do?page=${page}&rows=${rows}&maxTime=${maxTime}&backTime=${backTime}`, form, 'post')
+export const getCheckmonkeyPage = (form, page, rows,maxTime,backTime) => ajax(PRE_URL+`/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
 // &maxTime=${maxTime}&backTime=${backTime}
 
 export const getCheckmonkeyNum = (form, page, rows) => ajax(PRE_URL+`/checkmoneys/serviceFee.do?page=${page}&rows=${rows}`, form, 'post')
@@ -73,6 +73,8 @@ export const findTarget = (userId,year,month) => ajax(PRE_URL + '/userWorkTarget
 export const addRecord = (target) => ajax(PRE_URL + '/followUpRecord/add.do',target,'post')
 
 export const findRecord = (id) => ajax(PRE_URL + '/followUpRecord/findOne.do?id='+id,'get')
+
+export const getRecord = (obj) => ajax(PRE_URL + '/followUpRecord/search.do?page=1&rows=99',obj,'get')
 
 export const checkWangWang = (name) => ajax(PRE_URL + '/shop/getWangwangAccountCounts.do?wangwangAccount='+name,'post')
 

@@ -293,6 +293,7 @@ export default {
       if (this.checkList[0]) {
         this.checkList.forEach((item,index)=>{
           item.goodsId =  item.coopGoodsId
+          // item.goodsFID = item.coopGoodsId
           item.goodsStarttime = new Date(item.coopStarttime)
           item.goodsEndtime = new Date(item.coopEndtime)
           item.goodsPayMoney = item.coopServiceFee

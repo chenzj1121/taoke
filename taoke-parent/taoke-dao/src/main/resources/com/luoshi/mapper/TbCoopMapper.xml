@@ -47,6 +47,10 @@
     <result column="coop_shenhe_time" property="coopShenheTime" jdbcType="TIMESTAMP" />
     <result column="coop_tbType" property="coopTbtype" jdbcType="VARCHAR" />
     <result column="coop_shenhe_bz" property="coopShenheBz" jdbcType="VARCHAR" />
+    <result column="timeId" property="timeid" jdbcType="INTEGER" />
+    <result column="coop_tbmaxTime" property="coopTbmaxtime" jdbcType="TIMESTAMP" />
+    <result column="coop_max_startTime" property="coopMaxStarttime" jdbcType="TIMESTAMP" />
+    <result column="coop_max_endTime" property="coopMaxEndtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -114,7 +118,8 @@
     coop_picture, coop_promotion, coop_coupon, coop_color, coop_service_fee, coop_per_time, 
     coop_coupon_num, coop_tapbao_price, coop_pay_num, coop_Head_id, coop_real_shot, coop_boss_id, 
     coop_check_money, coop_pay_type, coop_goods_title, coop_beiyong, coop_shenhe_id, 
-    coop_shenhe_time, coop_tbType, coop_shenhe_bz
+    coop_shenhe_time, coop_tbType, coop_shenhe_bz, timeId, coop_tbmaxTime, coop_max_startTime, 
+    coop_max_endTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbCoopExample" >
     select
@@ -161,8 +166,9 @@
       coop_pay_num, coop_Head_id, coop_real_shot, 
       coop_boss_id, coop_check_money, coop_pay_type, 
       coop_goods_title, coop_beiyong, coop_shenhe_id, 
-      coop_shenhe_time, coop_tbType, coop_shenhe_bz
-      )
+      coop_shenhe_time, coop_tbType, coop_shenhe_bz, 
+      timeId, coop_tbmaxTime, coop_max_startTime, 
+      coop_max_endTime)
     values (#{coopId,jdbcType=INTEGER}, #{coopType,jdbcType=VARCHAR}, #{coopPttype,jdbcType=VARCHAR}, 
       #{coopXdwtype,jdbcType=VARCHAR}, #{coopCustomer,jdbcType=VARCHAR}, #{coopMainpicture,jdbcType=VARCHAR}, 
       #{coopActivity,jdbcType=VARCHAR}, #{coopGoodsId,jdbcType=BIGINT}, #{coopZero,jdbcType=VARCHAR}, 
@@ -177,8 +183,9 @@
       #{coopPayNum,jdbcType=INTEGER}, #{coopHeadId,jdbcType=BIGINT}, #{coopRealShot,jdbcType=VARCHAR}, 
       #{coopBossId,jdbcType=INTEGER}, #{coopCheckMoney,jdbcType=VARCHAR}, #{coopPayType,jdbcType=VARCHAR}, 
       #{coopGoodsTitle,jdbcType=VARCHAR}, #{coopBeiyong,jdbcType=VARCHAR}, #{coopShenheId,jdbcType=INTEGER}, 
-      #{coopShenheTime,jdbcType=TIMESTAMP}, #{coopTbtype,jdbcType=VARCHAR}, #{coopShenheBz,jdbcType=VARCHAR}
-      )
+      #{coopShenheTime,jdbcType=TIMESTAMP}, #{coopTbtype,jdbcType=VARCHAR}, #{coopShenheBz,jdbcType=VARCHAR}, 
+      #{timeid,jdbcType=INTEGER}, #{coopTbmaxtime,jdbcType=TIMESTAMP}, #{coopMaxStarttime,jdbcType=TIMESTAMP}, 
+      #{coopMaxEndtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbCoop" >
     insert into tb_coop
@@ -318,6 +325,18 @@
       <if test="coopShenheBz != null" >
         coop_shenhe_bz,
       </if>
+      <if test="timeid != null" >
+        timeId,
+      </if>
+      <if test="coopTbmaxtime != null" >
+        coop_tbmaxTime,
+      </if>
+      <if test="coopMaxStarttime != null" >
+        coop_max_startTime,
+      </if>
+      <if test="coopMaxEndtime != null" >
+        coop_max_endTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="coopId != null" >
@@ -454,6 +473,18 @@
       </if>
       <if test="coopShenheBz != null" >
         #{coopShenheBz,jdbcType=VARCHAR},
+      </if>
+      <if test="timeid != null" >
+        #{timeid,jdbcType=INTEGER},
+      </if>
+      <if test="coopTbmaxtime != null" >
+        #{coopTbmaxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coopMaxStarttime != null" >
+        #{coopMaxStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coopMaxEndtime != null" >
+        #{coopMaxEndtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -601,6 +632,18 @@
       <if test="record.coopShenheBz != null" >
         coop_shenhe_bz = #{record.coopShenheBz,jdbcType=VARCHAR},
       </if>
+      <if test="record.timeid != null" >
+        timeId = #{record.timeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.coopTbmaxtime != null" >
+        coop_tbmaxTime = #{record.coopTbmaxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.coopMaxStarttime != null" >
+        coop_max_startTime = #{record.coopMaxStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.coopMaxEndtime != null" >
+        coop_max_endTime = #{record.coopMaxEndtime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -652,7 +695,11 @@
       coop_shenhe_id = #{record.coopShenheId,jdbcType=INTEGER},
       coop_shenhe_time = #{record.coopShenheTime,jdbcType=TIMESTAMP},
       coop_tbType = #{record.coopTbtype,jdbcType=VARCHAR},
-      coop_shenhe_bz = #{record.coopShenheBz,jdbcType=VARCHAR}
+      coop_shenhe_bz = #{record.coopShenheBz,jdbcType=VARCHAR},
+      timeId = #{record.timeid,jdbcType=INTEGER},
+      coop_tbmaxTime = #{record.coopTbmaxtime,jdbcType=TIMESTAMP},
+      coop_max_startTime = #{record.coopMaxStarttime,jdbcType=TIMESTAMP},
+      coop_max_endTime = #{record.coopMaxEndtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -792,6 +839,18 @@
       <if test="coopShenheBz != null" >
         coop_shenhe_bz = #{coopShenheBz,jdbcType=VARCHAR},
       </if>
+      <if test="timeid != null" >
+        timeId = #{timeid,jdbcType=INTEGER},
+      </if>
+      <if test="coopTbmaxtime != null" >
+        coop_tbmaxTime = #{coopTbmaxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coopMaxStarttime != null" >
+        coop_max_startTime = #{coopMaxStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coopMaxEndtime != null" >
+        coop_max_endTime = #{coopMaxEndtime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where coop_id = #{coopId,jdbcType=INTEGER}
   </update>
@@ -840,7 +899,11 @@
       coop_shenhe_id = #{coopShenheId,jdbcType=INTEGER},
       coop_shenhe_time = #{coopShenheTime,jdbcType=TIMESTAMP},
       coop_tbType = #{coopTbtype,jdbcType=VARCHAR},
-      coop_shenhe_bz = #{coopShenheBz,jdbcType=VARCHAR}
+      coop_shenhe_bz = #{coopShenheBz,jdbcType=VARCHAR},
+      timeId = #{timeid,jdbcType=INTEGER},
+      coop_tbmaxTime = #{coopTbmaxtime,jdbcType=TIMESTAMP},
+      coop_max_startTime = #{coopMaxStarttime,jdbcType=TIMESTAMP},
+      coop_max_endTime = #{coopMaxEndtime,jdbcType=TIMESTAMP}
     where coop_id = #{coopId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,4 @@
 package com.luoshi.controller;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -111,10 +110,10 @@ public class CheckmoneysController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
-		System.out.println("时间"+maxTime);
-		System.out.println(backTime);
-		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows,maxTime,backTime);		
+	public PageResult search(@RequestBody TbCheckmoneys checkmoneys, int page, int rows ){
+		System.out.println(checkmoneys.getCmApplyTime());
+		System.out.println(checkmoneys.getCmBackTime());
+		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows);		
 	}
 	/**
 	 * 服务费金额统计
@@ -124,18 +123,13 @@ public class CheckmoneysController {
 	 * @param maxTime
 	 * @param backTime
 	 * @return
-	 * @throws Exception 
 	 */
 	@RequestMapping("/serviceFee")
-	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,String maxTime,String backTime  ) throws Exception{
-		
+	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
+		System.out.println("时间"+maxTime);
+		System.out.println(backTime);
 		double i=0;
-		 //注意：SimpleDateFormat构造函数的样式与strDate的样式必须相符
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 ");
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //加上时间
-        Date maxTime1=simpleDateFormat.parse(maxTime);
-        Date backTime1=simpleDateFormat.parse(backTime);
-		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys,maxTime1,backTime1);
+		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys,maxTime,backTime);
 		for (TbCheckmoneys tbCheckmoneys : List) {
 			i=(double) (i+tbCheckmoneys.getCmJsMoney());
 		}

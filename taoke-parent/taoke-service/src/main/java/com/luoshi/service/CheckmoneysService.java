@@ -57,7 +57,7 @@ public interface CheckmoneysService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum,int pageSize,Date maxTime,Date backTime);
+	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum,int pageSize);
 
 
 	public List serviceFee(TbCheckmoneys checkmoneys, Date maxTime, Date backTime);

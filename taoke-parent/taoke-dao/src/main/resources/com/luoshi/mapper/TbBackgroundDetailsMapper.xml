@@ -25,6 +25,7 @@
     <result column="gd_id" property="gdId" jdbcType="BIGINT" />
     <result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
     <result column="beiyong" property="beiyong" jdbcType="VARCHAR" />
+    <result column="max_jsTime" property="maxJstime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -87,16 +88,9 @@
   <sql id="Base_Column_List" >
     id, create_time, click_time, shop_message, goods_id, use_id, dept_id, group_id, aliwangwang, 
     shop_name, goods_counts, goods_price, orders_type, orders_fl, pay, pay_about, pay_time, 
-    pay_money, money_about, order_id, gd_id, goods_type, beiyong
+    pay_money, money_about, order_id, gd_id, goods_type, beiyong, max_jsTime
   </sql>
-  <sql id="Base_Column_List2" >
-	 id, create_time, click_time, shop_message, goods_id, use_id, dept_id, group_id, aliwangwang,      
-	 shop_name, SUM(goods_counts) goods_counts, goods_price, orders_type, orders_fl, SUM(pay) pay, 
-	 SUM(pay_about) pay_about, pay_time, SUM(pay_money) pay_money, SUM(money_about) money_about, 
-	 order_id, gd_id, goods_type, beiyong
- 
-  </sql>
-  <select id="selectByExample2" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbBackgroundDetailsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbBackgroundDetailsExample" >
     select
     <if test="distinct" >
       distinct
@@ -106,21 +100,6 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbBackgroundDetailsExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List2" />
-    from tb_background_details
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-     GROUP BY goods_id,use_id
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
@@ -149,7 +128,8 @@
       orders_type, orders_fl, pay, 
       pay_about, pay_time, pay_money, 
       money_about, order_id, gd_id, 
-      goods_type, beiyong)
+      goods_type, beiyong, max_jsTime
+      )
     values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{clickTime,jdbcType=TIMESTAMP}, 
       #{shopMessage,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{useId,jdbcType=INTEGER}, 
       #{deptId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, #{aliwangwang,jdbcType=VARCHAR}, 
@@ -157,7 +137,8 @@
       #{ordersType,jdbcType=VARCHAR}, #{ordersFl,jdbcType=DOUBLE}, #{pay,jdbcType=DOUBLE}, 
       #{payAbout,jdbcType=DOUBLE}, #{payTime,jdbcType=TIMESTAMP}, #{payMoney,jdbcType=DOUBLE}, 
       #{moneyAbout,jdbcType=DOUBLE}, #{orderId,jdbcType=BIGINT}, #{gdId,jdbcType=BIGINT}, 
-      #{goodsType,jdbcType=VARCHAR}, #{beiyong,jdbcType=VARCHAR})
+      #{goodsType,jdbcType=VARCHAR}, #{beiyong,jdbcType=VARCHAR}, #{maxJstime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbBackgroundDetails" >
     insert into tb_background_details
@@ -231,6 +212,9 @@
       <if test="beiyong != null" >
         beiyong,
       </if>
+      <if test="maxJstime != null" >
+        max_jsTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -301,6 +285,9 @@
       </if>
       <if test="beiyong != null" >
         #{beiyong,jdbcType=VARCHAR},
+      </if>
+      <if test="maxJstime != null" >
+        #{maxJstime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -382,6 +369,9 @@
       <if test="record.beiyong != null" >
         beiyong = #{record.beiyong,jdbcType=VARCHAR},
       </if>
+      <if test="record.maxJstime != null" >
+        max_jsTime = #{record.maxJstime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -411,7 +401,8 @@
       order_id = #{record.orderId,jdbcType=BIGINT},
       gd_id = #{record.gdId,jdbcType=BIGINT},
       goods_type = #{record.goodsType,jdbcType=VARCHAR},
-      beiyong = #{record.beiyong,jdbcType=VARCHAR}
+      beiyong = #{record.beiyong,jdbcType=VARCHAR},
+      max_jsTime = #{record.maxJstime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -485,6 +476,9 @@
       <if test="beiyong != null" >
         beiyong = #{beiyong,jdbcType=VARCHAR},
       </if>
+      <if test="maxJstime != null" >
+        max_jsTime = #{maxJstime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -511,7 +505,8 @@
       order_id = #{orderId,jdbcType=BIGINT},
       gd_id = #{gdId,jdbcType=BIGINT},
       goods_type = #{goodsType,jdbcType=VARCHAR},
-      beiyong = #{beiyong,jdbcType=VARCHAR}
+      beiyong = #{beiyong,jdbcType=VARCHAR},
+      max_jsTime = #{maxJstime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

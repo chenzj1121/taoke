@@ -125,11 +125,17 @@ public class CheckmoneysController {
 	 * @return
 	 */
 	@RequestMapping("/serviceFee")
+<<<<<<< HEAD
 	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
 		System.out.println("时间"+maxTime);
 		System.out.println(backTime);
 		double i=0;
 		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys,maxTime,backTime);
+=======
+	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows ){
+		double i=0;
+		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys);
+>>>>>>> 4a8053905cff0c7581c00dcf2de397d388ab2e68
 		for (TbCheckmoneys tbCheckmoneys : List) {
 			i=(double) (i+tbCheckmoneys.getCmJsMoney());
 		}

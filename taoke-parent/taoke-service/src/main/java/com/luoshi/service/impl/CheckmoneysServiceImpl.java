@@ -104,16 +104,28 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(checkmoneys.getCmApplyTime()!=null){
 				criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());
 			}
+<<<<<<< HEAD
 //			if(maxTime!=null) {
 //				criteria.andCmApplyTimeLessThanOrEqualTo(maxTime);
 //			}
+=======
+			if(checkmoneys.getCmTbmaxtime()!=null) {
+				criteria.andCmApplyTimeLessThanOrEqualTo(checkmoneys.getCmTbmaxtime());
+			}
+>>>>>>> 4a8053905cff0c7581c00dcf2de397d388ab2e68
 			//到款时间
 			if(checkmoneys.getCmBackTime()!=null) {
 				criteria.andCmBackTimeGreaterThanOrEqualTo(checkmoneys.getCmBackTime());
 			}
+<<<<<<< HEAD
 //			if(backTime!=null) {
 //				criteria.andCmBackTimeLessThanOrEqualTo(backTime);
 //			}
+=======
+			if(checkmoneys.getCmEndtime()!=null) {
+				criteria.andCmBackTimeLessThanOrEqualTo(checkmoneys.getCmEndtime());
+			}
+>>>>>>> 4a8053905cff0c7581c00dcf2de397d388ab2e68
 			//状态
 			if(checkmoneys.getCmType()!=null) {
 				criteria.andCmTypeEqualTo(checkmoneys.getCmType());
@@ -165,7 +177,7 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 	}
 
 		@Override
-		public List<TbCheckmoneys> serviceFee(TbCheckmoneys checkmoneys, Date maxTime, Date backTime) {
+		public List<TbCheckmoneys> serviceFee(TbCheckmoneys checkmoneys) {
 			TbCheckmoneysExample example=new TbCheckmoneysExample();
 			com.luoshi.pojo.TbCheckmoneysExample.Criteria criteria = example.createCriteria();
 			HttpSession session = request.getSession();
@@ -179,15 +191,15 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 				if(checkmoneys.getCmApplyTime()!=null){
 					criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());
 				}
-				if(maxTime!=null) {
-					criteria.andCmApplyTimeLessThanOrEqualTo(maxTime);
+				if(checkmoneys.getCmTbmaxtime()!=null) {
+					criteria.andCmApplyTimeLessThanOrEqualTo(checkmoneys.getCmTbmaxtime());
 				}
 				//到款时间
 				if(checkmoneys.getCmBackTime()!=null) {
 					criteria.andCmBackTimeGreaterThanOrEqualTo(checkmoneys.getCmBackTime());
 				}
-				if(backTime!=null) {
-					criteria.andCmBackTimeLessThanOrEqualTo(backTime);
+				if(checkmoneys.getCmEndtime()!=null) {
+					criteria.andCmBackTimeLessThanOrEqualTo(checkmoneys.getCmEndtime());
 				}
 				//状态
 				if(checkmoneys.getCmType()!=null) {

@@ -1934,6 +1934,66 @@ public class TbBackmoneyExample {
             addCriterion("bm_shop_id not between", value1, value2, "bmShopId");
             return (Criteria) this;
         }
+
+        public Criteria andBmTimeidIsNull() {
+            addCriterion("bm_timeId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidIsNotNull() {
+            addCriterion("bm_timeId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidEqualTo(Long value) {
+            addCriterion("bm_timeId =", value, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidNotEqualTo(Long value) {
+            addCriterion("bm_timeId <>", value, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidGreaterThan(Long value) {
+            addCriterion("bm_timeId >", value, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidGreaterThanOrEqualTo(Long value) {
+            addCriterion("bm_timeId >=", value, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidLessThan(Long value) {
+            addCriterion("bm_timeId <", value, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidLessThanOrEqualTo(Long value) {
+            addCriterion("bm_timeId <=", value, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidIn(List<Long> values) {
+            addCriterion("bm_timeId in", values, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidNotIn(List<Long> values) {
+            addCriterion("bm_timeId not in", values, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidBetween(Long value1, Long value2) {
+            addCriterion("bm_timeId between", value1, value2, "bmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmTimeidNotBetween(Long value1, Long value2) {
+            addCriterion("bm_timeId not between", value1, value2, "bmTimeid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

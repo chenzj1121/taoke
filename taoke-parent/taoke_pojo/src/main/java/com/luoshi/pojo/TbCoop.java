@@ -93,7 +93,7 @@ public class TbCoop {
 
     private String coopShenheBz;
 
-    private Integer timeid;
+    private Long timeid;
 
     private Date coopTbmaxtime;
 
@@ -460,16 +460,16 @@ public class TbCoop {
     public void setCoopShenheBz(String coopShenheBz) {
         this.coopShenheBz = coopShenheBz == null ? null : coopShenheBz.trim();
     }
+    
+    public Long getTimeid() {
+		return timeid;
+	}
 
-    public Integer getTimeid() {
-        return timeid;
-    }
+	public void setTimeid(Long timeid) {
+		this.timeid = timeid;
+	}
 
-    public void setTimeid(Integer timeid) {
-        this.timeid = timeid;
-    }
-
-    public Date getCoopTbmaxtime() {
+	public Date getCoopTbmaxtime() {
         return coopTbmaxtime;
     }
 

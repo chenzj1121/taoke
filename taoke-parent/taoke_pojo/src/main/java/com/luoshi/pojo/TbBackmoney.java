@@ -59,6 +59,8 @@ public class TbBackmoney {
 
     private Integer bmShopId;
 
+    private Long bmTimeid;
+
     public Integer getBmId() {
         return bmId;
     }
@@ -281,5 +283,13 @@ public class TbBackmoney {
 
     public void setBmShopId(Integer bmShopId) {
         this.bmShopId = bmShopId;
+    }
+
+    public Long getBmTimeid() {
+        return bmTimeid;
+    }
+
+    public void setBmTimeid(Long bmTimeid) {
+        this.bmTimeid = bmTimeid;
     }
 }

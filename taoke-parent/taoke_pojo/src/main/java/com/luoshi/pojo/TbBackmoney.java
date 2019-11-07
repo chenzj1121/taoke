@@ -57,6 +57,8 @@ public class TbBackmoney {
 
     private String bmDingdanType;
 
+    private Integer bmShopId;
+
     public Integer getBmId() {
         return bmId;
     }
@@ -271,5 +273,13 @@ public class TbBackmoney {
 
     public void setBmDingdanType(String bmDingdanType) {
         this.bmDingdanType = bmDingdanType == null ? null : bmDingdanType.trim();
+    }
+
+    public Integer getBmShopId() {
+        return bmShopId;
+    }
+
+    public void setBmShopId(Integer bmShopId) {
+        this.bmShopId = bmShopId;
     }
 }

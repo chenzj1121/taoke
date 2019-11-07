@@ -1874,6 +1874,66 @@ public class TbBackmoneyExample {
             addCriterion("bm_dingdan_type not between", value1, value2, "bmDingdanType");
             return (Criteria) this;
         }
+
+        public Criteria andBmShopIdIsNull() {
+            addCriterion("bm_shop_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdIsNotNull() {
+            addCriterion("bm_shop_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdEqualTo(Integer value) {
+            addCriterion("bm_shop_id =", value, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdNotEqualTo(Integer value) {
+            addCriterion("bm_shop_id <>", value, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdGreaterThan(Integer value) {
+            addCriterion("bm_shop_id >", value, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bm_shop_id >=", value, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdLessThan(Integer value) {
+            addCriterion("bm_shop_id <", value, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdLessThanOrEqualTo(Integer value) {
+            addCriterion("bm_shop_id <=", value, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdIn(List<Integer> values) {
+            addCriterion("bm_shop_id in", values, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdNotIn(List<Integer> values) {
+            addCriterion("bm_shop_id not in", values, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdBetween(Integer value1, Integer value2) {
+            addCriterion("bm_shop_id between", value1, value2, "bmShopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShopIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("bm_shop_id not between", value1, value2, "bmShopId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

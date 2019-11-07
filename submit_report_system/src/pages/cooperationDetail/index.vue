@@ -38,14 +38,16 @@
            <el-date-picker
               v-model="form.coopTbTime"
               type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="tibaoTimeEnd">
             <el-date-picker
-              v-model="form.coopTbTimeEnd"
+              v-model="form.coopTbmaxTime"
               type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
@@ -53,14 +55,16 @@
            <el-date-picker
               v-model="form.coopStartTime"
               type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="onlineTimeEnd">
             <el-date-picker
-              v-model="form.coopStartTimeEnd"
+              v-model="form.coopMaxStartTime"
               type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
@@ -68,20 +72,20 @@
            <el-date-picker
               v-model="form.coopEndTime"
               type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="outlineTimeEnd">
             <el-date-picker
-              v-model="form.coopEndTimeEnd"
+              v-model="form.coopMaxEndTime"
               type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-      
         <br/>
-       
         <el-form-item v-if="type==0 ||type ==1" prop="coopUserId" label="责任人">
           <el-select v-model="form.name">
             <el-option v-for="(option, index) in dutyPersonOptions" :key="index" :label="option.label" :value="option.value"></el-option>

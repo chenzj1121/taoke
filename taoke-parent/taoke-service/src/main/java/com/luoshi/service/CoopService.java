@@ -60,13 +60,13 @@ public interface CoopService {
 	//public PageResult findPage(TbCoop coop, int pageNum,int pageSize, Date TbMaxTime, Date maxStartTime, Date endTime);
 
 
-	 public PageResult findPage(TbCoop coop, int page, int rows, Date tbMaxTime, Date maxStartTime, Date endTime);
+	 public PageResult findPage(TbCoop coop, int page, int rows);
 
 
 	public void fenpei(int[] coopids, int userId);
 
 
-	public int getNums(TbCoop coop, Date tbMaxTime, Date maxStartTime, Date endTime);
+	public int getNums(TbCoop coop);
 
 
 

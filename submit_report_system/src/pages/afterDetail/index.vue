@@ -38,11 +38,11 @@
           end-placeholder="结束日期">
         </el-date-picker> -->
           <el-col :span="11">
-         <el-date-picker type="date" placeholder="开始日期" v-model="form.createTime" style="width: 100%;"></el-date-picker>
+         <el-date-picker type="date" placeholder="开始日期" v-model="form.createTime" style="width: 100%;"   value-format='timestamp'></el-date-picker>
         </el-col>
         <el-col class="line" :span="2">至</el-col>
         <el-col :span="11">
-          <el-date-picker  type="date" placeholder="结束时间" v-model="form.clickTime" style="width: 100%;"></el-date-picker>
+          <el-date-picker  type="date" placeholder="结束时间" v-model="form.maxJsTime" style="width: 100%;"   value-format='timestamp'></el-date-picker>
         </el-col>
       </el-form-item>
       <el-form-item label="订单号搜索">

@@ -54,7 +54,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="服务费金额统计：">
-        <el-input type="number" v-model="cmFwPrice"></el-input>
+        <el-input type="number" v-model="cmFwPrice" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="bindData">查询</el-button>

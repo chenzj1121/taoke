@@ -1,4 +1,6 @@
 package com.luoshi.controller;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -122,13 +124,18 @@ public class CheckmoneysController {
 	 * @param maxTime
 	 * @param backTime
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping("/serviceFee")
-	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
-		System.out.println("时间"+maxTime);
-		System.out.println(backTime);
+	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,String maxTime,String backTime  ) throws Exception{
+		
 		double i=0;
-		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys,maxTime,backTime);
+		 //注意：SimpleDateFormat构造函数的样式与strDate的样式必须相符
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 ");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //加上时间
+        Date maxTime1=simpleDateFormat.parse(maxTime);
+        Date backTime1=simpleDateFormat.parse(backTime);
+		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys,maxTime1,backTime1);
 		for (TbCheckmoneys tbCheckmoneys : List) {
 			i=(double) (i+tbCheckmoneys.getCmJsMoney());
 		}

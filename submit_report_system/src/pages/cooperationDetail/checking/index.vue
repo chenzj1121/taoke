@@ -198,6 +198,7 @@ export default {
       PRE_URL,
       isUpdate:false,
       checkList:[],
+      goodsFID:new Date().getTime(),
 
     }
   },
@@ -293,7 +294,7 @@ export default {
       if (this.checkList[0]) {
         this.checkList.forEach((item,index)=>{
           item.goodsId =  item.coopGoodsId
-          // item.goodsFID = item.coopGoodsId
+          item.goodsFID = this.goodsFID
           item.goodsStarttime = new Date(item.coopStarttime)
           item.goodsEndtime = new Date(item.coopEndtime)
           item.goodsPayMoney = item.coopServiceFee
@@ -352,6 +353,7 @@ export default {
             }
         })
       }else{
+      this.form.timeId = this.goodsFID;
       this.form.cmUserId = this.userInfo.id
       this.form.cmSellDept = this.userInfo.groupId
       this.form.cmDept = this.userInfo.deptId;
@@ -372,6 +374,7 @@ export default {
       }
     },
     addBack(){
+        this.form.timeId = this.goodsFID;
         this.form.bmShopId = this.shopDetail.id
         this.form.bmUserId = this.userInfo.id
         this.form.bmGroupId = this.userInfo.groupId

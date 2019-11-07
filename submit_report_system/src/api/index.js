@@ -112,7 +112,7 @@ export const updateBackMoney = (obj) => ajax(PRE_URL + `/backmoney/update.do`,ob
 
 export const addGoodsDetail = (obj) => ajax(PRE_URL + `/goods/add.do`,obj,'post')
 
-export const getGoodsDetail = (obj) => ajax(PRE_URL + `/goods/findByShop.do?shopId=${obj}`,'','post')
+export const getGoodsDetail = (obj) => ajax(PRE_URL + `/goods/search.do?page=1&rows=99`,obj,'post')
 
 export const delUserById = (param) => ajax(PRE_URL + '/sysUser/delete.do?ids=' + param, 'post')
 

@@ -94,7 +94,7 @@
       <el-table-column prop="cmUserName" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showOtherRecords(scope.row.cmShopId,scope.row.cmShopName)">{{ scope.row.cmShopName }}</span>
+          <span class="link" @click="showOtherRecords(scope.row.timeId)">{{ scope.row.cmShopName }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="cmShopType" label="类型"></el-table-column>

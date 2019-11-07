@@ -111,7 +111,7 @@ export default {
       this.$router.go(-1)
     },
     checkWang(){
-      this.form.wangwangaccount = this.form.wangwangaccount.toString()
+      // this.form.wangwangaccount = (this.form.wangwangaccount).toString()
       this.btn.load = true
       checkWangWang(this.form.wangwangaccount).then(res=>{
       this.btn.load = false

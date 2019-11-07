@@ -51,7 +51,7 @@ export default {
           list.shouldBeDone = (list.target/fullDay*nowDay).toFixed(2);
           list.hasDone = res.firstWeekCustom+res.secondWeekCustom+res.thirdWeekCustom+res.fourthWeekCustom+res.fifthWeekCustom
           list.donePercent = (list.hasDone/list.target*100).toFixed(2)+"%";
-          list.diff = (list.target - list.shouldBeDone)>0?"-"+ (list.target - list.shouldBeDone):"+"+ (list.target - list.shouldBeDone)*(-1)
+          list.diff = (list.hasDone - list.shouldBeDone)>0?"+"+ (list.hasDone - list.shouldBeDone):"-"+ (list.hasDone - list.shouldBeDone)*(-1)
           list.plannedSpeed = (nowDay/fullDay*100).toFixed(2)+"%"
           list.monthDays = fullDay;
           list.day =nowDay;

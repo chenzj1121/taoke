@@ -11,28 +11,32 @@
       <br/>
       <el-form-item label="申请时间：">
         <el-date-picker
-          v-model="form.cmApplyTimeBegin"
-          type="date">
+          v-model="form.cmApplyTime"
+          type="datetime"
+          value-format="timestamp">
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
           v-model="form.cmApplyTimeEnd"
-          type="date">
+          type="datetime"
+          value-format="timestamp">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="到款时间：">
         <el-date-picker
-          v-model="form.cmBackTimeBegin"
-          type="date">
+          v-model="form.cmBackTime"
+          type="datetime"
+          value-format="timestamp">
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
           v-model="form.cmBackTimeEnd"
-          type="date">
+          type="datetime"
+          value-format="timestamp">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="状态：">
@@ -40,13 +44,13 @@
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="服务费金额统计：">
-        <el-input type="number" v-model="form.cmFwPrice"></el-input>
-      </el-form-item>
       <el-form-item label="结算金额排序：">
         <el-select v-model="form.cmJsMoney">
           <el-option v-for="(option, index) in orderByOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item label="服务费金额统计：">
+        <el-input type="number" v-model="cmFwPrice"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="bindData">查询</el-button>
@@ -192,7 +196,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL,upCheckMoney} from '@/api'
+import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL,upCheckMoney,getCheckmonkeyNum} from '@/api'
 import { getUser } from '../../utils/auth'
 export default {
   components: {
@@ -245,6 +249,7 @@ export default {
         backTimeBox:false,
         rejectBox:false,
         checkObj:{},
+        cmFwPrice:0,
     }
   },
   methods: {
@@ -346,7 +351,10 @@ export default {
       const rows = this.page.pageSize
       const params = this.form
       this.loading = true
-      getCheckmonkeyPage(params, page, rows).then(res => {
+      getCheckmonkeyNum(params, page, rows).then(res=>{
+          this.cmFwPrice = res
+      })
+      getCheckmonkeyPage(params, page, rows,this.form.cmApplyTimeEnd,this.form.cmBackTimeEnd).then(res => {
           res.rows.forEach((item,index)=>{
               item.cmApplyTime =item.cmApplyTime? this.getMyDate(item.cmApplyTime):''
               item.cmBackTime =  item.cmBackTime?this.getMyDate(item.cmBackTime):''

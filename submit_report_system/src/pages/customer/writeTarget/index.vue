@@ -18,7 +18,7 @@
        :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.firstWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="firstWeekCustom" label="周 在线 目标："
+      <el-form-item prop="firstWeekCustom" label="周 实际到账："
        >
         <el-input v-model="form.firstWeekCustom" type="number"></el-input>
       </el-form-item>
@@ -27,7 +27,7 @@
        :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.secondWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="secondWeekCustom" label="周 在线 目标："
+      <el-form-item prop="secondWeekCustom" label="周 实际到账："
        >
         <el-input v-model="form.secondWeekCustom" type="number"></el-input>
       </el-form-item>
@@ -36,7 +36,7 @@
        :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.thirdWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="thirdWeekCustom" label="周 在线 目标："
+      <el-form-item prop="thirdWeekCustom" label="周 实际到账："
        >
         <el-input v-model="form.thirdWeekCustom" type="number"></el-input>
       </el-form-item>
@@ -45,7 +45,7 @@
        :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.fourthWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="fourthWeekCustom" label="周 在线 目标："
+      <el-form-item prop="fourthWeekCustom" label="周 实际到账："
        >
         <el-input v-model="form.fourthWeekCustom" type="number"></el-input>
       </el-form-item>
@@ -54,7 +54,7 @@
        :rules="{ required: true, message: '周到账目标不能为空' }">
         <el-input v-model="form.fifthWeek" type="number"></el-input>
       </el-form-item>
-      <el-form-item prop="fifthWeekCustom" label="周 在线 目标："
+      <el-form-item prop="fifthWeekCustom" label="周 实际到账："
        >
         <el-input v-model="form.fifthWeekCustom" type="number"></el-input>
       </el-form-item>

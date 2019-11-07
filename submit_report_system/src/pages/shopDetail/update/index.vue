@@ -9,7 +9,6 @@
         <el-form-item prop="wangwangaccount" label="旺旺账号：" :rules="[{ required: true, message: '旺旺账号不能为空' }]">
           <div class="oneline">
             <el-input v-model="form.wangwangaccount"></el-input>
-            <el-button type="primary">检测</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="shopBoss" label="店铺老板：">
@@ -65,8 +64,9 @@
 </template>
 
 <script>
-import { updateShop, getShopById } from '@/api'
+import { updateShop, getShopById,addHisrory} from '@/api'
 import maturity from '@/assets/maturity'
+import { getUser } from '../../../utils/auth'
 export default {
   data () {
     return {
@@ -74,6 +74,9 @@ export default {
       form: {
         
       },
+      orgin:{},
+      changeList:[],
+      updateList:'',
     //   pic:{},
       maturities: maturity,
       status: ['淘宝', '天猫']
@@ -88,6 +91,7 @@ export default {
       getShopById(id).then(res => {
         if (res) {
           this.form = res
+          this.orgin =  JSON.parse(JSON.stringify(res)) 
         } else {
           this.$errmsg('暂无数据')
         }
@@ -96,21 +100,60 @@ export default {
     onSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          console.log('params', this.form)
         //   this.form.shopRealShooting =JSON.stringify(this.pic) 
           const shop = this.form
-          updateShop(shop).then(response => {
-            if (response.success) {
-              this.$sucmsg('修改成功')
-              this.$refs.form.resetFields()
-              this.$router.go(-1)
+          this.findChange();
+          let obj ={
+            shopId :this.form.id,
+            userId :getUser().id,
+            updateTime :new Date(),
+            updateText :this.updateList
+          }
+          addHisrory(obj).then(res=>{
+            if (res.success) {
+              updateShop(shop).then(response => {
+              if (response.success) {
+                this.$sucmsg('修改成功')
+                this.$refs.form.resetFields()
+                this.$router.go(-1)
+              } else {
+                this.$errmsg(response.message)
+              }
+            })
             } else {
-              this.$errmsg(response.message)
-            //   this.$refs.form.resetFields()
+              this.$errmsg(res.message)
             }
           })
         }
       })
+    },
+    findChange(){
+        this.updateList =''
+        this.changeList=[]
+        for(let i in this.form){
+            if (this.form[i] != this.orgin[i]) {
+              this.changeList.push(i)
+            }
+          }
+          let list = {
+            shopName:'店铺名称',
+            wangwangaccount:'旺旺账号',
+            shopBoss:'店铺老板',
+            shopQq:'店铺qq',
+            shopUrl:'店铺链接',
+            maturity:'成熟度',
+            shopType:'店铺类型',
+            mainOperate:'主营',
+            shopOperateQq:'运营qq',
+            shopWx:'运营微信',
+            shopOperatePhone:'运营电话',
+            shopPhone:'店铺电话',
+          }
+          this.changeList.map(item=>{
+              this.updateList+=list[item]+';'
+          })
+        console.log(this.updateList)
+
     },
     back () {
       this.$router.go(-1)

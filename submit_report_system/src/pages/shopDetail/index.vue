@@ -52,12 +52,12 @@
       <el-table
         size="mini"
         border
-        :data="historyRecordTableData"
+        :data="updateRecord"
         style="width: 100%;">
         <el-table-column label="序号" type="index"></el-table-column>
-        <el-table-column label="修改时间" prop="name"></el-table-column>
-        <el-table-column label="负责人" prop="name"></el-table-column>
-        <el-table-column label="修改内容" prop="name"></el-table-column>
+        <el-table-column label="修改时间" prop="updateTime"></el-table-column>
+        <el-table-column label="负责人" prop="userId"></el-table-column>
+        <el-table-column label="修改内容" prop="updateText"></el-table-column>
         </el-table>
     </el-row>
   </div>
@@ -67,7 +67,7 @@
 /**
  * @description 商店详情
  */
-import {getShopById,getCooperationPage,getDeptByList,getGroupByList,getUserByList } from "@/api"
+import {getShopById,getCooperationPage,getDeptByList,getGroupByList,getUserByList,findHisrory} from "@/api"
 import Form from './form'
 export default {
   components: {
@@ -85,15 +85,32 @@ export default {
       deptList:[],
       groupList:[],
       userList:[],
+      updateRecord:[],
     }
   },
   mounted(){
     this.getUserList()
     this.getGroupList()
     this.getDeptList()
+    this.findHisroryById()
     this.getShopInfo(this.$route.query.id)
   },
   methods: {
+    findHisroryById(){
+      findHisrory({shopId:this.$route.query.id}).then(res=>{
+        res.rows.forEach(item=>{
+          item.updateTime = this.getMyDate(item.updateTime)
+          this.userList.forEach(obj=>{
+                if(item.userId ==obj.id ){
+                  item.userId = obj.username
+                }
+              
+          })
+        })
+        this.updateRecord = res.rows
+
+      })
+    },
      getUserList(){
       getUserByList().then(res=>{
         this.userList = res

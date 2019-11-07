@@ -58,7 +58,10 @@ export const getCooperationPage = (form, page, rows,TbMaxTime,maxStartTime,endTi
 // &TbMaxTime=${TbMaxTime}&maxStartTime=${maxStartTime}&endTime=${endTime}
 export const getCooperNum = (form, page, rows,TbMaxTime,maxStartTime,endTime) => ajax(PRE_URL+`/coop/getNums.do?page=${page}&rows=${rows}`, form, 'post')
 
-export const getCheckmonkeyPage = (form, page, rows) => ajax(PRE_URL+`/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
+export const getCheckmonkeyPage = (form, page, rows,maxTime,backTime) => ajax(PRE_URL+`/checkmoneys/search.do?page=${page}&rows=${rows}`, form, 'post')
+// &maxTime=${maxTime}&backTime=${backTime}
+
+export const getCheckmonkeyNum = (form, page, rows) => ajax(PRE_URL+`/checkmoneys/serviceFee.do?page=${page}&rows=${rows}`, form, 'post')
 
 //10-18 lambor
 export const addTarget = (target) => ajax(PRE_URL + '/userWorkTargetMonth/add.do',target, 'post')
@@ -122,6 +125,12 @@ export const delCoopById = (param) => ajax(PRE_URL + '/coop/delete.do?ids=' + pa
 export const fenpei = (coopids,userId) => ajax(PRE_URL + `/coop/fenpei.do?coopids=${coopids}&userId=${userId}`, 'post')
 
 export const shenhe = (param) => ajax(PRE_URL + '/coop/shenhe.do?' ,param, 'post')
+
+export const addHisrory = (param) => ajax(PRE_URL + '/history/add.do?' ,param, 'post')
+
+export const findHisrory = (param) => ajax(PRE_URL + '/history/search.do?page=1&rows=99',param, 'post')
+
+
 
 
 

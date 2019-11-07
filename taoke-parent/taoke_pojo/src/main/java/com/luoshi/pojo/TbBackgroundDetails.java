@@ -49,6 +49,8 @@ public class TbBackgroundDetails {
 
     private String beiyong;
 
+    private Date maxJstime;
+
     public Integer getId() {
         return id;
     }
@@ -231,5 +233,13 @@ public class TbBackgroundDetails {
 
     public void setBeiyong(String beiyong) {
         this.beiyong = beiyong == null ? null : beiyong.trim();
+    }
+
+    public Date getMaxJstime() {
+        return maxJstime;
+    }
+
+    public void setMaxJstime(Date maxJstime) {
+        this.maxJstime = maxJstime;
     }
 }

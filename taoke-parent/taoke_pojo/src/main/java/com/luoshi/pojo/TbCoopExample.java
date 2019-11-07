@@ -3044,6 +3044,246 @@ public class TbCoopExample {
             addCriterion("coop_shenhe_bz not between", value1, value2, "coopShenheBz");
             return (Criteria) this;
         }
+
+        public Criteria andTimeidIsNull() {
+            addCriterion("timeId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidIsNotNull() {
+            addCriterion("timeId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidEqualTo(Integer value) {
+            addCriterion("timeId =", value, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidNotEqualTo(Integer value) {
+            addCriterion("timeId <>", value, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidGreaterThan(Integer value) {
+            addCriterion("timeId >", value, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("timeId >=", value, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidLessThan(Integer value) {
+            addCriterion("timeId <", value, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidLessThanOrEqualTo(Integer value) {
+            addCriterion("timeId <=", value, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidIn(List<Integer> values) {
+            addCriterion("timeId in", values, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidNotIn(List<Integer> values) {
+            addCriterion("timeId not in", values, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidBetween(Integer value1, Integer value2) {
+            addCriterion("timeId between", value1, value2, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeidNotBetween(Integer value1, Integer value2) {
+            addCriterion("timeId not between", value1, value2, "timeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeIsNull() {
+            addCriterion("coop_tbmaxTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeIsNotNull() {
+            addCriterion("coop_tbmaxTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeEqualTo(Date value) {
+            addCriterion("coop_tbmaxTime =", value, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeNotEqualTo(Date value) {
+            addCriterion("coop_tbmaxTime <>", value, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeGreaterThan(Date value) {
+            addCriterion("coop_tbmaxTime >", value, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("coop_tbmaxTime >=", value, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeLessThan(Date value) {
+            addCriterion("coop_tbmaxTime <", value, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeLessThanOrEqualTo(Date value) {
+            addCriterion("coop_tbmaxTime <=", value, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeIn(List<Date> values) {
+            addCriterion("coop_tbmaxTime in", values, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeNotIn(List<Date> values) {
+            addCriterion("coop_tbmaxTime not in", values, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeBetween(Date value1, Date value2) {
+            addCriterion("coop_tbmaxTime between", value1, value2, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopTbmaxtimeNotBetween(Date value1, Date value2) {
+            addCriterion("coop_tbmaxTime not between", value1, value2, "coopTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeIsNull() {
+            addCriterion("coop_max_startTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeIsNotNull() {
+            addCriterion("coop_max_startTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeEqualTo(Date value) {
+            addCriterion("coop_max_startTime =", value, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeNotEqualTo(Date value) {
+            addCriterion("coop_max_startTime <>", value, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeGreaterThan(Date value) {
+            addCriterion("coop_max_startTime >", value, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("coop_max_startTime >=", value, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeLessThan(Date value) {
+            addCriterion("coop_max_startTime <", value, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeLessThanOrEqualTo(Date value) {
+            addCriterion("coop_max_startTime <=", value, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeIn(List<Date> values) {
+            addCriterion("coop_max_startTime in", values, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeNotIn(List<Date> values) {
+            addCriterion("coop_max_startTime not in", values, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeBetween(Date value1, Date value2) {
+            addCriterion("coop_max_startTime between", value1, value2, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxStarttimeNotBetween(Date value1, Date value2) {
+            addCriterion("coop_max_startTime not between", value1, value2, "coopMaxStarttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeIsNull() {
+            addCriterion("coop_max_endTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeIsNotNull() {
+            addCriterion("coop_max_endTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeEqualTo(Date value) {
+            addCriterion("coop_max_endTime =", value, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeNotEqualTo(Date value) {
+            addCriterion("coop_max_endTime <>", value, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeGreaterThan(Date value) {
+            addCriterion("coop_max_endTime >", value, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("coop_max_endTime >=", value, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeLessThan(Date value) {
+            addCriterion("coop_max_endTime <", value, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeLessThanOrEqualTo(Date value) {
+            addCriterion("coop_max_endTime <=", value, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeIn(List<Date> values) {
+            addCriterion("coop_max_endTime in", values, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeNotIn(List<Date> values) {
+            addCriterion("coop_max_endTime not in", values, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeBetween(Date value1, Date value2) {
+            addCriterion("coop_max_endTime between", value1, value2, "coopMaxEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoopMaxEndtimeNotBetween(Date value1, Date value2) {
+            addCriterion("coop_max_endTime not between", value1, value2, "coopMaxEndtime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -88,7 +88,7 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 	
 	
 		@Override
-	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum, int pageSize,Date maxTime,Date backTime) {
+	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbCheckmoneysExample example=new TbCheckmoneysExample();
@@ -104,23 +104,21 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(checkmoneys.getCmApplyTime()!=null){
 				criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());
 			}
-			if(maxTime!=null) {
-				criteria.andCmApplyTimeLessThanOrEqualTo(maxTime);
-			}
+//			if(maxTime!=null) {
+//				criteria.andCmApplyTimeLessThanOrEqualTo(maxTime);
+//			}
 			//到款时间
 			if(checkmoneys.getCmBackTime()!=null) {
 				criteria.andCmBackTimeGreaterThanOrEqualTo(checkmoneys.getCmBackTime());
 			}
-			if(backTime!=null) {
-				criteria.andCmBackTimeLessThanOrEqualTo(backTime);
-			}
+//			if(backTime!=null) {
+//				criteria.andCmBackTimeLessThanOrEqualTo(backTime);
+//			}
 			//状态
 			if(checkmoneys.getCmType()!=null) {
 				criteria.andCmTypeEqualTo(checkmoneys.getCmType());
 			}
 			//结算金额排序
-			
-			System.out.println("传递"+checkmoneys.getCmJsMoney());
 			String string = String.valueOf(checkmoneys.getCmJsMoney());
 			if(checkmoneys.getCmJsMoney()!=null) {
 				if("1.0".equals(string)) {

@@ -93,6 +93,14 @@ public class TbCoop {
 
     private String coopShenheBz;
 
+    private Integer timeid;
+
+    private Date coopTbmaxtime;
+
+    private Date coopMaxStarttime;
+
+    private Date coopMaxEndtime;
+
     public Integer getCoopId() {
         return coopId;
     }
@@ -451,5 +459,37 @@ public class TbCoop {
 
     public void setCoopShenheBz(String coopShenheBz) {
         this.coopShenheBz = coopShenheBz == null ? null : coopShenheBz.trim();
+    }
+
+    public Integer getTimeid() {
+        return timeid;
+    }
+
+    public void setTimeid(Integer timeid) {
+        this.timeid = timeid;
+    }
+
+    public Date getCoopTbmaxtime() {
+        return coopTbmaxtime;
+    }
+
+    public void setCoopTbmaxtime(Date coopTbmaxtime) {
+        this.coopTbmaxtime = coopTbmaxtime;
+    }
+
+    public Date getCoopMaxStarttime() {
+        return coopMaxStarttime;
+    }
+
+    public void setCoopMaxStarttime(Date coopMaxStarttime) {
+        this.coopMaxStarttime = coopMaxStarttime;
+    }
+
+    public Date getCoopMaxEndtime() {
+        return coopMaxEndtime;
+    }
+
+    public void setCoopMaxEndtime(Date coopMaxEndtime) {
+        this.coopMaxEndtime = coopMaxEndtime;
     }
 }

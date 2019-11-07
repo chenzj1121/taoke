@@ -1544,6 +1544,66 @@ public class TbBackgroundDetailsExample {
             addCriterion("beiyong not between", value1, value2, "beiyong");
             return (Criteria) this;
         }
+
+        public Criteria andMaxJstimeIsNull() {
+            addCriterion("max_jsTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeIsNotNull() {
+            addCriterion("max_jsTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeEqualTo(Date value) {
+            addCriterion("max_jsTime =", value, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeNotEqualTo(Date value) {
+            addCriterion("max_jsTime <>", value, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeGreaterThan(Date value) {
+            addCriterion("max_jsTime >", value, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("max_jsTime >=", value, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeLessThan(Date value) {
+            addCriterion("max_jsTime <", value, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeLessThanOrEqualTo(Date value) {
+            addCriterion("max_jsTime <=", value, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeIn(List<Date> values) {
+            addCriterion("max_jsTime in", values, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeNotIn(List<Date> values) {
+            addCriterion("max_jsTime not in", values, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeBetween(Date value1, Date value2) {
+            addCriterion("max_jsTime between", value1, value2, "maxJstime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxJstimeNotBetween(Date value1, Date value2) {
+            addCriterion("max_jsTime not between", value1, value2, "maxJstime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

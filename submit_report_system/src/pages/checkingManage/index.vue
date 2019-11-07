@@ -13,6 +13,7 @@
         <el-date-picker
           v-model="form.cmApplyTime"
           type="date"
+          value-format='timestamp'
           >
         </el-date-picker>
       </el-form-item>
@@ -21,6 +22,7 @@
         <el-date-picker
           v-model="form.cmApplyTimeEnd"
           type="date"
+          value-format='timestamp'
          >
         </el-date-picker>
       </el-form-item>
@@ -28,6 +30,7 @@
         <el-date-picker
           v-model="form.cmBackTime"
           type="date"
+          value-format='timestamp'
           >
         </el-date-picker>
       </el-form-item>
@@ -36,6 +39,7 @@
         <el-date-picker
           v-model="form.cmBackTimeEnd"
           type="date"
+          value-format='timestamp'
           >
         </el-date-picker>
       </el-form-item>
@@ -174,6 +178,7 @@
       <el-date-picker
       v-model="checkObj.cmBackTime"
       type="date"
+      value-format='timestamp'
       placeholder="选择日期"
       required>
     </el-date-picker>

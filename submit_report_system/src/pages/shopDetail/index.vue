@@ -67,7 +67,7 @@
 /**
  * @description 商店详情
  */
-import {getShopById,getCooperationPage,getDeptByList,getGroupByList,getUserByList,findHisrory} from "@/api"
+import {getShopById,getCooperationPage,getDeptByList,getGroupByList,getUserByList,findHisrory,getRecord} from "@/api"
 import Form from './form'
 export default {
   components: {

@@ -294,7 +294,7 @@ export default {
       if (this.checkList[0]) {
         this.checkList.forEach((item,index)=>{
           item.goodsId =  item.coopGoodsId
-          item.goodsFID = this.goodsFID
+          item.goodsFid = this.goodsFID
           item.goodsStarttime = new Date(item.coopStarttime)
           item.goodsEndtime = new Date(item.coopEndtime)
           item.goodsPayMoney = item.coopServiceFee
@@ -306,9 +306,9 @@ export default {
         // item.goodsShopName = item.coopCustomer
           addGoodsDetail(item).then(res=>{
               if (res.success) {
-                this.$sucmsg("商品信息，第"+index+"条数据传输成功")
+                this.$sucmsg("商品信息，第"+(index*1+1)+"条数据传输成功")
               }else{
-                this.$errmsg("商品信息，第"+index+"条数据传输失败")
+                this.$errmsg("商品信息，第"+(index*1+1)+"条数据传输失败")
               }
           })  
         })
@@ -341,7 +341,7 @@ export default {
     return oTime;
     },
     addCheck(){
-      this.form.cmApplyTime = new Date()
+      // this.form.cmApplyTime = new Date()
       this.form.cmType = "待审核"
       if (this.isUpdate) {
         upCheckMoney(this.form).then(res=>{
@@ -353,7 +353,8 @@ export default {
             }
         })
       }else{
-      this.form.timeId = this.goodsFID;
+      this.form.cmApplyTime = this.goodsFID
+      // this.form.timeId = this.goodsFID;
       this.form.cmUserId = this.userInfo.id
       this.form.cmSellDept = this.userInfo.groupId
       this.form.cmDept = this.userInfo.deptId;
@@ -374,7 +375,7 @@ export default {
       }
     },
     addBack(){
-        this.form.timeId = this.goodsFID;
+        this.form.bmTimeid = this.goodsFID;
         this.form.bmShopId = this.shopDetail.id
         this.form.bmUserId = this.userInfo.id
         this.form.bmGroupId = this.userInfo.groupId

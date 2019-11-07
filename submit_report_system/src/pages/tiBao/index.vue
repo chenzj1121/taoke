@@ -12,42 +12,48 @@
       <el-form-item label="提交时间：">
         <el-date-picker
           v-model="form.coopTbTime"
-          type="date">
+          type="date"
+          value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="TbMaxTime"
-          type="date">
+          v-model="form.coopTbmaxtime"
+          type="date"
+          value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
       <br>
        <el-form-item label="上线时间：">
         <el-date-picker
           v-model="form.coopStartTime"
-          type="date">
+          type="date"
+          value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.coopStartTimeEnd"
-          type="date">
+          v-model="form.coopMaxStarttime"
+          type="date"
+          value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
       <br>
        <el-form-item label="下线时间：">
         <el-date-picker
           v-model="form.coopEndTime"
-          type="date">
+          type="date"
+          value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.coopEndTimeEnd"
-          type="date">
+          v-model="form.coopMaxEndtime"
+          type="date"
+          value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
       <br>

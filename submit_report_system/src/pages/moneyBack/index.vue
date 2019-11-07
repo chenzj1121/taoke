@@ -63,7 +63,7 @@
       <el-table-column prop="creater" label="销售人"></el-table-column>
       <el-table-column label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showMoreRecords(scope.row.bmId)">{{scope.row.bmShopName}}</span>
+          <span class="link" @click="showMoreRecords(scope.row.bmTimeid,scope.row.bmShopName)">{{scope.row.bmShopName}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="bmShopName" label="商品ID"></el-table-column>
@@ -134,18 +134,19 @@
         style="width: 100%;"
         size="mini"
         :data="moreRecordsByShopTableData">
-        <el-table-column type="index" label="序号"></el-table-column>
-        <el-table-column label="店铺名称" prop="bmShopName"></el-table-column>
-        <el-table-column label="商品ID" prop="bmGoodsId"></el-table-column>
-        <el-table-column label="优惠券名称" prop="name"></el-table-column>
-        <el-table-column label="上线时间" prop="name"></el-table-column>
-        <el-table-column label="下线时间" prop="name"></el-table-column>
-        <el-table-column label="操作类型" prop="name"></el-table-column>
-        <el-table-column label="打款金额" prop="name"></el-table-column>
-        <el-table-column label="打款账户" prop="name"></el-table-column>
-        <el-table-column label="打款日期" prop="name"></el-table-column>
-        <el-table-column label="转入账户" prop="name"></el-table-column>
-        <el-table-column label="打款日期" prop="name"></el-table-column>
+         <el-table-column type="index" label="序号"></el-table-column>
+        <el-table-column label="部门" prop="goodsDeptId"></el-table-column>
+        <el-table-column label="销售人" prop="goodsUserId"></el-table-column>
+        <el-table-column label="店铺名称" prop="goodsShopName"></el-table-column>
+        <el-table-column label="商品ID" prop="goodsId"></el-table-column>
+        <el-table-column label="优惠券名称" prop="goodsYhqName"></el-table-column>
+        <el-table-column label="上线时间" prop="goodsStarttime"></el-table-column>
+        <el-table-column label="下线时间" prop="goodsEndtime"></el-table-column>
+        <el-table-column label="结算金额" prop="goodsPayMoney"></el-table-column>
+        <el-table-column label="结算量" prop="goodsNums"></el-table-column>
+        <el-table-column label="服务费单价" prop="goodsService"></el-table-column>
+        <el-table-column label="转入账户" prop="goodszhuanghu"></el-table-column>
+        <el-table-column label="打款日期" prop="dakuanriqi"></el-table-column>
       </el-table>
       <!-- <el-pagination
         background
@@ -198,7 +199,7 @@
 </template>
 
 <script>
-import {PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList,updateBackMoney} from '@/api'
+import {PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList,updateBackMoney,getGoodsDetail} from '@/api'
 import Page from '@/components/page'
 import { getUser } from '../../utils/auth'
 export default {
@@ -359,7 +360,34 @@ export default {
 
       })
     },
-    showMoreRecords (id) {
+    showMoreRecords (goodsFid,shopName) {
+      getGoodsDetail({goodsFid}).then(res=>{
+        if (res.rows[0]) {
+           res.rows.forEach((item,index)=>{
+            item.goodsEndtime =  item.goodsEndtime?this.getMyDate(item.goodsEndtime):''
+            item.goodsStarttime = item.goodsEndtime?this.getMyDate(item.goodsStarttime):''
+            item.goodsShopName = shopName
+           this.groupList.forEach(obj=>{
+                if(item.goodsGroupId == obj.groupId && item.goodsDeptId == obj.groupDeptId){
+                  item.goodsGroupId = obj.groupName
+                }
+              })
+              this.userList.forEach(obj=>{
+                if(item.goodsUserId ==obj.id ){
+                  item.goodsUserId = obj.username
+                }
+              })
+              this.deptList.forEach(obj=>{
+                if(item.goodsDeptId == obj.deptId){
+                  item.goodsDeptId = obj.deptName
+                }
+              })
+            })
+        }
+         this.moreRecordsByShopTableData = res.rows
+            console.log(res.rows)
+       
+      })
       this.moreRecordsByShopVisiable = true
     },
     showAccountInfo () {

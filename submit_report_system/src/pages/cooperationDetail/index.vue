@@ -22,11 +22,7 @@
             <el-option v-for="(option, index) in actionOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="name" label="回款状态">
-          <el-select v-model="form.name">
-            <el-option v-for="(option, index) in paybackOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-          </el-select>
-        </el-form-item>
+ 
       
         <el-form-item prop="coopZero" label="是否零点">
           <el-select v-model="form.coopZero">
@@ -85,14 +81,18 @@
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <br/>
+        <el-form-item prop="name" label="回款状态">
+          <el-select v-model="form.name" :disabled='true'>
+            <el-option v-for="(option, index) in paybackOptions" :key="index" :label="option.label" :value="option.value"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item v-if="type==0 ||type ==1" prop="coopUserId" label="责任人">
-          <el-select v-model="form.name">
+          <el-select v-model="form.name" :disabled='true'>
             <el-option v-for="(option, index) in dutyPersonOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="name" label="是否查款">
-          <el-select v-model="form.name">
+        <el-form-item prop="name" label="是否查款" >
+          <el-select v-model="form.name" :disabled='true'>
             <el-option v-for="(option, index) in isExamineOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>

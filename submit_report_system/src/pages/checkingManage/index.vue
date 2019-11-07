@@ -94,7 +94,7 @@
       <el-table-column prop="cmUserName" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
-          <span class="link" @click="showOtherRecords(scope.row.timeId)">{{ scope.row.cmShopName }}</span>
+          <span class="link" @click="showOtherRecords(scope.row.cmApplyTime1,scope.row.cmShopName)">{{ scope.row.cmShopName }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="cmShopType" label="类型"></el-table-column>
@@ -324,10 +324,10 @@ export default {
         this.groupList = res
       })
     },
-    showOtherRecords (cmShopId,shopName) {
-      getGoodsDetail(cmShopId).then(res=>{
-        if (res[0]) {
-           res.forEach((item,index)=>{
+    showOtherRecords (goodsFid,shopName) {
+      getGoodsDetail({goodsFid}).then(res=>{
+        if (res.rows[0]) {
+           res.rows.forEach((item,index)=>{
             item.goodsEndtime =  item.goodsEndtime?this.getMyDate(item.goodsEndtime):''
             item.goodsStarttime = item.goodsEndtime?this.getMyDate(item.goodsStarttime):''
             item.goodsShopName = shopName
@@ -347,9 +347,9 @@ export default {
                 }
               })
             })
-            this.otherRecordsTableData = res
-            console.log(res)
         }
+         this.otherRecordsTableData = res.rows
+            console.log(res.rows)
        
       })
       this.otherRecordsVisiable = true
@@ -364,6 +364,7 @@ export default {
       })
       getCheckmonkeyPage(params, page, rows,this.form.cmApplyTimeEnd,this.form.cmBackTimeEnd).then(res => {
           res.rows.forEach((item,index)=>{
+              item.cmApplyTime1= item.cmApplyTime;
               item.cmApplyTime =item.cmApplyTime? this.getMyDate(item.cmApplyTime):''
               item.cmBackTime =  item.cmBackTime?this.getMyDate(item.cmBackTime):''
               this.groupList.forEach(obj=>{

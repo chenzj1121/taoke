@@ -186,7 +186,7 @@ export default {
         coopPayType: "线下结算",
         coopActivity:"常规单",
         beginTime:"立即开始",
-        coopZero:"coopZero"
+        coopZero:"非零点"
       },
       shopDetail:{},
       optionList:[],

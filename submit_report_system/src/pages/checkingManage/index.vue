@@ -13,7 +13,7 @@
         <el-date-picker
           v-model="form.cmApplyTime"
           type="datetime"
-          value-format="timestamp">
+          value-format="yyyy年mm月dd日">
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
@@ -21,14 +21,14 @@
         <el-date-picker
           v-model="form.cmApplyTimeEnd"
           type="datetime"
-          value-format="timestamp">
+          value-format="yyyy年mm月dd日">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="到款时间：">
         <el-date-picker
           v-model="form.cmBackTime"
           type="datetime"
-          value-format="timestamp">
+          value-format="yyyy年mm月dd日">
         </el-date-picker>
       </el-form-item>
       <span style="position:relative;top:5px;left:-2px;">至</span>
@@ -36,7 +36,7 @@
         <el-date-picker
           v-model="form.cmBackTimeEnd"
           type="datetime"
-          value-format="timestamp">
+          value-format="yyyy年mm月dd日">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="状态：">
@@ -211,7 +211,10 @@ export default {
   },
   data () {
     return {
-      form: {},
+      form: {
+        cmApplyTimeEnd:null,
+        cmBackTimeEnd:null,
+      },
       page: {
         pageSize: 10,
         pageNum: 1,

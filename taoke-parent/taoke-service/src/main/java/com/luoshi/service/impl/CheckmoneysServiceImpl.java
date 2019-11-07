@@ -165,5 +165,81 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 		Page<TbCheckmoneys> page= (Page<TbCheckmoneys>)checkmoneysMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
+
+		@Override
+		public List<TbCheckmoneys> serviceFee(TbCheckmoneys checkmoneys, Date maxTime, Date backTime) {
+			TbCheckmoneysExample example=new TbCheckmoneysExample();
+			com.luoshi.pojo.TbCheckmoneysExample.Criteria criteria = example.createCriteria();
+			HttpSession session = request.getSession();
+			TbSysUser user = (TbSysUser) session.getAttribute("user");
+			example.setOrderByClause("cm_id DESC");
+			if(checkmoneys!=null){		
+				if(user.getType().equals("2")) {
+					criteria.andCmUserIdEqualTo(user.getId());
+				}
+				//申请时间
+				if(checkmoneys.getCmApplyTime()!=null){
+					criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());
+				}
+				if(maxTime!=null) {
+					criteria.andCmApplyTimeLessThanOrEqualTo(maxTime);
+				}
+				//到款时间
+				if(checkmoneys.getCmBackTime()!=null) {
+					criteria.andCmBackTimeGreaterThanOrEqualTo(checkmoneys.getCmBackTime());
+				}
+				if(backTime!=null) {
+					criteria.andCmBackTimeLessThanOrEqualTo(backTime);
+				}
+				//状态
+				if(checkmoneys.getCmType()!=null) {
+					criteria.andCmTypeEqualTo(checkmoneys.getCmType());
+				}
+				//结算金额排序
+				
+				System.out.println("传递"+checkmoneys.getCmJsMoney());
+				String string = String.valueOf(checkmoneys.getCmJsMoney());
+				if(checkmoneys.getCmJsMoney()!=null) {
+					if("1.0".equals(string)) {
+						example.setOrderByClause("cm_js_money ASC");
+					}else if("2.0".equals(string)) {
+						example.setOrderByClause("cm_js_money DESC");
+					}
+					
+				}
+				if(checkmoneys.getCmType()!=null) {
+					criteria.andCmTypeEqualTo(checkmoneys.getCmType());
+				}
+				
+				//店铺名称
+				if(checkmoneys.getCmShopName()!=null && checkmoneys.getCmShopName().length()>0){
+					criteria.andCmShopNameLike("%"+checkmoneys.getCmShopName()+"%");
+				}
+				if(checkmoneys.getCmShopType()!=null && checkmoneys.getCmShopType().length()>0){
+					criteria.andCmShopTypeLike("%"+checkmoneys.getCmShopType()+"%");
+				}
+				if(checkmoneys.getCmYhqPhoto()!=null && checkmoneys.getCmYhqPhoto().length()>0){
+					criteria.andCmYhqPhotoLike("%"+checkmoneys.getCmYhqPhoto()+"%");
+				}
+				if(checkmoneys.getCmLoadCustomer()!=null && checkmoneys.getCmLoadCustomer().length()>0){
+					criteria.andCmLoadCustomerLike("%"+checkmoneys.getCmLoadCustomer()+"%");
+				}
+				if(checkmoneys.getCmType()!=null && checkmoneys.getCmType().length()>0){
+					criteria.andCmTypeLike("%"+checkmoneys.getCmType()+"%");
+				}
+				if(checkmoneys.getCmYhqName()!=null && checkmoneys.getCmYhqName().length()>0){
+					criteria.andCmYhqNameLike("%"+checkmoneys.getCmYhqName()+"%");
+				}
+				if(checkmoneys.getCmText()!=null && checkmoneys.getCmText().length()>0){
+					criteria.andCmTextLike("%"+checkmoneys.getCmText()+"%");
+				}
+				if(checkmoneys.getCmYhqType()!=null && checkmoneys.getCmYhqType().length()>0){
+					criteria.andCmYhqTypeLike("%"+checkmoneys.getCmYhqType()+"%");
+				}
+		
+			}
+				
+			return checkmoneysMapper.selectByExample(example);
+		}
 	
 }

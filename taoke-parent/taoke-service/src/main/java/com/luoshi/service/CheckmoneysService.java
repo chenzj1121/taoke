@@ -60,5 +60,8 @@ public interface CheckmoneysService {
 	public PageResult findPage(TbCheckmoneys checkmoneys, int pageNum,int pageSize,Date maxTime,Date backTime);
 
 
+	public List serviceFee(TbCheckmoneys checkmoneys, Date maxTime, Date backTime);
+
+
 	
 }

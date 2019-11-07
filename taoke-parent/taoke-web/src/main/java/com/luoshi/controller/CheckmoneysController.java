@@ -114,5 +114,25 @@ public class CheckmoneysController {
 		System.out.println(backTime);
 		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows,maxTime,backTime);		
 	}
+	/**
+	 * 服务费金额统计
+	 * @param checkmoneys
+	 * @param page
+	 * @param rows
+	 * @param maxTime
+	 * @param backTime
+	 * @return
+	 */
+	@RequestMapping("/serviceFee")
+	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows,Date maxTime,Date backTime  ){
+		System.out.println("时间"+maxTime);
+		System.out.println(backTime);
+		double i=0;
+		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys,maxTime,backTime);
+		for (TbCheckmoneys tbCheckmoneys : List) {
+			i=(double) (i+tbCheckmoneys.getCmJsMoney());
+		}
+		return i;
+	}
 	
 }

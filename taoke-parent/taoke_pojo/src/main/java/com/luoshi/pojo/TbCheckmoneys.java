@@ -49,6 +49,10 @@ public class TbCheckmoneys {
 
     private String cmBeiyong;
 
+    private Date cmTbmaxtime;
+
+    private Date cmEndtime;
+
     public Integer getCmId() {
         return cmId;
     }
@@ -231,5 +235,21 @@ public class TbCheckmoneys {
 
     public void setCmBeiyong(String cmBeiyong) {
         this.cmBeiyong = cmBeiyong == null ? null : cmBeiyong.trim();
+    }
+
+    public Date getCmTbmaxtime() {
+        return cmTbmaxtime;
+    }
+
+    public void setCmTbmaxtime(Date cmTbmaxtime) {
+        this.cmTbmaxtime = cmTbmaxtime;
+    }
+
+    public Date getCmEndtime() {
+        return cmEndtime;
+    }
+
+    public void setCmEndtime(Date cmEndtime) {
+        this.cmEndtime = cmEndtime;
     }
 }

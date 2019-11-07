@@ -57,9 +57,9 @@ public class CoopController {
 	 * @return
 	 */
 	@RequestMapping("/getNums")
-	public int  getNums(@RequestBody TbCoop coop, Date TbMaxTime, Date maxStartTime, Date endTime){
+	public int  getNums(@RequestBody TbCoop coop){
 		
-		return coopService.getNums(coop,TbMaxTime, maxStartTime, endTime);
+		return coopService.getNums(coop);
 		
 		//return 	
 	}
@@ -284,8 +284,8 @@ public class CoopController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbCoop coop, int page, int rows,Date TbMaxTime, Date maxStartTime, Date endTime  ){
-		return coopService.findPage(coop, page, rows,TbMaxTime, maxStartTime, endTime);	
+	public PageResult search(@RequestBody TbCoop coop, int page, int rows ){
+		return coopService.findPage(coop, page, rows);	
 		//return null;
 	}
 	

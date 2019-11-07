@@ -91,7 +91,7 @@ public class CoopServiceImpl implements CoopService {
 	
 	
 		@Override
-	public PageResult findPage(TbCoop coop, int pageNum, int pageSize,Date TbMaxTime,Date maxStartTime,Date endTime) {
+	public PageResult findPage(TbCoop coop, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbCoopExample example=new TbCoopExample();
@@ -120,16 +120,16 @@ public class CoopServiceImpl implements CoopService {
 				criteria.andCoopTbtimeGreaterThanOrEqualTo(coop.getCoopTbtime());
 			}
 			//提报时间
-			if(TbMaxTime!=null){
-				criteria.andCoopTbtimeLessThanOrEqualTo(TbMaxTime);
+			if(coop.getCoopTbmaxtime()!=null){
+				criteria.andCoopTbtimeLessThanOrEqualTo(coop.getCoopTbmaxtime());
 			}
 			//上线时间区间
 			if(coop.getCoopStarttime()!=null) {
 				criteria.andCoopStarttimeGreaterThanOrEqualTo(coop.getCoopStarttime());
 			}
 			//上线时间
-			if(maxStartTime!=null) {
-				criteria.andCoopStarttimeLessThanOrEqualTo(maxStartTime);
+			if(coop.getCoopMaxStarttime()!=null) {
+				criteria.andCoopStarttimeLessThanOrEqualTo(coop.getCoopMaxStarttime());
 			}
 			//goodsId
 			if(coop.getCoopGoodsId()!=null){
@@ -140,8 +140,8 @@ public class CoopServiceImpl implements CoopService {
 				criteria.andCoopEndtimeGreaterThan(coop.getCoopEndtime());
 			}
 			//下线时间
-			if(endTime!=null) {
-				criteria.andCoopEndtimeLessThanOrEqualTo(endTime);
+			if(coop.getCoopMaxEndtime()!=null) {
+				criteria.andCoopEndtimeLessThanOrEqualTo(coop.getCoopMaxEndtime());
 			}
 			//责任人
 			if(coop.getCoopUserId()!=null) {
@@ -204,7 +204,7 @@ public class CoopServiceImpl implements CoopService {
 		}
 
 		@Override
-		public int getNums(TbCoop coop, Date tbMaxTime, Date maxStartTime, Date endTime) {
+		public int getNums(TbCoop coop) {
 			TbCoopExample example=new TbCoopExample();
 			com.luoshi.pojo.TbCoopExample.Criteria criteria = example.createCriteria();
 			HttpSession session = request.getSession();
@@ -231,16 +231,16 @@ public class CoopServiceImpl implements CoopService {
 					criteria.andCoopTbtimeGreaterThanOrEqualTo(coop.getCoopTbtime());
 				}
 				//提报时间
-				if(tbMaxTime!=null){
-					criteria.andCoopTbtimeLessThanOrEqualTo(tbMaxTime);
+				if(coop.getCoopTbmaxtime()!=null){
+					criteria.andCoopTbtimeLessThanOrEqualTo(coop.getCoopTbmaxtime());
 				}
 				//上线时间区间
 				if(coop.getCoopStarttime()!=null) {
 					criteria.andCoopStarttimeGreaterThanOrEqualTo(coop.getCoopStarttime());
 				}
 				//上线时间
-				if(maxStartTime!=null) {
-					criteria.andCoopStarttimeLessThanOrEqualTo(maxStartTime);
+				if(coop.getCoopMaxStarttime()!=null) {
+					criteria.andCoopStarttimeLessThanOrEqualTo(coop.getCoopMaxStarttime());
 				}
 				//goodsId
 				if(coop.getCoopGoodsId()!=null){
@@ -251,8 +251,8 @@ public class CoopServiceImpl implements CoopService {
 					criteria.andCoopEndtimeGreaterThan(coop.getCoopEndtime());
 				}
 				//下线时间
-				if(endTime!=null) {
-					criteria.andCoopEndtimeLessThanOrEqualTo(endTime);
+				if(coop.getCoopMaxEndtime()!=null) {
+					criteria.andCoopEndtimeLessThanOrEqualTo(coop.getCoopMaxEndtime());
 				}
 				//责任人
 				if(coop.getCoopUserId()!=null) {

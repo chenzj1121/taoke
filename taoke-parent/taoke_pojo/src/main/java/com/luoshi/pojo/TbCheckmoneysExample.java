@@ -1584,6 +1584,126 @@ public class TbCheckmoneysExample {
             addCriterion("cm_beiyong not between", value1, value2, "cmBeiyong");
             return (Criteria) this;
         }
+
+        public Criteria andCmTbmaxtimeIsNull() {
+            addCriterion("cm_tbmaxTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeIsNotNull() {
+            addCriterion("cm_tbmaxTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeEqualTo(Date value) {
+            addCriterion("cm_tbmaxTime =", value, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeNotEqualTo(Date value) {
+            addCriterion("cm_tbmaxTime <>", value, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeGreaterThan(Date value) {
+            addCriterion("cm_tbmaxTime >", value, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("cm_tbmaxTime >=", value, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeLessThan(Date value) {
+            addCriterion("cm_tbmaxTime <", value, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeLessThanOrEqualTo(Date value) {
+            addCriterion("cm_tbmaxTime <=", value, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeIn(List<Date> values) {
+            addCriterion("cm_tbmaxTime in", values, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeNotIn(List<Date> values) {
+            addCriterion("cm_tbmaxTime not in", values, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeBetween(Date value1, Date value2) {
+            addCriterion("cm_tbmaxTime between", value1, value2, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTbmaxtimeNotBetween(Date value1, Date value2) {
+            addCriterion("cm_tbmaxTime not between", value1, value2, "cmTbmaxtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeIsNull() {
+            addCriterion("cm_endTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeIsNotNull() {
+            addCriterion("cm_endTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeEqualTo(Date value) {
+            addCriterion("cm_endTime =", value, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeNotEqualTo(Date value) {
+            addCriterion("cm_endTime <>", value, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeGreaterThan(Date value) {
+            addCriterion("cm_endTime >", value, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("cm_endTime >=", value, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeLessThan(Date value) {
+            addCriterion("cm_endTime <", value, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeLessThanOrEqualTo(Date value) {
+            addCriterion("cm_endTime <=", value, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeIn(List<Date> values) {
+            addCriterion("cm_endTime in", values, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeNotIn(List<Date> values) {
+            addCriterion("cm_endTime not in", values, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeBetween(Date value1, Date value2) {
+            addCriterion("cm_endTime between", value1, value2, "cmEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmEndtimeNotBetween(Date value1, Date value2) {
+            addCriterion("cm_endTime not between", value1, value2, "cmEndtime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

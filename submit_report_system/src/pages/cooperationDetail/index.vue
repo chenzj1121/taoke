@@ -86,11 +86,6 @@
             <el-option v-for="(option, index) in paybackOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item v-if="type==0 ||type ==1" prop="coopUserId" label="责任人">
-          <el-select v-model="form.name" :disabled='true'>
-            <el-option v-for="(option, index) in dutyPersonOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item prop="name" label="是否查款" >
           <el-select v-model="form.name" :disabled='true'>
             <el-option v-for="(option, index) in isExamineOptions" :key="index" :label="option.label" :value="option.value"></el-option>
@@ -101,6 +96,26 @@
             <el-option v-for="(option, index) in settleStatusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
+      <div v-if="type==0 || type ==1">
+      <el-form-item label="销售部" v-if="isBoss">
+       <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
+              </el-select>
+      </el-form-item>
+      <el-form-item label="组别" v-if="isBoss">
+         <el-select v-model="form.coopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.coopGroupId)">
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
+              </el-select>
+      </el-form-item>
+      <el-form-item label="责任人">
+        <el-select v-model="form.coopUserId" placeholder="请选择">
+                <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
+              </el-select>
+      </el-form-item>
+      </div>
         <el-form-item>
           <el-button type="primary" @click="bindData">查询</el-button>
           <el-button @click="() => {this.form = {};this.bindData()}">重置</el-button>&nbsp;&nbsp;&nbsp;
@@ -111,6 +126,7 @@
           <el-button type="warning">上传数据</el-button> -->
           <span style="font-size: 16px;">通过数：{{passNum}} </span>
         </el-form-item>
+     
       </el-form>
       <el-table
         style="width: 100%;"
@@ -150,7 +166,18 @@
         <el-table-column prop="coopDept" label="部门"></el-table-column>
         <el-table-column prop="coopUser" label="责任人"></el-table-column>
         <el-table-column prop="coopYhqName" label="优惠券名称"></el-table-column>
-        <el-table-column prop="coopMessage" label="备注"></el-table-column>
+        <el-table-column prop="coopMessage" label="备注">
+          <template slot-scope="scope">
+             <p class="web" slot="reference"></p>
+             <el-popover
+              placement="top-start"
+              width="200"
+              trigger="hover">
+              <p>{{scope.row.coopMessage}}</p>
+            <p class="web" slot="reference">{{scope.row.coopMessage}}</p>
+             </el-popover> 
+          </template>
+        </el-table-column>
         <el-table-column prop="name" label="操作" width="360px">
           <template slot-scope="scope">
             <span class="flex">
@@ -172,7 +199,7 @@
 <script>
 import Page from '@/components/page'
 import ReasonBox from "@/components/reason"
-import { PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop,addCoop,getCooperNum} from '@/api'
+import { getGroupByList ,getGroupMember,PRE_URL,getCooperationPage ,getDeptByList,getUserByList,addBackMoney,getShopById,delCoopById,updateCoop,addCoop,getCooperNum} from '@/api'
 import {getUser} from "@/utils/auth"
 
 export default {
@@ -227,22 +254,58 @@ export default {
       ],
       cooperationDetailTableData: [],
       userList:[],
-      // groupList:{},
+      groupList:[],
+      gruopList2:[],
       deptList:[],
+      memberList:[],
       type:2,
       viewReason:false,
       reason:{},
       PRE_URL,
       passNum:0,
+       isBoss:false,
     }
   },
   mounted () {
     this.type = getUser().type
+    if (this.type==0) {
+      this.isBoss =true
+    }else{
+      this.form.deptId = getUser().deptId
+      this.form.groupId = getUser().groupId
+      this.getMember( this.form.deptId,this.form.groupId)
+    }
     this.getUserList()
     this.getDeptList()
+    this.getGroupList()
     this.bindData()
   },
   methods: {
+     getGroup(id){
+        this.form.groupId = null;
+        if( this.form.coopUserId){ this.form.coopUserId = null;}
+        this.gruopList2 = []
+        this.memberList = []
+      if(id){
+      //  this.form.shopDeptId =null;
+      this.groupList.map(item=>{
+        if(item.groupDeptId==id){
+          this.gruopList2.push(item)
+        }
+      })
+      }
+    },
+    getMember(deptId,groupId){
+      console.log(deptId,groupId)
+        if( this.form.coopUserId){ this.form.coopUserId = null;}
+      this.memberList = [];
+      if(deptId && groupId){
+      //  this.form.groupId = null;
+        getGroupMember(deptId,groupId).then(res=>{
+          this.memberList = res
+        })
+      }
+    },
     checkReason(data){
       this.viewReason = true;
       this.reason =data;
@@ -274,35 +337,35 @@ export default {
       })
     },
    reCoop(item,id,coopId){
-     if (item.coopTbtype=="通过") {
-         this.$confirm(`该提报已通过，是否重新创建一条?`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        item.coopTbtype ="待审核";
-        item.coopUser = getUser().id
-        item.coopTbtime = new Date()
-        item.coopShenheId = null
-        item.coopShenheBz = null
-        item.coopShenheTime = null
-        item.coopId=null
-        addCoop(item).then(res=>{
-            if (res.success) {
-              this.$sucmsg(res.message)
-            }else{
-              this.$errmsg(res.message)
-            }
-            this.bindData()
-        })
-      }).catch(()=>{})
-     }else{
+    //  if (item.coopTbtype=="通过") {
+    //      this.$confirm(`该提报已通过，是否重新创建一条?`, '提示', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(() => {
+    //     item.coopTbtype ="待审核";
+    //     item.coopUser = getUser().id
+    //     item.coopTbtime = new Date()
+    //     item.coopShenheId = null
+    //     item.coopShenheBz = null
+    //     item.coopShenheTime = null
+    //     item.coopId=null
+    //     addCoop(item).then(res=>{
+    //         if (res.success) {
+    //           this.$sucmsg(res.message)
+    //         }else{
+    //           this.$errmsg(res.message)
+    //         }
+    //         this.bindData()
+    //     })
+    //   }).catch(()=>{})
+    //  }else{
      getShopById(id).then(res=>{
        if (res) {
           this.$router.push({ path: '/customer/cooperationDetail',name:'cooperationDetail' ,params:res,query:{coopId}})
        }
      })
-     }
+    //  }
    },
     viewGood(id){
          window.open(`https://item.taobao.com/item.htm?ft=t&id=${id}`);   
@@ -318,11 +381,11 @@ export default {
         this.userList = res
       })
     },
-    //  getGroupList() {
-    //   getGroupByList().then(res => {
-    //     this.groupList = res
-    //   })
-    // },
+     getGroupList() {
+      getGroupByList().then(res => {
+        this.groupList = res
+      })
+    },
     bindData () {
       const form = this.form
       // form.coopTbTimeEnd = new Date(form.coopTbTimeEnd).getTime();
@@ -403,4 +466,11 @@ export default {
   cursor: pointer;
   color: blue;
 }
+.web{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 </style>

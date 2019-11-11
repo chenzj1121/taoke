@@ -166,11 +166,11 @@ export default {
     this.getGroupList()
     this.getDeptList()
     this.getDetailList()
-     if (this.type==0) {
+    if (this.type==0) {
       this.isBoss =true
     }else{
-      this.form.deptId = sessionStorage.userDeptId
-      this.form.groupId = sessionStorage.userGroupId
+      this.form.deptId = getUser().deptId
+      this.form.groupId = getUser().groupId
       this.getMember( this.form.deptId,this.form.groupId)
     }
   },

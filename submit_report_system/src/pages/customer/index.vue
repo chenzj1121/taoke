@@ -180,7 +180,10 @@ export default {
   },
   data () {
     return {
-      form: {},
+      form: {
+        // shopDeptId:getUser().deptId,
+        // shopGroupId:getUser().groupId,
+      },
       tableData: [],
       maturities: maturities,
       page: {
@@ -211,8 +214,8 @@ export default {
     if (this.type==0) {
       this.isBoss =true
     }else{
-      this.form.deptId = sessionStorage.userDeptId
-      this.form.groupId = sessionStorage.userGroupId
+      this.form.deptId = getUser().deptId
+      this.form.groupId = getUser().groupId
       this.getMember( this.form.deptId,this.form.groupId)
     }
   },
@@ -349,6 +352,7 @@ export default {
       if(this.multipleSelection[0]){
         for(let i=0;i<this.multipleSelection.length;i++){
          this.multipleSelection[i].privateType = 0;
+         this.multipleSelection[i].nextTime = new Date(this.multipleSelection[i].nextTime)
           this.multipleSelection[i].shopGroupId = "";
            this.multipleSelection[i].shopDeptId =""; 
              this.multipleSelection[i].shopUserId =""; 
@@ -361,8 +365,9 @@ export default {
            }
          })
         }
-      if(flag){this.$sucmsg("修改成功")}
       this.bindData();
+    if(flag)
+    {this.$sucmsg("修改成功")}
       }else{
         this.$message("请选择店铺")
       }

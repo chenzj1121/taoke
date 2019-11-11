@@ -113,6 +113,7 @@ export default {
   methods: {
     update(obj){
       let info = getUser()
+      obj.nextTime = new Date(obj.nextTime)
       obj.privateType = 1;
       obj.shopUserId2 = info.id;
       obj.shopDeptId =info.deptId;

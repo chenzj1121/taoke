@@ -305,6 +305,10 @@ export default {
       findCoopById(this.$route.query.coopId).then(res=>{
         res.beginTime =res.coopYjscale?"预告":'立即开始'
         this.form = res
+        if (res.coopTbtype=='通过') {
+          this.isUpadte = false
+          this.form.coopId = null
+        }
         if (this.check) {
         }else{
           this.form.coopDeptId=getUser().deptId

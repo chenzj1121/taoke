@@ -199,7 +199,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	}
 
 		@Override
-		public Result doImport(MultipartFile file) throws Exception {
+		public Result doImport(MultipartFile file,String goodsType) throws Exception {
 			Workbook wb = null;
 			Result result =new Result();
 			System.out.println(file.getName());
@@ -271,7 +271,8 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //					HttpSession session = request.getSession();
 //					TbSysUser user = (TbSysUser) session.getAttribute("user");
-
+					details.setOrdersType(goodsType);
+					
 					details.setCreateTime(sdf.parse(sheet.getRow(i).getCell(0).getStringCellValue()));
 					details.setClickTime(sdf.parse(sheet.getRow(i).getCell(1).getStringCellValue()));
 					details.setShopMessage(sheet.getRow(i).getCell(2).getStringCellValue());
@@ -395,6 +396,8 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				}
 			return i;
 		}
+
+
 
 	
 	

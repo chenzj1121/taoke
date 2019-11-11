@@ -202,7 +202,7 @@ public class BackgroundDetailsController {
      */
     @RequestMapping("/upload")
     public Result importExcel(@RequestParam("filebox") MultipartFile file,HttpServletRequest request,
-    		HttpServletResponse response) throws Exception{
+    		HttpServletResponse response, String goodsType) throws Exception{
     	Result rs = new Result();
 		int code = 200;
 		
@@ -235,7 +235,7 @@ public class BackgroundDetailsController {
 //		File localFile = new File(path);
 		//InputStream ins = file.getInputStream();
 		//读取excel文档  
-		return backgroundDetailsService.doImport(file);
+		return backgroundDetailsService.doImport(file,goodsType);
 		
 		//这里的result就是整个excel的数据。根据需求自行确定校验规则及后续加数据库等操作
 		}

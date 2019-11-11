@@ -66,7 +66,7 @@ public interface BackgroundDetailsService {
 	public PageResult findPage(TbBackgroundDetails backgroundDetails, int pageNum,int pageSize);
 
 
-	public Result doImport(MultipartFile file) throws Exception;
+	//public Result doImport(MultipartFile file) throws Exception;
 
 
 	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId);
@@ -75,6 +75,7 @@ public interface BackgroundDetailsService {
 	public Double payMoney(TbBackgroundDetails backgroundDetails, String string);
 
 
+	public Result doImport(MultipartFile file,String goodsType) throws Exception;
 
 	//public void doImport(InputStream ins, MultipartFile file);
 

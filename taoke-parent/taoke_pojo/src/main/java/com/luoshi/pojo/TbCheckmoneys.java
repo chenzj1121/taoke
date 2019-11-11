@@ -53,6 +53,8 @@ public class TbCheckmoneys {
 
     private Date cmEndtime;
 
+    private Long cmTimeid;
+
     public Integer getCmId() {
         return cmId;
     }
@@ -251,5 +253,13 @@ public class TbCheckmoneys {
 
     public void setCmEndtime(Date cmEndtime) {
         this.cmEndtime = cmEndtime;
+    }
+
+    public Long getCmTimeid() {
+        return cmTimeid;
+    }
+
+    public void setCmTimeid(Long cmTimeid) {
+        this.cmTimeid = cmTimeid;
     }
 }

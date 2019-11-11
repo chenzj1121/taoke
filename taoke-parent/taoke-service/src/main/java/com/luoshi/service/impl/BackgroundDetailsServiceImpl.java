@@ -332,6 +332,70 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			
 		}
 
+		@Override
+		public Double payMoney(TbBackgroundDetails backgroundDetails,String string) {
+			TbBackgroundDetailsExample example=new TbBackgroundDetailsExample();
+			Criteria criteria = example.createCriteria();
+			HttpSession session = request.getSession();
+			TbSysUser user = (TbSysUser) session.getAttribute("user");
+			example.setOrderByClause("id DESC");
+			if(backgroundDetails!=null){
+				if(user.getType().equals("2")) {
+					criteria.andUseIdEqualTo(user.getId());
+				}
+				if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
+					criteria.andShopMessageLike("%"+backgroundDetails.getShopMessage()+"%");
+				}
+				if(backgroundDetails.getAliwangwang()!=null && backgroundDetails.getAliwangwang().length()>0){
+					criteria.andAliwangwangLike("%"+backgroundDetails.getAliwangwang()+"%");
+				}
+				if(backgroundDetails.getShopName()!=null && backgroundDetails.getShopName().length()>0){
+					criteria.andShopNameLike("%"+backgroundDetails.getShopName()+"%");
+				}
+				if(backgroundDetails.getDeptId()!=null ){
+					criteria.andDeptIdEqualTo(backgroundDetails.getDeptId());
+				}
+				//小组
+				if(backgroundDetails.getGroupId()!=null) {
+					criteria.andGroupIdEqualTo(backgroundDetails.getGroupId());
+				}
+				//责任人
+				if(backgroundDetails.getUseId()!=null) {
+					criteria.andUseIdEqualTo(backgroundDetails.getUseId());
+				}
+				//商品id
+				if(backgroundDetails.getGoodsId()!=null){
+					criteria.andGoodsIdEqualTo(backgroundDetails.getGoodsId());
+				}
+				//时间查询
+				if(backgroundDetails.getCreateTime()!=null) {
+					criteria.andPayTimeGreaterThanOrEqualTo(backgroundDetails.getCreateTime());
+				}
+				//时间查询
+				if(backgroundDetails.getClickTime()!=null) {
+					criteria.andPayTimeLessThanOrEqualTo(backgroundDetails.getCreateTime());
+				}
+				//订单号
+				if(backgroundDetails.getOrderId()!=null){
+					criteria.andOrderIdEqualTo(backgroundDetails.getOrderId());
+				}
+				//状态
+				if(backgroundDetails.getOrdersType()!=null){
+					criteria.andOrdersTypeEqualTo(backgroundDetails.getOrdersType());
+				}
+			}
+				List<TbBackgroundDetails> list = backgroundDetailsMapper.selectByExample(example);
+				double i=0;
+				for (TbBackgroundDetails tbBackgroundDetails : list) {
+					if(string.equals("pay")){
+					i=i+tbBackgroundDetails.getPay();
+					}else if(string.equals("js")){
+					i=i+tbBackgroundDetails.getPayMoney();
+					}
+				}
+			return i;
+		}
+
 	
 	
 }

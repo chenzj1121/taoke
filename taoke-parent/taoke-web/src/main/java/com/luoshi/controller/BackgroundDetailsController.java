@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.luoshi.pojo.TbBackgroundDetails;
+import com.luoshi.pojo.TbCoop;
 import com.luoshi.service.BackgroundDetailsService;
 
 import entity.PageResult;
@@ -62,6 +63,29 @@ public class BackgroundDetailsController {
 		return backgroundDetailsService.findByGoodId(useId,goodsId);
 	}
 	
+	/**
+	 * 返回付款服务费总额
+	 * @return
+	 */
+	@RequestMapping("/payMoney")
+	public Double  payMoney(@RequestBody TbBackgroundDetails backgroundDetails){
+		
+		return backgroundDetailsService.payMoney(backgroundDetails,"pay");
+		
+		//return 	
+	}
+	
+	/**
+	 * 返回结算服务费总额
+	 * @return
+	 */
+	@RequestMapping("/jsMoney")
+	public Double  jsMoney(@RequestBody TbBackgroundDetails backgroundDetails){
+		
+		return backgroundDetailsService.payMoney(backgroundDetails,"js");
+		
+		//return 	
+	}
 	
 	/**
 	 * 返回全部列表

@@ -1704,6 +1704,66 @@ public class TbCheckmoneysExample {
             addCriterion("cm_endTime not between", value1, value2, "cmEndtime");
             return (Criteria) this;
         }
+
+        public Criteria andCmTimeidIsNull() {
+            addCriterion("cm_timeId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidIsNotNull() {
+            addCriterion("cm_timeId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidEqualTo(Long value) {
+            addCriterion("cm_timeId =", value, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidNotEqualTo(Long value) {
+            addCriterion("cm_timeId <>", value, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidGreaterThan(Long value) {
+            addCriterion("cm_timeId >", value, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidGreaterThanOrEqualTo(Long value) {
+            addCriterion("cm_timeId >=", value, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidLessThan(Long value) {
+            addCriterion("cm_timeId <", value, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidLessThanOrEqualTo(Long value) {
+            addCriterion("cm_timeId <=", value, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidIn(List<Long> values) {
+            addCriterion("cm_timeId in", values, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidNotIn(List<Long> values) {
+            addCriterion("cm_timeId not in", values, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidBetween(Long value1, Long value2) {
+            addCriterion("cm_timeId between", value1, value2, "cmTimeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmTimeidNotBetween(Long value1, Long value2) {
+            addCriterion("cm_timeId not between", value1, value2, "cmTimeid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

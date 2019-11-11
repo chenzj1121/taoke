@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.luoshi.pojo.TbBackgroundDetails;
+import com.luoshi.pojo.TbCoop;
 
 import entity.PageResult;
 import entity.Result;
@@ -71,7 +72,8 @@ public interface BackgroundDetailsService {
 	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId);
 
 
-	//public int getNums();
+	public Double payMoney(TbBackgroundDetails backgroundDetails, String string);
+
 
 
 	//public void doImport(InputStream ins, MultipartFile file);

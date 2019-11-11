@@ -86,7 +86,7 @@ export const getGroupMember = (deptId,groupId) => ajax(PRE_URL + '/sysUser/getUs
 export const getBackMoney = (obj,page,rows) => ajax(PRE_URL + `/backmoney/search.do?page=${page}&rows=${rows}`,obj,'post')
 
 // export const downloadDetail = (name) => ajax(PRE_URL + `/backgroundDetails/download.do?filename=moban.xls`,"",'post')
-export const uploadDetail = (file) => ajax(PRE_URL + `/backgroundDetails/upload.do`,file,'post')
+export const uploadDetail = (file,type) => ajax(PRE_URL + `/backgroundDetails/upload.do?goodsType=${type}`,file,'post')
 
 export const getSysRole = () => ajax(PRE_URL + `/sysRole/findAll.do`,'','post')
 

@@ -49,7 +49,7 @@
         <el-input v-model="form.orderId"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="form.goodsType">
+        <el-select v-model="form.ordersType">
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
@@ -135,8 +135,8 @@ export default {
       principalOptions: [],
       statusOptions: [
         { label: '全部', value: null },
-        { label: '订单结算', value: '订单结算' },
-        { label: '订单付款', value: '订单付款' },
+        { label: '订单结算', value: '已结算' },
+        { label: '订单付款', value: '已付款' },
         // { label: '订单成功', value: '订单成功' },
         // { label: '订单失效', value: '订单失效' }
       ],
@@ -160,6 +160,7 @@ export default {
       isBoss:false,
       payNum:0,
       jsNum:0,
+      goodsType:1,
     }
   },
   mounted(){
@@ -189,7 +190,18 @@ export default {
       })
     },
     openFile(){
-      document.getElementById("filebox").click()
+         this.$confirm('请选择上传类型?', '提示', {
+          confirmButtonText: '订单结算',
+          cancelButtonText: '订单付款',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.goodsType = 1
+          document.getElementById("filebox").click()
+        }).catch(() => {
+         this.goodsType = 0
+         document.getElementById("filebox").click()
+        });
     },
     upload(e){
       // let index = e.currentTarget.getAttribute("data-id");
@@ -219,7 +231,7 @@ export default {
       let fileName = file.name.split(".")[0]
       if(fileType=="xls" || fileType =="xlsx"){
         formData.append("filebox",file);
-         uploadDetail(formData).then(res=>{
+         uploadDetail(formData,this.goodsType).then(res=>{
             if(res.success){
               this.$sucmsg(res.message)
             }else{

@@ -43,6 +43,7 @@ public class LoginController {
         Result result = sysUserService.getUserByName(tbSysUser);
         HttpSession session = request.getSession();
         session.setAttribute("user", result.getData());
+        session.setMaxInactiveInterval(24*60*60);
     	return result;
     	}catch (Exception e) {
     	return ajaxReturn(false,"登陆失败");

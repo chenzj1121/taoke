@@ -102,8 +102,8 @@
         <el-button type="primary" size="mini" @click="bindData">查询</el-button>
         <el-button type="default" size="mini" @click="reset">重置</el-button>
         <el-button type="success" size="mini" @click="addCustomer">新建</el-button>
-        <el-button type="warning" size="mini">导入</el-button>
-        <el-button type="primary" size="mini">模板下载</el-button>
+        <!-- <el-button type="warning" size="mini">导入</el-button> -->
+        <!-- <el-button type="primary" size="mini">模板下载</el-button> -->
         <el-button type="warning" size="mini" @click="transTo">转入公海</el-button>
       </el-row>
     </el-row>
@@ -181,8 +181,8 @@ export default {
   data () {
     return {
       form: {
-        // shopDeptId:getUser().deptId,
-        // shopGroupId:getUser().groupId,
+        shopDeptId:getUser().type==0?'':getUser().deptId,
+        shopGroupId:getUser().type==0?'':getUser().groupId,
       },
       tableData: [],
       maturities: maturities,

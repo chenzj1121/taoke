@@ -214,7 +214,7 @@ export default {
         });
       }
       this.form.coopDeptId=getUser().deptId
-      this.form.coopGroupId = getUser().grouopId
+      this.form.coopGroupId = getUser().groupId
       this.form.coopUserId=getUser().id
       this.shopDetail = this.$route.params
       this.form.coopCustomer = this.shopDetail.shopName;

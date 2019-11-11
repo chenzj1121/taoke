@@ -209,7 +209,10 @@ export default {
   },
   data () {
     return {
-      form: {},
+      form: {
+        coopDeptId:getUser().type==0?'':getUser().deptId,
+        coopGroupId:getUser().type==0?'':getUser().groupId,
+      },
       page: {
         pageSize: 10,
         pageNum: 1,

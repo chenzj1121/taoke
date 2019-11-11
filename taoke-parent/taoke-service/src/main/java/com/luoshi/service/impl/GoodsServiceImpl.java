@@ -96,6 +96,9 @@ public class GoodsServiceImpl implements GoodsService {
 			if(goods.getGoodsYhqName()!=null && goods.getGoodsYhqName().length()>0){
 				criteria.andGoodsYhqNameLike("%"+goods.getGoodsYhqName()+"%");
 			}
+			if(goods.getGoodsFid()!=null){
+				criteria.andGoodsFidEqualTo(goods.getGoodsFid());
+			}
 	
 		}
 		

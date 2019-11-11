@@ -133,8 +133,7 @@ public class ShopServiceImpl implements ShopService {
 		example.setOrderByClause("id DESC");
 		if(shop!=null){
 			//如果是员工只能查询本人
-			if(user.getType().equals("2")) {
-				
+			if(user.getType().equals("2")&&shop.getPrivateType().length()==0) {
 				criteria.andShopUserId2EqualTo(user.getId());
 			}
 			//根据部门查找

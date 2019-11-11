@@ -132,6 +132,11 @@ export const addHisrory = (param) => ajax(PRE_URL + '/history/add.do?' ,param, '
 
 export const findHisrory = (param) => ajax(PRE_URL + '/history/search.do?page=1&rows=99',param, 'post')
 
+export const getPayMoney = (obj) => ajax(PRE_URL + `/backgroundDetails/payMoney.do?`,obj,'post')
+
+export const getJsMoney = (obj) => ajax(PRE_URL + `/backgroundDetails/jsMoney.do?`,obj,'post')
+
+
 
 
 

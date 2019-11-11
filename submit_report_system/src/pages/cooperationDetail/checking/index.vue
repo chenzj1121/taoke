@@ -353,8 +353,8 @@ export default {
             }
         })
       }else{
-      this.form.cmApplyTime = this.goodsFID
-      // this.form.timeId = this.goodsFID;
+      this.form.cmApplyTime = new Date()
+      this.form.cmTimeid = this.goodsFID;
       this.form.cmUserId = this.userInfo.id
       this.form.cmSellDept = this.userInfo.groupId
       this.form.cmDept = this.userInfo.deptId;

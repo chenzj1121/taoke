@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList,PRE_URL,uploadDetail} from "@/api/index"
+import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList,PRE_URL,uploadDetail,getPayMoney,getJsMoney} from "@/api/index"
 import Page from '@/components/page'
 import { getUser } from '@/utils/auth'
 export default {

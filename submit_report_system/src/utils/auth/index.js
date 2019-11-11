@@ -14,8 +14,11 @@ export const getUser = () => {
 }
 
 // 向cookie中增加登陆信息
+let allDay =7
 export const setUser = user => {
-  Cookie.set(USER, user)
+  Cookie.set(USER, user,{ 
+    expires : allDay 
+})
 }
 
 // 删除cookie中的登录信息 退出登陆时使用

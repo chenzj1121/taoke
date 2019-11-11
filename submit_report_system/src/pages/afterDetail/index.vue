@@ -63,10 +63,10 @@
         <el-button type="primary" @click="getDetailList">查询</el-button>
       </el-form-item>
       <el-form-item label="付款服务费总额">
-        <el-input v-model="form.payNum"></el-input>
+        <el-input v-model="payNum"></el-input>
       </el-form-item>
       <el-form-item label="结算服务费总额">
-        <el-input v-model="form.checkNum"></el-input>
+        <el-input v-model="jsNum"></el-input>
       </el-form-item>
       <el-form-item>
         <span>驳回消息 0 条</span>
@@ -137,8 +137,8 @@ export default {
         { label: '全部', value: null },
         { label: '订单结算', value: '订单结算' },
         { label: '订单付款', value: '订单付款' },
-        { label: '订单成功', value: '订单成功' },
-        { label: '订单失效', value: '订单失效' }
+        // { label: '订单成功', value: '订单成功' },
+        // { label: '订单失效', value: '订单失效' }
       ],
       orderByOptions: [
         { label: '全部', value: '全部' },
@@ -158,6 +158,8 @@ export default {
       memberList:[],//部门联动-员工
       type:2,
       isBoss:false,
+      payNum:0,
+      jsNum:0,
     }
   },
   mounted(){
@@ -166,6 +168,7 @@ export default {
     this.getGroupList()
     this.getDeptList()
     this.getDetailList()
+    this.getPay()
     if (this.type==0) {
       this.isBoss =true
     }else{
@@ -175,6 +178,16 @@ export default {
     }
   },
   methods:{
+    getPay(){
+      getPayMoney(this.form).then(res=>{
+        this.payNum = res
+      })
+    },
+    getJs(){
+      getJsMoney(this.form).then(res=>{
+        this.jsNum = res
+      })
+    },
     openFile(){
       document.getElementById("filebox").click()
     },

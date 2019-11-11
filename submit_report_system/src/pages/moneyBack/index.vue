@@ -361,6 +361,10 @@ export default {
       })
     },
     showMoreRecords (goodsFid,shopName) {
+       this.moreRecordsByShopTableData=[]
+      if (!goodsFid) {
+        
+      }else{
       getGoodsDetail({goodsFid}).then(res=>{
         if (res.rows[0]) {
            res.rows.forEach((item,index)=>{
@@ -388,6 +392,7 @@ export default {
             console.log(res.rows)
        
       })
+      }
       this.moreRecordsByShopVisiable = true
     },
     showAccountInfo () {

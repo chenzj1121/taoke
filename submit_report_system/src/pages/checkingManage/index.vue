@@ -325,6 +325,10 @@ export default {
       })
     },
     showOtherRecords (goodsFid,shopName) {
+      this.moreRecordsByShopTableData=[]
+      if (!goodsFid) {
+        
+      }else{
       getGoodsDetail({goodsFid}).then(res=>{
         if (res.rows[0]) {
            res.rows.forEach((item,index)=>{
@@ -352,6 +356,7 @@ export default {
             console.log(res.rows)
        
       })
+      }
       this.otherRecordsVisiable = true
     },
     bindData () {
@@ -362,7 +367,7 @@ export default {
       getCheckmonkeyNum(params, page, rows).then(res=>{
           this.cmFwPrice = res
       })
-      getCheckmonkeyPage(params, page, rows,this.form.cmApplyTimeEnd,this.form.cmBackTimeEnd).then(res => {
+      getCheckmonkeyPage(params, page, rows).then(res => {
           res.rows.forEach((item,index)=>{
               item.cmApplyTime1= item.cmApplyTime;
               item.cmApplyTime =item.cmApplyTime? this.getMyDate(item.cmApplyTime):''

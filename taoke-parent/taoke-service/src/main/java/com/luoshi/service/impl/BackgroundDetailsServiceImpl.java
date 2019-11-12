@@ -66,11 +66,11 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 	}
 	
 	@Override
-	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId) {
+	public List<TbBackgroundDetails> findByGoodId(Integer useId, Long goodsId) {
 		TbBackgroundDetailsExample example=new TbBackgroundDetailsExample();
 		Criteria criteria = example.createCriteria();
 		//责任人
-		if(useId>0 ) {
+		if(useId!=null ) {
 			criteria.andUseIdEqualTo(useId);
 		}
 		//商品id
@@ -397,7 +397,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					if(string.equals("pay")){
 					i=i+tbBackgroundDetails.getPay();
 					}else if(string.equals("js")){
-					i=i+tbBackgroundDetails.getPayMoney();
+					i=i+tbBackgroundDetails.getMoneyAbout();
 					}
 				}
 			return i;

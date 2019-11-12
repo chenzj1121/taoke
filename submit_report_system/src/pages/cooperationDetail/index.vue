@@ -81,7 +81,7 @@
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <el-form-item prop="name" label="回款状态">
+        <!-- <el-form-item prop="name" label="回款状态">
           <el-select v-model="form.name" :disabled='true'>
             <el-option v-for="(option, index) in paybackOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
@@ -90,7 +90,7 @@
           <el-select v-model="form.name" :disabled='true'>
             <el-option v-for="(option, index) in isExamineOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item prop="coopPayType" label="结算类型">
           <el-select v-model="form.coopPayType">
             <el-option v-for="(option, index) in settleStatusOptions" :key="index" :label="option.label" :value="option.value"></el-option>

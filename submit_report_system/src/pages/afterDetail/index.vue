@@ -95,7 +95,7 @@
       <el-table-column label="所属部门" prop="deptName"></el-table-column>
       <el-table-column label="组别" prop="groupName"></el-table-column>
       <el-table-column label="责任人" prop="creater"></el-table-column>
-      <el-table-column label="订单状态" prop="goodsType"></el-table-column>
+      <el-table-column label="订单状态" prop="ordersType"></el-table-column>
       <el-table-column label="店铺名称" prop="shopName"></el-table-column>
       <el-table-column label="商品ID" prop="goodsId">
          <template slot-scope="scope">
@@ -127,7 +127,7 @@
       <el-table-column label="所属部门" prop="deptName"></el-table-column>
       <el-table-column label="组别" prop="groupName"></el-table-column>
       <el-table-column label="责任人" prop="creater"></el-table-column>
-      <el-table-column label="订单状态" prop="goodsType"></el-table-column>
+      <el-table-column label="订单状态" prop="ordersType"></el-table-column>
       <el-table-column label="店铺名称" prop="shopName"></el-table-column>
       <el-table-column label="商品ID" prop="goodsId"></el-table-column>
       <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
@@ -153,9 +153,7 @@ export default {
     return {
       drawer:false,
       form: {
-        goodsType:"订单结算",
-        payNum:0,
-        checkNum:0,
+        ordersType:"已结算",
         deptId:getUser().type==0?null:getUser().deptId,
         groupId:getUser().type==0?null:getUser().groupId,
       },
@@ -190,7 +188,7 @@ export default {
       isBoss:false,
       payNum:0,
       jsNum:0,
-      goodsType:1,
+      ordersType:1,
     }
   },
   mounted(){
@@ -233,10 +231,10 @@ export default {
           type: 'warning',
           center: true
         }).then(() => {
-          this.goodsType = 1
+          this.ordersType = 1
           document.getElementById("filebox").click()
         }).catch(() => {
-         this.goodsType = 0
+         this.ordersType = 0
          document.getElementById("filebox").click()
         });
     },
@@ -268,7 +266,7 @@ export default {
       let fileName = file.name.split(".")[0]
       if(fileType=="xls" || fileType =="xlsx"){
         formData.append("filebox",file);
-         uploadDetail(formData,this.goodsType).then(res=>{
+         uploadDetail(formData,this.ordersType).then(res=>{
             if(res.success){
               this.$sucmsg(res.message)
             }else{

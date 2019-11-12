@@ -99,7 +99,7 @@
       <el-table-column label="店铺名称" prop="shopName"></el-table-column>
       <el-table-column label="商品ID" prop="goodsId">
          <template slot-scope="scope">
-         <p class="link"  @click="openDrawer(scope.row.gdId,scope.row.useId)">{{scope.row.goodsId}}</p>
+         <p class="link"  @click="openDrawer(scope.row.goodsId,scope.row.useId)">{{scope.row.goodsId}}</p>
        </template>
       </el-table-column>
       <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
@@ -119,10 +119,11 @@
     <el-drawer
       title="商品ID下的订单信息"
       :visible.sync="drawer"
-      direction="ttb">
+      direction="ttb"
+      size="100%">
         <el-table
       :data="smallDetail"
-      size="mini">
+     height="800px">
       <el-table-column type="index" label="序号"></el-table-column>
       <el-table-column label="所属部门" prop="deptName"></el-table-column>
       <el-table-column label="组别" prop="groupName"></el-table-column>
@@ -209,9 +210,28 @@ export default {
   methods:{
     openDrawer(gdId,useId){
       this.drawer = true
-      // useId = useId*1
+      // useId = useId+''
       getDetailById(gdId,useId).then(res=>{
-        console.log(res)
+          res.forEach((item,index)=>{
+              this.groupList.forEach((obj)=>{
+                 if(item.deptId == obj.groupDeptId && item.groupId ==obj.groupId){
+                      item.groupName = obj.groupName
+                  }
+              })
+              this.deptList.forEach(obj=>{
+                if (item.deptId = obj.deptId) {
+                      item.deptName = obj.deptName
+                }
+              })
+                this.userList.forEach(obj=>{
+                if(item.useId ==obj.id ){
+                  item.creater = obj.username
+                }
+              })
+          // this.form.payNum= (this.form.payNum+item.payAbout)
+
+          })
+        this.smallDetail = res
       })
     },
     getPay(){
@@ -313,6 +333,11 @@ export default {
                       item.groupName = obj.groupName
                       item.deptName = obj.groupName
                   }
+              })
+               this.deptList.forEach(obj=>{
+                if (item.deptId = obj.deptId) {
+                      item.deptName = obj.deptName
+                }
               })
                 this.userList.forEach(obj=>{
                 if(item.useId ==obj.id ){

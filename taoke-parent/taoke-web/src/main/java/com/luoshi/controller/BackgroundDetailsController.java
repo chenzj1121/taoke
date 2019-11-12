@@ -61,7 +61,9 @@ public class BackgroundDetailsController {
 	@RequestMapping("/findByGoodId")
 	public List<TbBackgroundDetails> findByGoodId(String useId,Long goodsId ){
 		Integer i = null;
-		if(useId!=null){
+		System.out.println(useId);
+		System.out.println(useId.length());
+		if(useId!= null &&useId.equals("") &&  !useId.equals("null")){
 		     i = Integer.valueOf(useId);
 		}
 		return backgroundDetailsService.findByGoodId(i,goodsId);

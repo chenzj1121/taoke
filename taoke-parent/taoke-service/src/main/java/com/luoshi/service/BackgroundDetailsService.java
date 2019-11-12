@@ -69,7 +69,7 @@ public interface BackgroundDetailsService {
 	//public Result doImport(MultipartFile file) throws Exception;
 
 
-	public List<TbBackgroundDetails> findByGoodId(int useId, Long goodsId);
+	public List<TbBackgroundDetails> findByGoodId(Integer useId, Long goodsId);
 
 
 	public Double payMoney(TbBackgroundDetails backgroundDetails, String string);

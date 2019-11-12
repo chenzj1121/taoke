@@ -158,6 +158,14 @@ public class CoopServiceImpl implements CoopService {
 			if(coop.getCoopPayType()!=null) {
 				criteria.andCoopPayTypeEqualTo(coop.getCoopPayType());
 			}
+			//部门
+			if(coop.getCoopDeptId()!=null) {
+				criteria.andCoopDeptIdEqualTo(coop.getCoopDeptId());
+			}
+			//小组
+			if(coop.getCoopGroupId()!=null) {
+				criteria.andCoopGroupIdEqualTo(coop.getCoopGroupId());
+			}
 			if(coop.getCoopCustomer()!=null && coop.getCoopCustomer().length()>0){
 				criteria.andCoopCustomerLike("%"+coop.getCoopCustomer()+"%");
 			}
@@ -259,6 +267,14 @@ public class CoopServiceImpl implements CoopService {
 				//下线时间
 				if(coop.getCoopMaxEndtime()!=null) {
 					criteria.andCoopEndtimeLessThanOrEqualTo(coop.getCoopMaxEndtime());
+				}
+				//部门
+				if(coop.getCoopDeptId()!=null) {
+					criteria.andCoopDeptIdEqualTo(coop.getCoopDeptId());
+				}
+				//小组
+				if(coop.getCoopGroupId()!=null) {
+					criteria.andCoopGroupIdEqualTo(coop.getCoopGroupId());
 				}
 				//责任人
 				if(coop.getCoopUserId()!=null) {

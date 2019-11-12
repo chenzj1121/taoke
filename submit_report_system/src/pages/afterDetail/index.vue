@@ -210,7 +210,9 @@ export default {
   methods:{
     openDrawer(gdId,useId){
       this.drawer = true
-      // useId = useId+''
+      if (!useId) {
+        useId = 'null'
+      }
       getDetailById(gdId,useId).then(res=>{
           res.forEach((item,index)=>{
               this.groupList.forEach((obj)=>{

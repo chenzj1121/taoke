@@ -141,7 +141,7 @@
              <p class="checkReject" v-if="scope.row.coopTbtype=='拒绝'" @click="checkReason(scope.row)">(查看)</p>
            </template>
         </el-table-column>
-        <el-table-column prop="coopPttype" label="平台状态"></el-table-column>
+        <!-- <el-table-column prop="coopPttype" label="平台状态"></el-table-column> -->
         <el-table-column prop="coopCustomer" label="商家客户"></el-table-column>
         <el-table-column prop="coopMainpicture" label="商家主图">
                 <template   slot-scope="scope">            

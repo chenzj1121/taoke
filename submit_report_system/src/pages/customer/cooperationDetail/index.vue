@@ -312,7 +312,7 @@ export default {
         if (this.check) {
         }else{
           this.form.coopDeptId=getUser().deptId
-          this.form.coopGroupId = getUser().grouopId
+          this.form.coopGroupId = getUser().groupId
           this.form.coopUserId=getUser().id
         }
        
@@ -396,6 +396,7 @@ export default {
               console.log(this.form)
               this.form.coopTbtime = new Date()
               this.form.coopTbtype = '待审核'
+              this.form.coopGroupId = getUser().groupId;
               addCoop(this.form).then(res=>{
                 console.log(res)
                 if (res.success) {

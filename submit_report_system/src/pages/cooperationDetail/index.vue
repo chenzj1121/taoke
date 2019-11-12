@@ -210,8 +210,8 @@ export default {
   data () {
     return {
       form: {
-        coopDeptId:getUser().type==0?'':getUser().deptId,
-        coopGroupId:getUser().type==0?'':getUser().groupId,
+        coopDeptId:getUser().type==0?null:getUser().deptId,
+        coopGroupId:getUser().type==0?null:getUser().groupId,
       },
       page: {
         pageSize: 10,
@@ -415,6 +415,12 @@ export default {
                   item.coopDept = obj.deptName
                 }
               })
+              // this.groupList.forEach(obj=>{
+              //   if (item.coopGroupId == obj.groupId && item.coopDeptId == obj.groupDeptId) {
+              //     item.coopGroup = obj.groupName
+                  
+              //   }
+              // })
               this.userList.forEach(obj=>{
                 if(item.coopUserId ==obj.id ){
                   item.coopUser = obj.username

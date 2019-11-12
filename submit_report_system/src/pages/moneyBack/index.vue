@@ -208,7 +208,10 @@ export default {
   },
   data () {
     return {
-      form: {},
+      form: {
+        bmDeptId:getUser().type==0?null:getUser().deptId,
+        bmGroupId:getUser().type==0?null:getUser().groupId,
+      },
       moneyBackTableData: [
         // { name: 'name', id: 1 }
       ], // 返款的表格数据
@@ -239,7 +242,7 @@ export default {
        page1: {
         pageSize: 5,
         pageNum: 1,
-        total: 10
+        total: 0,
       },
        userList:[],
       groupList:[],

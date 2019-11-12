@@ -68,10 +68,10 @@
       <el-form-item label="结算服务费总额">
         <el-input v-model="jsNum"></el-input>
       </el-form-item>
-      <el-form-item>
+      <!-- <el-form-item>
         <span>驳回消息 0 条</span>
         <span class="link">点击查看</span>
-      </el-form-item>
+      </el-form-item> -->
         <el-form-item>
           <el-button type="primary" @click="downloadFile">下载表格</el-button>
           <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>    
@@ -97,7 +97,11 @@
       <el-table-column label="责任人" prop="creater"></el-table-column>
       <el-table-column label="订单状态" prop="goodsType"></el-table-column>
       <el-table-column label="店铺名称" prop="shopName"></el-table-column>
-      <el-table-column label="商品ID" prop="goodsId"></el-table-column>
+      <el-table-column label="商品ID" prop="goodsId">
+         <template slot-scope="scope">
+         <p class="link"  @click="openDrawer(scope.row.gdId,scope.row.useId)">{{scope.row.goodsId}}</p>
+       </template>
+      </el-table-column>
       <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
       <el-table-column label="服务费比例" prop="ordersFl"></el-table-column>
       <el-table-column label="付款金额" prop="pay"></el-table-column>
@@ -112,11 +116,33 @@
       :total="1000">
     </el-pagination> -->
     <Page style="text-align: right;margin-top: 10px;" :page="page" @change="getDetailList" />
+    <el-drawer
+      title="商品ID下的订单信息"
+      :visible.sync="drawer"
+      direction="ttb">
+        <el-table
+      :data="smallDetail"
+      size="mini">
+      <el-table-column type="index" label="序号"></el-table-column>
+      <el-table-column label="所属部门" prop="deptName"></el-table-column>
+      <el-table-column label="组别" prop="groupName"></el-table-column>
+      <el-table-column label="责任人" prop="creater"></el-table-column>
+      <el-table-column label="订单状态" prop="goodsType"></el-table-column>
+      <el-table-column label="店铺名称" prop="shopName"></el-table-column>
+      <el-table-column label="商品ID" prop="goodsId"></el-table-column>
+      <el-table-column label="订单数" prop="goodsCounts"></el-table-column>
+      <el-table-column label="服务费比例" prop="ordersFl"></el-table-column>
+      <el-table-column label="付款金额" prop="pay"></el-table-column>
+      <el-table-column label="付款服务费" prop="payAbout"></el-table-column>
+      <el-table-column label="结算金额" prop="payMoney"></el-table-column>
+      <el-table-column label="结算服务费" prop="moneyAbout"></el-table-column>
+    </el-table>
+    </el-drawer>
   </div>
 </template>
 
 <script>
-import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList,PRE_URL,uploadDetail,getPayMoney,getJsMoney} from "@/api/index"
+import {getDetail,getDeptByList,getGroupByList,getUserById,getGroupMember,getUserByList,PRE_URL,uploadDetail,getPayMoney,getJsMoney,getDetailById} from "@/api/index"
 import Page from '@/components/page'
 import { getUser } from '@/utils/auth'
 export default {
@@ -125,10 +151,13 @@ export default {
   },
   data () {
     return {
+      drawer:false,
       form: {
         goodsType:"订单结算",
         payNum:0,
         checkNum:0,
+        deptId:getUser().type==0?null:getUser().deptId,
+        groupId:getUser().type==0?null:getUser().groupId,
       },
       departmentOptions: [],
       groupOptions: [],
@@ -146,6 +175,7 @@ export default {
         { label: '由低到高', value: '由低到高' }
       ],
       afterDetailTableData: [],
+      smallDetail:[],
       page: {
         pageSize: 10,
         pageNum: 1,
@@ -169,7 +199,7 @@ export default {
     this.getGroupList()
     this.getDeptList()
     this.getDetailList()
-    this.getPay()
+  
     if (this.type==0) {
       this.isBoss =true
     }else{
@@ -179,6 +209,12 @@ export default {
     }
   },
   methods:{
+    openDrawer(gdId,useId){
+      this.drawer = true
+      getDetailById(gdId,useId).then(res=>{
+        console.log(res)
+      })
+    },
     getPay(){
       getPayMoney(this.form).then(res=>{
         this.payNum = res
@@ -269,7 +305,9 @@ export default {
       param.sysUser = this.form
       param.pageNum = this.page.pageNum
       param.pageSize = this.page.pageSize
-    getDetail(this.form,this.page.pageNum,this.page.pageSize).then(res=>{
+      this.getPay()
+      this.getJs()
+      getDetail(this.form,this.page.pageNum,this.page.pageSize).then(res=>{
        res.rows.forEach((item,index)=>{
               this.groupList.forEach((obj)=>{
                  if(item.deptId == obj.groupDeptId && item.groupId ==obj.groupId){

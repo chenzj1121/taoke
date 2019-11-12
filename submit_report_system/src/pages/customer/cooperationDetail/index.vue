@@ -390,7 +390,7 @@ export default {
                 }
               })
             }else{
-              if (this.form.beginTime === '立即开始') {
+              if (this.form.beginTime == '立即开始') {
                 this.form.coopStarttime = new Date() //若立即开始
               }
               console.log(this.form)

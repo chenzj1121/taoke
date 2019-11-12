@@ -136,6 +136,9 @@ export const getPayMoney = (obj) => ajax(PRE_URL + `/backgroundDetails/payMoney.
 
 export const getJsMoney = (obj) => ajax(PRE_URL + `/backgroundDetails/jsMoney.do?`,obj,'post')
 
+export const getDetailById = (goodsId,useId) => ajax(PRE_URL + `/backgroundDetails/findByGoodId.do?useId=${useId}&goodsId=${goodsId}`,'post')
+
+
 
 
 

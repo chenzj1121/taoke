@@ -181,8 +181,8 @@ export default {
   data () {
     return {
       form: {
-        shopDeptId:getUser().type==0?'':getUser().deptId,
-        shopGroupId:getUser().type==0?'':getUser().groupId,
+        shopDeptId:getUser().type==0?null:getUser().deptId,
+        shopGroupId:getUser().type==0?null:getUser().groupId,
       },
       tableData: [],
       maturities: maturities,

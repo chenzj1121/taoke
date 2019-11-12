@@ -129,16 +129,16 @@
       <el-table-column prop="cmYhqName" label="优惠券名称"></el-table-column>
       <el-table-column prop="cmBackTime" label="到款时间"></el-table-column>
       <el-table-column prop="cmText" label="备注"></el-table-column>
-      <el-table-column prop="cmYhqType" label="券截图">
+      <!-- <el-table-column prop="cmYhqType" label="券截图">
          <template slot-scope="scope">
            <el-image 
             style="width: 70px; height: 70px"
             :src="`${PRE_URL}/`+scope.row.cmYhqType" 
             :preview-src-list="[`${PRE_URL}/${scope.row.cmYhqType}`]">
           </el-image>
-          <!-- <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70"> -->
+          <img :src="`${PRE_URL}/`+scope.row.cmYhqType"  min-width="70" height="70">
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="再次提交" width="120px">
         <template slot-scope="scope">
           <el-button v-if="scope.row.cmType!='通过'" size="mini" type="success" @click="reSubmit(scope.row)">再次提交</el-button>
@@ -219,6 +219,8 @@ export default {
       form: {
         cmApplyTimeEnd:null,
         cmBackTimeEnd:null,
+        cmDeptId:getUser().type==0?null:getUser().deptId,
+        cmGroupId:getUser().type==0?null:getUser().groupId,
       },
       page: {
         pageSize: 10,

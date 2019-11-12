@@ -100,6 +100,9 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(user.getType().equals("2")) {
 				criteria.andCmUserIdEqualTo(user.getId());
 			}
+			if(user.getType().equals("1")){
+				criteria.andCmGroupIdEqualTo(user.getGroupId());
+			}
 			//申请时间
 			if(checkmoneys.getCmApplyTime()!=null){
 				criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());
@@ -174,6 +177,9 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(checkmoneys!=null){		
 				if(user.getType().equals("2")) {
 					criteria.andCmUserIdEqualTo(user.getId());
+				}
+				if(user.getType().equals("1")){
+					criteria.andCmGroupIdEqualTo(user.getGroupId());
 				}
 				//申请时间
 				if(checkmoneys.getCmApplyTime()!=null){

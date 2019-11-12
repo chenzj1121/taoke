@@ -128,8 +128,14 @@ public class CheckmoneysController {
 	public double serviceFee(@RequestBody TbCheckmoneys checkmoneys, int page, int rows ){
 		double i=0;
 		List<TbCheckmoneys> List = checkmoneysServiceImpl.serviceFee(checkmoneys);
+		if(List.size()>0){
 		for (TbCheckmoneys tbCheckmoneys : List) {
+			if(tbCheckmoneys.getCmJsMoney()==null){
+				i=i;
+			}else{
 			i=(double) (i+tbCheckmoneys.getCmJsMoney());
+			}
+		}
 		}
 		return i;
 	}

@@ -211,7 +211,7 @@ export default {
   methods:{
     openDrawer(gdId,useId){
       this.drawer = true
-      useId = useId*1
+      // useId = useId*1
       getDetailById(gdId,useId).then(res=>{
         console.log(res)
       })

@@ -53,12 +53,12 @@
           <el-form-item prop="ID" label="合作产品ID:" label-width="100px">
             <el-input :value="form.ID"></el-input>
           </el-form-item>
-          <el-form-item prop="beginPrice" label="回款金额区间查询:" label-width="130px">
-            <el-input :value="form.beginPrice" type="number"></el-input>
+          <el-form-item prop="beginPrice" label="回款金额区间查询:" label-width="130px"> 
+            <el-input :value="form.refundsMoney" type="number"  :disabled='true'></el-input>
           </el-form-item>
           <span style="font-size: 14px;color: #666;position:relative;top:3px;left:-2px;">到</span>
           <el-form-item prop="endPrice">
-            <el-input :value="form.endPrice" type="number"></el-input>
+            <el-input :value="form.MaxMoney" type="number"  :disabled='true'></el-input>
           </el-form-item>
           <div v-if="type==0 || type==1">
           <el-form-item label="部门:" label-width="60px" v-if="isBoss">
@@ -311,7 +311,7 @@ export default {
       const rows = this.page.pageSize
       this.loading = true
       shop.privateType = '1'
-      getShopList(shop, page, rows).then(res => {
+      getShopList(shop, page, rows,shop.MaxMoney).then(res => {
         this.tableData = res.rows
         console.log(res.rows)
           res.rows.forEach((item,index)=>{

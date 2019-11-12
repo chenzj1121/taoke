@@ -44,7 +44,8 @@ export const addGroup = (param) => ajax(PRE_URL+'/group/add.do', param, 'post')
 
 export const updGroup = (param) => ajax(PRE_URL+'/group/update.do', param, 'post')
 
-export const getShopList = (shop, page, rows) => ajax(PRE_URL+`/shop/search.do?page=${page}&rows=${rows}`, shop, 'post')
+export const getShopList = (shop, page, rows,MaxMoney) => ajax(PRE_URL+`/shop/search.do?page=${page}&rows=${rows}`, shop, 'post')
+// &MaxMoney=${MaxMoney}
 
 export const getShopById = id => ajax(PRE_URL+`/shop/findOne.do`, { id })
 

@@ -20,7 +20,7 @@
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.cmTbmaxTime"
+          v-model="form.cmTbmaxtime"
           type="date"
           value-format='timestamp'
          >
@@ -37,7 +37,7 @@
       <span style="position:relative;top:5px;left:-2px;">至</span>
       <el-form-item>
         <el-date-picker
-          v-model="form.cmEndTime"
+          v-model="form.cmEndtime"
           type="date"
           value-format='timestamp'
           >

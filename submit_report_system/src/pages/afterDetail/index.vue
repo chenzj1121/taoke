@@ -38,11 +38,11 @@
           end-placeholder="结束日期">
         </el-date-picker> -->
           <el-col :span="11">
-         <el-date-picker type="date" placeholder="开始日期" v-model="form.createTime" style="width: 100%;"   value-format='timestamp'></el-date-picker>
+         <el-date-picker type="date" placeholder="开始日期" v-model="form.payTime" style="width: 100%;"   value-format='timestamp'></el-date-picker>
         </el-col>
         <el-col class="line" :span="2">至</el-col>
         <el-col :span="11">
-          <el-date-picker  type="date" placeholder="结束时间" v-model="form.maxJsTime" style="width: 100%;"   value-format='timestamp'></el-date-picker>
+          <el-date-picker  type="date" placeholder="结束时间" v-model="form.maxJstime" style="width: 100%;"   value-format='timestamp'></el-date-picker>
         </el-col>
       </el-form-item>
       <el-form-item label="订单号搜索">
@@ -61,6 +61,7 @@
       <br/>
       <el-form-item>
         <el-button type="primary" @click="getDetailList">查询</el-button>
+        <el-button @click="() => {this.form = {};this.getDetailList()}">重置</el-button>
       </el-form-item>
       <el-form-item label="付款服务费总额">
         <el-input v-model="payNum"></el-input>
@@ -210,9 +211,9 @@ export default {
   methods:{
     openDrawer(gdId,useId){
       this.drawer = true
-      if (!useId) {
-        useId = 'null'
-      }
+      // if (!useId) {
+      //   useId = 'null'
+      // }
       getDetailById(gdId,useId).then(res=>{
           res.forEach((item,index)=>{
               this.groupList.forEach((obj)=>{
@@ -238,12 +239,12 @@ export default {
     },
     getPay(){
       getPayMoney(this.form).then(res=>{
-        this.payNum = res
+        this.payNum = res.toFixed(2)
       })
     },
     getJs(){
       getJsMoney(this.form).then(res=>{
-        this.jsNum = res
+        this.jsNum = res.toFixed(2)
       })
     },
     openFile(){

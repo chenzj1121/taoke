@@ -32,7 +32,7 @@
         <br>
         <el-form-item prop="tibaoTime" label="提报时间">
            <el-date-picker
-              v-model="form.coopTbTime"
+              v-model="form.coopTbtime"
               type="date"
               value-format='timestamp'
               placeholder="选择日期">
@@ -41,7 +41,7 @@
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="tibaoTimeEnd">
             <el-date-picker
-              v-model="form.coopTbmaxTime"
+              v-model="form.coopTbmaxtime"
               type="date"
               value-format='timestamp'
               placeholder="选择日期">
@@ -49,7 +49,7 @@
         </el-form-item>
         <el-form-item prop="onlineTimeBegin" label="上线时间">
            <el-date-picker
-              v-model="form.coopStartTime"
+              v-model="form.coopStarttime"
               type="date"
               value-format='timestamp'
               placeholder="选择日期">
@@ -58,7 +58,7 @@
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="onlineTimeEnd">
             <el-date-picker
-              v-model="form.coopMaxStartTime"
+              v-model="form.coopMaxStarttime"
               type="date"
               value-format='timestamp'
               placeholder="选择日期">
@@ -66,7 +66,7 @@
         </el-form-item>
          <el-form-item prop="outlineTimeBegin" label="下线时间">
            <el-date-picker
-              v-model="form.coopEndTime"
+              v-model="form.coopEndtime"
               type="date"
               value-format='timestamp'
               placeholder="选择日期">
@@ -75,7 +75,7 @@
         <span style="position:relative;top:5px;left:-5px;">至</span>
         <el-form-item prop="outlineTimeEnd">
             <el-date-picker
-              v-model="form.coopMaxEndTime"
+              v-model="form.coopMaxEndtime"
               type="date"
               value-format='timestamp'
               placeholder="选择日期">
@@ -390,17 +390,17 @@ export default {
       })
     },
     bindData () {
-      const form = this.form
-      // form.coopTbTimeEnd = new Date(form.coopTbTimeEnd).getTime();
-      // form.coopStartTimeEnd = new Date(form.coopStartTimeEnd).getTime();
-      // form.coopEndTimeEnd = new Date(form.coopEndTimeEnd).getTime();
-      const page = this.page.pageNum
-      const rows = this.page.pageSize
-      this.loading = true
-      getCooperNum(form, page, rows).then(res=>{
+      // const form = this.form
+      // // form.coopTbTimeEnd = new Date(form.coopTbTimeEnd).getTime();
+      // // form.coopStartTimeEnd = new Date(form.coopStartTimeEnd).getTime();
+      // // form.coopEndTimeEnd = new Date(form.coopEndTimeEnd).getTime();
+      // const page = this.page.pageNum
+      // const rows = this.page.pageSize
+      // this.loading = true
+      getCooperNum(this.form, this.page.pageNum, this.page.pageSize).then(res=>{
         this.passNum = res
       })
-      getCooperationPage(form, page, rows).then(res => {
+      getCooperationPage(this.form, this.page.pageNum, this.page.pageSize).then(res => {
          res.rows.forEach((item,index)=>{
            let list =["coopEndtime","coopStarttime","coopTbtime"]
            list.forEach(obj=>{

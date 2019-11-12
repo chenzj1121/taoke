@@ -100,6 +100,9 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 			if(user.getType().equals("2")) {
 				criteria.andBmUserIdEqualTo(user.getId());
 			}
+			if(user.getType().equals("1")){
+				criteria.andBmGroupIdEqualTo(user.getGroupId());
+			}
 			//根据店铺名称查找
 			if(backmoney.getBmShopName()!=null && backmoney.getBmShopName().length()>0){
 				criteria.andBmShopNameLike("%"+backmoney.getBmShopName()+"%");

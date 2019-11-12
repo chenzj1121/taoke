@@ -103,6 +103,9 @@ public class CoopServiceImpl implements CoopService {
 			if(user.getType().equals("2")) {
 				criteria.andCoopUserIdEqualTo(user.getId());
 			}
+			if(user.getType().equals("1")){
+				criteria.andCoopGroupIdEqualTo(user.getGroupId());
+			}
 			//审核员工
 			if(user.getType().equals("5")) {
 				criteria.andCoopShenheIdEqualTo(user.getId());
@@ -213,6 +216,9 @@ public class CoopServiceImpl implements CoopService {
 			if(coop!=null){	
 				if(user.getType().equals("2")) {
 					criteria.andCoopUserIdEqualTo(user.getId());
+				}
+				if(user.getType().equals("1")){
+					criteria.andCoopGroupIdEqualTo(user.getGroupId());
 				}
 				//审核员工
 				if(user.getType().equals("5")) {

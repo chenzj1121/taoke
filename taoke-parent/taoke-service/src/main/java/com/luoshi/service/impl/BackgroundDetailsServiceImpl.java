@@ -141,6 +141,9 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			if(user.getType().equals("2")) {
 				criteria.andUseIdEqualTo(user.getId());
 			}
+			if(user.getType().equals("1")){
+				criteria.andGroupIdEqualTo(user.getGroupId());
+			}
 			if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
 				criteria.andShopMessageLike("%"+backgroundDetails.getShopMessage()+"%");
 			}
@@ -343,6 +346,9 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			if(backgroundDetails!=null){
 				if(user.getType().equals("2")) {
 					criteria.andUseIdEqualTo(user.getId());
+				}
+				if(user.getType().equals("1")){
+					criteria.andGroupIdEqualTo(user.getGroupId());
 				}
 				if(backgroundDetails.getShopMessage()!=null && backgroundDetails.getShopMessage().length()>0){
 					criteria.andShopMessageLike("%"+backgroundDetails.getShopMessage()+"%");

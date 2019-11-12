@@ -1,6 +1,9 @@
 package com.luoshi.service.impl;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.luoshi.pojo.TbGroupExample;
 import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,8 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Autowired
 	private TbSysUserMapper sysUserMapper;
-	
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 查询全部
 	 */
@@ -121,8 +125,14 @@ public class SysUserServiceImpl implements SysUserService {
 		
 		TbSysUserExample example=new TbSysUserExample();
 		com.luoshi.pojo.TbSysUserExample.Criteria criteria = example.createCriteria();
+		
+		HttpSession session = request.getSession();
+		TbSysUser user = (TbSysUser) session.getAttribute("user");
 		example.setOrderByClause("id DESC");
-		if(sysUser!=null){			
+		if(sysUser!=null){
+			if(user.getType().equals("1")){
+				criteria.andGroupIdEqualTo(user.getGroupId());
+			}
 			if(sysUser.getSalt()!=null && sysUser.getSalt().length()>0){
 				criteria.andSaltLike("%"+sysUser.getSalt()+"%");
 			}

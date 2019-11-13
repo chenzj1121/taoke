@@ -89,6 +89,10 @@ public class TbShop {
 
     private String shopTbBz;
 
+    private Double shopMaxMoney;
+
+    private Date createTimeEnd;
+
     public Integer getId() {
         return id;
     }
@@ -431,5 +435,21 @@ public class TbShop {
 
     public void setShopTbBz(String shopTbBz) {
         this.shopTbBz = shopTbBz == null ? null : shopTbBz.trim();
+    }
+
+    public Double getShopMaxMoney() {
+        return shopMaxMoney;
+    }
+
+    public void setShopMaxMoney(Double shopMaxMoney) {
+        this.shopMaxMoney = shopMaxMoney;
+    }
+
+    public Date getCreateTimeEnd() {
+        return createTimeEnd;
+    }
+
+    public void setCreateTimeEnd(Date createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
     }
 }

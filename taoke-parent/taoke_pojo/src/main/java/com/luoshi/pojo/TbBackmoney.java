@@ -61,6 +61,10 @@ public class TbBackmoney {
 
     private Long bmTimeid;
 
+    private Date bmMakeTimeEnd;
+
+    private Date bmCreateTimeEnd;
+
     public Integer getBmId() {
         return bmId;
     }
@@ -291,5 +295,21 @@ public class TbBackmoney {
 
     public void setBmTimeid(Long bmTimeid) {
         this.bmTimeid = bmTimeid;
+    }
+
+    public Date getBmMakeTimeEnd() {
+        return bmMakeTimeEnd;
+    }
+
+    public void setBmMakeTimeEnd(Date bmMakeTimeEnd) {
+        this.bmMakeTimeEnd = bmMakeTimeEnd;
+    }
+
+    public Date getBmCreateTimeEnd() {
+        return bmCreateTimeEnd;
+    }
+
+    public void setBmCreateTimeEnd(Date bmCreateTimeEnd) {
+        this.bmCreateTimeEnd = bmCreateTimeEnd;
     }
 }

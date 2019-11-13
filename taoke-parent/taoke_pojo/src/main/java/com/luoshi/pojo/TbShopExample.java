@@ -2964,6 +2964,126 @@ public class TbShopExample {
             addCriterion("shop_tb_bz not between", value1, value2, "shopTbBz");
             return (Criteria) this;
         }
+
+        public Criteria andShopMaxMoneyIsNull() {
+            addCriterion("shop_max_money is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyIsNotNull() {
+            addCriterion("shop_max_money is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyEqualTo(Double value) {
+            addCriterion("shop_max_money =", value, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyNotEqualTo(Double value) {
+            addCriterion("shop_max_money <>", value, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyGreaterThan(Double value) {
+            addCriterion("shop_max_money >", value, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyGreaterThanOrEqualTo(Double value) {
+            addCriterion("shop_max_money >=", value, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyLessThan(Double value) {
+            addCriterion("shop_max_money <", value, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyLessThanOrEqualTo(Double value) {
+            addCriterion("shop_max_money <=", value, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyIn(List<Double> values) {
+            addCriterion("shop_max_money in", values, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyNotIn(List<Double> values) {
+            addCriterion("shop_max_money not in", values, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyBetween(Double value1, Double value2) {
+            addCriterion("shop_max_money between", value1, value2, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopMaxMoneyNotBetween(Double value1, Double value2) {
+            addCriterion("shop_max_money not between", value1, value2, "shopMaxMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndIsNull() {
+            addCriterion("create_time_end is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndIsNotNull() {
+            addCriterion("create_time_end is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndEqualTo(Date value) {
+            addCriterion("create_time_end =", value, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndNotEqualTo(Date value) {
+            addCriterion("create_time_end <>", value, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndGreaterThan(Date value) {
+            addCriterion("create_time_end >", value, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time_end >=", value, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndLessThan(Date value) {
+            addCriterion("create_time_end <", value, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndLessThanOrEqualTo(Date value) {
+            addCriterion("create_time_end <=", value, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndIn(List<Date> values) {
+            addCriterion("create_time_end in", values, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndNotIn(List<Date> values) {
+            addCriterion("create_time_end not in", values, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndBetween(Date value1, Date value2) {
+            addCriterion("create_time_end between", value1, value2, "createTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEndNotBetween(Date value1, Date value2) {
+            addCriterion("create_time_end not between", value1, value2, "createTimeEnd");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

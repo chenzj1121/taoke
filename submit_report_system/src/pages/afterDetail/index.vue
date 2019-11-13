@@ -54,7 +54,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="结算金额排序">
-        <el-select v-model="form.sort">
+        <el-select v-model="form.payMoney">
           <el-option v-for="(option, index) in orderByOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
@@ -170,9 +170,9 @@ export default {
         // { label: '订单失效', value: '订单失效' }
       ],
       orderByOptions: [
-        { label: '全部', value: '全部' },
-        { label: '由高到低', value: '由高到低' },
-        { label: '由低到高', value: '由低到高' }
+        { label: '全部', value: null },
+        { label: '由高到低', value:1},
+        { label: '由低到高', value:2}
       ],
       afterDetailTableData: [],
       smallDetail:[],

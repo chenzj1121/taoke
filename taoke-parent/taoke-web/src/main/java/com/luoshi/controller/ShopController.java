@@ -146,8 +146,8 @@ public class ShopController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbShop shop, int page, int rows,Double MaxMoney){
-		return shopService.findPage(shop,page, rows,MaxMoney);		
+	public PageResult search(@RequestBody TbShop shop, int page, int rows){
+		return shopService.findPage(shop,page, rows);		
 	}
 	
 }

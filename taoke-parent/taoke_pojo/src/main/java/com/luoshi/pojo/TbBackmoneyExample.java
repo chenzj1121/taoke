@@ -1994,6 +1994,126 @@ public class TbBackmoneyExample {
             addCriterion("bm_timeId not between", value1, value2, "bmTimeid");
             return (Criteria) this;
         }
+
+        public Criteria andBmMakeTimeEndIsNull() {
+            addCriterion("bm_make_time_end is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndIsNotNull() {
+            addCriterion("bm_make_time_end is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndEqualTo(Date value) {
+            addCriterion("bm_make_time_end =", value, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndNotEqualTo(Date value) {
+            addCriterion("bm_make_time_end <>", value, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndGreaterThan(Date value) {
+            addCriterion("bm_make_time_end >", value, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndGreaterThanOrEqualTo(Date value) {
+            addCriterion("bm_make_time_end >=", value, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndLessThan(Date value) {
+            addCriterion("bm_make_time_end <", value, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndLessThanOrEqualTo(Date value) {
+            addCriterion("bm_make_time_end <=", value, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndIn(List<Date> values) {
+            addCriterion("bm_make_time_end in", values, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndNotIn(List<Date> values) {
+            addCriterion("bm_make_time_end not in", values, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndBetween(Date value1, Date value2) {
+            addCriterion("bm_make_time_end between", value1, value2, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmMakeTimeEndNotBetween(Date value1, Date value2) {
+            addCriterion("bm_make_time_end not between", value1, value2, "bmMakeTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndIsNull() {
+            addCriterion("bm_create_time_end is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndIsNotNull() {
+            addCriterion("bm_create_time_end is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndEqualTo(Date value) {
+            addCriterion("bm_create_time_end =", value, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndNotEqualTo(Date value) {
+            addCriterion("bm_create_time_end <>", value, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndGreaterThan(Date value) {
+            addCriterion("bm_create_time_end >", value, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndGreaterThanOrEqualTo(Date value) {
+            addCriterion("bm_create_time_end >=", value, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndLessThan(Date value) {
+            addCriterion("bm_create_time_end <", value, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndLessThanOrEqualTo(Date value) {
+            addCriterion("bm_create_time_end <=", value, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndIn(List<Date> values) {
+            addCriterion("bm_create_time_end in", values, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndNotIn(List<Date> values) {
+            addCriterion("bm_create_time_end not in", values, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndBetween(Date value1, Date value2) {
+            addCriterion("bm_create_time_end between", value1, value2, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmCreateTimeEndNotBetween(Date value1, Date value2) {
+            addCriterion("bm_create_time_end not between", value1, value2, "bmCreateTimeEnd");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

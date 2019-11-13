@@ -115,13 +115,22 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 			if(backmoney.getBmYhqName()!=null && backmoney.getBmYhqName().length()>0){
 				criteria.andBmYhqNameLike("%"+backmoney.getBmYhqName()+"%");
 			}
-			//上线时间
-			if(backmoney.getBmOnlineTime()!=null ){
-				criteria.andBmOnlineTimeEqualTo(backmoney.getBmOnlineTime());
+			//打款时间
+			if(backmoney.getBmMakeTime()!=null ){
+				criteria.andBmMakeTimeEndGreaterThanOrEqualTo(backmoney.getBmMakeTime());
 			}
-			//下线时间
-			if(backmoney.getBmOfflineTime()!=null ){
-				criteria.andBmOfflineTimeEqualTo(backmoney.getBmOfflineTime());
+			//打款时间
+			if(backmoney.getBmMakeTimeEnd()!=null ){
+				criteria.andBmMakeTimeEndLessThanOrEqualTo(backmoney.getBmMakeTimeEnd());
+			}
+			
+			//申请时间
+			if(backmoney.getBmCreateTime()!=null ){
+				criteria.andBmCreateTimeEndGreaterThanOrEqualTo(backmoney.getBmCreateTime());
+			}
+			//申请时间
+			if(backmoney.getBmCreateTimeEnd()!=null ){
+				criteria.andBmCreateTimeEndGreaterThanOrEqualTo(backmoney.getBmCreateTimeEnd());
 			}
 			//状态
 			if(backmoney.getBmType()!=null) {

@@ -169,6 +169,7 @@ public class BackgroundDetailsController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbBackgroundDetails backgroundDetails, int page, int rows  ){
+		
 		return backgroundDetailsService.findPage(backgroundDetails, page, rows);		
 	}
 	

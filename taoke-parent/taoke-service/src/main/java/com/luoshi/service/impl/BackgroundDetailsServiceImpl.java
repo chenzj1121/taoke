@@ -187,9 +187,9 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 			example.setDistinct(true);
 			//结算金额排序
 			if(backgroundDetails.getPayMoney()!=null) {
-				if("1".equals(backgroundDetails.getPayMoney())) {
+				if(backgroundDetails.getPayMoney().equals(1.0)) {
 					example.setOrderByClause("pay_money ASC");
-				}else if("2".equals(backgroundDetails.getPayMoney())) {
+				}else if(backgroundDetails.getPayMoney().equals(2.0)) {
 					example.setOrderByClause("pay_money DESC");
 				}
 				

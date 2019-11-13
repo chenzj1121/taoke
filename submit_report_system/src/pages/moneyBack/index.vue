@@ -15,10 +15,10 @@
         <el-input v-model="form.bmYhqName"></el-input>
       </el-form-item>
       <el-form-item label="上线时间：">
-        <el-date-picker v-model="form.bmOnlineTime"></el-date-picker>
+        <el-date-picker v-model="form.bmOnlineTime" type="datetime"></el-date-picker>
       </el-form-item>
       <el-form-item label="下线时间：">
-        <el-date-picker v-model="form.bmOfflineTime"></el-date-picker>
+        <el-date-picker v-model="form.bmOfflineTime" type="datetime"></el-date-picker>
       </el-form-item>
       <el-form-item label="状态：">
         <el-select v-model="form.bmConfirmType">

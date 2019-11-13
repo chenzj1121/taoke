@@ -65,7 +65,7 @@
       :data="moneyBackTableData">
       <el-table-column type="selection" width="30"></el-table-column>
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column prop="bmConfirmType" label="确认状态">
+      <el-table-column prop="bmConfirmType" label="确认状态" width="100px">
               <template slot-scope="scope">
            <el-popover
             placement="right"
@@ -102,9 +102,9 @@
       <el-table-column prop="bmMakeMoney" label="打款金额"></el-table-column>
       <el-table-column prop="bmBackMoney" label="返/退款金额"></el-table-column>
       <el-table-column prop="bmSurplus" label="剩余金额"></el-table-column>
-      <el-table-column prop="bmBackAccountNumber" label="打款账户">
+      <el-table-column prop="bmBackAccount" label="打款账户">
         <template slot-scope="scope">
-          <span class="link" @click="showAccountInfo(scope.row.id)">{{scope.row.bmBackAccountNumber}}</span>
+          <span class="link" @click="showAccountInfo(scope.row)">{{scope.row.bmBackAccount}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="bmMakeTime1" label="打款时间"></el-table-column>
@@ -190,13 +190,14 @@
       width="40%"
       title="到款账户信息">
       <el-form label-position="left" label-width="150px">
-        <el-form-item label="销售花名："><span>{{ accountInfo.name }}</span></el-form-item>
-        <el-form-item label="返/退款金额："><span>{{ accountInfo.name }}</span></el-form-item>
-        <el-form-item label="打款账户："><span>{{ accountInfo.name }}</span></el-form-item>
-        <el-form-item label="打款账号："><span>{{ accountInfo.name }}</span></el-form-item>
-        <el-form-item label="返款比例："><span>{{ accountInfo.name }}</span></el-form-item>
-        <el-form-item label="退款银行："><span>{{ accountInfo.name }}</span></el-form-item>
-        <el-form-item label="备注："><span>{{ accountInfo.name }}</span></el-form-item>
+        <el-form-item label="销售花名："><span>{{ accountInfo.bmUserName }}</span></el-form-item>
+        <el-form-item label="返/退款金额："><span>{{ accountInfo.bmBackMoney }}</span></el-form-item>
+        <el-form-item label="打款账户："><span>{{ accountInfo.bmBackAccount }}</span></el-form-item>
+        <el-form-item label="打款账号："><span>{{ accountInfo.bmBackAccountNumber }}</span></el-form-item>
+        <el-form-item label="返款比例："><span>{{ accountInfo.bmBackBl }}</span></el-form-item>
+        <el-form-item label="退款银行："><span>{{ accountInfo.bmBackType }}</span></el-form-item>
+        <el-form-item label="银行卡号：" v-if="accountInfo.bmBackType!='支付宝'" ><span>{{ accountInfo.bmMakeAccount }}</span></el-form-item>
+        <el-form-item label="备注："><span>{{ accountInfo.bmText }}</span></el-form-item>
       </el-form>
     </el-dialog>
        <el-dialog
@@ -223,6 +224,7 @@
     </el-input>
     <el-button type="warning" size="mini"  @click="submitReject" style="margin-top:20px;">提交</el-button>
     </el-dialog>
+
   </div>
 </template>
 
@@ -257,9 +259,7 @@ export default {
         { name: 'name', id: 1 }
       ], // 返款来源表格数据
       accountInfoVisiable: false,
-      accountInfo: {
-        name: 'name'
-      },
+      accountInfo: {},
       loading: false,
       page: {
         pageSize: 10,
@@ -425,8 +425,9 @@ export default {
       }
       this.moreRecordsByShopVisiable = true
     },
-    showAccountInfo () {
+    showAccountInfo (item) {
       this.accountInfoVisiable = true
+      this.accountInfo = item
     },
     getMyDate(str) {
     var oDate = new Date(str)

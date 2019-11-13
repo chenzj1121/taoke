@@ -103,7 +103,7 @@
           <el-radio v-model="form.isAlipay" label="银行卡">银行卡</el-radio>
         </el-form-item>
         <el-form-item v-if="form.isChecking && form.isAlipay=='银行卡'" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.bmMakeAccount"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款账户：" :rules="[{ required: true, message: '不能为空' }]">

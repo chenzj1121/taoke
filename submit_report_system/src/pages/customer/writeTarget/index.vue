@@ -131,7 +131,8 @@ export default {
         this.form = res
         this.form.target = res.workTarget
         this.form.writeTime = new Date(`${res.year}-${res.month}`)
-
+        }else{
+          this.form.writeTime = new Date(`${year}-${month}`)
         }
     })
   },

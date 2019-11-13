@@ -90,7 +90,7 @@ export default {
     }
     return {
       form: {
-        writeTime: Date.now(),
+        writeTime: null,
         firstWeek:null,
         secondWeek:null,
         thirdWeek:null,

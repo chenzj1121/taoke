@@ -46,20 +46,21 @@
           <el-form-item prop="wangwangaccount" label="旺旺号:" label-width="80px">
             <el-input v-model="form.wangwangaccount"></el-input>
           </el-form-item>
+            <el-form-item prop="coopId" label="合作产品ID:" label-width="100px">
+            <el-input v-model="form.coopId"></el-input>
+          </el-form-item>
+          <el-form-item prop="refundsMoney" label="回款金额区间查询:" label-width="130px"> 
+            <el-input v-model="form.refundsMoney" type="number"  ></el-input>
+          </el-form-item>
+          <span style="font-size: 14px;color: #666;position:relative;top:3px;left:-2px;">到</span>
+          <el-form-item prop="MaxMoney">
+            <el-input v-model="form.MaxMoney" type="number"  ></el-input>
+          </el-form-item>
           <br>
           <!-- <el-form-item  label="运营QQ:" label-width="80px">
             <el-input :value="form.name"></el-input>
           </el-form-item> -->
-          <el-form-item prop="ID" label="合作产品ID:" label-width="100px">
-            <el-input :value="form.ID"></el-input>
-          </el-form-item>
-          <el-form-item prop="beginPrice" label="回款金额区间查询:" label-width="130px"> 
-            <el-input :value="form.refundsMoney" type="number"  :disabled='true'></el-input>
-          </el-form-item>
-          <span style="font-size: 14px;color: #666;position:relative;top:3px;left:-2px;">到</span>
-          <el-form-item prop="endPrice">
-            <el-input :value="form.MaxMoney" type="number"  :disabled='true'></el-input>
-          </el-form-item>
+        
           <div v-if="type==0 || type==1">
           <el-form-item label="部门:" label-width="60px" v-if="isBoss">
             <div>

@@ -14,10 +14,10 @@
       <el-form-item label="优惠券名称：">
         <el-input v-model="form.bmYhqName"></el-input>
       </el-form-item>
-      <el-form-item label="上线时间：">
+      <el-form-item label="申请时间">
         <el-date-picker v-model="form.bmOnlineTime" type="datetime"></el-date-picker>
       </el-form-item>
-      <el-form-item label="下线时间：">
+      <el-form-item label="打款时间">
         <el-date-picker v-model="form.bmOfflineTime" type="datetime"></el-date-picker>
       </el-form-item>
       <el-form-item label="状态：">

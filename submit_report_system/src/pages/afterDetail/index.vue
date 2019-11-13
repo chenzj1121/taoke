@@ -171,8 +171,8 @@ export default {
       ],
       orderByOptions: [
         { label: '全部', value: null },
-        { label: '由高到低', value:1},
-        { label: '由低到高', value:2}
+        { label: '由高到低', value:'1'},
+        { label: '由低到高', value:'2'}
       ],
       afterDetailTableData: [],
       smallDetail:[],

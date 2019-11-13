@@ -8,59 +8,64 @@
       <el-form-item label="商品ID：">
         <el-input v-model="form.coopGoodsId"></el-input>
       </el-form-item>
-      <br>
-      <el-form-item label="提交时间：">
-        <el-date-picker
-          v-model="form.coopTbTime"
-          type="date"
-          value-format='timestamp'>
-        </el-date-picker>
-      </el-form-item>
-      <span style="position:relative;top:5px;left:-2px;">至</span>
-      <el-form-item>
-        <el-date-picker
-          v-model="form.coopTbmaxtime"
-          type="date"
-          value-format='timestamp'>
-        </el-date-picker>
-      </el-form-item>
-      <br>
-       <el-form-item label="上线时间：">
-        <el-date-picker
-          v-model="form.coopStartTime"
-          type="date"
-          value-format='timestamp'>
-        </el-date-picker>
-      </el-form-item>
-      <span style="position:relative;top:5px;left:-2px;">至</span>
-      <el-form-item>
-        <el-date-picker
-          v-model="form.coopMaxStarttime"
-          type="date"
-          value-format='timestamp'>
-        </el-date-picker>
-      </el-form-item>
-      <br>
-       <el-form-item label="下线时间：">
-        <el-date-picker
-          v-model="form.coopEndTime"
-          type="date"
-          value-format='timestamp'>
-        </el-date-picker>
-      </el-form-item>
-      <span style="position:relative;top:5px;left:-2px;">至</span>
-      <el-form-item>
-        <el-date-picker
-          v-model="form.coopMaxEndtime"
-          type="date"
-          value-format='timestamp'>
-        </el-date-picker>
-      </el-form-item>
       <el-form-item prop="coopType" label="提报状态">
         <el-select v-model="form.coopTbtype">
           <el-option v-for="(option, index) in submitOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
+      <br>
+      <el-form-item prop="tibaoTime" label="提报时间">
+           <el-date-picker
+              v-model="form.coopTbtime"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
+        <span style="position:relative;top:5px;left:-5px;">至</span>
+        <el-form-item prop="tibaoTimeEnd">
+            <el-date-picker
+              v-model="form.coopTbmaxtime"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
+        <el-form-item prop="onlineTimeBegin" label="上线时间">
+           <el-date-picker
+              v-model="form.coopStarttime"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
+        <span style="position:relative;top:5px;left:-5px;">至</span>
+        <el-form-item prop="onlineTimeEnd">
+            <el-date-picker
+              v-model="form.coopMaxStarttime"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
+         <el-form-item prop="outlineTimeBegin" label="下线时间">
+           <el-date-picker
+              v-model="form.coopEndtime"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
+        <span style="position:relative;top:5px;left:-5px;">至</span>
+        <el-form-item prop="outlineTimeEnd">
+            <el-date-picker
+              v-model="form.coopMaxEndtime"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+        </el-form-item>
+
       <br>
       <div v-if="type ==4||type==0" >
       <el-form-item label="部门:" label-width="60px">

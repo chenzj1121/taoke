@@ -19,11 +19,29 @@
           <el-form-item prop="createTime" label="创建时间:" label-width="80px">
             <el-date-picker
               v-model="form.createTime"
-              type="datetime"
+              type="date"
+              value-format='timestamp'
               placeholder="选择日期">
             </el-date-picker>
           </el-form-item>
-          <el-form-item prop="maturity" label="成熟度:" label-width="60px">
+            <span style="position:relative;top:5px;left:-5px;">至</span>
+          <el-form-item prop="outlineTimeEnd">
+            <el-date-picker
+              v-model="form.createTimeEnd"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+         </el-form-item>
+          <el-form-item prop="refundsMoney" label="回款金额:" label-width="80px"> 
+            <el-input v-model="form.refundsMoney" type="number"  ></el-input>
+          </el-form-item>
+          <span style="position:relative;top:5px;left:-5px;">到</span>
+          <el-form-item prop="MaxMoney">
+            <el-input v-model="form.shopMaxMoney" type="number"  ></el-input>
+          </el-form-item>
+         <br>
+          <el-form-item prop="maturity" label="成熟度:" label-width="80px">
             <el-select v-model="form.maturity" value="0">
               <el-option v-for="(option, index) in maturities" :key="index" :value="option">{{ option }}</el-option>
             </el-select>
@@ -49,20 +67,14 @@
             <el-form-item prop="coopId" label="合作产品ID:" label-width="100px">
             <el-input v-model="form.coopId"></el-input>
           </el-form-item>
-          <el-form-item prop="refundsMoney" label="回款金额区间查询:" label-width="130px"> 
-            <el-input v-model="form.refundsMoney" type="number"  ></el-input>
-          </el-form-item>
-          <span style="font-size: 14px;color: #666;position:relative;top:3px;left:-2px;">到</span>
-          <el-form-item prop="MaxMoney">
-            <el-input v-model="form.MaxMoney" type="number"  ></el-input>
-          </el-form-item>
           <br>
+         
           <!-- <el-form-item  label="运营QQ:" label-width="80px">
             <el-input :value="form.name"></el-input>
           </el-form-item> -->
         
           <div v-if="type==0 || type==1">
-          <el-form-item label="部门:" label-width="60px" v-if="isBoss">
+          <el-form-item label="部门:" label-width="80px" v-if="isBoss">
             <div>
               <el-select v-model="form.shopDeptId" placeholder="请选择" @change="getGroup(form.shopDeptId)" >
               <el-option value="" label="全部"></el-option>

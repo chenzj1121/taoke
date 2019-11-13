@@ -15,11 +15,39 @@
         <el-input v-model="form.bmYhqName"></el-input>
       </el-form-item>
       <el-form-item label="申请时间">
-        <el-date-picker v-model="form.bmOnlineTime" type="datetime"></el-date-picker>
+        <el-date-picker 
+        v-model="form.bmCreateTime" 
+        type="date"
+        value-format='timestamp'
+        placeholder="选择日期">
+        </el-date-picker>
       </el-form-item>
+        <span style="position:relative;top:5px;left:-5px;">至</span>
+          <el-form-item prop="outlineTimeEnd">
+            <el-date-picker
+              v-model="form.bmCreateTimeEnd"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+         </el-form-item>
       <el-form-item label="打款时间">
-        <el-date-picker v-model="form.bmOfflineTime" type="datetime"></el-date-picker>
+        <el-date-picker v-model="form.bmMakeTime"
+          type="date"
+          value-format='timestamp'
+          placeholder="选择日期">
+         </el-date-picker>
       </el-form-item>
+       <span style="position:relative;top:5px;left:-5px;">至</span>
+          <el-form-item prop="outlineTimeEnd">
+            <el-date-picker
+              v-model="form.bmMakeTimeEnd"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+      </el-form-item>
+      <br>
       <el-form-item label="状态：">
         <el-select v-model="form.bmConfirmType">
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
@@ -115,7 +143,7 @@
       title="此店铺下同属这笔款的商品记录"
       width="80%"
       :visible.sync="moreRecordsByShopVisiable">
-      <el-row type="flex" justify="space-between">
+      <!-- <el-row type="flex" justify="space-between">
         <el-col :span="2" style="margin-bottom: 40px;">
           <div style="padding: 20px;">返款来源</div>
         </el-col>
@@ -129,7 +157,7 @@
             <el-table-column label="到款时间" prop="name"></el-table-column>
           </el-table>
         </el-col>
-      </el-row>
+      </el-row> -->
       <el-table
         style="width: 100%;"
         size="mini"

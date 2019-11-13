@@ -29,6 +29,11 @@
             <el-option v-for="(option, index) in isZeroOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item prop="coopPayType" label="结算类型">
+          <el-select v-model="form.coopPayType">
+            <el-option v-for="(option, index) in settleStatusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
+          </el-select>
+        </el-form-item>
         <br>
         <el-form-item prop="tibaoTime" label="提报时间">
            <el-date-picker
@@ -91,11 +96,7 @@
             <el-option v-for="(option, index) in isExamineOptions" :key="index" :label="option.label" :value="option.value"></el-option>
           </el-select>
         </el-form-item> -->
-        <el-form-item prop="coopPayType" label="结算类型">
-          <el-select v-model="form.coopPayType">
-            <el-option v-for="(option, index) in settleStatusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
-          </el-select>
-        </el-form-item>
+
       <div v-if="type==0 || type ==1">
       <el-form-item label="销售部" v-if="isBoss">
        <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">

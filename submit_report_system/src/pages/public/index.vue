@@ -6,8 +6,21 @@
         inline
         size="mini">
         <el-form-item label="创建时间：">
-          <el-date-picker type="date" v-model="form.createTime"/>
+        <el-date-picker 
+        type="date" 
+        v-model="form.createTime"  
+        value-format='timestamp'  
+        placeholder="选择日期"/>
         </el-form-item>
+          <span style="position:relative;top:5px;left:-5px;">至</span>
+          <el-form-item prop="outlineTimeEnd">
+            <el-date-picker
+              v-model="form.createTimeEnd"
+              type="date"
+              value-format='timestamp'
+              placeholder="选择日期">
+            </el-date-picker>
+         </el-form-item>
         <el-form-item label="主营：">
           <el-input v-model="form.mainOperate"/>
         </el-form-item>

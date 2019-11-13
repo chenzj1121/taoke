@@ -220,7 +220,7 @@ public class CoopServiceImpl implements CoopService {
 			com.luoshi.pojo.TbCoopExample.Criteria criteria = example.createCriteria();
 			HttpSession session = request.getSession();
 			TbSysUser user = (TbSysUser) session.getAttribute("user");
-			example.setOrderByClause("coop_id DESC");
+			example.setOrderByClause("coop_tbTime DESC, coop_id DESC");
 			if(coop!=null){	
 				if(user.getType().equals("2")) {
 					criteria.andCoopUserIdEqualTo(user.getId());

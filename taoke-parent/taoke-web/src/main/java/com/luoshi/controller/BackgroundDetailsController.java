@@ -88,7 +88,7 @@ public class BackgroundDetailsController {
 	@RequestMapping("/jsMoney")
 	public Double  jsMoney(@RequestBody TbBackgroundDetails backgroundDetails){
 		
-		return backgroundDetailsService.payMoney(backgroundDetails,"js");
+		return backgroundDetailsService.payMoney(backgroundDetails,"js")*0.88;
 		
 		//return 	
 	}

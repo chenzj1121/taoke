@@ -169,12 +169,12 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				criteria.andGoodsIdEqualTo(backgroundDetails.getGoodsId());
 			}
 			//时间查询
-			if(backgroundDetails.getCreateTime()!=null) {
-				criteria.andPayTimeGreaterThanOrEqualTo(backgroundDetails.getCreateTime());
+			if(backgroundDetails.getPayTime()!=null) {
+				criteria.andPayTimeGreaterThanOrEqualTo(backgroundDetails.getPayTime());
 			}
 			//时间查询
-			if(backgroundDetails.getClickTime()!=null) {
-				criteria.andPayTimeLessThanOrEqualTo(backgroundDetails.getCreateTime());
+			if(backgroundDetails.getMaxJstime()!=null) {
+				criteria.andPayTimeLessThanOrEqualTo(backgroundDetails.getMaxJstime());
 			}
 			//订单号
 			if(backgroundDetails.getOrderId()!=null){
@@ -375,12 +375,12 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 					criteria.andGoodsIdEqualTo(backgroundDetails.getGoodsId());
 				}
 				//时间查询
-				if(backgroundDetails.getCreateTime()!=null) {
-					criteria.andPayTimeGreaterThanOrEqualTo(backgroundDetails.getCreateTime());
+				if(backgroundDetails.getPayTime()!=null) {
+					criteria.andPayTimeGreaterThanOrEqualTo(backgroundDetails.getPayTime());
 				}
 				//时间查询
-				if(backgroundDetails.getClickTime()!=null) {
-					criteria.andPayTimeLessThanOrEqualTo(backgroundDetails.getCreateTime());
+				if(backgroundDetails.getMaxJstime()!=null) {
+					criteria.andPayTimeLessThanOrEqualTo(backgroundDetails.getMaxJstime());
 				}
 				//订单号
 				if(backgroundDetails.getOrderId()!=null){

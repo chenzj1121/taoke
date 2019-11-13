@@ -103,8 +103,8 @@ export default {
       },
       loading: false,
       options: [
-        { label: '是', value: true },
-        { label: '否', value: false }
+        { label: '淘宝', value: '淘宝' },
+        { label: '天猫', value: '天猫' }
       ],
       publicCustomerTableData: [],
       type:2,

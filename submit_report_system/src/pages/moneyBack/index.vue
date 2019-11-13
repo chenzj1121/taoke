@@ -6,27 +6,27 @@
       size="mini"
       label-width="100px">
       <el-form-item label="店铺名称：">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.bmShopName"></el-input>
       </el-form-item>
-      <el-form-item label="商品ID：">
+      <!-- <el-form-item label="商品ID：">
         <el-input v-model="form.name"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="优惠券名称：">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.bmYhqName"></el-input>
       </el-form-item>
       <el-form-item label="上线时间：">
-        <el-date-picker v-model="form.name"></el-date-picker>
+        <el-date-picker v-model="form.bmOnlineTime"></el-date-picker>
       </el-form-item>
       <el-form-item label="下线时间：">
-        <el-date-picker v-model="form.name"></el-date-picker>
+        <el-date-picker v-model="form.bmOfflineTime"></el-date-picker>
       </el-form-item>
       <el-form-item label="状态：">
-        <el-select v-model="form.name">
+        <el-select v-model="form.bmConfirmType">
           <el-option v-for="(option, index) in statusOptions" :key="index" :label="option.label" :value="option.value"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">查询</el-button>
+        <el-button type="primary" @click="bindData()">查询</el-button>
         <el-button type="primary" >下载表格</el-button>
         <span>驳回消息 5 条</span>
         <span>点击查看</span>
@@ -216,11 +216,10 @@ export default {
         // { name: 'name', id: 1 }
       ], // 返款的表格数据
       statusOptions: [
-        { label: '全部', value: 'name' },
-        { label: '待确认', value: 'name' },
-        { label: '已确认', value: 'name' },
-        { label: '退回', value: 'name' },
-        { label: '已打款', value: 'name' }
+        { label: '全部', value: '' },
+        { label: '通过', value: '通过' },
+        { label: '拒绝', value: '拒绝' },
+        { label: '待修改', value: '待修改' },
       ],
       moreRecordsByShopVisiable: false,
       moreRecordsByShopTableData: [

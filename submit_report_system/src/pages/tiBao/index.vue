@@ -56,9 +56,14 @@
           value-format='timestamp'>
         </el-date-picker>
       </el-form-item>
+      <el-form-item prop="coopType" label="提报状态">
+        <el-select v-model="form.coopTbtype">
+          <el-option v-for="(option, index) in submitOptions" :key="index" :label="option.label" :value="option.value"></el-option>
+        </el-select>
+      </el-form-item>
       <br>
       <div v-if="type ==4||type==0" >
-      <el-form-item label="部门:" label-width="60px" v-if="isBoss">
+      <el-form-item label="部门:" label-width="60px">
             <div>
               <el-select v-model="form.coopDeptId" placeholder="请选择" @change="getGroup(form.coopDeptId)">
               <el-option value="" label="全部"></el-option>
@@ -66,15 +71,15 @@
               </el-select>
             </div>
           </el-form-item>
-          <el-form-item label="组别:" label-width="60px" v-if="isBoss">
+          <el-form-item label="组别:" label-width="60px">
             <div>
-              <el-select v-model="form.shopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.shopGroupId)">
+              <el-select v-model="form.coopGroupId" placeholder="请选择" @change="getMember(form.coopDeptId,form.coopGroupId)">
               <el-option value="" label="全部"></el-option>
                 <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
               </el-select>
             </div>
           </el-form-item>
-          <el-form-item label="部门人员:" label-width="80px">
+          <el-form-item label="销售人员:" label-width="80px">
             <div>
               <el-select v-model="form.coopUserId" placeholder="请选择" >
                 <el-option value="" label="全部"></el-option>
@@ -202,6 +207,8 @@ export default {
                 total: 10
             },
             loading:false,
+            coopDeptId:null,
+            coopGroupId:null,
             cooperationDetailTableData:[],
             TbMaxTime:null,
             viewReason:false,
@@ -212,6 +219,12 @@ export default {
             length:0,
             fenpei:false,
             isBoss:false,
+            submitOptions: [ // 提报状态options
+        { label: '全部', value: null },
+        { label: '待审核', value: '待审核' },
+        { label: '通过', value: '通过' },
+        { label: '拒绝', value: '拒绝' },
+        ],
         }
     },
     mounted(){
@@ -220,13 +233,13 @@ export default {
         this.getUserList()
         this.getGroupList()
         this.bindData()
-        if (this.type==0) {
-          this.isBoss =true
-        }else{
-          this.form.deptId = sessionStorage.userDeptId
-          this.form.groupId = sessionStorage.userGroupId
-          this.getMember( this.form.deptId,this.form.groupId)
-        }
+        // if (this.type==0) {
+        //   this.isBoss =true
+        // }else{
+        //   this.form.deptId = sessionStorage.userDeptId
+        //   this.form.groupId = sessionStorage.userGroupId
+        //   this.getMember( this.form.deptId,this.form.groupId)
+        // }
         
     },
     methods:{
@@ -355,7 +368,7 @@ export default {
     },
     getGroup(id){
         this.form.shopGroupId = null;
-        if( this.form.coopUserId){ this.form.coopUserId = null;}
+        if( this.form.coopShenheId){ this.form.coopShenheId = null;}
         this.gruopList2 = []
         this.memberList = []
       if(id){
@@ -367,7 +380,7 @@ export default {
       }
     },
     getMember(deptId,groupId){
-        if( this.form.coopUserId){ this.form.coopUserId = null;}
+        if( this.form.coopShenheId){ this.form.coopShenheId = null;}
       this.memberList = [];
       if(deptId && groupId){
         getGroupMember(deptId,groupId).then(res=>{
@@ -386,11 +399,11 @@ export default {
       })
     },
     bindData(){
-    const form = this.form
+      const form = this.form
       const page = this.page.pageNum
       const rows = this.page.pageSize
       this.loading = true
-      getCooperationPage(form, page,rows,this.TbMaxTime,this.form.coopStartTimeEnd,this.form.coopEndTimeEnd).then(res => {
+      getCooperationPage(form, page,rows).then(res => {
          res.rows.forEach((item,index)=>{
              item.coopTbtime = item.coopTbtime?this.getMyDate(item.coopTbtime):''
              item.coopStarttime = item.coopStarttime?this.getMyDate(item.coopStarttime):''

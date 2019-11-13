@@ -227,9 +227,9 @@ export default {
       ],
       actionOptions: [ // 活动类型
         { label: '全部', value: null },
+        { label: '常规单', value: '常规单' },
         { label: '聚划算', value: '聚划算' },
         { label: '淘抢购', value: '淘抢购' },
-        { label: '常规推广', value: '常规推广' }
       ],
       paybackOptions: [ // 回款状态
         { label: '全部', value: null },

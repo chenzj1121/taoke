@@ -19,7 +19,7 @@
           <el-form-item prop="createTime" label="创建时间:" label-width="80px">
             <el-date-picker
               v-model="form.createTime"
-              type="date"
+              type="datetime"
               placeholder="选择日期">
             </el-date-picker>
           </el-form-item>

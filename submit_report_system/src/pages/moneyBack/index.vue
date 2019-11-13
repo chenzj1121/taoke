@@ -364,7 +364,7 @@ export default {
            res.rows.forEach((item,index)=>{
               let list =["bmOfflineTime","bmOnlineTime","bmMakeTime","bmCreateTime"]
               list.forEach(obj=>{
-                item[obj+'1'] = this.getMyDate(item[obj])
+                item[obj+'1'] = item[obj]?this.getMyDate(item[obj]):''
               })
               this.deptList.forEach(obj=>{
                 if(item.bmDeptId == obj.deptId){

@@ -118,8 +118,8 @@
       </el-form-item>
       </div>
         <el-form-item>
-          <el-button type="primary" @click="bindData">查询</el-button>
-          <el-button @click="() => {this.form = {};this.bindData()}">重置</el-button>&nbsp;&nbsp;&nbsp;
+          <el-button type="primary" @click="()=>{this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">查询</el-button>
+          <el-button @click="() => {this.form = {};this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">重置</el-button>&nbsp;&nbsp;&nbsp;
           <!-- <span>驳回消息 0 条</span>
           <span class="link">点击查看</span> -->
           <!-- &nbsp;&nbsp; -->
@@ -425,6 +425,9 @@ export default {
               this.userList.forEach(obj=>{
                 if(item.coopUserId ==obj.id ){
                   item.coopUser = obj.username
+                }
+                if (item.coopShenheId == obj.id) {
+                  item.coopShenhe = obj.username
                 }
               })
    

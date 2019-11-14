@@ -54,7 +54,8 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="bindData()">查询</el-button>
+        <el-button type="primary" @click="()=>{this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">查询</el-button>
+        <el-button @click="() => {this.form = {};this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">重置</el-button>
         <el-button type="primary" >下载表格</el-button>
         <span>驳回消息 5 条</span>
         <span>点击查看</span>

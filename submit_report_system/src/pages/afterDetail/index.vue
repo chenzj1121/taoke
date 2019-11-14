@@ -60,8 +60,8 @@
       </el-form-item>
       <br/>
       <el-form-item>
-        <el-button type="primary" @click="getDetailList">查询</el-button>
-        <el-button @click="() => {this.form = {};this.getDetailList()}">重置</el-button>
+        <el-button type="primary" @click="()=>{this.page={pageSize: 10,pageNum: 1,total: 10};this.getDetailList();}">查询</el-button>
+        <el-button @click="() => {this.form = {};this.page={pageSize: 10,pageNum: 1,total: 10};this.getDetailList();}">重置</el-button>
       </el-form-item>
       <el-form-item label="付款服务费总额">
         <el-input v-model="payNum"></el-input>

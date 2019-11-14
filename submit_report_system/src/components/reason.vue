@@ -4,11 +4,10 @@
             <div class="title1">
                 <p>拒绝理由</p>
                 <div class="shenheInfo">
-                    <p>审核人：{{data.coopUser}}</p>
+                    <p>审核人：{{data.coopShenhe}}</p>
                     <p>审核时间：{{data.coopShenheTime}}</p>
                  </div>
             </div>
-          
             <el-input
             style="width:450px;padding:0 10px;"
             type="textarea"
@@ -39,6 +38,7 @@ export default {
         }
     },
     created(){
+        console.log(this.data)
             this.data.coopShenheTime = this.getMyDate(this.data.coopShenheTime)
             // this.userList.forEach(item=>{
             //     if (data.coopShenheId==item.id) {

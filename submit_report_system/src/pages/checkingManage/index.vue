@@ -57,8 +57,8 @@
         <el-input type="number" v-model="cmFwPrice" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="bindData">查询</el-button>
-        <el-button @click="() => {this.form = {}; this.bindData()}">重置</el-button>
+       <el-button type="primary" @click="()=>{this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">查询</el-button>
+          <el-button @click="() => {this.form = {};this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">重置</el-button>
       </el-form-item>
     </el-form>
 

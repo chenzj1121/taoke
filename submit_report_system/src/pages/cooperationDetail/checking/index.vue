@@ -111,7 +111,7 @@
         </el-form-item>
         <br/>
         <el-form-item label="返款账号：" :rules="[{ required: true, message: '不能为空' }]">
-          <el-input v-model="form.bmBackAccountumber"></el-input>
+          <el-input v-model="form.bmBackAccountNumber"></el-input>
         </el-form-item>
         <br/>
         <el-form-item label="返款备注：">

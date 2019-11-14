@@ -112,8 +112,8 @@
           </el-form-item> -->
       </el-form>
       <el-row>
-        <el-button type="primary" size="mini" @click="bindData">查询</el-button>
-        <el-button type="default" size="mini" @click="reset">重置</el-button>
+        <el-button size="mini" type="primary" @click="()=>{this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">查询</el-button>
+        <el-button  size="mini" @click="() => {this.form = {};this.page={pageSize: 10,pageNum: 1,total: 10};this.bindData();}">重置</el-button>
         <el-button type="success" size="mini" @click="addCustomer">新建</el-button>
         <!-- <el-button type="warning" size="mini">导入</el-button> -->
         <!-- <el-button type="primary" size="mini">模板下载</el-button> -->
@@ -313,10 +313,6 @@ export default {
         }
         this.bindData()
       })
-    },
-    reset () {
-      this.form = {}
-      this.bindData()
     },
     bindData () {
       const shop = this.form

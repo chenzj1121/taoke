@@ -195,10 +195,10 @@ export default {
   },
   mounted(){
     this.type = getUser().type
+    this.getDeptList()
     this.getUserList()
     this.getGroupList()
-    this.getDeptList()
-    this.getDetailList()
+    // this.getDetailList()  转移到获取部门当中去
   
     if (this.type==0) {
       this.isBoss =true
@@ -211,9 +211,6 @@ export default {
   methods:{
     openDrawer(gdId,useId){
       this.drawer = true
-      // if (!useId) {
-      //   useId = 'null'
-      // }
       getDetailById(gdId,useId).then(res=>{
           res.forEach((item,index)=>{
               this.groupList.forEach((obj)=>{
@@ -222,7 +219,7 @@ export default {
                   }
               })
               this.deptList.forEach(obj=>{
-                if (item.deptId = obj.deptId) {
+                if (item.deptId == obj.deptId) {
                       item.deptName = obj.deptName
                 }
               })
@@ -314,6 +311,13 @@ export default {
       getDeptByList().then(res => {
         // console.log(res)
         this.deptList = res
+       res.forEach(item=>{
+        if (item.deptName=="销售部") {
+          this.form.deptId = item.deptId
+          this.getDetailList()
+        }
+      })
+       
       })
     },
     getGroupList() {
@@ -329,16 +333,16 @@ export default {
       param.pageSize = this.page.pageSize
       this.getPay()
       this.getJs()
+     
       getDetail(this.form,this.page.pageNum,this.page.pageSize).then(res=>{
        res.rows.forEach((item,index)=>{
               this.groupList.forEach((obj)=>{
                  if(item.deptId == obj.groupDeptId && item.groupId ==obj.groupId){
                       item.groupName = obj.groupName
-                      item.deptName = obj.groupName
                   }
               })
                this.deptList.forEach(obj=>{
-                if (item.deptId = obj.deptId) {
+                if (item.deptId == obj.deptId) {
                       item.deptName = obj.deptName
                 }
               })

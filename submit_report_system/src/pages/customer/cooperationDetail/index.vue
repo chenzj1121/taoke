@@ -56,9 +56,8 @@
         </el-form-item>
         <el-form-item prop="coopStarttime" label="预告时间" v-if="form.beginTime === '预告'" :rules="[{ required: true, message: '请输入预告时间' }]">
           <el-date-picker
-          
             v-model="form.coopStarttime"
-            type="date"
+            type="datetime"
             placeholder="选择日期"
             >
           </el-date-picker>
@@ -205,14 +204,7 @@ export default {
       this.isUpadte = true;
       this.getCoopDetail();
     }else{
-      if(!this.$route.params) {
-       this.$alert('未检测到店铺', '警告', {
-          confirmButtonText: '确定',
-          callback: action => {
-              this.$router.go(-1)
-          }
-        });
-      }
+    
       this.form.coopDeptId=getUser().deptId
       this.form.coopGroupId = getUser().groupId
       this.form.coopUserId=getUser().id
@@ -220,6 +212,14 @@ export default {
       this.form.coopCustomer = this.shopDetail.shopName;
       this.form.coopBossId = this.shopDetail.id
       this.form.coopBossName = this.shopDetail.shopBoss
+        if(!this.$route.params.shopName) {
+       this.$alert('未检测到店铺', '警告', {
+          confirmButtonText: '确定',
+          callback: action => {
+              this.$router.go(-1)
+          }
+        });
+      }
     }
     if (this.$route.query.check) {
         this.check = true
@@ -377,6 +377,9 @@ export default {
         if(valid){
           // if (this.flag) {
             if (this.isUpadte) {
+              if (this.form.beginTime =='立即开始') {
+                this.form.coopStarttime = new Date()
+              }
               this.form.coopTbtime = new Date()
               this.form.coopTbtype = '待审核'
               this.form.coopShenheId = null;

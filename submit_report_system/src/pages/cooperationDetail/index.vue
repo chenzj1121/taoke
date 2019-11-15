@@ -225,6 +225,7 @@ export default {
         { label: '待审核', value: '待审核' },
         { label: '通过', value: '通过' },
         { label: '拒绝', value: '拒绝' },
+        { label: '待修改', value: '待修改' },
       ],
       actionOptions: [ // 活动类型
         { label: '全部', value: null },

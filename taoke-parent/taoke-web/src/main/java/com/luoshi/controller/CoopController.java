@@ -190,6 +190,7 @@ public class CoopController {
 	@RequestMapping("/update")
 	public Result update(@RequestBody TbCoop coop) {
 		try {
+			coop.setCoopTbtime(new Date());
 			coopService.update(coop);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {

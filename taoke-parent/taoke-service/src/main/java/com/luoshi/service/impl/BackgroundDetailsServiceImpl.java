@@ -395,7 +395,7 @@ public class BackgroundDetailsServiceImpl implements BackgroundDetailsService {
 				double i=0;
 				for (TbBackgroundDetails tbBackgroundDetails : list) {
 					if(string.equals("pay")){
-					i=i+tbBackgroundDetails.getPay();
+					i=i+tbBackgroundDetails.getPayAbout();
 					}else if(string.equals("js")){
 					i=i+tbBackgroundDetails.getMoneyAbout();
 					}

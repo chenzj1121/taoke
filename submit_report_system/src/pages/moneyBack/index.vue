@@ -223,7 +223,7 @@
     <form enctype="multipart/form-data" target="nm_iframe" style="display:inline;">
         <input type="file" class="yhq" name="file" @change="upload" style="display:none" data-id="2" >
          <div class="picBox"  @click="openPic">
-          点击添加图片
+          点击添加打款图片
           <img class="showPic" src="" >
         </div>
     </form>

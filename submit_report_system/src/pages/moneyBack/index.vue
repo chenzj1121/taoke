@@ -87,6 +87,15 @@
            </el-popover>
          </template>
       </el-table-column>
+      <el-table-column prop="pic" label="通过截图">
+            <template slot-scope="scope">
+               <el-image 
+              style="width: 60px; height: 60px"
+              :src="`${PRE_URL}/${scope.row.bmMakePhoto}`" 
+              :preview-src-list="[`${PRE_URL}/${scope.row.bmMakePhoto}`]">
+            </el-image>
+            </template>
+      </el-table-column>
       <el-table-column prop="dep" label="销售部"></el-table-column>
       <el-table-column prop="group" label="组别"></el-table-column>
       <el-table-column prop="creater" label="销售人"></el-table-column>
@@ -102,7 +111,7 @@
       <el-table-column prop="bmType" label="操作类型"></el-table-column>
       <el-table-column prop="bmMakeMoney" label="打款金额"></el-table-column>
       <el-table-column prop="bmBackMoney" label="返/退款金额"></el-table-column>
-      <el-table-column prop="bmSurplus" label="剩余金额"></el-table-column>
+      <!-- <el-table-column prop="bmSurplus" label="剩余金额"></el-table-column> -->
       <el-table-column prop="bmBackAccount" label="打款账户">
         <template slot-scope="scope">
           <span class="link" @click="showAccountInfo(scope.row)">{{scope.row.bmBackAccount}}</span>
@@ -211,6 +220,13 @@
       placeholder="选择日期"
       required>
     </el-date-picker>
+    <form enctype="multipart/form-data" target="nm_iframe" style="display:inline;">
+        <input type="file" class="yhq" name="file" @change="upload" style="display:none" data-id="2" >
+         <div class="picBox"  @click="openPic">
+          点击添加图片
+          <img class="showPic" src="" >
+        </div>
+    </form>
     <el-button type="warning" @click="submitBackTime" style="margin-left:10px;">提交</el-button>
     </el-dialog>
      <el-dialog
@@ -230,7 +246,7 @@
 </template>
 
 <script>
-import {PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList,updateBackMoney,getGoodsDetail} from '@/api'
+import {uploadPic,PRE_URL,getBackMoney,getUserByList, getDeptByList,getGroupByList,updateBackMoney,getGoodsDetail} from '@/api'
 import Page from '@/components/page'
 import { getUser } from '../../utils/auth'
 export default {
@@ -289,6 +305,48 @@ export default {
     this.bindData()
   },
   methods: {
+     upload(e){
+          let form  = e.currentTarget.parentElement
+      // let form = document.getElementById("form")
+          let formData = new FormData() ;
+          console.log(e)
+          let file = e.currentTarget.files[0]
+          let fileType = file.name.split(".")[1]
+          let fileName = file.name.split(".")[0]
+         if(!/\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/.test('.'+fileType)){
+            this.$errmsg("请上传图片格式文件")
+         }else{
+           let url = this.getObjectURL(file)
+           let picBox = e.currentTarget.nextElementSibling.getElementsByClassName("showPic")[0]
+           let type = e.currentTarget.getAttribute("data-id")
+           console.log(type)
+           formData.append('file',file);
+          uploadPic(formData).then(res=>{
+            if (res.success) {
+              picBox.setAttribute("src",url)
+              picBox.style.display = 'block'
+              // this.form.cmDkPhote = res.message
+            }else{
+              this.$errmsg(res.message)
+            }
+            console.log(res)
+          })
+         }
+        },
+    getObjectURL(file) {  
+    var url = null;  
+    if (window.createObjcectURL != undefined) {  
+        url = window.createOjcectURL(file);  
+    } else if (window.URL != undefined) {  
+        url = window.URL.createObjectURL(file);  
+    } else if (window.webkitURL != undefined) {  
+        url = window.webkitURL.createObjectURL(file);  
+    }  
+    return url;  
+   },
+    openPic(e){
+       e.currentTarget.previousElementSibling.click()
+   },
     resubmit(item){
         this.$router.push({ path: '/cooperationDetail/checking',query:{bmId:item.bmId}})
     },
@@ -448,6 +506,36 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.picBox{
+  margin: 20px 0;
+  width: 180px;
+  height: 180px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 180px;
+  color: #409EFF;
+  cursor: pointer;
+  position: relative;
+  .showPic{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+}
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
 .title {
   padding: 10px;
   background: #eee;

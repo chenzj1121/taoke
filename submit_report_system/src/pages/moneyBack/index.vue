@@ -87,12 +87,12 @@
            </el-popover>
          </template>
       </el-table-column>
-      <el-table-column prop="pic" label="通过截图">
-          <template slot-scope="scope" v-if="scope.row.bmConfirmType=='通过'">
+      <el-table-column prop="pic" label="打款截图">
+          <template slot-scope="scope" v-if="scope.row.bmShPhoto">
                <el-image 
               style="width: 60px; height: 60px"
-              :src="`${PRE_URL}/${scope.row.bmMakePhoto}`" 
-              :preview-src-list="[`${PRE_URL}/${scope.row.bmMakePhoto}`]">
+              :src="`${PRE_URL}/${scope.row.bmShPhoto}`" 
+              :preview-src-list="[`${PRE_URL}/${scope.row.bmShPhoto}`]">
             </el-image>
             </template>
       </el-table-column>
@@ -141,11 +141,11 @@
           <!-- <img src="http://iph.href.lu/200x200"  min-width="70" height="70"> -->
         </template>
       </el-table-column>
-      <el-table-column prop="bm_back_type" label="再次提交" width="100px">
+      <!-- <el-table-column prop="bm_back_type" label="再次提交" width="100px">
          <template slot-scope="scope">
            <el-button size="mini" @click='resubmit(scope.row)' disabled>再次提交</el-button>
          </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <Page style="text-align:right;margin-top:10px;" :page="page" @change="bindData"/>
 
@@ -325,7 +325,8 @@ export default {
             if (res.success) {
               picBox.setAttribute("src",url)
               picBox.style.display = 'block'
-              // this.form.cmDkPhote = res.message
+              console.log(res.message)
+              this.checkObj.bmShPhoto = res.message
             }else{
               this.$errmsg(res.message)
             }

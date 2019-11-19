@@ -2114,6 +2114,76 @@ public class TbBackmoneyExample {
             addCriterion("bm_create_time_end not between", value1, value2, "bmCreateTimeEnd");
             return (Criteria) this;
         }
+
+        public Criteria andBmShPhotoIsNull() {
+            addCriterion("bm_sh_photo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoIsNotNull() {
+            addCriterion("bm_sh_photo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoEqualTo(String value) {
+            addCriterion("bm_sh_photo =", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoNotEqualTo(String value) {
+            addCriterion("bm_sh_photo <>", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoGreaterThan(String value) {
+            addCriterion("bm_sh_photo >", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoGreaterThanOrEqualTo(String value) {
+            addCriterion("bm_sh_photo >=", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoLessThan(String value) {
+            addCriterion("bm_sh_photo <", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoLessThanOrEqualTo(String value) {
+            addCriterion("bm_sh_photo <=", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoLike(String value) {
+            addCriterion("bm_sh_photo like", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoNotLike(String value) {
+            addCriterion("bm_sh_photo not like", value, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoIn(List<String> values) {
+            addCriterion("bm_sh_photo in", values, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoNotIn(List<String> values) {
+            addCriterion("bm_sh_photo not in", values, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoBetween(String value1, String value2) {
+            addCriterion("bm_sh_photo between", value1, value2, "bmShPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andBmShPhotoNotBetween(String value1, String value2) {
+            addCriterion("bm_sh_photo not between", value1, value2, "bmShPhoto");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

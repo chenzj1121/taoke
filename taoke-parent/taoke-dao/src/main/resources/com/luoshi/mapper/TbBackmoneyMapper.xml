@@ -33,6 +33,7 @@
     <result column="bm_timeId" property="bmTimeid" jdbcType="BIGINT" />
     <result column="bm_make_time_end" property="bmMakeTimeEnd" jdbcType="TIMESTAMP" />
     <result column="bm_create_time_end" property="bmCreateTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="bm_sh_photo" property="bmShPhoto" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -98,7 +99,7 @@
     bm_make_account, bm_make_time, bm_create_time, bm_text, bm_yhq_photo, bm_confirm_type, 
     bm_make_photo, bm_byzd, bm_back_type, bm_user_name, bm_back_bl, bm_back_account, 
     bm_back_account_number, bm_dingdan_type, bm_shop_id, bm_timeId, bm_make_time_end, 
-    bm_create_time_end
+    bm_create_time_end, bm_sh_photo
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luoshi.pojo.TbBackmoneyExample" >
     select
@@ -141,7 +142,7 @@
       bm_back_type, bm_user_name, bm_back_bl, 
       bm_back_account, bm_back_account_number, bm_dingdan_type, 
       bm_shop_id, bm_timeId, bm_make_time_end, 
-      bm_create_time_end)
+      bm_create_time_end, bm_sh_photo)
     values (#{bmId,jdbcType=INTEGER}, #{bmDeptId,jdbcType=INTEGER}, #{bmGroupId,jdbcType=INTEGER}, 
       #{bmUserId,jdbcType=INTEGER}, #{bmShopName,jdbcType=VARCHAR}, #{bmGoodsId,jdbcType=INTEGER}, 
       #{bmYhqName,jdbcType=VARCHAR}, #{bmOnlineTime,jdbcType=TIMESTAMP}, #{bmOfflineTime,jdbcType=TIMESTAMP}, 
@@ -152,7 +153,7 @@
       #{bmBackType,jdbcType=VARCHAR}, #{bmUserName,jdbcType=VARCHAR}, #{bmBackBl,jdbcType=VARCHAR}, 
       #{bmBackAccount,jdbcType=VARCHAR}, #{bmBackAccountNumber,jdbcType=VARCHAR}, #{bmDingdanType,jdbcType=VARCHAR}, 
       #{bmShopId,jdbcType=INTEGER}, #{bmTimeid,jdbcType=BIGINT}, #{bmMakeTimeEnd,jdbcType=TIMESTAMP}, 
-      #{bmCreateTimeEnd,jdbcType=TIMESTAMP})
+      #{bmCreateTimeEnd,jdbcType=TIMESTAMP}, #{bmShPhoto,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.luoshi.pojo.TbBackmoney" >
     insert into tb_backmoney
@@ -250,6 +251,9 @@
       <if test="bmCreateTimeEnd != null" >
         bm_create_time_end,
       </if>
+      <if test="bmShPhoto != null" >
+        bm_sh_photo,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="bmId != null" >
@@ -344,6 +348,9 @@
       </if>
       <if test="bmCreateTimeEnd != null" >
         #{bmCreateTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bmShPhoto != null" >
+        #{bmShPhoto,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -449,6 +456,9 @@
       <if test="record.bmCreateTimeEnd != null" >
         bm_create_time_end = #{record.bmCreateTimeEnd,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.bmShPhoto != null" >
+        bm_sh_photo = #{record.bmShPhoto,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -486,7 +496,8 @@
       bm_shop_id = #{record.bmShopId,jdbcType=INTEGER},
       bm_timeId = #{record.bmTimeid,jdbcType=BIGINT},
       bm_make_time_end = #{record.bmMakeTimeEnd,jdbcType=TIMESTAMP},
-      bm_create_time_end = #{record.bmCreateTimeEnd,jdbcType=TIMESTAMP}
+      bm_create_time_end = #{record.bmCreateTimeEnd,jdbcType=TIMESTAMP},
+      bm_sh_photo = #{record.bmShPhoto,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -584,6 +595,9 @@
       <if test="bmCreateTimeEnd != null" >
         bm_create_time_end = #{bmCreateTimeEnd,jdbcType=TIMESTAMP},
       </if>
+      <if test="bmShPhoto != null" >
+        bm_sh_photo = #{bmShPhoto,jdbcType=VARCHAR},
+      </if>
     </set>
     where bm_id = #{bmId,jdbcType=INTEGER}
   </update>
@@ -618,7 +632,8 @@
       bm_shop_id = #{bmShopId,jdbcType=INTEGER},
       bm_timeId = #{bmTimeid,jdbcType=BIGINT},
       bm_make_time_end = #{bmMakeTimeEnd,jdbcType=TIMESTAMP},
-      bm_create_time_end = #{bmCreateTimeEnd,jdbcType=TIMESTAMP}
+      bm_create_time_end = #{bmCreateTimeEnd,jdbcType=TIMESTAMP},
+      bm_sh_photo = #{bmShPhoto,jdbcType=VARCHAR}
     where bm_id = #{bmId,jdbcType=INTEGER}
   </update>
 </mapper>

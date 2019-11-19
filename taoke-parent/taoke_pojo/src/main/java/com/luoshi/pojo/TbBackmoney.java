@@ -65,6 +65,8 @@ public class TbBackmoney {
 
     private Date bmCreateTimeEnd;
 
+    private String bmShPhoto;
+
     public Integer getBmId() {
         return bmId;
     }
@@ -311,5 +313,13 @@ public class TbBackmoney {
 
     public void setBmCreateTimeEnd(Date bmCreateTimeEnd) {
         this.bmCreateTimeEnd = bmCreateTimeEnd;
+    }
+
+    public String getBmShPhoto() {
+        return bmShPhoto;
+    }
+
+    public void setBmShPhoto(String bmShPhoto) {
+        this.bmShPhoto = bmShPhoto == null ? null : bmShPhoto.trim();
     }
 }

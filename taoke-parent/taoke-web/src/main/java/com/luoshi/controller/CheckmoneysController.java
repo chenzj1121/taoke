@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luoshi.pojo.TbCheckmoneys;
+import com.luoshi.pojo.TbSysUser;
 import com.luoshi.service.CheckmoneysService;
+import com.luoshi.service.SysUserService;
 
 import entity.PageResult;
 import entity.Result;
@@ -24,6 +26,9 @@ public class CheckmoneysController {
 
 	@Autowired
 	private CheckmoneysService checkmoneysServiceImpl;
+	
+	@Autowired
+	private SysUserService sysUserService;
 	
 	/**
 	 * 返回全部列表
@@ -52,6 +57,12 @@ public class CheckmoneysController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbCheckmoneys checkmoneys){
 		try {
+			if(checkmoneys.getCmUserId()!=null){
+				Integer id = checkmoneys.getCmUserId();
+				TbSysUser user = sysUserService.findOne(id);
+				checkmoneys.setCmDeptId(user.getDeptId());
+				checkmoneys.setCmGroupId(user.getGroupId());
+			}
 			checkmoneysServiceImpl.add(checkmoneys);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -111,8 +122,6 @@ public class CheckmoneysController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbCheckmoneys checkmoneys, int page, int rows ){
-		System.out.println(checkmoneys.getCmApplyTime());
-		System.out.println(checkmoneys.getCmBackTime());
 		return checkmoneysServiceImpl.findPage(checkmoneys, page, rows);		
 	}
 	/**

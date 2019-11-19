@@ -103,6 +103,15 @@ public class BackmoneyServiceImpl implements BackmoneyService {
 			if(user.getType().equals("1")){
 				criteria.andBmGroupIdEqualTo(user.getGroupId());
 			}
+			if(backmoney.getBmDeptId()!=null){
+				criteria.andBmDeptIdEqualTo(backmoney.getBmDeptId());
+			}
+			if(backmoney.getBmGroupId()!=null){
+				criteria.andBmGroupIdEqualTo(backmoney.getBmGroupId());
+			}
+			if(backmoney.getBmUserId()!=null){
+				criteria.andBmUserIdEqualTo(backmoney.getBmUserId());
+			}
 			//根据店铺名称查找
 			if(backmoney.getBmShopName()!=null && backmoney.getBmShopName().length()>0){
 				criteria.andBmShopNameLike("%"+backmoney.getBmShopName()+"%");

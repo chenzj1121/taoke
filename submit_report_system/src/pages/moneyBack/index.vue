@@ -88,7 +88,7 @@
          </template>
       </el-table-column>
       <el-table-column prop="pic" label="通过截图">
-            <template slot-scope="scope">
+          <template slot-scope="scope" v-if="scope.row.bmConfirmType=='通过'">
                <el-image 
               style="width: 60px; height: 60px"
               :src="`${PRE_URL}/${scope.row.bmMakePhoto}`" 

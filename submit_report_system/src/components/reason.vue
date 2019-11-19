@@ -4,7 +4,7 @@
             <div class="title1">
                 <p>拒绝理由</p>
                 <div class="shenheInfo">
-                    <p>审核人：{{data.coopShenhe}}</p>
+                    <p>审核人：{{data.shenhe}}</p>
                     <p>审核时间：{{data.coopShenheTime}}</p>
                  </div>
             </div>

@@ -1,7 +1,34 @@
 <template>
   <div>
     <div class="title">查款管理</div>
+    
     <el-form inline size="mini" label-position="left" label-width="120px;">
+       <div v-if="type==0 || type==1">
+          <el-form-item label="部门:" label-width="80px">
+            <div>
+              <el-select v-model="form.cmDeptId" placeholder="请选择" @change="getGroup(form.cmDeptId)" >
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  deptList" :key="i" :value="item.deptId" :label="item.deptName"></el-option>
+              </el-select>
+            </div>
+          </el-form-item>
+          <el-form-item label="组别:" label-width="60px">
+            <div>
+              <el-select v-model="form.cmGroupId" placeholder="请选择" @change="getMember(form.cmDeptId,form.cmGroupId)" >
+              <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  gruopList2" :key="i" :value="item.groupId" :label="item.groupName"></el-option>
+              </el-select>
+            </div>
+          </el-form-item>
+          <el-form-item label="部门人员:" label-width="80px">
+            <div>
+              <el-select v-model="form.cmUserId" placeholder="请选择" >
+                <el-option value="" label="全部"></el-option>
+                <el-option v-for="(item,i) in  memberList" :key="i" :value="item.id" :label="item.username"></el-option>
+              </el-select>
+            </div>
+          </el-form-item>
+        </div>
       <el-form-item label="店铺名称：">
         <el-input v-model="form.cmShopName"></el-input>
       </el-form-item>
@@ -89,8 +116,8 @@
            </el-popover>
          </template>
       </el-table-column>
-      <el-table-column prop="cmSellDeptName" label="销售部"></el-table-column>
-      <el-table-column prop="cmDeptName" label="部门"></el-table-column>
+      <el-table-column prop="cmDeptName" label="销售部"></el-table-column>
+      <el-table-column prop="cmGroupName" label="部门"></el-table-column>
       <el-table-column prop="cmUserName" label="责任人"></el-table-column>
       <el-table-column prop="cmShopName" label="店铺名称">
         <template slot-scope="scope">
@@ -201,7 +228,7 @@
 
 <script>
 import Page from '@/components/page'
-import { getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL,upCheckMoney,getCheckmonkeyNum} from '@/api'
+import { getGroupMember,getCheckmonkeyPage,getDeptByList,getGroupByList,getUserByList ,getGoodsDetail,PRE_URL,upCheckMoney,getCheckmonkeyNum} from '@/api'
 import { getUser } from '../../utils/auth'
 export default {
   components: {
@@ -219,8 +246,8 @@ export default {
       form: {
         cmApplyTimeEnd:null,
         cmBackTimeEnd:null,
-        cmDeptId:getUser().type==0?null:getUser().deptId,
-        cmGroupId:getUser().type==0?null:getUser().groupId,
+        // cmDeptId:getUser().type==0?null:getUser().deptId,
+        // cmGroupId:getUser().type==0?null:getUser().groupId,
       },
       page: {
         pageSize: 10,
@@ -254,6 +281,8 @@ export default {
         deptList:[],
         groupList:[],
         userList:[],
+        memberList:[],
+        gruopList2:[],
         PRE_URL,
         type:2,
         backTimeBox:false,
@@ -310,6 +339,28 @@ export default {
     reSubmit(item){
       console.log(item)
       this.$router.push({ path: '/cooperationDetail/checking',query:{id:item.cmShopId,cid:item.cmId}})
+    },
+     getGroup(id){
+        this.form.cmGroupId = null;
+        if( this.form.cmUserId){ this.form.cmUserId = null;}
+        this.gruopList2 = []
+        this.memberList = []
+      if(id){
+      this.groupList.map(item=>{
+        if(item.groupDeptId==id){
+          this.gruopList2.push(item)
+        }
+      })
+      }
+    },
+    getMember(deptId,groupId){
+        if( this.form.cmUserId){ this.form.cmUserId = null;}
+      this.memberList = [];
+      if(deptId && groupId){
+        getGroupMember(deptId,groupId).then(res=>{
+          this.memberList = res
+        })
+      }
     },
     getUserList(){
       getUserByList().then(res=>{
@@ -375,8 +426,8 @@ export default {
               item.cmApplyTime =item.cmApplyTime? this.getMyDate(item.cmApplyTime):''
               item.cmBackTime =  item.cmBackTime?this.getMyDate(item.cmBackTime):''
               this.groupList.forEach(obj=>{
-                if(item.cmSellDept == obj.groupId && item.cmDept == obj.groupDeptId){
-                  item.cmSellDeptName = obj.groupName
+                if(item.cmGroupId == obj.groupId && item.cmDeptId == obj.groupDeptId){
+                  item.cmGroupName = obj.groupName
                 }
               })
               this.userList.forEach(obj=>{
@@ -385,7 +436,7 @@ export default {
                 }
               })
               this.deptList.forEach(obj=>{
-                if(item.cmDept == obj.deptId){
+                if(item.cmDeptId == obj.deptId){
                   item.cmDeptName = obj.deptName
                 }
               })

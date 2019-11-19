@@ -356,8 +356,8 @@ export default {
       this.form.cmApplyTime = new Date()
       this.form.cmTimeid = this.goodsFID;
       this.form.cmUserId = this.userInfo.id
-      this.form.cmSellDept = this.userInfo.groupId
-      this.form.cmDept = this.userInfo.deptId;
+      this.form.cmGroupId = this.userInfo.groupId
+      this.form.cmDeptId = this.userInfo.deptId;
       this.form.cmShopName =this.shopDetail.shopName
       this.form.cmShopId = this.shopDetail.id
       addCheckMoney(this.form).then(res=>{

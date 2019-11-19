@@ -103,6 +103,15 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 			if(user.getType().equals("1")){
 				criteria.andCmGroupIdEqualTo(user.getGroupId());
 			}
+			if(checkmoneys.getCmDeptId()!=null){
+				criteria.andCmDeptIdEqualTo(checkmoneys.getCmDeptId());
+			}
+			if(checkmoneys.getCmGroupId()!=null){
+				criteria.andCmGroupIdEqualTo(checkmoneys.getCmGroupId());
+			}
+			if(checkmoneys.getCmUserId()!=null){
+				criteria.andCmUserIdEqualTo(checkmoneys.getCmUserId());
+			}
 			//申请时间
 			if(checkmoneys.getCmApplyTime()!=null){
 				criteria.andCmApplyTimeGreaterThan(checkmoneys.getCmApplyTime());

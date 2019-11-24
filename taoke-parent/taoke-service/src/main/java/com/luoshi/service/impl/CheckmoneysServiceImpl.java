@@ -214,9 +214,10 @@ public class CheckmoneysServiceImpl implements CheckmoneysService {
 					criteria.andCmBackTimeLessThanOrEqualTo(checkmoneys.getCmEndtime());
 				}
 				//状态
-				if(checkmoneys.getCmType()!=null) {
-					criteria.andCmTypeEqualTo(checkmoneys.getCmType());
-				}
+//				if(checkmoneys.getCmType()!=null) {
+//					criteria.andCmTypeEqualTo(checkmoneys.getCmType());
+//				}
+				criteria.andCmTypeEqualTo("通过");
 				//结算金额排序
 				
 				System.out.println("传递"+checkmoneys.getCmJsMoney());

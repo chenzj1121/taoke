@@ -121,6 +121,25 @@ public class ShopServiceImpl implements ShopService {
             return list;
         }
     }
+    
+    @Override
+    public List<String> checkshopName(String shopName) {
+
+	    List<String> list = new ArrayList<>();
+        TbShopExample example=new TbShopExample();
+        com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
+
+        criteria.andShopNameEqualTo(shopName);
+        List<TbShop> tbShops = shopMapper.selectByExample(example);
+        if(tbShops.size() == 0) {
+            return list;
+        } else {
+            for (TbShop shop : tbShops){
+                list.add(sysUserService.findOne(shop.getShopUseId()).getUsername());
+            }
+            return list;
+        }
+    }
 
     @Override
 	public PageResult findPage(TbShop shop, int pageNum, int pageSize) {

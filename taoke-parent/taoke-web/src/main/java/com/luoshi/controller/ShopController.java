@@ -47,6 +47,16 @@ public class ShopController {
     	int size = shopService.checkWangWangAccount(wangwangAccount).size();
         return size;
     }
+    
+    /**
+	 * 查询店铺名
+	 * @param wangwangAccount
+	 * @return
+	 */
+    @RequestMapping("/getWangwangAccountCounts")
+    public List  getSubmitshopNameList(@RequestParam("shopName") String shopName) {
+    	return  shopService.checkshopName(shopName);
+    }
 	
 	/**
 	 * 返回全部列表

@@ -6,7 +6,7 @@
         <el-form-item prop="shopName" label="店铺名称：" :rules="[{ required: true, message: '店铺名称不能为空' }]">
           <div class="oneline">
             <el-input v-model="form.shopName"></el-input>
-            <el-button :type="btn1.type" @click="checkname" :loading="btn.load">{{btn.txt}}</el-button>
+            <el-button :type="btn1.type" @click="checkname" :loading="btn1.load">{{btn1.txt}}</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="wangwangaccount" label="旺旺账号：" :rules="[{ required: true, message: '旺旺账号不能为空' }]">
@@ -89,6 +89,11 @@ export default {
   },
   methods: {
     onSubmit () {
+      if (this.btn.txt=="成功" && this.btn1.txt=="成功") {
+        this.flag = true
+      }else{
+        this.flag = false
+      }
       if(this.flag){
       this.$refs.form.validate(valid => {
         if (valid) {
@@ -112,7 +117,7 @@ export default {
         }
       })
       }else{
-        this.$errmsg("请验证旺旺号")
+        this.$errmsg("请验证旺旺号和店铺名")
       }
     },
     back () {
@@ -126,17 +131,33 @@ export default {
         if(res<=3){
           this.btn.type = "success";
           this.btn.txt = "成功"
-          this.flag = true;
+          // this.flag = true;
         }else{
           this.btn.type = "danger";
-          this.flag = false;
+          // this.flag = false;
         }
 
       })
     },
     checkname(){
+      this.btn1.load = true
       checkShopName(this.form.shopName).then(res=>{
-        console.log(res)
+      this.btn1.load = false
+        if (res[0]) {
+          for(let i =0;i<res.length;i++){
+            if (res[i]==getUser().username) {
+                this.btn1.type = "primary";
+                this.btn1.txt = "检测"
+               this.$errmsg("该店铺已存在您的私海账户中")
+               break;
+            }
+            this.btn1.txt = "成功"
+            this.btn1.type = "success";
+          }
+        }else{
+          this.btn1.type = "success";
+          this.btn1.txt = "成功"
+        }
       })
     }
   }

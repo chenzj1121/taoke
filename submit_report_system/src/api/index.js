@@ -77,9 +77,9 @@ export const findRecord = (id) => ajax(PRE_URL + '/followUpRecord/findOne.do?id=
 
 export const getRecord = (obj) => ajax(PRE_URL + '/followUpRecord/search.do?page=1&rows=99',obj,'get')
 
-export const checkWangWang = (name) => ajax(PRE_URL + '/shop/getWangwangAccountCounts.do?wangwangAccount='+name,'post')
+export const checkWangWang = (name) => ajax(PRE_URL + '/shop/getWangwangAccountCounts.do?wangwangAccount='+name,'get')
 
-export const checkShopName = (name) => ajax(PRE_URL + '/shop/getshopNameCounts.do?shopName='+name,'post')
+export const checkShopName = (name) => ajax(PRE_URL + '/shop/getshopNameCounts.do?shopName='+name,'get')
 
 export const getDetail = (obj,page,rows) => ajax(PRE_URL + `/backgroundDetails/search.do?page=${page}&rows=${rows}`,obj,'post')
 

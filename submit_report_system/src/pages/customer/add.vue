@@ -4,7 +4,10 @@
     <div class="content">
       <el-form ref="form" :model="form" label-width="120px" label-position="left" size="mini">
         <el-form-item prop="shopName" label="店铺名称：" :rules="[{ required: true, message: '店铺名称不能为空' }]">
-          <el-input v-model="form.shopName"></el-input>
+          <div class="oneline">
+            <el-input v-model="form.shopName"></el-input>
+            <el-button :type="btn1.type" @click="checkname" :loading="btn.load">{{btn.txt}}</el-button>
+          </div>
         </el-form-item>
         <el-form-item prop="wangwangaccount" label="旺旺账号：" :rules="[{ required: true, message: '旺旺账号不能为空' }]">
           <div class="oneline">
@@ -59,7 +62,7 @@
 </template>
 
 <script>
-import { addShop,checkWangWang } from '@/api'
+import { addShop,checkWangWang,checkShopName} from '@/api'
 import maturity from '@/assets/maturity'
 import {getUser} from "../../utils/auth"
 export default {
@@ -69,6 +72,11 @@ export default {
       maturities: maturity,
       status: ['淘宝', '天猫'],
       btn:{
+        type:"primary",
+        txt:"检测",
+        load:false,
+      },
+      btn1:{
         type:"primary",
         txt:"检测",
         load:false,
@@ -124,6 +132,11 @@ export default {
           this.flag = false;
         }
 
+      })
+    },
+    checkname(){
+      checkShopName(this.form.shopName).then(res=>{
+        console.log(res)
       })
     }
   }

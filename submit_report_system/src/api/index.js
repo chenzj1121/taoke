@@ -79,6 +79,8 @@ export const getRecord = (obj) => ajax(PRE_URL + '/followUpRecord/search.do?page
 
 export const checkWangWang = (name) => ajax(PRE_URL + '/shop/getWangwangAccountCounts.do?wangwangAccount='+name,'post')
 
+export const checkShopName = (name) => ajax(PRE_URL + '/shop/getshopNameCounts.do?shopName='+name,'post')
+
 export const getDetail = (obj,page,rows) => ajax(PRE_URL + `/backgroundDetails/search.do?page=${page}&rows=${rows}`,obj,'post')
 
 export const getGroupMember = (deptId,groupId) => ajax(PRE_URL + '/sysUser/getUserByDeptIdAndGroupId.do?deptId='+deptId+"&groupId="+groupId,'','post')

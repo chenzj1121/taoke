@@ -53,7 +53,7 @@ public class ShopController {
 	 * @param wangwangAccount
 	 * @return
 	 */
-    @RequestMapping("/getWangwangAccountCounts")
+    @RequestMapping("/getshopNameCounts")
     public List  getSubmitshopNameList(@RequestParam("shopName") String shopName) {
     	return  shopService.checkshopName(shopName);
     }

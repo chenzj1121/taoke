@@ -44,6 +44,7 @@ public class ShopController {
 	 */
     @RequestMapping("/getWangwangAccountCounts")
     public int  getSubmitAccountNameList(@RequestParam("wangwangAccount") String wangwangAccount) {
+    	wangwangAccount=encodeStr(wangwangAccount);
     	int size = shopService.checkWangWangAccount(wangwangAccount).size();
         return size;
     }
@@ -55,8 +56,17 @@ public class ShopController {
 	 */
     @RequestMapping("/getshopNameCounts")
     public List  getSubmitshopNameList(@RequestParam("shopName") String shopName) {
+    	shopName=encodeStr(shopName);
     	return  shopService.checkshopName(shopName);
     }
+    public static String encodeStr(String str) {  
+        try {  
+            return new String(str.getBytes("ISO-8859-1"), "UTF-8");  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+            return null;  
+        }  
+    }  
 	
 	/**
 	 * 返回全部列表

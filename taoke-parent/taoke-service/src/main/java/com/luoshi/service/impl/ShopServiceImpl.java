@@ -110,13 +110,17 @@ public class ShopServiceImpl implements ShopService {
         TbShopExample example=new TbShopExample();
         com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
 
+        if(wangwangAccount!=null){
         criteria.andWangwangaccountEqualTo(wangwangAccount);
+        }
         List<TbShop> tbShops = shopMapper.selectByExample(example);
         if(tbShops.size() == 0) {
             return list;
         } else {
             for (TbShop shop : tbShops){
-                list.add(sysUserService.findOne(shop.getShopUseId()).getRealname());
+            	if(shop.getShopUseId()!=null){
+                    list.add(sysUserService.findOne(shop.getShopUseId()).getUsername());
+                	}
             }
             return list;
         }
@@ -129,13 +133,17 @@ public class ShopServiceImpl implements ShopService {
         TbShopExample example=new TbShopExample();
         com.luoshi.pojo.TbShopExample.Criteria criteria = example.createCriteria();
 
+        if(shopName!=null){
         criteria.andShopNameEqualTo(shopName);
+        }
         List<TbShop> tbShops = shopMapper.selectByExample(example);
         if(tbShops.size() == 0) {
             return list;
         } else {
             for (TbShop shop : tbShops){
+            	if(shop.getShopUseId()!=null){
                 list.add(sysUserService.findOne(shop.getShopUseId()).getUsername());
+            	}
             }
             return list;
         }

@@ -79,7 +79,7 @@
       </el-table-column>
       <el-table-column label="注销">
         <template slot-scope="scope">
-          <el-button type="warning" size="mini"  @click="deleteUser(scope.row.id,scope.row.username)">注销</el-button>
+          <el-button type="warning" size="mini"  @click="deleteUser(scope.row,scope.row.username)">注销</el-button>
           <!-- <span v-if="scope.row.isDelete === 0" class="linkSpan" @click="logoutUser(scope.row)"><el-tag>已激活</el-tag></span>
           <span v-if="scope.row.isDelete === 1" class="linkSpan" @click="logoutUser(scope.row)"><el-tag type="danger">已注销</el-tag></span> -->
         </template>
@@ -128,7 +128,9 @@ export default {
         pageNum: 1,
         total: 10
       },
-      form: { },
+      form: { 
+        salt:'0'
+      },
       op: {
         realname: 'like',
         phone: 'like'
@@ -145,13 +147,14 @@ export default {
     }
   },
   methods: {
-    deleteUser(id,name){
+    deleteUser(item,name){
       this.$confirm(`您即将注销${name}的账号, 是否继续?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        delUserById(id).then(res=>{
+        item.salt=1;
+        updUser(item).then(res=>{
           if (res.success) {
             this.$sucmsg(res.message)
             this.getUserList()

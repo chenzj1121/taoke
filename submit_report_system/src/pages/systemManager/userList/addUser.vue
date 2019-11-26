@@ -93,6 +93,7 @@ export default {
       this.form.maxTb = (this.form.type==4 || this.form.type==5)?20:'';
       this.form.nowTb = (this.form.type==4 || this.form.type==5)?0:'';
       this.form.password = Base64.encode(this.form.password)
+      this.form.salt = '0'
       addUser(this.form).then(res => {
         this.back()
       })
